@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2022-10-04">
+<title>dsfair_quarto - The tidyverse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="../styles.css">
+<meta name="twitter:title" content="dsfair_quarto - The tidyverse">
+<meta name="twitter:description" content="When using R, you will sooner or later hear about the {tidyverse}. The tidyverse is a collection of R packages that “share an underlying design philosophy, grammar, and data structures” of tidy data.">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DSFAIR</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
+    <a class="dropdown-item" href="../rbasics/firststeps.html">
+ <span class="dropdown-text">First Steps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rbasics/tidyverse.html">
+ <span class="dropdown-text">The tidyverse</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-example-analyses" role="button" data-bs-toggle="dropdown" aria-expanded="false">Example Analyses</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-example-analyses">
+<li class="dropdown-header">Simple Experiments</li>
+        <li class="dropdown-header">Complex Experiments</li>
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
+    <a class="dropdown-item" href="../summaryarticles/compactletterdisplay.html">
+ <span class="dropdown-text">Compact Letter Display</span></a>
+  </li>  
+        <li class="dropdown-header">Designing Experiments</li>
+        <li>
+    <a class="dropdown-item" href="../summaryarticles/workshopprep.html">
+ <span class="dropdown-text">Workshop prep</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#tables" id="toc-tables" class="nav-link active" data-scroll-target="#tables">Tables</a>
+  <ul class="collapse">
+<li><a href="#data.frame" id="toc-data.frame" class="nav-link" data-scroll-target="#data.frame">data.frame</a></li>
+  <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble">tibble</a></li>
+  </ul>
+</li>
+  <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
+  <li>
+<a href="#the-pipe-operator" id="toc-the-pipe-operator" class="nav-link" data-scroll-target="#the-pipe-operator">The pipe operator</a>
+  <ul class="collapse">
+<li><a href="#no-pipe---intermediate-steps" id="toc-no-pipe---intermediate-steps" class="nav-link" data-scroll-target="#no-pipe---intermediate-steps">No pipe - intermediate steps</a></li>
+  <li><a href="#no-pipe---nesting-functions" id="toc-no-pipe---nesting-functions" class="nav-link" data-scroll-target="#no-pipe---nesting-functions">No pipe - nesting functions</a></li>
+  <li><a href="#pipe" id="toc-pipe" class="nav-link" data-scroll-target="#pipe">Pipe!</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#dplyr-verbs" id="toc-dplyr-verbs" class="nav-link" data-scroll-target="#dplyr-verbs">dplyr verbs</a>
+  <ul class="collapse">
+<li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">mutate()</a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select">select()</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">filter()</a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">arrange()</a></li>
+  <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise">summarise()</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">The tidyverse</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    Paul Schmidt <a href="https://orcid.org/0000-0003-1528-2082" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://schmidtpaul.github.io/">
+            Freelancer &amp;
+            </a>
+          </p>
+        <p class="affiliation">
+            <a href="https://www.biomath.de/">
+            BioMath GmbH
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 4, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header><p>When using R, you will sooner or later hear about the <a href="https://www.wikiwand.com/en/Tidyverse">{tidyverse}</a>. The tidyverse is a collection of R packages that “share an underlying design philosophy, grammar, and data structures” of tidy data. The individual tidyverse packages comprise some of the most downloaded R packages.</p>
+<p>Install the complete tidyverse with:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="co"># or</span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="table">
+<caption>Some of my favorite tidyverse packages</caption>
+<thead><tr class="header">
+<th style="text-align: center;">ggplot2</th>
+<th style="text-align: center;">dplyr</th>
+<th style="text-align: center;">tibble</th>
+<th style="text-align: center;">forcats</th>
+<th style="text-align: center;">stringr</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: center;"><a href="https://ggplot2.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="100"></a></td>
+<td style="text-align: center;"><a href="https://dplyr.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="100"></a></td>
+<td style="text-align: center;"><a href="https://tibble.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tibble.png" width="100"></a></td>
+<td style="text-align: center;"><a href="https://forcats.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="100"></a></td>
+<td style="text-align: center;"><a href="https://stringr.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="100"></a></td>
+</tr></tbody>
+</table>
+<p>I did not use the tidyverse packages in my first years using R, but I wish I did. While you can often reach your goal with or without using the tidyverse packages, I personally prefer using them. Thus, they are used extensively throughout the chapters of this website.</p>
+<p>During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/">“R for Data Science”</a> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>, which is a book that can be read online for free and was written by the package authors themselves.</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="tables" class="level1"><h1>Tables</h1>
+<p>Finally, we can now talk about data tables with rows and columns. In R, I like to think of a table as multiple vectors side by side, so that each column is a vector.</p>
+<section id="data.frame" class="level2"><h2 class="anchored" data-anchor-id="data.frame">data.frame</h2>
+<p>Base R has a standard format for data tables called <code>data.frame</code>. Here is an example table that is an R built-in, just like <code>pi</code> is - it is called <code>PlantGrowth</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">PlantGrowth</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>   weight group
+1    4.17  ctrl
+2    5.58  ctrl
+3    5.18  ctrl
+4    6.11  ctrl
+5    4.50  ctrl
+6    4.61  ctrl
+7    5.17  ctrl
+8    4.53  ctrl
+9    5.33  ctrl
+10   5.14  ctrl
+11   4.81  trt1
+12   4.17  trt1
+13   4.41  trt1
+14   3.59  trt1
+15   5.87  trt1
+16   3.83  trt1
+17   6.03  trt1
+18   4.89  trt1
+19   4.32  trt1
+20   4.69  trt1
+21   6.31  trt2
+22   5.12  trt2
+23   5.54  trt2
+24   5.50  trt2
+25   5.37  trt2
+26   5.29  trt2
+27   4.92  trt2
+28   6.15  trt2
+29   5.80  trt2
+30   5.26  trt2</code></pre>
+</div>
+</div>
+<p>Let us create a copy of this table called <code>df</code> (<strong>d</strong>ata<strong>f</strong>rame) and then use some helpful functions to get a first impression of this data:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>'data.frame':   30 obs. of  2 variables:
+ $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>     weight       group   
+ Min.   :3.590   ctrl:10  
+ 1st Qu.:4.550   trt1:10  
+ Median :5.155   trt2:10  
+ Mean   :5.073            
+ 3rd Qu.:5.530            
+ Max.   :6.310            </code></pre>
+</div>
+</div>
+<p>We can see that this dataset has 30 observations (=rows) and 2 variables (=columns) and is of the type “data.frame”. Furthermore, the first variable is called <code>weight</code> and contains numeric values for which we get some measures of central tendency like the minimum, maximum, mean and median. The second variable is called <code>group</code> and is of the type factor containing a total of three different levels, which each appear 10 times.</p>
+<p>If you want to extract/use values of only one column of such a data.frame, you write the name of the data.frame, then a <code>$</code> and finally the name of the respective column. It returns the values of that column as a vector:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
+[16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
+[16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
+Levels: ctrl trt1 trt2</code></pre>
+</div>
+</div>
+</section><section id="tibble" class="level2"><h2 class="anchored" data-anchor-id="tibble">tibble</h2>
+<p>One major aspect of the tidyverse is formatting tables as <strong>tibble instead of data.frame</strong>. A tibble <em>“is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not.”</em> It is super simple to convert a data.frame into a tibble, but you must have the tidyverse R package {tibble} installed and loaded - which it is if you are loading the entire {tidyverse}. Let us convert our <code>df</code> into a tibble and call it <code>tbl</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span>
+<span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 30 × 2
+   weight group
+    &lt;dbl&gt; &lt;fct&gt;
+ 1   4.17 ctrl 
+ 2   5.58 ctrl 
+ 3   5.18 ctrl 
+ 4   6.11 ctrl 
+ 5   4.5  ctrl 
+ 6   4.61 ctrl 
+ 7   5.17 ctrl 
+ 8   4.53 ctrl 
+ 9   5.33 ctrl 
+10   5.14 ctrl 
+# … with 20 more rows</code></pre>
+</div>
+</div>
+<p>Of course, the data itself does not change - only its format and the way it is displayed to us in R. If you compare the output we get from printing <code>tbl</code> here to that of printing <code>df</code> above, I would like to point out some things I find extremely convenient for tibbles:</p>
+<ol type="1">
+<li>There is an extra first line telling us about the number of rows and columns.</li>
+<li>There is an extra line below the column names telling us about the data type of each column.</li>
+<li>Only the first ten rows of data are printed and a <em>“… with 20 more rows”</em> is added below.</li>
+<li>It can’t be seen here, but this would analogously happen if there were too many columns.</li>
+<li>It can’t be seen here, but missing values <code>NA</code> and negative numbers are printed in red.</li>
+</ol>
+<p>Finally, note that in its heart, a tibble is still a data.frame and in most cases you can do everything with a tibble that you can do with a data.frame:</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>tibble [30 × 2] (S3: tbl_df/tbl/data.frame)
+ $ weight: num [1:30] 4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>     weight       group   
+ Min.   :3.590   ctrl:10  
+ 1st Qu.:4.550   trt1:10  
+ Median :5.155   trt2:10  
+ Mean   :5.073            
+ 3rd Qu.:5.530            
+ Max.   :6.310            </code></pre>
+</div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
+[16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
+[16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
+Levels: ctrl trt1 trt2</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>'data.frame':   30 obs. of  2 variables:
+ $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+ $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>     weight       group   
+ Min.   :3.590   ctrl:10  
+ 1st Qu.:4.550   trt1:10  
+ Median :5.155   trt2:10  
+ Mean   :5.073            
+ 3rd Qu.:5.530            
+ Max.   :6.310            </code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
+[16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
+</div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
+[16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
+Levels: ctrl trt1 trt2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Therefore, I almost always format my datasets as tibbles.</p>
+</section></section><section id="plots" class="level1"><h1>Plots</h1>
+<p>Base R has a <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function which is good at getting some first data visualizations with very little code. It guesses what type of plot you would like to see via the data type of the respective data to be plotted:</p>
+<div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span> <span class="co"># scatter plot of values in the order they appear</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">group</span><span class="op">)</span> <span class="co"># bar plot of frequency of each level</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">group</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span> <span class="co"># boxplot for values of each level</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1500"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="1500"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="tidyverse_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid" width="1500"></p>
+</div>
+</div>
+</div>
+</div>
+<p>However, I really just use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package <a href="https://ggplot2.tidyverse.org">ggplot2</a> and its function <code>ggplot()</code>. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website’s chapters.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cédric Scherer’s <span class="citation" data-cites="CedricScherer_2022">(<a href="#ref-CedricScherer_2022" role="doc-biblioref">2022</a>)</span> <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">A ggplot2 tutorial for beautiful plotting in R</a>
+</li>
+<li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extensions gallery</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="the-pipe-operator" class="level1"><h1>The pipe operator</h1>
+<p>The pipe operator <em>“completely changed the way how we code in R, making it more simple and readable”</em> <span class="citation" data-cites="álvarez_2021">(<a href="#ref-%C3%A1lvarez_2021" role="doc-biblioref">Álvarez 2021</a>)</span>. I started using the pipe as <code>%&gt;%</code> from the {dplyr} package<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. However, since May 18, 2021 (= R 4.1.0) the pipe is officially part of Base R - although written as <code>|&gt;</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>To understand what makes it so great we need to start using more than one function at a time. So far, we have only used functions individually. Yet, in real life you will often find yourself having to combine multiple functions. As a fictional example, let’s say that from the <code>PlantGrowth</code> data, we want to extract a sorted vector of the square root of all weight-values that belong to the <code>ctrl</code> group. I will show three approaches how to accomplish this</p>
+<section id="no-pipe---intermediate-steps" class="level2"><h2 class="anchored" data-anchor-id="no-pipe---intermediate-steps">No pipe - intermediate steps</h2>
+<p>Using one function at a time and saving the output in the variables <code>a</code> - <code>d</code>, we can do this:</p>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">PlantGrowth</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">pull</span><span class="op">(</span><span class="va">a</span>, <span class="va">weight</span><span class="op">)</span> <span class="co"># same as: b &lt;- a$weight</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">c</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
+</div>
+</div>
+</section><section id="no-pipe---nesting-functions" class="level2"><h2 class="anchored" data-anchor-id="no-pipe---nesting-functions">No pipe - nesting functions</h2>
+<p>Just like in MS Excel, it is possible to write functions inside of functions so that we can do this:</p>
+<div class="cell">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu">pull</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">PlantGrowth</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span>, <span class="va">weight</span><span class="op">)</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
+</div>
+</div>
+</section><section id="pipe" class="level2"><h2 class="anchored" data-anchor-id="pipe">Pipe!</h2>
+<p>This approach (i) allows you to write functions from left to right / top to bottom and thus in the order they are executed and the way you think about them and (ii) does not create extra variables for intermediate steps:</p>
+<div class="cell">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">PlantGrowth</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">pull</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
+</div>
+</div>
+<p>You can think about it like this: Something (in this case the <code>PlantGrowth</code> data.frame) goes into the pipe and is directed to the next function <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. By default, this function takes what came out of the previous pipe and puts it as its first argument. This happens with every pipe. You’ll notice that all the functions who required two arguments above, now only need one argument, <em>i.e.</em> the additional argument, because the main argument stating which data is to be used is by default simply what came out of the previous pipe. Accordingly, the functions <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> and <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> appear empty here, because they only need one piece of information and that is which data they should work with. Finally note that you can easily highlight only some of the lines up until one of the pipes to see the intermediate results.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The keyboard shortcut for writing <code>%&gt;%</code> in RStudio is <strong>CTRL+SHIFT+M</strong>. Keyboard shortcuts can be customized in RStudio as described <a href="https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts-in-the-RStudio-IDE">here</a>.</p>
+</div>
+</div>
+</section></section><section id="dplyr-verbs" class="level1"><h1>dplyr verbs</h1>
+<p>Taken directly from <a href="https://dplyr.tidyverse.org/">the documentation</a>:</p>
+<blockquote class="blockquote">
+<p>{dplyr} is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:</p>
+<ul>
+<li><p><code>mutate()</code> adds new variables that are functions of existing variables.</p></li>
+<li><p><code>select()</code> picks variables based on their names.</p></li>
+<li><p><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> picks cases based on their values.</p></li>
+<li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
+<li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
+</ul>
+<p>These all combine naturally with <code>group_by()</code> which allows you to perform any operation “by group”. If you are new to dplyr, the best place to start is <a href="https://r4ds.had.co.nz/transform.html">the data transformation chapter</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>.</p>
+</blockquote>
+<p>In my experience you really can do most of the data manipulation before and after the actual statistics with these functions. In other words, it is exactly these functions who can and should replace the manual work you may currently even be doing in MS Excel. In the following sections I will give very brief examples of how to use these functions while always pointing to more thorough resources.</p>
+<section id="mutate" class="level2"><h2 class="anchored" data-anchor-id="mutate">mutate()</h2>
+<p>This function is useful whenever you want to change existing columns or add new columns to your table. To keep the following examples short and simple, let’s create <code>tbl2</code> as only the first six rows of <code>tbl</code> via the <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function:</p>
+<div class="cell">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
+<span><span class="va">tbl2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   4.17 ctrl 
+2   5.58 ctrl 
+3   5.18 ctrl 
+4   6.11 ctrl 
+5   4.5  ctrl 
+6   4.61 ctrl </code></pre>
+</div>
+</div>
+<p>Let’s start by adding 2 to the <code>weight</code> in our data. Below, we do this two different ways: by adding a column named <code>new</code> to the dataset (left) and by replacing/overwriting the original <code>weight</code> column (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>new <span class="op">=</span> <span class="va">weight</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 3
+  weight group   new
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt;
+1   4.17 ctrl   6.17
+2   5.58 ctrl   7.58
+3   5.18 ctrl   7.18
+4   6.11 ctrl   8.11
+5   4.5  ctrl   6.5 
+6   4.61 ctrl   6.61</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>weight <span class="op">=</span> <span class="va">weight</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   6.17 ctrl 
+2   7.58 ctrl 
+3   7.18 ctrl 
+4   8.11 ctrl 
+5   6.5  ctrl 
+6   6.61 ctrl </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>We can also create multiple columns at once (left) and make the values of the new column dynamically depend on the other columns via <code>case_when()</code> (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    `Name with Space` <span class="op">=</span> <span class="st">"Hello!"</span>,</span>
+<span>    number10 <span class="op">=</span> <span class="fl">10</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 4
+  weight group `Name with Space` number10
+   &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;                &lt;dbl&gt;
+1   4.17 ctrl  Hello!                  10
+2   5.58 ctrl  Hello!                  10
+3   5.18 ctrl  Hello!                  10
+4   6.11 ctrl  Hello!                  10
+5   4.5  ctrl  Hello!                  10
+6   4.61 ctrl  Hello!                  10</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>larger5 <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"yes"</span>,</span>
+<span>    <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"no"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 3
+  weight group larger5
+   &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;  
+1   4.17 ctrl  no     
+2   5.58 ctrl  yes    
+3   5.18 ctrl  yes    
+4   6.11 ctrl  yes    
+5   4.5  ctrl  no     
+6   4.61 ctrl  no     </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Finally, we can efficiently apply the same function to multiple columns at once via <code>across()</code>. We can select the columns e.g.&nbsp;manually via their names in a vector (left) or via a function such as <code>is.numeric</code> (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">v2</span><span class="op">)</span>, <span class="op">~</span> <span class="va">.x</span> <span class="op">+</span> <span class="fl">20</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 5
+  weight group    v1    v2    v3
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   4.17 ctrl     21    22     3
+2   5.58 ctrl     21    22     3
+3   5.18 ctrl     21    22     3
+4   6.11 ctrl     21    22     3
+5   4.5  ctrl     21    22     3
+6   4.61 ctrl     21    22     3</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="op">~</span> <span class="va">.x</span> <span class="op">+</span> <span class="fl">20</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 5
+  weight group    v1    v2    v3
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   24.2 ctrl     21    22    23
+2   25.6 ctrl     21    22    23
+3   25.2 ctrl     21    22    23
+4   26.1 ctrl     21    22    23
+5   24.5 ctrl     21    22    23
+6   24.6 ctrl     21    22    23</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate">5.5 Add new variables with mutate()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
+</li>
+<li><a href="https://dplyr.tidyverse.org/reference/mutate.html">Create, modify, and delete columns with mutate()</a></li>
+<li><a href="https://dplyr.tidyverse.org/reference/case_when.html">A general vectorised if with case_when()</a></li>
+<li><a href="https://dplyr.tidyverse.org/reference/across.html">Apply a function (or functions) across multiple columns with across()</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="select" class="level2"><h2 class="anchored" data-anchor-id="select">select()</h2>
+<p>This function is useful whenever you want to select a subset of columns or change the order of columns. To provide better examples, let’s first create a table <code>tbl3</code> with a few more columns:</p>
+<div class="cell">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">&lt;-</span> <span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>var1 <span class="op">=</span> <span class="fl">1</span>, var2 <span class="op">=</span> <span class="fl">2</span>, var3 <span class="op">=</span> <span class="st">"text"</span>, var4 <span class="op">=</span> <span class="st">"word"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tbl3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 6
+  weight group  var1  var2 var3  var4 
+   &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1   4.17 ctrl      1     2 text  word 
+2   5.58 ctrl      1     2 text  word 
+3   5.18 ctrl      1     2 text  word 
+4   6.11 ctrl      1     2 text  word 
+5   4.5  ctrl      1     2 text  word 
+6   4.61 ctrl      1     2 text  word </code></pre>
+</div>
+</div>
+<p>We can now select individual columns manually by giving all names (left) and even select all columns <code>from:to</code> by writing a colon between them (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">group</span>, <span class="va">var1</span>, <span class="va">var4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 3
+  group  var1 var4 
+  &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt;
+1 ctrl      1 word 
+2 ctrl      1 word 
+3 ctrl      1 word 
+4 ctrl      1 word 
+5 ctrl      1 word 
+6 ctrl      1 word </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">group</span>, <span class="va">var1</span><span class="op">:</span><span class="va">var4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 5
+  group  var1  var2 var3  var4 
+  &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1 ctrl      1     2 text  word 
+2 ctrl      1     2 text  word 
+3 ctrl      1     2 text  word 
+4 ctrl      1     2 text  word 
+5 ctrl      1     2 text  word 
+6 ctrl      1     2 text  word </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>We can also use functions like <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>matches()</code> and <code>num_range()</code> to select all columns based on their name:</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 5
+  group  var1  var2 var3  var4 
+  &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1 ctrl      1     2 text  word 
+2 ctrl      1     2 text  word 
+3 ctrl      1     2 text  word 
+4 ctrl      1     2 text  word 
+5 ctrl      1     2 text  word 
+6 ctrl      1     2 text  word </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">num_range</span><span class="op">(</span><span class="st">"var"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 3
+   var1  var2 var3 
+  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1     1     2 text 
+2     1     2 text 
+3     1     2 text 
+4     1     2 text 
+5     1     2 text 
+6     1     2 text </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Finally, we can select based on a function like <code>is.numeric</code> via <code>where()</code> (left) or simply rearrange while keeping all columns by using <code>everything()</code> (right)</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 3
+  weight  var1  var2
+   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   4.17     1     2
+2   5.58     1     2
+3   5.18     1     2
+4   6.11     1     2
+5   4.5      1     2
+6   4.61     1     2</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">var1</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 6
+   var1 weight group  var2 var3  var4 
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
+1     1   4.17 ctrl      2 text  word 
+2     1   5.58 ctrl      2 text  word 
+3     1   5.18 ctrl      2 text  word 
+4     1   6.11 ctrl      2 text  word 
+5     1   4.5  ctrl      2 text  word 
+6     1   4.61 ctrl      2 text  word </code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/transform.html#select">5.4 Select columns with select()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
+</li>
+<li><a href="https://dplyr.tidyverse.org/reference/select.html">Subset columns using their names and types with select()</a></li>
+<li><a href="https://tidyselect.r-lib.org/reference/starts_with.html">Select variables that match a pattern with starts_with() etc.</a></li>
+<li><a href="https://tidyselect.r-lib.org/reference/where.html">Select variables with a function with where()</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="filter" class="level2"><h2 class="anchored" data-anchor-id="filter">filter()</h2>
+<p>This function is useful whenever you want to subset rows based on their values. Note that for the examples here, we use the original <code>tbl</code> with 30 observations.</p>
+<p>Let’s immediately filter for two conditions: Observations that belong to group <code>trt2</code> <strong>and</strong> are larger than 6 (left); Observations that are larger than 6 <strong>or</strong> smaller than 4 (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">6</span> <span class="op">&amp;</span> <span class="va">group</span> <span class="op">==</span> <span class="st">"trt2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 2 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   6.31 trt2 
+2   6.15 trt2 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">6</span> <span class="op">|</span> <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   6.11 ctrl 
+2   3.59 trt1 
+3   3.83 trt1 
+4   6.03 trt1 
+5   6.31 trt2 
+6   6.15 trt2 </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>We can also filter for values that <strong>are not</strong> of the <code>ctrl</code> group (left) or that are larger than the mean weight (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"ctrl"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 20 × 2
+   weight group
+    &lt;dbl&gt; &lt;fct&gt;
+ 1   4.81 trt1 
+ 2   4.17 trt1 
+ 3   4.41 trt1 
+ 4   3.59 trt1 
+ 5   5.87 trt1 
+ 6   3.83 trt1 
+ 7   6.03 trt1 
+ 8   4.89 trt1 
+ 9   4.32 trt1 
+10   4.69 trt1 
+11   6.31 trt2 
+12   5.12 trt2 
+13   5.54 trt2 
+14   5.5  trt2 
+15   5.37 trt2 
+16   5.29 trt2 
+17   4.92 trt2 
+18   6.15 trt2 
+19   5.8  trt2 
+20   5.26 trt2 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 17 × 2
+   weight group
+    &lt;dbl&gt; &lt;fct&gt;
+ 1   5.58 ctrl 
+ 2   5.18 ctrl 
+ 3   6.11 ctrl 
+ 4   5.17 ctrl 
+ 5   5.33 ctrl 
+ 6   5.14 ctrl 
+ 7   5.87 trt1 
+ 8   6.03 trt1 
+ 9   6.31 trt2 
+10   5.12 trt2 
+11   5.54 trt2 
+12   5.5  trt2 
+13   5.37 trt2 
+14   5.29 trt2 
+15   6.15 trt2 
+16   5.8  trt2 
+17   5.26 trt2 </code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/transform.html#filter-rows-with-filter">5.2 Filter rows with filter()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
+</li>
+<li><a href="https://dplyr.tidyverse.org/reference/filter.html">Subset rows using column values with filter()</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="arrange" class="level2"><h2 class="anchored" data-anchor-id="arrange">arrange()</h2>
+<p>This function is useful whenever you want to sort rows based on their values. Note that for the examples here, we use the original <code>tbl</code> with 30 observations. You’ll notice that I’ve added <code>print(n = Inf)</code> so that R shows all rows of our resulting tibble, since by default R will only show the first 10 rows if a tibble has more than 20 rows.</p>
+<p>We can arrange by one column (left) or multiple columns (right). Note that by default values are sorted in ascending order, but this can be changed by using <code>desc()</code> (right). Furthermore, <code>NA</code> (= missing values) are always sorted to the end<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, even when using <code>desc()</code>.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 30 × 2
+   weight group
+    &lt;dbl&gt; &lt;fct&gt;
+ 1   3.59 trt1 
+ 2   3.83 trt1 
+ 3   4.17 ctrl 
+ 4   4.17 trt1 
+ 5   4.32 trt1 
+ 6   4.41 trt1 
+ 7   4.5  ctrl 
+ 8   4.53 ctrl 
+ 9   4.61 ctrl 
+10   4.69 trt1 
+11   4.81 trt1 
+12   4.89 trt1 
+13   4.92 trt2 
+14   5.12 trt2 
+15   5.14 ctrl 
+16   5.17 ctrl 
+17   5.18 ctrl 
+18   5.26 trt2 
+19   5.29 trt2 
+20   5.33 ctrl 
+21   5.37 trt2 
+22   5.5  trt2 
+23   5.54 trt2 
+24   5.58 ctrl 
+25   5.8  trt2 
+26   5.87 trt1 
+27   6.03 trt1 
+28   6.11 ctrl 
+29   6.15 trt2 
+30   6.31 trt2 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">group</span>, <span class="fu">desc</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 30 × 2
+   weight group
+    &lt;dbl&gt; &lt;fct&gt;
+ 1   6.11 ctrl 
+ 2   5.58 ctrl 
+ 3   5.33 ctrl 
+ 4   5.18 ctrl 
+ 5   5.17 ctrl 
+ 6   5.14 ctrl 
+ 7   4.61 ctrl 
+ 8   4.53 ctrl 
+ 9   4.5  ctrl 
+10   4.17 ctrl 
+11   6.03 trt1 
+12   5.87 trt1 
+13   4.89 trt1 
+14   4.81 trt1 
+15   4.69 trt1 
+16   4.41 trt1 
+17   4.32 trt1 
+18   4.17 trt1 
+19   3.83 trt1 
+20   3.59 trt1 
+21   6.31 trt2 
+22   6.15 trt2 
+23   5.8  trt2 
+24   5.54 trt2 
+25   5.5  trt2 
+26   5.37 trt2 
+27   5.29 trt2 
+28   5.26 trt2 
+29   5.12 trt2 
+30   4.92 trt2 </code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange">5.3 Arrange rows with arrange()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
+</li>
+<li><a href="https://dplyr.tidyverse.org/reference/arrange.html">Arrange rows by column values with arrange()</a></li>
+<li><a href="https://stackoverflow.com/a/25267681/8830099">How to have NA’s displayed first using arrange()</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="summarise" class="level2"><h2 class="anchored" data-anchor-id="summarise">summarise()</h2>
+<p>This function can be useful whenever you want to summarise data. Yet, it is not very useful (left) unless it is paired with <code>group_by()</code> (right).</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="co"># no group_by </span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>my_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 1 × 1
+  my_mean
+    &lt;dbl&gt;
+1    5.07</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>my_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 3 × 2
+  group my_mean
+  &lt;fct&gt;   &lt;dbl&gt;
+1 ctrl     5.03
+2 trt1     4.66
+3 trt2     5.53</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>You can create multiple summary output columns (left) and have multiple grouping columns (right):</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
+<span>    StdDev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
+<span>    Min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
+<span>    Median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
+<span>    Max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
+<span>    n_Obs <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 3 × 7
+  group  Mean StdDev   Min Median   Max n_Obs
+  &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 ctrl   5.03  0.583  4.17   5.15  6.11    10
+2 trt1   4.66  0.794  3.59   4.55  6.03    10
+3 trt2   5.53  0.443  4.92   5.44  6.31    10</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>larger5 <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"yes"</span>,</span>
+<span>    <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"no"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span>, <span class="va">larger5</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    n_Obs <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 6 × 4
+# Groups:   group [3]
+  group larger5 n_Obs  Mean
+  &lt;fct&gt; &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt;
+1 ctrl  no          4  4.45
+2 ctrl  yes         6  5.42
+3 trt1  no          8  4.34
+4 trt1  yes         2  5.95
+5 trt2  no          1  4.92
+6 trt2  yes         9  5.59</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Just like with <code>mutate()</code>, we can make use of <code>across()</code> to deal with multiple columns:</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span></span>
+<span>    <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, </span>
+<span>    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 3 × 5
+  group weight    v1    v2    v3
+  &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 ctrl    5.03     1     2     3
+2 trt1    4.66     1     2     3
+3 trt2    5.53     1     2     3</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">weight</span>, <span class="va">v3</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    Min <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
+<span>    Max <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 3 × 5
+  group weight_Min weight_Max v3_Min v3_Max
+  &lt;fct&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 ctrl        4.17       6.11      3      3
+2 trt1        3.59       6.03      3      3
+3 trt2        4.92       6.31      3      3</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once you used <code>group_by()</code> on a table, it stays grouped unless you use <code>ungroup()</code> on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results.</p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Additional Resources (click to show)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>
+<a href="https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise">5.6 Grouped summaries with summarise()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
+</li>
+<li><a href="https://dplyr.tidyverse.org/reference/summarise.html">Summarise each group to fewer rows with summarise()</a></li>
+<li><a href="https://dplyr.tidyverse.org/reference/group_by.html">Group by one or more variables with group_by()</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+
+</section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-álvarez_2021" class="csl-entry" role="doc-biblioentry">
+Álvarez, Adolfo. 2021. <span>“Plumbers, Chains, and Famous Painters: The (Updated) History of the Pipe Operator in r.”</span> <em>Adolfo Álvarez Blog</em>. <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/</a>.
+</div>
+<div id="ref-CedricScherer_2022" class="csl-entry" role="doc-biblioentry">
+Scherer, Cédric. 2022. <span>“A Ggplot2 Tutorial for Beautiful Plotting in r.”</span> <em>Cédric Scherer Blog</em>. <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/</a>.
+</div>
+<div id="ref-Wickham_2017" class="csl-entry" role="doc-biblioentry">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. O’Reilly Media, Inc.
+</div>
+</div></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1" role="doc-endnote"><p>But it was not the first package to use it. <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">This blog post</a> has a nice summary of the history of the pipe operator in R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Note that there are some differences between <code>%&gt;%</code> and <code>|&gt;</code> - find more about it <em>e.g.</em> <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/#base-r">here</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>See the additional resources below if you want it differently.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb93" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "The tidyverse"</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-04</span></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">class.output =</span> <span class="st">"custom-output"</span></span>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb93-15"><a href="#cb93-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-16"><a href="#cb93-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-17"><a href="#cb93-17" aria-hidden="true" tabindex="-1"></a>When using R, you will sooner or later hear about the <span class="co">[</span><span class="ot">{tidyverse}</span><span class="co">](https://www.wikiwand.com/en/Tidyverse)</span>. The tidyverse is a collection of R packages that "share an underlying design philosophy, grammar, and data structures" of tidy data. The individual tidyverse packages comprise some of the most downloaded R packages.</span>
+<span id="cb93-18"><a href="#cb93-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-19"><a href="#cb93-19" aria-hidden="true" tabindex="-1"></a>Install the complete tidyverse with:</span>
+<span id="cb93-20"><a href="#cb93-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-23"><a href="#cb93-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-24"><a href="#cb93-24" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb93-25"><a href="#cb93-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-26"><a href="#cb93-26" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb93-27"><a href="#cb93-27" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb93-28"><a href="#cb93-28" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb93-29"><a href="#cb93-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-30"><a href="#cb93-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-31"><a href="#cb93-31" aria-hidden="true" tabindex="-1"></a>|                                                                 ggplot2                                                                  |                                                                dplyr                                                                 |                                                                 tibble                                                                 |                                                                 forcats                                                                  |                                                                 stringr                                                                  |</span>
+<span id="cb93-32"><a href="#cb93-32" aria-hidden="true" tabindex="-1"></a>|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|</span>
+<span id="cb93-33"><a href="#cb93-33" aria-hidden="true" tabindex="-1"></a>| <span class="co">[</span><span class="ot">&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="100"/&gt;</span><span class="co">](https://ggplot2.tidyverse.org/)</span> | <span class="co">[</span><span class="ot">&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="100"/&gt;</span><span class="co">](https://dplyr.tidyverse.org/)</span> | <span class="co">[</span><span class="ot">&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tibble.png" width="100"/&gt;</span><span class="co">](https://tibble.tidyverse.org/)</span> | <span class="co">[</span><span class="ot">&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="100"/&gt;</span><span class="co">](https://forcats.tidyverse.org/)</span> | <span class="co">[</span><span class="ot">&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="100"/&gt;</span><span class="co">](https://stringr.tidyverse.org/)</span> |</span>
+<span id="cb93-34"><a href="#cb93-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-35"><a href="#cb93-35" aria-hidden="true" tabindex="-1"></a>: Some of my favorite tidyverse packages</span>
+<span id="cb93-36"><a href="#cb93-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-37"><a href="#cb93-37" aria-hidden="true" tabindex="-1"></a>I did not use the tidyverse packages in my first years using R, but I wish I did. While you can often reach your goal with or without using the tidyverse packages, I personally prefer using them. Thus, they are used extensively throughout the chapters of this website.</span>
+<span id="cb93-38"><a href="#cb93-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-39"><a href="#cb93-39" aria-hidden="true" tabindex="-1"></a>During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.</span>
+<span id="cb93-40"><a href="#cb93-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-41"><a href="#cb93-41" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-42"><a href="#cb93-42" aria-hidden="true" tabindex="-1"></a><span class="ss">-    </span><span class="co">[</span><span class="ot">"R for Data Science"</span><span class="co">](https://r4ds.had.co.nz/)</span> <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span>, which is a book that can be read online for free and was written by the package authors themselves.</span>
+<span id="cb93-43"><a href="#cb93-43" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-44"><a href="#cb93-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-45"><a href="#cb93-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tables</span></span>
+<span id="cb93-46"><a href="#cb93-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-47"><a href="#cb93-47" aria-hidden="true" tabindex="-1"></a>Finally, we can now talk about data tables with rows and columns. In R, I like to think of a table as multiple vectors side by side, so that each column is a vector.</span>
+<span id="cb93-48"><a href="#cb93-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-49"><a href="#cb93-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## data.frame</span></span>
+<span id="cb93-50"><a href="#cb93-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-51"><a href="#cb93-51" aria-hidden="true" tabindex="-1"></a>Base R has a standard format for data tables called <span class="in">`data.frame`</span>. Here is an example table that is an R built-in, just like <span class="in">`pi`</span> is - it is called <span class="in">`PlantGrowth`</span>:</span>
+<span id="cb93-52"><a href="#cb93-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-55"><a href="#cb93-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-56"><a href="#cb93-56" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span>
+<span id="cb93-57"><a href="#cb93-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-58"><a href="#cb93-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-59"><a href="#cb93-59" aria-hidden="true" tabindex="-1"></a>Let us create a copy of this table called <span class="in">`df`</span> (**d**ata**f**rame) and then use some helpful functions to get a first impression of this data:</span>
+<span id="cb93-60"><a href="#cb93-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-63"><a href="#cb93-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-64"><a href="#cb93-64" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> PlantGrowth</span>
+<span id="cb93-65"><a href="#cb93-65" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
+<span id="cb93-66"><a href="#cb93-66" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb93-67"><a href="#cb93-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-68"><a href="#cb93-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-69"><a href="#cb93-69" aria-hidden="true" tabindex="-1"></a>We can see that this dataset has 30 observations (=rows) and 2 variables (=columns) and is of the type "data.frame". Furthermore, the first variable is called <span class="in">`weight`</span> and contains numeric values for which we get some measures of central tendency like the minimum, maximum, mean and median. The second variable is called <span class="in">`group`</span> and is of the type factor containing a total of three different levels, which each appear 10 times.</span>
+<span id="cb93-70"><a href="#cb93-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-71"><a href="#cb93-71" aria-hidden="true" tabindex="-1"></a>If you want to extract/use values of only one column of such a data.frame, you write the name of the data.frame, then a <span class="in">`$`</span> and finally the name of the respective column. It returns the values of that column as a vector:</span>
+<span id="cb93-72"><a href="#cb93-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-75"><a href="#cb93-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-76"><a href="#cb93-76" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>weight</span>
+<span id="cb93-77"><a href="#cb93-77" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>group</span>
+<span id="cb93-78"><a href="#cb93-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-79"><a href="#cb93-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-80"><a href="#cb93-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## tibble</span></span>
+<span id="cb93-81"><a href="#cb93-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-82"><a href="#cb93-82" aria-hidden="true" tabindex="-1"></a>One major aspect of the tidyverse is formatting tables as **tibble instead of data.frame**. A tibble *"is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not."* It is super simple to convert a data.frame into a tibble, but you must have the tidyverse R package {tibble} installed and loaded - which it is if you are loading the entire {tidyverse}. Let us convert our <span class="in">`df`</span> into a tibble and call it <span class="in">`tbl`</span>:</span>
+<span id="cb93-83"><a href="#cb93-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-86"><a href="#cb93-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-87"><a href="#cb93-87" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb93-88"><a href="#cb93-88" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)</span>
+<span id="cb93-89"><a href="#cb93-89" aria-hidden="true" tabindex="-1"></a>tbl</span>
+<span id="cb93-90"><a href="#cb93-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-91"><a href="#cb93-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-92"><a href="#cb93-92" aria-hidden="true" tabindex="-1"></a>Of course, the data itself does not change - only its format and the way it is displayed to us in R. If you compare the output we get from printing <span class="in">`tbl`</span> here to that of printing <span class="in">`df`</span> above, I would like to point out some things I find extremely convenient for tibbles:</span>
+<span id="cb93-93"><a href="#cb93-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-94"><a href="#cb93-94" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>There is an extra first line telling us about the number of rows and columns.</span>
+<span id="cb93-95"><a href="#cb93-95" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>There is an extra line below the column names telling us about the data type of each column.</span>
+<span id="cb93-96"><a href="#cb93-96" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Only the first ten rows of data are printed and a *"... with 20 more rows"* is added below.</span>
+<span id="cb93-97"><a href="#cb93-97" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>It can't be seen here, but this would analogously happen if there were too many columns.</span>
+<span id="cb93-98"><a href="#cb93-98" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>It can't be seen here, but missing values <span class="in">`NA`</span> and negative numbers are printed in red.</span>
+<span id="cb93-99"><a href="#cb93-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-100"><a href="#cb93-100" aria-hidden="true" tabindex="-1"></a>Finally, note that in its heart, a tibble is still a data.frame and in most cases you can do everything with a tibble that you can do with a data.frame:</span>
+<span id="cb93-101"><a href="#cb93-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-102"><a href="#cb93-102" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-103"><a href="#cb93-103" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-106"><a href="#cb93-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-107"><a href="#cb93-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-overflow: wrap</span></span>
+<span id="cb93-108"><a href="#cb93-108" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tbl)</span>
+<span id="cb93-109"><a href="#cb93-109" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tbl)</span>
+<span id="cb93-110"><a href="#cb93-110" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tbl)</span>
+<span id="cb93-111"><a href="#cb93-111" aria-hidden="true" tabindex="-1"></a>tbl<span class="sc">$</span>weight</span>
+<span id="cb93-112"><a href="#cb93-112" aria-hidden="true" tabindex="-1"></a>tbl<span class="sc">$</span>group</span>
+<span id="cb93-113"><a href="#cb93-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-114"><a href="#cb93-114" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-115"><a href="#cb93-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-116"><a href="#cb93-116" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-117"><a href="#cb93-117" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-118"><a href="#cb93-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-119"><a href="#cb93-119" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-122"><a href="#cb93-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-123"><a href="#cb93-123" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-overflow: wrap</span></span>
+<span id="cb93-124"><a href="#cb93-124" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df)</span>
+<span id="cb93-125"><a href="#cb93-125" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span>
+<span id="cb93-126"><a href="#cb93-126" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb93-127"><a href="#cb93-127" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>weight</span>
+<span id="cb93-128"><a href="#cb93-128" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>group</span>
+<span id="cb93-129"><a href="#cb93-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-130"><a href="#cb93-130" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-131"><a href="#cb93-131" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-132"><a href="#cb93-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-133"><a href="#cb93-133" aria-hidden="true" tabindex="-1"></a>Therefore, I almost always format my datasets as tibbles.</span>
+<span id="cb93-134"><a href="#cb93-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-135"><a href="#cb93-135" aria-hidden="true" tabindex="-1"></a><span class="fu"># Plots</span></span>
+<span id="cb93-136"><a href="#cb93-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-137"><a href="#cb93-137" aria-hidden="true" tabindex="-1"></a>Base R has a <span class="in">`plot()`</span> function which is good at getting some first data visualizations with very little code. It guesses what type of plot you would like to see via the data type of the respective data to be plotted:</span>
+<span id="cb93-138"><a href="#cb93-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-141"><a href="#cb93-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-142"><a href="#cb93-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| layout-ncol: 3</span></span>
+<span id="cb93-143"><a href="#cb93-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5</span></span>
+<span id="cb93-144"><a href="#cb93-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb93-145"><a href="#cb93-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-146"><a href="#cb93-146" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>weight) <span class="co"># scatter plot of values in the order they appear</span></span>
+<span id="cb93-147"><a href="#cb93-147" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>group) <span class="co"># bar plot of frequency of each level</span></span>
+<span id="cb93-148"><a href="#cb93-148" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df<span class="sc">$</span>group, <span class="at">y =</span> df<span class="sc">$</span>weight) <span class="co"># boxplot for values of each level</span></span>
+<span id="cb93-149"><a href="#cb93-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-150"><a href="#cb93-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-151"><a href="#cb93-151" aria-hidden="true" tabindex="-1"></a>However, I really just use <span class="in">`plot()`</span> to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package <span class="in">`{ggplot2}`</span> and its function <span class="in">`ggplot()`</span>. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website's chapters.</span>
+<span id="cb93-152"><a href="#cb93-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-153"><a href="#cb93-153" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-154"><a href="#cb93-154" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Cédric Scherer's <span class="co">[</span><span class="ot">-@CedricScherer_2022</span><span class="co">] [A ggplot2 tutorial for beautiful plotting in R]</span>(https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)</span>
+<span id="cb93-155"><a href="#cb93-155" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">ggplot2 extensions gallery</span><span class="co">](https://exts.ggplot2.tidyverse.org/gallery/)</span></span>
+<span id="cb93-156"><a href="#cb93-156" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-157"><a href="#cb93-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-158"><a href="#cb93-158" aria-hidden="true" tabindex="-1"></a><span class="fu"># The pipe operator</span></span>
+<span id="cb93-159"><a href="#cb93-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-160"><a href="#cb93-160" aria-hidden="true" tabindex="-1"></a>The pipe operator *"completely changed the way how we code in R, making it more simple and readable"* <span class="co">[</span><span class="ot">@álvarez_2021</span><span class="co">]</span>. I started using the pipe as <span class="in">`%&gt;%`</span> from the {dplyr} package<span class="ot">[^1]</span>. However, since May 18, 2021 (= R 4.1.0) the pipe is officially part of Base R - although written as <span class="in">`|&gt;`</span><span class="ot">[^2]</span>.</span>
+<span id="cb93-161"><a href="#cb93-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-162"><a href="#cb93-162" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>But it was not the first package to use it. <span class="co">[</span><span class="ot">This blog post</span><span class="co">](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/)</span> has a nice summary of the history of the pipe operator in R.</span>
+<span id="cb93-163"><a href="#cb93-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-164"><a href="#cb93-164" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>Note that there are some differences between <span class="in">`%&gt;%`</span> and <span class="in">`|&gt;`</span> - find more about it *e.g.* <span class="co">[</span><span class="ot">here</span><span class="co">](http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/#base-r)</span>.</span>
+<span id="cb93-165"><a href="#cb93-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-166"><a href="#cb93-166" aria-hidden="true" tabindex="-1"></a>To understand what makes it so great we need to start using more than one function at a time. So far, we have only used functions individually. Yet, in real life you will often find yourself having to combine multiple functions. As a fictional example, let's say that from the <span class="in">`PlantGrowth`</span> data, we want to extract a sorted vector of the square root of all weight-values that belong to the <span class="in">`ctrl`</span> group. I will show three approaches how to accomplish this</span>
+<span id="cb93-167"><a href="#cb93-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-168"><a href="#cb93-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## No pipe - intermediate steps</span></span>
+<span id="cb93-169"><a href="#cb93-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-170"><a href="#cb93-170" aria-hidden="true" tabindex="-1"></a>Using one function at a time and saving the output in the variables <span class="in">`a`</span> - <span class="in">`d`</span>, we can do this:</span>
+<span id="cb93-171"><a href="#cb93-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-174"><a href="#cb93-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-175"><a href="#cb93-175" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">filter</span>(PlantGrowth, group <span class="sc">==</span> <span class="st">"ctrl"</span>)</span>
+<span id="cb93-176"><a href="#cb93-176" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">pull</span>(a, weight) <span class="co"># same as: b &lt;- a$weight</span></span>
+<span id="cb93-177"><a href="#cb93-177" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(b)</span>
+<span id="cb93-178"><a href="#cb93-178" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(c, <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb93-179"><a href="#cb93-179" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d)</span>
+<span id="cb93-180"><a href="#cb93-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-181"><a href="#cb93-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-182"><a href="#cb93-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## No pipe - nesting functions</span></span>
+<span id="cb93-183"><a href="#cb93-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-184"><a href="#cb93-184" aria-hidden="true" tabindex="-1"></a>Just like in MS Excel, it is possible to write functions inside of functions so that we can do this:</span>
+<span id="cb93-185"><a href="#cb93-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-188"><a href="#cb93-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-189"><a href="#cb93-189" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(PlantGrowth, group <span class="sc">==</span> <span class="st">"ctrl"</span>), weight)), <span class="at">digits =</span> <span class="dv">1</span>))</span>
+<span id="cb93-190"><a href="#cb93-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-191"><a href="#cb93-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-192"><a href="#cb93-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pipe!</span></span>
+<span id="cb93-193"><a href="#cb93-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-194"><a href="#cb93-194" aria-hidden="true" tabindex="-1"></a>This approach (i) allows you to write functions from left to right / top to bottom and thus in the order they are executed and the way you think about them and (ii) does not create extra variables for intermediate steps:</span>
+<span id="cb93-195"><a href="#cb93-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-198"><a href="#cb93-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-199"><a href="#cb93-199" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> </span>
+<span id="cb93-200"><a href="#cb93-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"ctrl"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-201"><a href="#cb93-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-202"><a href="#cb93-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb93-203"><a href="#cb93-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-204"><a href="#cb93-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>()</span>
+<span id="cb93-205"><a href="#cb93-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-206"><a href="#cb93-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-207"><a href="#cb93-207" aria-hidden="true" tabindex="-1"></a>You can think about it like this: Something (in this case the <span class="in">`PlantGrowth`</span> data.frame) goes into the pipe and is directed to the next function <span class="in">`filter()`</span>. By default, this function takes what came out of the previous pipe and puts it as its first argument. This happens with every pipe. You'll notice that all the functions who required two arguments above, now only need one argument, *i.e.* the additional argument, because the main argument stating which data is to be used is by default simply what came out of the previous pipe. Accordingly, the functions <span class="in">`sqrt()`</span> and <span class="in">`sort()`</span> appear empty here, because they only need one piece of information and that is which data they should work with. Finally note that you can easily highlight only some of the lines up until one of the pipes to see the intermediate results.</span>
+<span id="cb93-208"><a href="#cb93-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-209"><a href="#cb93-209" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb93-210"><a href="#cb93-210" aria-hidden="true" tabindex="-1"></a>The keyboard shortcut for writing <span class="in">`%&gt;%`</span> in RStudio is **CTRL+SHIFT+M**. Keyboard shortcuts can be customized in RStudio as described <span class="co">[</span><span class="ot">here</span><span class="co">](https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts-in-the-RStudio-IDE)</span>.</span>
+<span id="cb93-211"><a href="#cb93-211" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-212"><a href="#cb93-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-213"><a href="#cb93-213" aria-hidden="true" tabindex="-1"></a><span class="fu"># dplyr verbs</span></span>
+<span id="cb93-214"><a href="#cb93-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-215"><a href="#cb93-215" aria-hidden="true" tabindex="-1"></a>Taken directly from <span class="co">[</span><span class="ot">the documentation</span><span class="co">](https://dplyr.tidyverse.org/)</span>:</span>
+<span id="cb93-216"><a href="#cb93-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-217"><a href="#cb93-217" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; {dplyr} is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:</span></span>
+<span id="cb93-218"><a href="#cb93-218" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-219"><a href="#cb93-219" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; -   </span><span class="in">`mutate()`</span><span class="at"> adds new variables that are functions of existing variables.</span></span>
+<span id="cb93-220"><a href="#cb93-220" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-221"><a href="#cb93-221" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; -   </span><span class="in">`select()`</span><span class="at"> picks variables based on their names.</span></span>
+<span id="cb93-222"><a href="#cb93-222" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-223"><a href="#cb93-223" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; -   </span><span class="in">`filter()`</span><span class="at"> picks cases based on their values.</span></span>
+<span id="cb93-224"><a href="#cb93-224" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-225"><a href="#cb93-225" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; -   </span><span class="in">`summarise()`</span><span class="at"> reduces multiple values down to a single summary.</span></span>
+<span id="cb93-226"><a href="#cb93-226" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-227"><a href="#cb93-227" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; -   </span><span class="in">`arrange()`</span><span class="at"> changes the ordering of the rows.</span></span>
+<span id="cb93-228"><a href="#cb93-228" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb93-229"><a href="#cb93-229" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; These all combine naturally with </span><span class="in">`group_by()`</span><span class="at"> which allows you to perform any operation "by group". If you are new to dplyr, the best place to start is </span><span class="co">[</span><span class="ot">the data transformation chapter</span><span class="co">](https://r4ds.had.co.nz/transform.html)</span><span class="at"> in *R for data science* </span><span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span><span class="at">.</span></span>
+<span id="cb93-230"><a href="#cb93-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-231"><a href="#cb93-231" aria-hidden="true" tabindex="-1"></a>In my experience you really can do most of the data manipulation before and after the actual statistics with these functions. In other words, it is exactly these functions who can and should replace the manual work you may currently even be doing in MS Excel. In the following sections I will give very brief examples of how to use these functions while always pointing to more thorough resources.</span>
+<span id="cb93-232"><a href="#cb93-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-233"><a href="#cb93-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## mutate()</span></span>
+<span id="cb93-234"><a href="#cb93-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-235"><a href="#cb93-235" aria-hidden="true" tabindex="-1"></a>This function is useful whenever you want to change existing columns or add new columns to your table. To keep the following examples short and simple, let's create <span class="in">`tbl2`</span> as only the first six rows of <span class="in">`tbl`</span> via the <span class="in">`head()`</span> function:</span>
+<span id="cb93-236"><a href="#cb93-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-239"><a href="#cb93-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-240"><a href="#cb93-240" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="ot">&lt;-</span> <span class="fu">head</span>(tbl)</span>
+<span id="cb93-241"><a href="#cb93-241" aria-hidden="true" tabindex="-1"></a>tbl2</span>
+<span id="cb93-242"><a href="#cb93-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-243"><a href="#cb93-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-244"><a href="#cb93-244" aria-hidden="true" tabindex="-1"></a>Let's start by adding 2 to the <span class="in">`weight`</span> in our data. Below, we do this two different ways: by adding a column named <span class="in">`new`</span> to the dataset (left) and by replacing/overwriting the original <span class="in">`weight`</span> column (right):</span>
+<span id="cb93-245"><a href="#cb93-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-246"><a href="#cb93-246" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-247"><a href="#cb93-247" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-250"><a href="#cb93-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-251"><a href="#cb93-251" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-252"><a href="#cb93-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new =</span> weight <span class="sc">+</span> <span class="dv">2</span>)</span>
+<span id="cb93-253"><a href="#cb93-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-254"><a href="#cb93-254" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-255"><a href="#cb93-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-256"><a href="#cb93-256" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-257"><a href="#cb93-257" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-258"><a href="#cb93-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-259"><a href="#cb93-259" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-262"><a href="#cb93-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-263"><a href="#cb93-263" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-264"><a href="#cb93-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> weight <span class="sc">+</span> <span class="dv">2</span>)</span>
+<span id="cb93-265"><a href="#cb93-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-266"><a href="#cb93-266" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-267"><a href="#cb93-267" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-268"><a href="#cb93-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-269"><a href="#cb93-269" aria-hidden="true" tabindex="-1"></a>We can also create multiple columns at once (left) and make the values of the new column dynamically depend on the other columns via <span class="in">`case_when()`</span> (right):</span>
+<span id="cb93-270"><a href="#cb93-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-271"><a href="#cb93-271" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-272"><a href="#cb93-272" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-275"><a href="#cb93-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-276"><a href="#cb93-276" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb93-277"><a href="#cb93-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb93-278"><a href="#cb93-278" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Name with Space</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Hello!"</span>,</span>
+<span id="cb93-279"><a href="#cb93-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">number10 =</span> <span class="dv">10</span></span>
+<span id="cb93-280"><a href="#cb93-280" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb93-281"><a href="#cb93-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-282"><a href="#cb93-282" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-283"><a href="#cb93-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-284"><a href="#cb93-284" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-285"><a href="#cb93-285" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-286"><a href="#cb93-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-287"><a href="#cb93-287" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-290"><a href="#cb93-290" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-291"><a href="#cb93-291" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-292"><a href="#cb93-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">larger5 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb93-293"><a href="#cb93-293" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"yes"</span>,</span>
+<span id="cb93-294"><a href="#cb93-294" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"no"</span></span>
+<span id="cb93-295"><a href="#cb93-295" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb93-296"><a href="#cb93-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-297"><a href="#cb93-297" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-298"><a href="#cb93-298" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-299"><a href="#cb93-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-300"><a href="#cb93-300" aria-hidden="true" tabindex="-1"></a>Finally, we can efficiently apply the same function to multiple columns at once via <span class="in">`across()`</span>. We can select the columns e.g. manually via their names in a vector (left) or via a function such as <span class="in">`is.numeric`</span> (right):</span>
+<span id="cb93-301"><a href="#cb93-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-302"><a href="#cb93-302" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-303"><a href="#cb93-303" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-306"><a href="#cb93-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-307"><a href="#cb93-307" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb93-308"><a href="#cb93-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb93-309"><a href="#cb93-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb93-310"><a href="#cb93-310" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">c</span>(v1, v2), <span class="sc">~</span> .x <span class="sc">+</span> <span class="dv">20</span>)</span>
+<span id="cb93-311"><a href="#cb93-311" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb93-312"><a href="#cb93-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-313"><a href="#cb93-313" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-314"><a href="#cb93-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-315"><a href="#cb93-315" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-316"><a href="#cb93-316" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-317"><a href="#cb93-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-318"><a href="#cb93-318" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-321"><a href="#cb93-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-322"><a href="#cb93-322" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb93-323"><a href="#cb93-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb93-324"><a href="#cb93-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb93-325"><a href="#cb93-325" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> .x <span class="sc">+</span> <span class="dv">20</span>)</span>
+<span id="cb93-326"><a href="#cb93-326" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb93-327"><a href="#cb93-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-328"><a href="#cb93-328" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-329"><a href="#cb93-329" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-330"><a href="#cb93-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-331"><a href="#cb93-331" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-332"><a href="#cb93-332" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.5 Add new variables with mutate()</span><span class="co">](https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-333"><a href="#cb93-333" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Create, modify, and delete columns with mutate()</span><span class="co">](https://dplyr.tidyverse.org/reference/mutate.html)</span></span>
+<span id="cb93-334"><a href="#cb93-334" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">A general vectorised if with case_when()</span><span class="co">](https://dplyr.tidyverse.org/reference/case_when.html)</span></span>
+<span id="cb93-335"><a href="#cb93-335" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Apply a function (or functions) across multiple columns with across()</span><span class="co">](https://dplyr.tidyverse.org/reference/across.html)</span></span>
+<span id="cb93-336"><a href="#cb93-336" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-337"><a href="#cb93-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-338"><a href="#cb93-338" aria-hidden="true" tabindex="-1"></a><span class="fu">## select()</span></span>
+<span id="cb93-339"><a href="#cb93-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-340"><a href="#cb93-340" aria-hidden="true" tabindex="-1"></a>This function is useful whenever you want to select a subset of columns or change the order of columns. To provide better examples, let's first create a table <span class="in">`tbl3`</span> with a few more columns:</span>
+<span id="cb93-341"><a href="#cb93-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-344"><a href="#cb93-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-345"><a href="#cb93-345" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="ot">&lt;-</span> tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-346"><a href="#cb93-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var1 =</span> <span class="dv">1</span>, <span class="at">var2 =</span> <span class="dv">2</span>, <span class="at">var3 =</span> <span class="st">"text"</span>, <span class="at">var4 =</span> <span class="st">"word"</span>)</span>
+<span id="cb93-347"><a href="#cb93-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-348"><a href="#cb93-348" aria-hidden="true" tabindex="-1"></a>tbl3</span>
+<span id="cb93-349"><a href="#cb93-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-350"><a href="#cb93-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-351"><a href="#cb93-351" aria-hidden="true" tabindex="-1"></a>We can now select individual columns manually by giving all names (left) and even select all columns <span class="in">`from:to`</span> by writing a colon between them (right):</span>
+<span id="cb93-352"><a href="#cb93-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-353"><a href="#cb93-353" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-354"><a href="#cb93-354" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-357"><a href="#cb93-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-358"><a href="#cb93-358" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-359"><a href="#cb93-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, var1, var4)</span>
+<span id="cb93-360"><a href="#cb93-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-361"><a href="#cb93-361" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-362"><a href="#cb93-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-363"><a href="#cb93-363" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-364"><a href="#cb93-364" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-365"><a href="#cb93-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-366"><a href="#cb93-366" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-369"><a href="#cb93-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-370"><a href="#cb93-370" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-371"><a href="#cb93-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, var1<span class="sc">:</span>var4)</span>
+<span id="cb93-372"><a href="#cb93-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-373"><a href="#cb93-373" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-374"><a href="#cb93-374" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-375"><a href="#cb93-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-376"><a href="#cb93-376" aria-hidden="true" tabindex="-1"></a>We can also use functions like <span class="in">`starts_with()`</span>, <span class="in">`ends_with()`</span>, <span class="in">`contains()`</span>, <span class="in">`matches()`</span> and <span class="in">`num_range()`</span> to select all columns based on their name:</span>
+<span id="cb93-377"><a href="#cb93-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-378"><a href="#cb93-378" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-379"><a href="#cb93-379" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-382"><a href="#cb93-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-383"><a href="#cb93-383" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-384"><a href="#cb93-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"r"</span>))</span>
+<span id="cb93-385"><a href="#cb93-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-386"><a href="#cb93-386" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-387"><a href="#cb93-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-388"><a href="#cb93-388" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-389"><a href="#cb93-389" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-390"><a href="#cb93-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-391"><a href="#cb93-391" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-394"><a href="#cb93-394" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-395"><a href="#cb93-395" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span></span>
+<span id="cb93-396"><a href="#cb93-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">num_range</span>(<span class="st">"var"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb93-397"><a href="#cb93-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-398"><a href="#cb93-398" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-399"><a href="#cb93-399" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-400"><a href="#cb93-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-401"><a href="#cb93-401" aria-hidden="true" tabindex="-1"></a>Finally, we can select based on a function like <span class="in">`is.numeric`</span> via <span class="in">`where()`</span> (left) or simply rearrange while keeping all columns by using <span class="in">`everything()`</span> (right)</span>
+<span id="cb93-402"><a href="#cb93-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-403"><a href="#cb93-403" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-404"><a href="#cb93-404" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-407"><a href="#cb93-407" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-408"><a href="#cb93-408" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-409"><a href="#cb93-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span>
+<span id="cb93-410"><a href="#cb93-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-411"><a href="#cb93-411" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-412"><a href="#cb93-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-413"><a href="#cb93-413" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-414"><a href="#cb93-414" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-415"><a href="#cb93-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-416"><a href="#cb93-416" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-419"><a href="#cb93-419" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-420"><a href="#cb93-420" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb93-421"><a href="#cb93-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(var1, <span class="fu">everything</span>())</span>
+<span id="cb93-422"><a href="#cb93-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-423"><a href="#cb93-423" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-424"><a href="#cb93-424" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-425"><a href="#cb93-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-426"><a href="#cb93-426" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-427"><a href="#cb93-427" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.4 Select columns with select()</span><span class="co">](https://r4ds.had.co.nz/transform.html#select)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-428"><a href="#cb93-428" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Subset columns using their names and types with select()</span><span class="co">](https://dplyr.tidyverse.org/reference/select.html)</span></span>
+<span id="cb93-429"><a href="#cb93-429" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Select variables that match a pattern with starts_with() etc.</span><span class="co">](https://tidyselect.r-lib.org/reference/starts_with.html)</span></span>
+<span id="cb93-430"><a href="#cb93-430" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Select variables with a function with where()</span><span class="co">](https://tidyselect.r-lib.org/reference/where.html)</span></span>
+<span id="cb93-431"><a href="#cb93-431" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-432"><a href="#cb93-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-433"><a href="#cb93-433" aria-hidden="true" tabindex="-1"></a><span class="fu">## filter()</span></span>
+<span id="cb93-434"><a href="#cb93-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-435"><a href="#cb93-435" aria-hidden="true" tabindex="-1"></a>This function is useful whenever you want to subset rows based on their values. Note that for the examples here, we use the original <span class="in">`tbl`</span> with 30 observations.</span>
+<span id="cb93-436"><a href="#cb93-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-437"><a href="#cb93-437" aria-hidden="true" tabindex="-1"></a>Let's immediately filter for two conditions: Observations that belong to group <span class="in">`trt2`</span> **and** are larger than 6 (left); Observations that are larger than 6 **or** smaller than 4 (right):</span>
+<span id="cb93-438"><a href="#cb93-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-439"><a href="#cb93-439" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-440"><a href="#cb93-440" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-443"><a href="#cb93-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-444"><a href="#cb93-444" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-445"><a href="#cb93-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="dv">6</span> <span class="sc">&amp;</span> group <span class="sc">==</span> <span class="st">"trt2"</span>)</span>
+<span id="cb93-446"><a href="#cb93-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-447"><a href="#cb93-447" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-448"><a href="#cb93-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-449"><a href="#cb93-449" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-450"><a href="#cb93-450" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-451"><a href="#cb93-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-452"><a href="#cb93-452" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-455"><a href="#cb93-455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-456"><a href="#cb93-456" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-457"><a href="#cb93-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="dv">6</span> <span class="sc">|</span> weight <span class="sc">&lt;</span> <span class="dv">4</span>)</span>
+<span id="cb93-458"><a href="#cb93-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-459"><a href="#cb93-459" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-460"><a href="#cb93-460" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-461"><a href="#cb93-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-462"><a href="#cb93-462" aria-hidden="true" tabindex="-1"></a>We can also filter for values that **are not** of the <span class="in">`ctrl`</span> group (left) or that are larger than the mean weight (right):</span>
+<span id="cb93-463"><a href="#cb93-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-464"><a href="#cb93-464" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-465"><a href="#cb93-465" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-468"><a href="#cb93-468" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-469"><a href="#cb93-469" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-470"><a href="#cb93-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">!=</span> <span class="st">"ctrl"</span>)</span>
+<span id="cb93-471"><a href="#cb93-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-472"><a href="#cb93-472" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-473"><a href="#cb93-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-474"><a href="#cb93-474" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-475"><a href="#cb93-475" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-476"><a href="#cb93-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-477"><a href="#cb93-477" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-480"><a href="#cb93-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-481"><a href="#cb93-481" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-482"><a href="#cb93-482" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="fu">mean</span>(weight))</span>
+<span id="cb93-483"><a href="#cb93-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-484"><a href="#cb93-484" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-485"><a href="#cb93-485" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-486"><a href="#cb93-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-487"><a href="#cb93-487" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-488"><a href="#cb93-488" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.2 Filter rows with filter()</span><span class="co">](https://r4ds.had.co.nz/transform.html#filter-rows-with-filter)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-489"><a href="#cb93-489" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Subset rows using column values with filter()</span><span class="co">](https://dplyr.tidyverse.org/reference/filter.html)</span></span>
+<span id="cb93-490"><a href="#cb93-490" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-491"><a href="#cb93-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-492"><a href="#cb93-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## arrange()</span></span>
+<span id="cb93-493"><a href="#cb93-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-494"><a href="#cb93-494" aria-hidden="true" tabindex="-1"></a>This function is useful whenever you want to sort rows based on their values. Note that for the examples here, we use the original <span class="in">`tbl`</span> with 30 observations. You'll notice that I've added <span class="in">`print(n = Inf)`</span> so that R shows all rows of our resulting tibble, since by default R will only show the first 10 rows if a tibble has more than 20 rows.</span>
+<span id="cb93-495"><a href="#cb93-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-496"><a href="#cb93-496" aria-hidden="true" tabindex="-1"></a>We can arrange by one column (left) or multiple columns (right). Note that by default values are sorted in ascending order, but this can be changed by using <span class="in">`desc()`</span> (right). Furthermore, <span class="in">`NA`</span> (= missing values) are always sorted to the end<span class="ot">[^3]</span>, even when using <span class="in">`desc()`</span>.</span>
+<span id="cb93-497"><a href="#cb93-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-498"><a href="#cb93-498" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>See the additional resources below if you want it differently.</span>
+<span id="cb93-499"><a href="#cb93-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-500"><a href="#cb93-500" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-501"><a href="#cb93-501" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-504"><a href="#cb93-504" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-505"><a href="#cb93-505" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-506"><a href="#cb93-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-507"><a href="#cb93-507" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span>
+<span id="cb93-508"><a href="#cb93-508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-509"><a href="#cb93-509" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-510"><a href="#cb93-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-511"><a href="#cb93-511" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-512"><a href="#cb93-512" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-513"><a href="#cb93-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-514"><a href="#cb93-514" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-517"><a href="#cb93-517" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-518"><a href="#cb93-518" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-519"><a href="#cb93-519" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(group, <span class="fu">desc</span>(weight)) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-520"><a href="#cb93-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span>
+<span id="cb93-521"><a href="#cb93-521" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-522"><a href="#cb93-522" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-523"><a href="#cb93-523" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-524"><a href="#cb93-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-525"><a href="#cb93-525" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-526"><a href="#cb93-526" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.3 Arrange rows with arrange()</span><span class="co">](https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-527"><a href="#cb93-527" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Arrange rows by column values with arrange()</span><span class="co">](https://dplyr.tidyverse.org/reference/arrange.html)</span></span>
+<span id="cb93-528"><a href="#cb93-528" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">How to have NA's displayed first using arrange()</span><span class="co">](https://stackoverflow.com/a/25267681/8830099)</span></span>
+<span id="cb93-529"><a href="#cb93-529" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-530"><a href="#cb93-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-531"><a href="#cb93-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## summarise()</span></span>
+<span id="cb93-532"><a href="#cb93-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-533"><a href="#cb93-533" aria-hidden="true" tabindex="-1"></a>This function can be useful whenever you want to summarise data. Yet, it is not very useful (left) unless it is paired with <span class="in">`group_by()`</span> (right).</span>
+<span id="cb93-534"><a href="#cb93-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-535"><a href="#cb93-535" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-536"><a href="#cb93-536" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-539"><a href="#cb93-539" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-540"><a href="#cb93-540" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-541"><a href="#cb93-541" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no group_by </span></span>
+<span id="cb93-542"><a href="#cb93-542" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">my_mean =</span> <span class="fu">mean</span>(weight))</span>
+<span id="cb93-543"><a href="#cb93-543" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-544"><a href="#cb93-544" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-545"><a href="#cb93-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-546"><a href="#cb93-546" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-547"><a href="#cb93-547" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-548"><a href="#cb93-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-549"><a href="#cb93-549" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-552"><a href="#cb93-552" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-553"><a href="#cb93-553" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-554"><a href="#cb93-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-555"><a href="#cb93-555" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">my_mean =</span> <span class="fu">mean</span>(weight))</span>
+<span id="cb93-556"><a href="#cb93-556" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-557"><a href="#cb93-557" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-558"><a href="#cb93-558" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-559"><a href="#cb93-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-560"><a href="#cb93-560" aria-hidden="true" tabindex="-1"></a>You can create multiple summary output columns (left) and have multiple grouping columns (right):</span>
+<span id="cb93-561"><a href="#cb93-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-562"><a href="#cb93-562" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-563"><a href="#cb93-563" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-566"><a href="#cb93-566" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-567"><a href="#cb93-567" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-568"><a href="#cb93-568" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-569"><a href="#cb93-569" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb93-570"><a href="#cb93-570" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb93-571"><a href="#cb93-571" aria-hidden="true" tabindex="-1"></a>    <span class="at">StdDev =</span> <span class="fu">sd</span>(weight),</span>
+<span id="cb93-572"><a href="#cb93-572" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(weight),</span>
+<span id="cb93-573"><a href="#cb93-573" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(weight),</span>
+<span id="cb93-574"><a href="#cb93-574" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(weight),</span>
+<span id="cb93-575"><a href="#cb93-575" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb93-576"><a href="#cb93-576" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb93-577"><a href="#cb93-577" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-578"><a href="#cb93-578" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-579"><a href="#cb93-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-580"><a href="#cb93-580" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-581"><a href="#cb93-581" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-582"><a href="#cb93-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-583"><a href="#cb93-583" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-586"><a href="#cb93-586" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-587"><a href="#cb93-587" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb93-588"><a href="#cb93-588" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">larger5 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb93-589"><a href="#cb93-589" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"yes"</span>,</span>
+<span id="cb93-590"><a href="#cb93-590" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"no"</span></span>
+<span id="cb93-591"><a href="#cb93-591" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-592"><a href="#cb93-592" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, larger5) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-593"><a href="#cb93-593" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb93-594"><a href="#cb93-594" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb93-595"><a href="#cb93-595" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(weight)</span>
+<span id="cb93-596"><a href="#cb93-596" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb93-597"><a href="#cb93-597" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-598"><a href="#cb93-598" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-599"><a href="#cb93-599" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-600"><a href="#cb93-600" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-601"><a href="#cb93-601" aria-hidden="true" tabindex="-1"></a>Just like with <span class="in">`mutate()`</span>, we can make use of <span class="in">`across()`</span> to deal with multiple columns:</span>
+<span id="cb93-602"><a href="#cb93-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-603"><a href="#cb93-603" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb93-604"><a href="#cb93-604" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-607"><a href="#cb93-607" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-608"><a href="#cb93-608" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span></span>
+<span id="cb93-609"><a href="#cb93-609" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb93-610"><a href="#cb93-610" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb93-611"><a href="#cb93-611" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(</span>
+<span id="cb93-612"><a href="#cb93-612" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(is.numeric), </span>
+<span id="cb93-613"><a href="#cb93-613" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">mean</span>(.x)</span>
+<span id="cb93-614"><a href="#cb93-614" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb93-615"><a href="#cb93-615" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-616"><a href="#cb93-616" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-617"><a href="#cb93-617" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-618"><a href="#cb93-618" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb93-619"><a href="#cb93-619" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-620"><a href="#cb93-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-621"><a href="#cb93-621" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb93-624"><a href="#cb93-624" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb93-625"><a href="#cb93-625" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span></span>
+<span id="cb93-626"><a href="#cb93-626" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb93-627"><a href="#cb93-627" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb93-628"><a href="#cb93-628" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(</span>
+<span id="cb93-629"><a href="#cb93-629" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(weight, v3),</span>
+<span id="cb93-630"><a href="#cb93-630" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb93-631"><a href="#cb93-631" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="sc">~</span> <span class="fu">min</span>(.x),</span>
+<span id="cb93-632"><a href="#cb93-632" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="sc">~</span> <span class="fu">max</span>(.x)</span>
+<span id="cb93-633"><a href="#cb93-633" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb93-634"><a href="#cb93-634" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb93-635"><a href="#cb93-635" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb93-636"><a href="#cb93-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-637"><a href="#cb93-637" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-638"><a href="#cb93-638" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-639"><a href="#cb93-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-640"><a href="#cb93-640" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb93-641"><a href="#cb93-641" aria-hidden="true" tabindex="-1"></a>Once you used <span class="in">`group_by()`</span> on a table, it stays grouped unless you use <span class="in">`ungroup()`</span> on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results.</span>
+<span id="cb93-642"><a href="#cb93-642" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-643"><a href="#cb93-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-644"><a href="#cb93-644" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-645"><a href="#cb93-645" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.6 Grouped summaries with summarise()</span><span class="co">](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-646"><a href="#cb93-646" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Summarise each group to fewer rows with summarise()</span><span class="co">](https://dplyr.tidyverse.org/reference/summarise.html)</span></span>
+<span id="cb93-647"><a href="#cb93-647" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Group by one or more variables with group_by()</span><span class="co">](https://dplyr.tidyverse.org/reference/group_by.html)</span></span>
+<span id="cb93-648"><a href="#cb93-648" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

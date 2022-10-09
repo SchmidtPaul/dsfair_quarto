@@ -1,0 +1,12 @@
+/* css styles */
+
+/* Text Selection/Highlight Color */
+::selection {
+  color: #f8f9fa;
+  background: #00923f;
+}
+
+/* Output Code */
+.custom-output {
+  background-color: #bce2cc;
+}

@@ -1,0 +1,89 @@
+---
+title: "Prepare for an upcoming workshop"
+format:
+  html:
+    code-tools: false
+date: 2022-09-30
+---
+
+Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare.
+
+# R and RStudio
+
+You will need to install both R and RStudio, which are both open-source.
+
+-   [Guide to install R](https://rstudio-education.github.io/hopr/starting.html#how-to-download-and-install-r)
+
+-   [Guide to install RStudio](https://rstudio-education.github.io/hopr/starting.html#rstudio)
+
+If you have already installed these in the past, you should check whether you need to update the version you are currently using.
+
+-   [Guide to updating R](https://www.r-statistics.com/2013/03/updating-r-from-r-on-windows-using-the-installr-package/)
+
+-   To update RStudio, just open it and go to `Help` \> `Check for Updates`.
+
+## R-packages
+
+During the workshop you will get to know and install many additional R-packages that are not automatically installed. In most cases, you can just install them the moment they are introduced. However, if you *e.g.* have a slow internet connection, it may be worthwhile to install them beforehand. You can install most of the packages we need by running the following code:
+
+```{r}
+#| eval: false
+if (!require("pacman", quietly = TRUE))
+  install.packages("pacman")
+
+pacman::p_load(
+  conflicted,
+  desplot,
+  dlookr,
+  emmeans,
+  glmmTMB,
+  here,
+  janitor,
+  lme4,
+  lmerTest,
+  multcomp,
+  multcompView,
+  openxlsx,
+  scales,
+  tidyverse
+)
+```
+
+# Online Workshops
+
+This section is only relevant if our upcoming workshop will happen via zoom (or similar).
+
+## Having two screens helps!
+
+During the workshop, I will constantly share my screen with you. Depending on whether you have multiple screens available or not, there are three main scenarios in my experience - ranked from worst to best:
+
+1.  **You only have a single screen**\
+    While this is the worst scenario, you obviously can still participate and will have no problem following me during the workshop. What may become difficult, however, is if you want to both look at my shared screen and also write your own R code simulatenously. If you only have only a single screen (that is not super wide), this means constantly switching between zoom and R. Nevertheless, there will be exercises during the workshop where everone has time to do an assignment on their own so that during those time you will definitely get some undivided R time.
+
+2.  **You have a two screens, but they are not connected to the same device\
+    **An example for such a scenario would be having a computer with one screen and a laptop/tablet next to it. You could open R on one device and zoom on the other. This is certainly better than having only a single screen, since it is much easier to simultaneously read my and write your code. It is not optimal, however, since it does not allow for the advantages (i) and (ii) listed for scenario 3 below.
+
+3.  **You have two screens\
+    **Having a computer/laptop with multiple screens connected is the optimal setup! You can easily look at both my and your R code and additionally (i) share your screen via zoom so that we can fix an issue you are having in R and (ii) copy-paste things from the zoom-chat into R.
+
+## Do I need to install zoom?
+
+(Obviously, this section is only relevant if the workshop will be held via zoom and not some other video communication software.)
+
+No, not necessarily. It is not required to install the zoom software in order to participate in a zoom meeting, because you can also join from your browser (see details [here](https://support.zoom.us/hc/en-us/articles/201362193-Joining-a-Zoom-meeting#h_01FNW1GPCRK5G432X003X7DVGY) and [here](https://support.zoom.us/hc/en-us/articles/115005666383-Show-a-Join-from-your-browser-Link)). Basically, there will be a link that says "Join from your browser" and that's it. However, be aware that there are some minor functions not available to you if you are joining from your browser.
+
+## What else?
+
+-   **Check your microphone\
+    **Make sure we can hear you when asking a question.
+
+-   **Check your camera**\
+    This is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.
+
+-   **Get familiar with the options/functions**
+
+    -   Know how to mute your microphone. It should be muted at all times except when you are actually talking to us.
+
+    -   Know how to use the zoom chat.
+
+    -   In zoom, know how to give a "thumbs up" - making a symbol appear on your screen.

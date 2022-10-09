@@ -1,0 +1,224 @@
+---
+title: "First steps in R"
+date: 2022-10-04
+code-fold: false
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  class.output = "custom-output"
+)
+```
+
+This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.
+
+::: callout-note
+This is certainly not the best tutorial you'll ever find, so if you want other tutorials check out this curated list of R Tutorials [here](https://github.com/ujjwalkarn/DataScienceR).
+:::
+
+Furthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. "The way I use it" mostly refers to me using the [{tidyverse}](https://www.tidyverse.org/), which *"is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures"* and has become quite popular over the last years. [Here](https://dplyr.tidyverse.org/articles/base.html) is a direct comparison of how to do things in R with *base R* and via the tidyverse.
+
+# Let's go
+
+You can use R like a calculator. It does not matter[^1] whether you put spaces in or not as shown here:
+
+[^1]: As long as you are dealing with numbers and calculations. Spaces do matter when we are talking about s*trings* (i.e. text).
+
+```{r}
+2+3
+2 *   6
+```
+
+Similar to what you may know from Excel, you can use functions like e.g. `sqrt()` to obtain the square root of a number:
+
+```{r}
+sqrt(9)
+```
+
+You can find out more about a function by running the command with a question mark in front: `?sqrt()`.
+
+Besides built-in functions, R also knows certain things like $\pi$ or the alphabet, which are stored in the [built-in constants](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Constants.html) named `pi` and `letters`:
+
+```{r}
+pi
+letters
+```
+
+Importantly, you may also define your own variables via `=` or `<-`:
+
+```{r}
+x = 3
+x
+x = 20
+x
+a_long_variable_name <- 2 + 4
+a_long_variable_name
+x + a_long_variable_name
+mytext <- "This is my text"
+mytext
+```
+
+Note that the variable `x` was overwritten - at first it was 3, but then it was 20. Also, as can be seen when the variable `a_long_variable_name` is defined, you may put more than just a simple number on the right side of the `<-` or `=`.
+
+# data types
+
+As you just saw, R can deal with both numbers and text. We can check the data type via the `typeof()` function:
+
+```{r}
+typeof(x)
+typeof(mytext)
+```
+
+Here is a simplified overview over some of R's data types you may see more often:
+
+-   Numbers
+    -   `integer`/`int`: whole number\
+        e.g. *42*, *-1504*
+    -   `numeric`/`num` & `double`/`dbl`: real number\
+        e.g. *3.14*, *0.051795*
+-   Text
+    -   `character`/`chr`: string values\
+        e.g. *"hello"*, *"Two words"*
+-   Factor
+    -   `factor`/`fct`: categorical variable that stores both string and integer data values as "levels"\
+        e.g. *Control*, *Treatment*
+-   TRUE/FALSE
+    -   `logical`/`logi`: logical value\
+        either *TRUE* or *FALSE*
+
+# vectors
+
+Instead of dealing with single numbers, we obviously want to deal with entire datasets. Before we get to an entire table with multiple rows and columns, the first step is to understand what a *vector* is in R: It is *a sequence of elements that share the same data type*. I often think about them as a single column in my dataset. Above, we actually already looked at a vector: `letters` is a built-in vector with 26 elements of the data type `character`. We could check this via the `length()` or `str()` functions:
+
+```{r}
+length(letters)
+str(letters)
+```
+
+Note how the built-in constant `pi` is not a vector, because it's just a single number (*a.k.a.* a scalar).
+
+```{r}
+str(pi)
+length(pi)
+```
+
+If you want to create your own vector from scratch, you must put all the elements together in the `c()` function and separate them with commas:
+
+```{r}
+mynumbers <- c(1, 4, 9, 12, 12, 12, 16)
+mynumbers
+mywords <- c("Hakuna", "Matata", "Simba")
+mywords
+```
+
+Interestingly, we can still apply the `sqrt()` function we used above to a vector with numbers and it will simply take the square-root of every element:
+
+```{r}
+sqrt(mynumbers)
+```
+
+However, there are also functions like `mean()` which return the mean of all numbers in a vector as a single output element:
+
+```{r}
+mean(mynumbers)
+```
+
+# function arguments
+
+So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use `seq()` as an example, which seems simple enough, because it generates a sequence of numbers:
+
+```{r}
+seq(1, 10)
+```
+
+As you can see, putting in `1` and `10` separated by a comma generates a numeric vector with numbers from 1 to 10. However, I would like you to fully understand what is going on here, because it will help a lot with more complex functions.
+
+See, we could switch the numbers and the function will work as expected:
+
+```{r}
+seq(10, 1)
+```
+
+So this means that the first input is always the starting point and the second one is always the end point of the sequence, right? Well, yes by default, but you can have it your way if you specifically use the names of the arguments.
+
+Looking at `?seq()` it says `seq(from = 1, to = 1, by = ...)` so this `seq(10, 1)` is more explicitly this: `seq(from = 1, to = 10, by = 1)`. Here is proof:
+
+```{r}
+seq(from = 1, to = 10, by = 1)
+```
+
+Again, if you do not write out the arguments like this, it will simply assume the default order: The first number supplied is `from =` the second is `to =` and the third is `by =`. However, if we write out the arguments, we can use any order we like:
+
+```{r}
+seq(1, 9, 2)
+seq(from = 1, to = 9, by = 2)
+seq(from = 1, by = 2, to = 9)
+seq(1, 2, 9)
+```
+
+In short: If you understand why the first three lines of the code above produce the same result, but the last one does not, you are good to go!
+
+# R packages
+
+Any function is always part of an R package.
+
+## base R
+
+After installing R there are many functions etc. you can use right away - which is what we did above. For example, when running `?mean`, the help page will tell you that this function is part of the [{base}](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html) package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the "Packages" tab in RStudio - you will find the *base* package and it will have a checked box next to it.
+
+## loading packages
+
+When looking at the "Packages" tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is `library(package_name)`. This command must be run once every time you open a new R session.
+
+## installing additional packages
+
+R really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - *e.g.* the package `{ggplot2}`, which is not built-in, has been downloaded [75 million](https://cranlogs.r-pkg.org/badges/grand-total/ggplot2) times. In order to install a package, the default command is `install.packages(package_name)`. Alternatively, you can also click on the "Install" button in the top left of the "Packages" tab and type in the *package_name* there.
+
+::: callout-note
+A package only needs to be installed once, but\
+A package must be loaded every time you open a new R session!
+:::
+
+[Here](https://github.com/qinwf/awesome-R) is a curated list of R packages and tools for different areas.
+
+## `p_load()` vs. `library()`
+
+[<img src="https://github.com/trinker/pacman/blob/master/inst/pacman_logo/r_pacman.png?raw=true" width="100"/>](https://tidyverse.tidyverse.org/)
+
+You now know how to install and load R packages the standard way. However, over the years I switched to using the function `p_load()` from the {pacman} package instead of `library()` and `install.packages()`. The reason is simple: Usually R-scripts start with multiple lines of `library()` statements that load the necessary packages. However, when this code is run on a different computer, the user may not have all these packages installed and will therefore get an error message. This can be avoided by using the `p_load()`, because it
+
+-   loads all packages that are installed and
+-   installs and loads all packages that are not installed.
+
+Obviously, {pacman} itself must first be installed (the standard way). Moreover, you may now think that in order to use `p_load()` we do need a single `library(pacman)` first. However, we can avoid this by writing `pacman::p_load()` instead. Simply put, writing `package_name::function_name()` [makes sure](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ns-dblcolon.html) that this explicit function from this explicit package is being used. Additionally, R actually lets you use this function without loading the corresponding package. Thus, we now arrived at the way I handle packages at the beginning of all my R-scripts:
+
+```{r}
+#| eval: false
+
+pacman::p_load(
+  package_name_1,
+  package_name_2,
+  package_name_3
+)
+```
+
+# Keyboard shortcuts
+
+Here are shortcuts I actually use regularly in RStudio:
+
+| Shortcut              | Description                                   |
+|-----------------------|-----------------------------------------------|
+| CTRL+ENTER            | Run selected lines of code                    |
+| CTRL+SHIFT+M          | Insert `%>%`[^2]                              |
+| CTRL+SHIFT+R          | Insert code section header                    |
+| CTRL+LEFT/RIGHT       | Jump to Word                                  |
+| CTRL+SHIFT+LEFT/RIGHT | Select Word                                   |
+| ALT+LEFT/RIGHT        | Jump to Line Start/End                        |
+| ALT+SHIFT+LEFT/RIGHT  | Select to Line Start/End                      |
+| CTRL+A                | Highlight everything (to run the entire code) |
+| CTRL+Z                | Undo                                          |
+
+[^2]: The pipe operator %\>% is introduced in the next chapter.
+
+Keyboard shortcuts can be customized in RStudio as described [here](https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts-in-the-RStudio-IDE).

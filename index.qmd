@@ -1,0 +1,18 @@
+---
+title: "Data Science for Agriculture in R"
+format:
+  html:
+    toc: false
+    code-fold: false
+    code-tools: false
+---
+
+[DSFAIR - Data Science for Agriculture in R](https://schmidtpaul.github.io/DSFAIR/) provides a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields.
+
+## Workshops
+
+Moreover, the articles published here serve as the basis for any of my R‑Workshops. Check out
+
+-   ["Prepare for an upcoming workshop"](summaryarticles/workshopprep.qmd)
+
+-   and my [list of workshops](https://schmidtpaul.github.io/)

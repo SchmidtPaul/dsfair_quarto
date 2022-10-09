@@ -1,0 +1,83 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "dsfair_quarto"
+  navbar:
+    title: DSFAIR
+    search: true
+    left:
+      - text: Home
+        href: index.qmd
+      - text: R Basics
+        menu:
+          - text: First Steps
+            href: rbasics/firststeps.qmd
+          - text: The tidyverse
+            href: rbasics/tidyverse.qmd
+      - text: Example Analyses
+        menu:
+          - text: Simple Experiments
+          - text: Complex Experiments
+      - text: Summary Articles
+        menu:
+          - text: Compact Letter Display
+            href: summaryarticles/compactletterdisplay.qmd
+          - text: Designing Experiments
+          - text: Workshop prep
+            href: summaryarticles/workshopprep.qmd
+    right:
+      - text: Contact
+        href: https://schmidtpaul.github.io/
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
+  twitter-card: true
+  # cookie-consent: true
+
+format:
+  html:
+    theme: theme.scss
+    css: styles.css
+    toc: true
+    code-fold: show
+    code-summary: "Click to show/hide code"
+    code-overflow: scroll
+    code-copy: true
+    code-link: true
+    code-tools: true
+    citations-hover: true
+    footnotes-hover: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+
+author:
+  - name:
+      given: Paul
+      family: Schmidt
+      literal: Paul Schmidt
+    orcid: 0000-0003-1528-2082
+    email: schmidtpaul1989@outlook.com
+    affiliations:
+      - name: Freelancer &
+        url: https://schmidtpaul.github.io/
+      - name: BioMath GmbH
+        city: Hamburg
+        country: Germany
+        url: https://www.biomath.de/
+
+editor: visual
+
+execute:
+  warning: false
+  message: false
+
+fig-dpi: 300
+fig-width: 5.5
+fig-height: 3.5
+
+filters: 
+  - custom-callout.lua

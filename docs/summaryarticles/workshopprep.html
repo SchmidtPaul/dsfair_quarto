@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2022-09-30">
+<title>dsfair_quarto - Prepare for an upcoming workshop</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><link rel="stylesheet" href="../styles.css">
+<meta name="twitter:title" content="dsfair_quarto - Prepare for an upcoming workshop">
+<meta name="twitter:description" content="Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare.">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">DSFAIR</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
+    <a class="dropdown-item" href="../rbasics/firststeps.html">
+ <span class="dropdown-text">First Steps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../rbasics/tidyverse.html">
+ <span class="dropdown-text">The tidyverse</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-example-analyses" role="button" data-bs-toggle="dropdown" aria-expanded="false">Example Analyses</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-example-analyses">
+<li class="dropdown-header">Simple Experiments</li>
+        <li class="dropdown-header">Complex Experiments</li>
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
+    <a class="dropdown-item" href="../summaryarticles/compactletterdisplay.html">
+ <span class="dropdown-text">Compact Letter Display</span></a>
+  </li>  
+        <li class="dropdown-header">Designing Experiments</li>
+        <li>
+    <a class="dropdown-item" href="../summaryarticles/workshopprep.html">
+ <span class="dropdown-text">Workshop prep</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#r-and-rstudio" id="toc-r-and-rstudio" class="nav-link active" data-scroll-target="#r-and-rstudio">R and RStudio</a>
+  <ul class="collapse">
+<li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R-packages</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#online-workshops" id="toc-online-workshops" class="nav-link" data-scroll-target="#online-workshops">Online Workshops</a>
+  <ul class="collapse">
+<li><a href="#having-two-screens-helps" id="toc-having-two-screens-helps" class="nav-link" data-scroll-target="#having-two-screens-helps">Having two screens helps!</a></li>
+  <li><a href="#do-i-need-to-install-zoom" id="toc-do-i-need-to-install-zoom" class="nav-link" data-scroll-target="#do-i-need-to-install-zoom">Do I need to install zoom?</a></li>
+  <li><a href="#what-else" id="toc-what-else" class="nav-link" data-scroll-target="#what-else">What else?</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Prepare for an upcoming workshop</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    Paul Schmidt <a href="https://orcid.org/0000-0003-1528-2082" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://schmidtpaul.github.io/">
+            Freelancer &amp;
+            </a>
+          </p>
+        <p class="affiliation">
+            <a href="https://www.biomath.de/">
+            BioMath GmbH
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 30, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header><p>Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare.</p>
+<section id="r-and-rstudio" class="level1"><h1>R and RStudio</h1>
+<p>You will need to install both R and RStudio, which are both open-source.</p>
+<ul>
+<li><p><a href="https://rstudio-education.github.io/hopr/starting.html#how-to-download-and-install-r">Guide to install R</a></p></li>
+<li><p><a href="https://rstudio-education.github.io/hopr/starting.html#rstudio">Guide to install RStudio</a></p></li>
+</ul>
+<p>If you have already installed these in the past, you should check whether you need to update the version you are currently using.</p>
+<ul>
+<li><p><a href="https://www.r-statistics.com/2013/03/updating-r-from-r-on-windows-using-the-installr-package/">Guide to updating R</a></p></li>
+<li><p>To update RStudio, just open it and go to <code>Help</code> &gt; <code>Check for Updates</code>.</p></li>
+</ul>
+<section id="r-packages" class="level2"><h2 class="anchored" data-anchor-id="r-packages">R-packages</h2>
+<p>During the workshop you will get to know and install many additional R-packages that are not automatically installed. In most cases, you can just install them the moment they are introduced. However, if you <em>e.g.</em> have a slow internet connection, it may be worthwhile to install them beforehand. You can install most of the packages we need by running the following code:</p>
+<div class="cell">
+<details open=""><summary>Click to show/hide code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/trinker/pacman">"pacman"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"pacman"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="va">conflicted</span>,</span>
+<span>  <span class="va">desplot</span>,</span>
+<span>  <span class="va">dlookr</span>,</span>
+<span>  <span class="va">emmeans</span>,</span>
+<span>  <span class="va">glmmTMB</span>,</span>
+<span>  <span class="va">here</span>,</span>
+<span>  <span class="va">janitor</span>,</span>
+<span>  <span class="va">lme4</span>,</span>
+<span>  <span class="va">lmerTest</span>,</span>
+<span>  <span class="va">multcomp</span>,</span>
+<span>  <span class="va">multcompView</span>,</span>
+<span>  <span class="va">openxlsx</span>,</span>
+<span>  <span class="va">scales</span>,</span>
+<span>  <span class="va">tidyverse</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section><section id="online-workshops" class="level1"><h1>Online Workshops</h1>
+<p>This section is only relevant if our upcoming workshop will happen via zoom (or similar).</p>
+<section id="having-two-screens-helps" class="level2"><h2 class="anchored" data-anchor-id="having-two-screens-helps">Having two screens helps!</h2>
+<p>During the workshop, I will constantly share my screen with you. Depending on whether you have multiple screens available or not, there are three main scenarios in my experience - ranked from worst to best:</p>
+<ol type="1">
+<li><p><strong>You only have a single screen</strong><br>
+While this is the worst scenario, you obviously can still participate and will have no problem following me during the workshop. What may become difficult, however, is if you want to both look at my shared screen and also write your own R code simulatenously. If you only have only a single screen (that is not super wide), this means constantly switching between zoom and R. Nevertheless, there will be exercises during the workshop where everone has time to do an assignment on their own so that during those time you will definitely get some undivided R time.</p></li>
+<li><p><strong>You have a two screens, but they are not connected to the same device<br></strong>An example for such a scenario would be having a computer with one screen and a laptop/tablet next to it. You could open R on one device and zoom on the other. This is certainly better than having only a single screen, since it is much easier to simultaneously read my and write your code. It is not optimal, however, since it does not allow for the advantages (i) and (ii) listed for scenario 3 below.</p></li>
+<li><p><strong>You have two screens<br></strong>Having a computer/laptop with multiple screens connected is the optimal setup! You can easily look at both my and your R code and additionally (i) share your screen via zoom so that we can fix an issue you are having in R and (ii) copy-paste things from the zoom-chat into R.</p></li>
+</ol></section><section id="do-i-need-to-install-zoom" class="level2"><h2 class="anchored" data-anchor-id="do-i-need-to-install-zoom">Do I need to install zoom?</h2>
+<p>(Obviously, this section is only relevant if the workshop will be held via zoom and not some other video communication software.)</p>
+<p>No, not necessarily. It is not required to install the zoom software in order to participate in a zoom meeting, because you can also join from your browser (see details <a href="https://support.zoom.us/hc/en-us/articles/201362193-Joining-a-Zoom-meeting#h_01FNW1GPCRK5G432X003X7DVGY">here</a> and <a href="https://support.zoom.us/hc/en-us/articles/115005666383-Show-a-Join-from-your-browser-Link">here</a>). Basically, there will be a link that says “Join from your browser” and that’s it. However, be aware that there are some minor functions not available to you if you are joining from your browser.</p>
+</section><section id="what-else" class="level2"><h2 class="anchored" data-anchor-id="what-else">What else?</h2>
+<ul>
+<li><p><strong>Check your microphone<br></strong>Make sure we can hear you when asking a question.</p></li>
+<li><p><strong>Check your camera</strong><br>
+This is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.</p></li>
+<li>
+<p><strong>Get familiar with the options/functions</strong></p>
+<ul>
+<li><p>Know how to mute your microphone. It should be muted at all times except when you are actually talking to us.</p></li>
+<li><p>Know how to use the zoom chat.</p></li>
+<li><p>In zoom, know how to give a “thumbs up” - making a symbol appear on your screen.</p></li>
+</ul>
+</li>
+</ul>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

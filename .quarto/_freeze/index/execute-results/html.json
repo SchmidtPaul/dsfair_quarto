@@ -1,0 +1,14 @@
+{
+  "hash": "d912159e7d6e2c6fd351e51f34bde4d7",
+  "result": {
+    "markdown": "---\ntitle: \"Data Science for Agriculture in R\"\nformat:\n  html:\n    toc: false\n    code-fold: false\n    code-tools: false\n    \ndate: \"30 September, 2022\"\n---\n\n\n[DSFAIR - Data Science for Agriculture in R](https://schmidtpaul.github.io/DSFAIR/) provides a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields.\n\n## Workshops\n\nMoreover, the articles published here serve as the basis for any R‑Workshop given by me ([list of workshops](https://schmidtpaul.github.io/)). Check out [these tips](https://schmidtpaul.github.io/DSFAIR/0courseprep.html) to help you prepare for an upcoming workshop.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
