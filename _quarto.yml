@@ -16,6 +16,8 @@ website:
             href: rbasics/firststeps.qmd
           - text: The tidyverse
             href: rbasics/tidyverse.qmd
+          - text: Useful things
+            href: rbasics/usefulthings.qmd
       - text: Example Analyses
         menu:
           - text: Simple Experiments

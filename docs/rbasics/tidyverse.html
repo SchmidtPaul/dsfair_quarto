@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.0.36">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2022-10-04">
+<meta name="dcterms.date" content="2022-10-09">
 <title>dsfair_quarto - The tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
@@ -161,6 +161,10 @@ div.csl-indent {
     <a class="dropdown-item" href="../rbasics/tidyverse.html">
  <span class="dropdown-text">The tidyverse</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../rbasics/usefulthings.html">
+ <span class="dropdown-text">Useful things</span></a>
+  </li>  
     </ul>
 </li>
   <li class="nav-item dropdown ">
@@ -266,7 +270,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 4, 2022</p>
+      <p class="date">October 9, 2022</p>
     </div>
   </div>
     
@@ -1493,7 +1497,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb93" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "The tidyverse"</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-04</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-09</span></span>
 <span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
 <span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
 <span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -1528,7 +1532,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb93-39"><a href="#cb93-39" aria-hidden="true" tabindex="-1"></a>During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.</span>
 <span id="cb93-40"><a href="#cb93-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb93-41"><a href="#cb93-41" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
-<span id="cb93-42"><a href="#cb93-42" aria-hidden="true" tabindex="-1"></a><span class="ss">-    </span><span class="co">[</span><span class="ot">"R for Data Science"</span><span class="co">](https://r4ds.had.co.nz/)</span> <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span>, which is a book that can be read online for free and was written by the package authors themselves.</span>
+<span id="cb93-42"><a href="#cb93-42" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">"R for Data Science"</span><span class="co">](https://r4ds.had.co.nz/)</span> <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span>, which is a book that can be read online for free and was written by the package authors themselves.</span>
 <span id="cb93-43"><a href="#cb93-43" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb93-44"><a href="#cb93-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb93-45"><a href="#cb93-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tables</span></span>
@@ -2050,19 +2054,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb93-633"><a href="#cb93-633" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb93-634"><a href="#cb93-634" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb93-635"><a href="#cb93-635" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb93-636"><a href="#cb93-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-636"><a href="#cb93-636" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb93-637"><a href="#cb93-637" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb93-638"><a href="#cb93-638" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb93-639"><a href="#cb93-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-640"><a href="#cb93-640" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb93-641"><a href="#cb93-641" aria-hidden="true" tabindex="-1"></a>Once you used <span class="in">`group_by()`</span> on a table, it stays grouped unless you use <span class="in">`ungroup()`</span> on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results.</span>
-<span id="cb93-642"><a href="#cb93-642" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb93-643"><a href="#cb93-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-644"><a href="#cb93-644" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
-<span id="cb93-645"><a href="#cb93-645" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.6 Grouped summaries with summarise()</span><span class="co">](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
-<span id="cb93-646"><a href="#cb93-646" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Summarise each group to fewer rows with summarise()</span><span class="co">](https://dplyr.tidyverse.org/reference/summarise.html)</span></span>
-<span id="cb93-647"><a href="#cb93-647" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Group by one or more variables with group_by()</span><span class="co">](https://dplyr.tidyverse.org/reference/group_by.html)</span></span>
-<span id="cb93-648"><a href="#cb93-648" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-638"><a href="#cb93-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-639"><a href="#cb93-639" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb93-640"><a href="#cb93-640" aria-hidden="true" tabindex="-1"></a>Once you used <span class="in">`group_by()`</span> on a table, it stays grouped unless you use <span class="in">`ungroup()`</span> on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results.</span>
+<span id="cb93-641"><a href="#cb93-641" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb93-642"><a href="#cb93-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-643"><a href="#cb93-643" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb93-644"><a href="#cb93-644" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.6 Grouped summaries with summarise()</span><span class="co">](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
+<span id="cb93-645"><a href="#cb93-645" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Summarise each group to fewer rows with summarise()</span><span class="co">](https://dplyr.tidyverse.org/reference/summarise.html)</span></span>
+<span id="cb93-646"><a href="#cb93-646" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Group by one or more variables with group_by()</span><span class="co">](https://dplyr.tidyverse.org/reference/group_by.html)</span></span>
+<span id="cb93-647"><a href="#cb93-647" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

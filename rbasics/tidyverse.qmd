@@ -1,6 +1,6 @@
 ---
 title: "The tidyverse"
-date: 2022-10-04
+date: 2022-10-09
 code-fold: false
 bibliography: references.bib
 ---
@@ -35,7 +35,7 @@ I did not use the tidyverse packages in my first years using R, but I wish I did
 During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.
 
 ::: custom-callout-tip
--    ["R for Data Science"](https://r4ds.had.co.nz/) [@Wickham_2017], which is a book that can be read online for free and was written by the package authors themselves.
+-   ["R for Data Science"](https://r4ds.had.co.nz/) [@Wickham_2017], which is a book that can be read online for free and was written by the package authors themselves.
 :::
 
 # Tables
@@ -557,7 +557,6 @@ tbl %>%
     )
   ))
 ```
-
 :::
 :::
 

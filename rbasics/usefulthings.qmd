@@ -1,0 +1,214 @@
+---
+title: "Useful things"
+date: 2022-10-09
+code-fold: false
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  class.output = "custom-output"
+)
+```
+
+This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically.
+
+# {dlookr} - descriptive statistics
+
+When providing descriptive statistics tables, one may find the number of relevant measures become annoyingly large so that even with the {tidyverse}, several lines of code are necessary. Here are just five measures, and they are not even including the [`na.rm = TRUE`](https://www.statology.org/na-rm/) argument, which is necessary for data with missing values.
+
+```{r}
+library(tidyverse)
+
+PlantGrowth %>% 
+  group_by(group) %>% 
+  summarise(
+    mean = mean(weight),
+    stddev = sd(weight),
+    median = median(weight),
+    min = min(weight),
+    max = max(weight)
+  )
+```
+
+Obviously, there are multiple packages who try to address just that. The one I've been using for some time now is [{dlookr}](https://choonghyunryu.github.io/dlookr/) with its `describe()` function. It actually provides more measures than I usually need[^1], but it has everything I want and I disregard the rest (via `select()`).
+
+[^1]: Keep in mind that `p00` is the 0th percentile and thus the minimum. Analogously, `p50` is the median and `p100` the maximum.
+
+```{r}
+#| eval: false
+library(dlookr)
+
+PlantGrowth %>%
+  group_by(group) %>%
+  describe(weight)
+```
+
+```{r}
+#| echo: false
+PlantGrowth %>%
+  group_by(group) %>%
+  dlookr::describe(weight)
+```
+
+# {forcats} - factor level handling
+
+In my experience, R beginners really only care about the difference between `factor` and `character` variables once the factor level order is not as they want it to be - typically on the x-axis of a plot. Luckily, [{forcats}](https://forcats.tidyverse.org/) can deal with this.
+
+In the following example, we create a column `fct` that is a copy of the column `chr`, except that they are formatted as `factor` and `character`, respectively.
+
+```{r}
+library(tidyverse)
+
+dat <- tribble(
+     ~val,   ~chr,
+       10, "Ctrl", 
+       15,    "A",
+        8,    "B"
+) %>% 
+  mutate(fct = as.factor(chr))
+
+ggplot(dat) +
+  aes(y = val, x = fct) +
+  geom_col()
+```
+
+Even though the data is sorted so that Ctrl is first, then A, then B, the x-Axis is sorted differently[^2]. This is because factor levels are always sorted alphabetically by default. We can reorder them via different functions in {forcats}:
+
+[^2]: It does not make a difference here, whether we put `x = chr` or `x = fct` in the ggplot statement.
+
+```{r}
+dat <- dat %>% 
+  mutate(
+    fct2 = fct_relevel(fct, c("Ctrl", "A", "B")),
+    fct3 = fct_reorder(fct, val, mean)
+    )
+
+str(dat)
+```
+
+Above are just two popular examples for sorting factor levels: `fct_relevel` sorts the levels manually by providing a vector with the level names in the order they should appear, while `fct_reorder` here sorts the levels according to their respective group mean[^3] of the values in the `val` column.
+
+[^3]: Yes, the mean in this example is not really a mean, since there is only one number per group.
+
+You can see that it worked in the output of `str(dat)` above and in the plots below.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ggplot(dat) +
+  aes(y = val, x = fct2) +
+  geom_col()
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ggplot(dat) +
+  aes(y = val, x = fct3) +
+  geom_col()
+```
+:::
+:::
+
+# {ggtext} - automatic word wrapping
+
+Adding long text to plots created via {ggplot2} is problematic, since you have to insert line breaks yourself. However, [{ggext}](https://wilkelab.org/ggtext/)'s `geom_textbox()` for data labels and `element_textbox_simple()` for title, caption etc. will automatically add line breaks:
+
+```{r}
+longtext <- "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
+```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+library(ggplot2)
+
+ggplot() +
+  
+  
+  
+  aes(y = 1, x = 1, label = longtext) +
+  geom_label() +
+  labs(caption = longtext)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+library(ggtext)
+
+ggplot() +
+  theme(plot.caption =
+          element_textbox_simple()
+        ) +
+  aes(y = 1, x = 1, label = longtext) +
+  geom_textbox() +
+  labs(caption = longtext)
+```
+:::
+:::
+
+# %in% and %not_in%
+
+R has the built-in function `%in%` which checks whether something is present in a vector.
+
+```{r}
+treatments <- c("Ctrl", "A", "B")
+```
+
+Not only can we checke which treatments are present in our `treatment` vector (left), but we can also easily keep only those that are (right).
+
+::: columns
+::: {.column width="49%"}
+```{r}
+c("A", "D") %in% treatments 
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+c("A", "D") %>% .[. %in% treatments]
+```
+:::
+:::
+
+Not built-in, for some reason, is the opposite of that function - checking whether something is **not** present. Yet, we can quickly built our own function that does exactly that:
+
+```{r}
+`%not_in%` <- Negate(`%in%`)
+```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+c("A", "D") %not_in% treatments 
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+c("A", "D") %>% .[. %not_in% treatments]
+```
+:::
+:::
