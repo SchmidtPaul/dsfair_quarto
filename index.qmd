@@ -9,6 +9,10 @@ format:
 
 [DSFAIR - Data Science for Agriculture in R](https://schmidtpaul.github.io/DSFAIR/) provides a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields.
 
+::: callout-important
+This website is currently under construction. I am trying to rebuild [the original website](https://schmidtpaul.github.io/DSFAIR/) with quarto. My GitHub profile will always list all up-to-date links to my websites: [https://github.com/SchmidtPaul](https://github.com/SchmidtPaul)
+:::
+
 ## Workshops
 
 Moreover, the articles published here serve as the basis for any of my R‑Workshops. Check out
