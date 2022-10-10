@@ -13,6 +13,36 @@ knitr::opts_chunk$set(
 
 This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically.
 
+# {broom} - tidy formatted results
+
+In R, results from statistical tests, models etc. are often formatted in a way that may not be optimal for further processing steps. Luckily, [{broom}](https://broom.tidymodels.org/) will format the results of [the most common functions](https://broom.tidymodels.org/articles/available-methods.html) into [tidy data structures](https://www.jstatsoft.org/article/view/v059i10).
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# Correlation Analysis
+# for built-in example
+# data "mtcars"
+cor.test(mtcars$mpg, 
+         mtcars$disp)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+library(broom)
+library(tidyverse)
+
+cor.test(mtcars$mpg,
+         mtcars$disp) %>%
+  tidy()
+```
+:::
+:::
+
 # {dlookr} - descriptive statistics
 
 When providing descriptive statistics tables, one may find the number of relevant measures become annoyingly large so that even with the {tidyverse}, several lines of code are necessary. Here are just five measures, and they are not even including the [`na.rm = TRUE`](https://www.statology.org/na-rm/) argument, which is necessary for data with missing values.
@@ -212,3 +242,7 @@ c("A", "D") %>% .[. %not_in% treatments]
 ```
 :::
 :::
+
+
+
+
