@@ -1,7 +1,6 @@
 ---
 title: "Useful things"
 date: 2022-10-09
-code-fold: false
 ---
 
 ```{r}
@@ -80,73 +79,6 @@ PlantGrowth %>%
   group_by(group) %>%
   dlookr::describe(weight)
 ```
-
-# {forcats} - factor level handling
-
-In my experience, R beginners really only care about the difference between `factor` and `character` variables once the factor level order is not as they want it to be - typically on the x-axis of a plot. Luckily, [{forcats}](https://forcats.tidyverse.org/) can deal with this.
-
-In the following example, we create a column `fct` that is a copy of the column `chr`, except that they are formatted as `factor` and `character`, respectively.
-
-```{r}
-library(tidyverse)
-
-dat <- tribble(
-     ~val,   ~chr,
-       10, "Ctrl", 
-       15,    "A",
-        8,    "B"
-) %>% 
-  mutate(fct = as.factor(chr))
-
-ggplot(dat) +
-  aes(y = val, x = fct) +
-  geom_col()
-```
-
-Even though the data is sorted so that Ctrl is first, then A, then B, the x-Axis is sorted differently[^2]. This is because factor levels are always sorted alphabetically by default. We can reorder them via different functions in {forcats}:
-
-[^2]: It does not make a difference here, whether we put `x = chr` or `x = fct` in the ggplot statement.
-
-```{r}
-dat <- dat %>% 
-  mutate(
-    fct2 = fct_relevel(fct, c("Ctrl", "A", "B")),
-    fct3 = fct_reorder(fct, val, mean)
-    )
-
-str(dat)
-```
-
-Above are just two popular examples for sorting factor levels: `fct_relevel` sorts the levels manually by providing a vector with the level names in the order they should appear, while `fct_reorder` here sorts the levels according to their respective group mean[^3] of the values in the `val` column.
-
-[^3]: Yes, the mean in this example is not really a mean, since there is only one number per group.
-
-You can see that it worked in the output of `str(dat)` above and in the plots below.
-
-::: columns
-::: {.column width="49%"}
-```{r}
-#| fig-width: 5
-#| fig-height: 3
-ggplot(dat) +
-  aes(y = val, x = fct2) +
-  geom_col()
-```
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-```{r}
-#| fig-width: 5
-#| fig-height: 3
-ggplot(dat) +
-  aes(y = val, x = fct3) +
-  geom_col()
-```
-:::
-:::
 
 # {ggtext} - automatic word wrapping
 

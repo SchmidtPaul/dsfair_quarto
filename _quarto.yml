@@ -18,6 +18,8 @@ website:
             href: rbasics/tidyverse.qmd
           - text: Correlation & Regression
             href: rbasics/correlation_regression.qmd
+          - text: Bad data & Outliers
+            href: rbasics/baddata.qmd
           - text: Useful things
             href: rbasics/usefulthings.qmd
       - text: Example Analyses
@@ -45,7 +47,7 @@ format:
     theme: theme.scss
     css: styles.css
     toc: true
-    code-fold: show
+    code-fold: false
     code-summary: "Click to show/hide code"
     code-overflow: scroll
     code-copy: true

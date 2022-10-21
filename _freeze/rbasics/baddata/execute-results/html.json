@@ -1,0 +1,16 @@
+{
+  "hash": "22b58063808a21ec3b63d95ec1bad3e8",
+  "result": {
+    "markdown": "---\ntitle: \"Bad data & Outliers\"\ndate: 2022-10-17\n---\n\n\n\n\nThere are two download links:\n\n - Download the **original** excel file [here](https://drive.google.com/uc?export=download&id=1HuzLyyIt0Ihh8crV2qV1qahC_lB3Zj2G).\n \n - Download the **formatted** excel file [here](https://drive.google.com/uc?export=download&id=1xUDsQPI9kIRHYpNOvaOS4kYgOiXA15LD).\n \n ",
+    "supporting": [
+      "baddata_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

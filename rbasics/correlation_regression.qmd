@@ -1,7 +1,6 @@
 ---
 title: "Correlation & Regression"
 date: 2022-10-09
-code-fold: false
 ---
 
 ```{r}

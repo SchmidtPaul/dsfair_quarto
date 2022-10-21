@@ -3,7 +3,6 @@ title: "Data Science for Agriculture in R"
 format:
   html:
     toc: false
-    code-fold: false
     code-tools: false
 ---
 

@@ -1,0 +1,19 @@
+---
+title: "Bad data & Outliers"
+date: 2022-10-17
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  class.output = "custom-output"
+)
+```
+
+There are two download links:
+
+ - Download the **original** excel file [here](https://drive.google.com/uc?export=download&id=1HuzLyyIt0Ihh8crV2qV1qahC_lB3Zj2G).
+ 
+ - Download the **formatted** excel file [here](https://drive.google.com/uc?export=download&id=1xUDsQPI9kIRHYpNOvaOS4kYgOiXA15LD).
+ 
+ 
