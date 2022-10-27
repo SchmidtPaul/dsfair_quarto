@@ -14,7 +14,11 @@ This chapter is trying to give you a feeling for what correlation and (simple li
 
 ```{r}
 # packages
-pacman::p_load(tidyverse)
+pacman::p_load(
+  broom,
+  conflicted,
+  modelbased,
+  tidyverse)
 ```
 
 # Data
@@ -120,8 +124,6 @@ mycor
 
 ::: {.column width="49%"}
 ```{r}
-library(broom)
-
 tidy(mycor)
 ```
 :::
@@ -217,8 +219,6 @@ Here is a little more info why `formula = blood_alc ~ drinks` leads to R estimat
 After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via [{modelbased}](https://easystats.github.io/modelbased/):
 
 ```{r}
-library(modelbased)
-
 preddat <- data.frame(drinks = seq(0, 9)) %>% 
   estimate_expectation(model = reg, data = .) %>% 
   as_tibble()

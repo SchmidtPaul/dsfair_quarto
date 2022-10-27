@@ -42,6 +42,14 @@ cor.test(mtcars$mpg,
 :::
 :::
 
+# {conflicted} -
+
+TO DO
+
+# {desplot} - 
+
+TO DO
+
 # {dlookr} - descriptive statistics
 
 When providing descriptive statistics tables, one may find the number of relevant measures become annoyingly large so that even with the {tidyverse}, several lines of code are necessary. Here are just five measures, and they are not even including the [`na.rm = TRUE`](https://www.statology.org/na-rm/) argument, which is necessary for data with missing values.
@@ -125,6 +133,42 @@ ggplot() +
 :::
 :::
 
+# {here} -
+
+TO DO
+
+# {insight} - 
+
+[TO DO](https://easystats.github.io/insight/reference/format_p.html)
+
+# {janitor} -
+
+TO DO
+
+# {modelbased} -
+
+[TO DO](https://easystats.github.io/modelbased/articles/estimate_response.html)
+
+# {openxlsx} - 
+
+TO DO
+
+# {patchwork} - 
+
+TO DO
+
+# {readxl} - 
+
+TO DO
+
+# {reprex} - 
+
+TO DO
+
+# {scales} - 
+
+TO DO
+
 # %in% and %not_in%
 
 R has the built-in function `%in%` which checks whether something is present in a vector.
@@ -175,6 +219,8 @@ c("A", "D") %>% .[. %not_in% treatments]
 :::
 :::
 
+# system('open "file.png"') -
 
+[TO DO](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)
 
 

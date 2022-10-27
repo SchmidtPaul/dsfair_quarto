@@ -10,10 +10,29 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r}
+pacman::p_load(
+  conflicted,
+  here,
+  janitor,
+  readxl,
+  tidyverse
+)
+```
+
 There are two download links:
 
  - Download the **original** excel file [here](https://drive.google.com/uc?export=download&id=1HuzLyyIt0Ihh8crV2qV1qahC_lB3Zj2G).
  
  - Download the **formatted** excel file [here](https://drive.google.com/uc?export=download&id=1xUDsQPI9kIRHYpNOvaOS4kYgOiXA15LD).
  
- 
+Assuming you are working in a [R-project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects), save the formatted file somewhere within the project directory. I have saved it within a sub folder called `data` so that the relative path to my file is `data/vision_fixed.xls`. 
+
+```{r}
+path <- here("data", "vision_fixed.xls")
+dat <- read_excel(path)
+
+dat
+```
+
+

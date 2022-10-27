@@ -661,8 +661,6 @@ In my experience, R beginners really only care about the difference between `fac
 In the following example, we create a column `fct` that is a copy of the column `chr`, except that they are formatted as `factor` and `character`, respectively.
 
 ```{r}
-library(tidyverse)
-
 dat <- tribble(
      ~val,   ~chr,
        10, "Ctrl", 
