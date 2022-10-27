@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.189">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="dcterms.date" content="2022-10-03">
+
 <title>dsfair_quarto - Compact Letter Display (CLD)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -51,7 +59,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -64,7 +72,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -97,6 +105,7 @@ div.csl-indent {
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -112,7 +121,8 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -130,30 +140,39 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="dsfair_quarto - Compact Letter Display (CLD)">
 <meta name="twitter:description" content="Compact letter displays are often used to report results of all pairwise comparisons among treatment means in comparative experiments.">
 <meta name="twitter:card" content="summary">
 </head>
+
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../index.html">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DSFAIR</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
+        <li>
     <a class="dropdown-item" href="../rbasics/firststeps.html">
  <span class="dropdown-text">First Steps</span></a>
   </li>  
@@ -174,18 +193,18 @@ div.csl-indent {
  <span class="dropdown-text">Useful things</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-example-analyses" role="button" data-bs-toggle="dropdown" aria-expanded="false">Example Analyses</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-example-analyses">
-<li class="dropdown-header">Simple Experiments</li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-example-analyses">    
+        <li class="dropdown-header">Simple Experiments</li>
         <li class="dropdown-header">Complex Experiments</li>
     </ul>
-</li>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
+        <li>
     <a class="dropdown-item" href="../summaryarticles/compactletterdisplay.html">
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
@@ -195,10 +214,10 @@ div.csl-indent {
  <span class="dropdown-text">Workshop prep</span></a>
   </li>  
     </ul>
-</li>
+  </li>
 </ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
     <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
   </li>  
   <li class="nav-item compact">
@@ -207,43 +226,45 @@ div.csl-indent {
  </a>
   </li>  
 </ul>
-<div id="quarto-search" class="" title="Search"></div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li><a href="#what-is-it" id="toc-what-is-it" class="nav-link active" data-scroll-target="#what-is-it">What is it?</a></li>
-  <li>
-<a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to">How to</a>
+  <li><a href="#what-is-it" id="toc-what-is-it" class="nav-link active" data-scroll-target="#what-is-it">What is it?</a></li>
+  <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to">How to</a>
   <ul class="collapse">
-<li><a href="#get-the-letters" id="toc-get-the-letters" class="nav-link" data-scroll-target="#get-the-letters">get the letters</a></li>
+  <li><a href="#get-the-letters" id="toc-get-the-letters" class="nav-link" data-scroll-target="#get-the-letters">get the letters</a></li>
   <li><a href="#interpret-the-letters" id="toc-interpret-the-letters" class="nav-link" data-scroll-target="#interpret-the-letters">interpret the letters</a></li>
-  <li>
-<a href="#get-the-plots" id="toc-get-the-plots" class="nav-link" data-scroll-target="#get-the-plots">get the plots</a>
+  <li><a href="#get-the-plots" id="toc-get-the-plots" class="nav-link" data-scroll-target="#get-the-plots">get the plots</a>
   <ul class="collapse">
-<li><a href="#plot-1-suggested" id="toc-plot-1-suggested" class="nav-link" data-scroll-target="#plot-1-suggested">plot 1: suggested</a></li>
+  <li><a href="#plot-1-suggested" id="toc-plot-1-suggested" class="nav-link" data-scroll-target="#plot-1-suggested">plot 1: suggested</a></li>
   <li><a href="#plot-2-well-known" id="toc-plot-2-well-known" class="nav-link" data-scroll-target="#plot-2-well-known">plot 2: well-known</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#alternative-plots" id="toc-alternative-plots" class="nav-link" data-scroll-target="#alternative-plots">Alternative plots</a>
+  </ul></li>
+  <li><a href="#alternative-plots" id="toc-alternative-plots" class="nav-link" data-scroll-target="#alternative-plots">Alternative plots</a>
   <ul class="collapse">
-<li><a href="#alt-1-pairwise-p-value-plot-emmeans" id="toc-alt-1-pairwise-p-value-plot-emmeans" class="nav-link" data-scroll-target="#alt-1-pairwise-p-value-plot-emmeans">alt 1: Pairwise P-value plot {emmeans}</a></li>
+  <li><a href="#alt-1-pairwise-p-value-plot-emmeans" id="toc-alt-1-pairwise-p-value-plot-emmeans" class="nav-link" data-scroll-target="#alt-1-pairwise-p-value-plot-emmeans">alt 1: Pairwise P-value plot {emmeans}</a></li>
   <li><a href="#alt-2-lighthouse-plot-easystats" id="toc-alt-2-lighthouse-plot-easystats" class="nav-link" data-scroll-target="#alt-2-lighthouse-plot-easystats">alt 2: Lighthouse plot {easystats}</a></li>
   <li><a href="#alt-3-the-ggbetweenstats-plot" id="toc-alt-3-the-ggbetweenstats-plot" class="nav-link" data-scroll-target="#alt-3-the-ggbetweenstats-plot">alt 3: The {ggbetweenstats} plot</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
-</li>
-  </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Compact Letter Display (CLD)</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -282,13 +303,16 @@ div.csl-indent {
   </div>
   
 
-</header><div class="cell">
+</header>
+
+<div class="cell">
 
 </div>
 <div class="cell">
 
 </div>
-<section id="what-is-it" class="level1"><h1>What is it?</h1>
+<section id="what-is-it" class="level1">
+<h1>What is it?</h1>
 <p>Compact letter displays are often used to report results of all pairwise comparisons among treatment means in comparative experiments. See Piepho <span class="citation" data-cites="piepho2004">(<a href="#ref-piepho2004" role="doc-biblioref">2004</a>)</span> and <span class="citation" data-cites="piepho2018">(<a href="#ref-piepho2018" role="doc-biblioref">2018</a>)</span> for more details and find a coding example below.</p>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -300,52 +324,54 @@ div.csl-indent {
 </div><div class="column" style="width:30%;">
 <table class="table">
 <caption>*Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance.</caption>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>Group</th>
 <th>Mean weight*</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td>Trt1</td>
-<td>4.7<span class="math inline">\(^{a}\)</span>
-</td>
+<td>4.7<span class="math inline">\(^{a}\)</span></td>
 </tr>
 <tr class="even">
 <td>Ctrl</td>
-<td>5.0<span class="math inline">\(^{ab}\)</span>
-</td>
+<td>5.0<span class="math inline">\(^{ab}\)</span></td>
 </tr>
 <tr class="odd">
 <td>Trt2</td>
-<td>5.5<span class="math inline">\(^{b}\)</span>
-</td>
+<td>5.5<span class="math inline">\(^{b}\)</span></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-</section><section id="how-to" class="level1"><h1>How to</h1>
-<section id="get-the-letters" class="level2"><h2 class="anchored" data-anchor-id="get-the-letters">get the letters</h2>
-<p>You will need to install the packages <a href="https://github.com/rvlenth/emmeans">emmeans</a>, <a href="http://multcomp.R-forge.R-project.org">multcomp</a> and <code>{multcompView}</code>. The example given here is based on the <code>PlantGrowth</code> data, which is included in R.</p>
+</section>
+<section id="how-to" class="level1">
+<h1>How to</h1>
+<section id="get-the-letters" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-letters">get the letters</h2>
+<p>You will need to install the packages <code>{emmeans}</code>, <code>{multcomp}</code> and <code>{multcompView}</code>. The example given here is based on the <code>PlantGrowth</code> data, which is included in R.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org">multcomp</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">multcompView</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># set up model</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">PlantGrowth</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># get (adjusted) weight means per group</span></span>
-<span><span class="va">model_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">model</span>,</span>
-<span>                       specs <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># add letters to each mean</span></span>
-<span><span class="va">model_means_cld</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/multcomp/man/cld.html">cld</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">model_means</span>,</span>
-<span>                       adjust <span class="op">=</span> <span class="st">"Tukey"</span>,</span>
-<span>                       Letters <span class="op">=</span> <span class="va">letters</span>,</span>
-<span>                       alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
-<span><span class="co"># show output</span></span>
-<span><span class="va">model_means_cld</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcompView)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set up model</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get (adjusted) weight means per group</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model_means <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(<span class="at">object =</span> model,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">specs =</span> <span class="st">"group"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add letters to each mean</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>model_means_cld <span class="ot">&lt;-</span> <span class="fu">cld</span>(<span class="at">object =</span> model_means,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">adjust =</span> <span class="st">"Tukey"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Letters =</span> letters,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">alpha =</span> <span class="fl">0.05</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># show output</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model_means_cld</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -364,25 +390,19 @@ NOTE: If two or more means share the same grouping letter,
 </div>
 </div>
 <ol type="1">
-<li>
-<strong>We set up a model</strong>
+<li><strong>We set up a model</strong>
 <ul>
-<li>This is a very simple example using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. You may use much more complex models and <a href="https://cran.r-project.org/web/packages/emmeans/vignettes/models.html">many other model classes</a>.</li>
-</ul>
-</li>
-<li>
-<a href="https://www.rdocumentation.org/packages/emmeans/versions/1.6.2-1/topics/emmeans"><strong><code>emmeans()</code></strong></a> <strong>estimates adjusted means per group.</strong>
+<li>This is a very simple example using <code>lm()</code>. You may use much more complex models and <a href="https://cran.r-project.org/web/packages/emmeans/vignettes/models.html">many other model classes</a>.</li>
+</ul></li>
+<li><a href="https://www.rdocumentation.org/packages/emmeans/versions/1.6.2-1/topics/emmeans"><strong><code>emmeans()</code></strong></a> <strong>estimates adjusted means per group.</strong>
 <ul>
 <li>Note that when doing this for mixed models, one should use the Kenward-Roger method adjusting the denominator degrees of freedom. One may add the <code>lmer.df = "kenward-roger"</code> argument, yet this is the default in {emmeans} (<a href="https://cran.r-project.org/web/packages/emmeans/vignettes/sophisticated.html#lmerOpts">Details here</a>)! Also note that you cannot go wrong with this adjustment - even if there is nothing to adjust.</li>
-</ul>
-</li>
-<li>
-<a href="https://www.rdocumentation.org/packages/multcomp/versions/1.4-17/topics/cld"><strong><code>cld()</code></strong></a> <strong>adds the letters in a new column named <code>.group</code>.</strong>
+</ul></li>
+<li><a href="https://www.rdocumentation.org/packages/multcomp/versions/1.4-17/topics/cld"><strong><code>cld()</code></strong></a> <strong>adds the letters in a new column named <code>.group</code>.</strong>
 <ul>
 <li>The <code>alpha =</code> argument lets you choose the significance level for the comparisons.</li>
 <li>It allows for <a href="https://cran.r-project.org/web/packages/emmeans/vignettes/confidence-intervals.html#adjust">different multiplicity adjustments</a>. Go to the “P-value adjustments” heading within the <a href="https://www.rdocumentation.org/packages/emmeans/versions/1.6.2-1/topics/summary.emmGrid">“summary.emmGrid” section in the emmeans documentation</a> for more details on e.g.&nbsp;t-test, Tukey-test, Bonferroni adjustment etc.</li>
-</ul>
-</li>
+</ul></li>
 </ol>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -396,28 +416,30 @@ Note
 <div class="callout-body-container callout-body">
 <p>If you get the following note and are irritated by it,</p>
 <div class="cell" data-code-copy="false">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Note: adjust = "tukey" was changed to "sidak" </span></span>
-<span><span class="co">## because "tukey" is only appropriate for one set of pairwise comparisons</span></span>
-<span><span class="co">## Conf-level adjustment: sidak method for 3 estimates.</span></span>
-<span><span class="co">## P value adjustment: tukey method for comparing a family of 3 estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: adjust = "tukey" was changed to "sidak" </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## because "tukey" is only appropriate for one set of pairwise comparisons</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Conf-level adjustment: sidak method for 3 estimates.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## P value adjustment: tukey method for comparing a family of 3 estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="https://stats.stackexchange.com/questions/508055/unclear-why-adjust-tukey-was-changed-to-sidak">here</a> is an answer explaining why this happens and that it is not a problem. It is not a problem in the sense that the p-values of the pairwise comparisons were indeed adjusted with the Tukey-method, while the Sidak adjustment was applied to the confidence intervals of the means (<em>i.e.</em> columns <code>lower.CL</code> and <code>upper.CL</code>).</p>
 </div>
 </div>
-</section><section id="interpret-the-letters" class="level2"><h2 class="anchored" data-anchor-id="interpret-the-letters">interpret the letters</h2>
-<p>Until August 2022, the note below the <code><a href="https://rdrr.io/pkg/multcomp/man/cld.html">cld()</a></code> outcome would read:</p>
+</section>
+<section id="interpret-the-letters" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-the-letters">interpret the letters</h2>
+<p>Until August 2022, the note below the <code>cld()</code> outcome would read:</p>
 <div class="cell" data-code-copy="false">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## NOTE: Compact letter displays can be misleading</span></span>
-<span><span class="co">##       because they show NON-findings rather than findings.</span></span>
-<span><span class="co">##       Consider using 'pairs()', 'pwpp()', or 'pwpm()' instead.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: Compact letter displays can be misleading</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       because they show NON-findings rather than findings.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">##       Consider using 'pairs()', 'pwpp()', or 'pwpm()' instead.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>However, in <a href="https://github.com/rvlenth/emmeans/commits/678c2eac11570e8cb6a5aab05323b28690487481/R/cld-emm.R">CRAN version 1.8.0</a> it was changed to:</p>
 <div class="cell" data-code-copy="false">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## NOTE: If two or more means share the same grouping letter,</span></span>
-<span><span class="co">##       then we cannot show them to be different.</span></span>
-<span><span class="co">##       But we also did not show them to be the same.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: If two or more means share the same grouping letter,</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">##       then we cannot show them to be different.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">##       But we also did not show them to be the same.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Both notes are very much in line with the delicate matter of how the CLD must be understood. The author and maintainer of the <a href="https://github.com/rvlenth/emmeans">emmeans</a> package, <a href="http://homepage.divms.uiowa.edu/~rlenth/">Russell V. Lenth</a> makes the argument that CLDs convey information in a way that may be misleading to the reader. This is because they “display non-findings rather than findings - they group together means based on NOT being able to show they are different” (personal communication). Furthermore, “[the CLD approach] works, but it is very black-and-white: with alpha = .05, P values slightly above or below .05 make a difference, but there’s no difference between a P value of .051 and one of .987, or between .049 and .00001” (<a href="https://github.com/rvlenth/emmeans/issues/93#issuecomment-468877941">posted here</a>). He even <a href="https://stats.stackexchange.com/a/508092/192956">wrote here</a> that “Providing for CLDs at all remains one of my biggest regrets in developing this package”. Finally, the former note suggests using alternative plots, which are also created below.</p>
+<p>Both notes are very much in line with the delicate matter of how the CLD must be understood. The author and maintainer of the <code>{emmeans}</code> package, <a href="http://homepage.divms.uiowa.edu/~rlenth/">Russell V. Lenth</a> makes the argument that CLDs convey information in a way that may be misleading to the reader. This is because they “display non-findings rather than findings - they group together means based on NOT being able to show they are different” (personal communication). Furthermore, “[the CLD approach] works, but it is very black-and-white: with alpha = .05, P values slightly above or below .05 make a difference, but there’s no difference between a P value of .051 and one of .987, or between .049 and .00001” (<a href="https://github.com/rvlenth/emmeans/issues/93#issuecomment-468877941">posted here</a>). He even <a href="https://stats.stackexchange.com/a/508092/192956">wrote here</a> that “Providing for CLDs at all remains one of my biggest regrets in developing this package”. Finally, the former note suggests using alternative plots, which are also created below.</p>
 <p>On the other hand, it must be clear that the information conveyed by CLDs is not <em>wrong</em> as long as it is interpreted correctly. The <a href="https://www.rdocumentation.org/packages/multcomp/versions/1.4-17/topics/cld">documentation of the <code>cld()</code> function</a> refers to Piepho <span class="citation" data-cites="piepho2004">(<a href="#ref-piepho2004" role="doc-biblioref">2004</a>)</span>, but even more on point in this context is Piepho <span class="citation" data-cites="piepho2018">(<a href="#ref-piepho2018" role="doc-biblioref">2018</a>)</span>:</p>
 <blockquote class="blockquote">
 <p><a href="https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257&amp;L=1"><strong>Piepho, Hans-Peter</strong></a> <strong>(2018) Letters in Mean Comparisons: What They Do and Don’t Mean</strong>, Agronomy Journal, 110(2), 431-434. DOI: <a href="https://doi.org/10.2134/agronj2017.10.0580">10.2134/agronj2017.10.0580</a> <a href="https://www.researchgate.net/publication/322054734_Letters_in_Mean_Comparisons_What_They_Do_and_Don't_Mean">(ResearchGate)</a></p>
@@ -430,191 +452,219 @@ Note
 <p>Letter displays are often used to report results of all pairwise comparisons among treatment means in comparative experiments. In captions to tables and charts using such letter displays, it is crucial to explain properly what the letters mean. In this paper I explain what the letters mean and how this meaning can be succinctly conveyed in a single sentence without ambiguity. This is contrasted to counter-examples commonly found in publications.</p>
 </blockquote>
 <p>Thus, the article (= 4 pages long) is certainly worth a read if you are using CLDs.</p>
-</section><section id="get-the-plots" class="level2"><h2 class="anchored" data-anchor-id="get-the-plots">get the plots</h2>
-<p>Here I provide code for two ways of plotting the results via <a href="https://ggplot2.tidyverse.org">ggplot2</a>. The first plot is the one I would use, while the second plot is one that is traditionally more common. Finally, I provide examples of other plots that I came across that are suggested as alternatives to CLD plots.</p>
-<section id="plot-1-suggested" class="level3"><h3 class="anchored" data-anchor-id="plot-1-suggested">plot 1: suggested</h3>
+</section>
+<section id="get-the-plots" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-plots">get the plots</h2>
+<p>Here I provide code for two ways of plotting the results via <code>{ggplot2}</code>. The first plot is the one I would use, while the second plot is one that is traditionally more common. Finally, I provide examples of other plots that I came across that are suggested as alternatives to CLD plots.</p>
+<section id="plot-1-suggested" class="level3">
+<h3 class="anchored" data-anchor-id="plot-1-suggested">plot 1: suggested</h3>
 <p>I’ve been using and suggesting to use this type of plot for a while now. I know it contains a lot of information and may seem unfamiliar and overwhelming at first glance. However, I argue that if you take the time to understand what you are looking at, this plot is nice as it shows the raw data (black dots), descriptive statistics (black boxes), estimated means (red dots) and a measure of their precision (red error bars) as well as the compact letter display (red letters).</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># ggplot &amp; helper functions</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span>    <span class="co"># more helper functions</span></span>
-<span></span>
-<span><span class="co"># optional: sort factor levels of groups column according to highest mean</span></span>
-<span><span class="co"># ...in means table</span></span>
-<span><span class="va">model_means_cld</span> <span class="op">&lt;-</span> <span class="va">model_means_cld</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">emmean</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># ...in data table</span></span>
-<span><span class="va">PlantGrowth</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">group</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">model_means_cld</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># y-axis</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Weight"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/pretty_breaks.html">pretty_breaks</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># x-axis</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Treatment"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># general layout</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.caption <span class="op">=</span> <span class="fu"><a href="https://wilkelab.org/ggtext/reference/element_textbox.html">element_textbox_simple</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># black data points</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">PlantGrowth</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">weight</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
-<span>    shape <span class="op">=</span> <span class="fl">16</span>,</span>
-<span>    alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html">position_nudge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># black boxplot</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">PlantGrowth</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">weight</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
-<span>    width <span class="op">=</span> <span class="fl">0.05</span>,</span>
-<span>    outlier.shape <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html">position_nudge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># red mean value</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">emmean</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
-<span>    size <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"red"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># red mean errorbar</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">lower.CL</span>, ymax <span class="op">=</span> <span class="va">upper.CL</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
-<span>    width <span class="op">=</span> <span class="fl">0.05</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"red"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># red letters</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>      y <span class="op">=</span> <span class="va">emmean</span>,</span>
-<span>      x <span class="op">=</span> <span class="va">group</span>,</span>
-<span>      label <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span><span class="op">(</span><span class="va">.group</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html">position_nudge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span>
-<span>    hjust <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"red"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># caption</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>    caption <span class="op">=</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent (estimated marginal) means ± 95% confidence interval per group. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)    <span class="co"># automatic line breaks in caption</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># ggplot &amp; helper functions</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)    <span class="co"># more helper functions</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># optional: sort factor levels of groups column according to highest mean</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ...in means table</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>model_means_cld <span class="ot">&lt;-</span> model_means_cld <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">fct_reorder</span>(group, emmean))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ...in data table</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">fct_relevel</span>(group, <span class="fu">levels</span>(model_means_cld<span class="sc">$</span>group)))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># y-axis</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">pretty_breaks</span>(),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x-axis</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment"</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># general layout</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>()) <span class="sc">+</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># black data points</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> PlantGrowth,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group),</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">16</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.2</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># black boxplot</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> PlantGrowth,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group),</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.05</span>,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="cn">NA</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.1</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red mean value</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means_cld,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">x =</span> group),</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red mean errorbar</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means_cld,</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">x =</span> group),</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.05</span>,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red letters</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means_cld,</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> emmean,</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> group,</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">str_trim</span>(.group)</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.1</span>),</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># caption</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent (estimated marginal) means ± 95% confidence interval per group. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
-</section><section id="plot-2-well-known" class="level3"><h3 class="anchored" data-anchor-id="plot-2-well-known">plot 2: well-known</h3>
+</section>
+<section id="plot-2-well-known" class="level3">
+<h3 class="anchored" data-anchor-id="plot-2-well-known">plot 2: well-known</h3>
 <p>Traditionally, bar plots with error bars are used a lot in this context. In my experience, there is at least one poster with one of them in every university building I. While they are not wrong <em>per se</em>, there is a decade-long discussion about why such “dynamite plots” are not optimal (see e.g.&nbsp;<a href="https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-and-how-to-create-them-with-ggplot2/">this nice blogpost</a>).</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># ggplot &amp; helper functions</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span>    <span class="co"># more helper functions</span></span>
-<span></span>
-<span><span class="co"># optional: sort factor levels of groups column according to highest mean</span></span>
-<span><span class="co"># ...in means table</span></span>
-<span><span class="va">model_means_cld</span> <span class="op">&lt;-</span> <span class="va">model_means_cld</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">emmean</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># ...in data table</span></span>
-<span><span class="va">PlantGrowth</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">group</span>, <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">model_means_cld</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># y-axis</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Weight"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://scales.r-lib.org/reference/pretty_breaks.html">pretty_breaks</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># x-axis</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Treatment"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># general layout</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.caption <span class="op">=</span> <span class="fu"><a href="https://wilkelab.org/ggtext/reference/element_textbox.html">element_textbox_simple</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># bars</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">emmean</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span>,</span>
-<span>           stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># errorbars</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>                  ymin <span class="op">=</span> <span class="va">emmean</span> <span class="op">-</span> <span class="va">SE</span>,</span>
-<span>                  ymax <span class="op">=</span> <span class="va">emmean</span> <span class="op">+</span> <span class="va">SE</span>,</span>
-<span>                  x <span class="op">=</span> <span class="va">group</span></span>
-<span>                <span class="op">)</span>,</span>
-<span>                width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># letters</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span></span>
-<span>    data <span class="op">=</span> <span class="va">model_means_cld</span>,</span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>      y <span class="op">=</span> <span class="va">emmean</span> <span class="op">+</span> <span class="va">SE</span>,</span>
-<span>      x <span class="op">=</span> <span class="va">group</span>,</span>
-<span>      label <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span><span class="op">(</span><span class="va">.group</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>    vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># caption</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>    caption <span class="op">=</span> <span class="st">"Bars with errorbars represent (estimated marginal) means ± standard error. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)    <span class="co"># automatic line breaks in caption</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># ggplot &amp; helper functions</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)    <span class="co"># more helper functions</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># optional: sort factor levels of groups column according to highest mean</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ...in means table</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>model_means_cld <span class="ot">&lt;-</span> model_means_cld <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">fct_reorder</span>(group, emmean))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ...in data table</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">fct_relevel</span>(group, <span class="fu">levels</span>(model_means_cld<span class="sc">$</span>group)))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># y-axis</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">pretty_breaks</span>(),</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># x-axis</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment"</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># general layout</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>()) <span class="sc">+</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># bars</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> model_means_cld,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">x =</span> group),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># errorbars</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> model_means_cld,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymin =</span> emmean <span class="sc">-</span> SE,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> emmean <span class="sc">+</span> SE,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> group</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># letters</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means_cld,</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> emmean <span class="sc">+</span> SE,</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> group,</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">str_trim</span>(.group)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># caption</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Bars with errorbars represent (estimated marginal) means ± standard error. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
-</section></section><section id="alternative-plots" class="level2"><h2 class="anchored" data-anchor-id="alternative-plots">Alternative plots</h2>
+</section>
+</section>
+<section id="alternative-plots" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-plots">Alternative plots</h2>
 <p>Note that I simply collect alternative ways of plotting adjusted mean comparisons here - this does not mean I fully grasp their concept.</p>
-<section id="alt-1-pairwise-p-value-plot-emmeans" class="level3"><h3 class="anchored" data-anchor-id="alt-1-pairwise-p-value-plot-emmeans">alt 1: Pairwise P-value plot {emmeans}</h3>
+<section id="alt-1-pairwise-p-value-plot-emmeans" class="level3">
+<h3 class="anchored" data-anchor-id="alt-1-pairwise-p-value-plot-emmeans">alt 1: Pairwise P-value plot {emmeans}</h3>
 <p>This is the Pairwise P-value plot suggested in the former NOTE we received above as an alternative. The documentation reads: <em>Factor levels (or combinations thereof) are plotted on the vertical scale, and P values are plotted on the horizontal scale. Each P value is plotted twice – at vertical positions corresponding to the levels being compared – and connected by a line segment. Thus, it is easy to visualize which P values are small and large, and which levels are compared.</em></p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/pwpp.html">pwpp</a></span><span class="op">(</span><span class="va">model_means</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwpp</span>(model_means) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
-</section><section id="alt-2-lighthouse-plot-easystats" class="level3"><h3 class="anchored" data-anchor-id="alt-2-lighthouse-plot-easystats">alt 2: Lighthouse plot {easystats}</h3>
-<p>Within the framework of the <a href="https://easystats.github.io/easystats/">easystats</a> packages, the <em>lighthouse plots</em> came up as a more recent idea. See <a href="https://github.com/easystats/see/issues/12">this issue</a> and <a href="https://easystats.github.io/see/articles/modelbased.html#pairwise-contrasts">this</a> and <a href="https://easystats.github.io/modelbased/articles/estimate_contrasts.html#complex-model">this</a> part of the documentation for more details.</p>
+</section>
+<section id="alt-2-lighthouse-plot-easystats" class="level3">
+<h3 class="anchored" data-anchor-id="alt-2-lighthouse-plot-easystats">alt 2: Lighthouse plot {easystats}</h3>
+<p>Within the framework of the <code>{easystats}</code> packages, the <em>lighthouse plots</em> came up as a more recent idea. See <a href="https://github.com/easystats/see/issues/12">this issue</a> and <a href="https://easystats.github.io/see/articles/modelbased.html#pairwise-contrasts">this</a> and <a href="https://easystats.github.io/modelbased/articles/estimate_contrasts.html#complex-model">this</a> part of the documentation for more details.</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span>, adjust <span class="op">=</span> <span class="st">"tukey"</span><span class="op">)</span>,</span>
-<span>     <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelbased)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(see)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">estimate_contrasts</span>(model, <span class="at">adjust =</span> <span class="st">"tukey"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">estimate_means</span>(model)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
-</section><section id="alt-3-the-ggbetweenstats-plot" class="level3"><h3 class="anchored" data-anchor-id="alt-3-the-ggbetweenstats-plot">alt 3: The {ggbetweenstats} plot</h3>
-<p>Finally, the <a href="https://indrajeetpatil.github.io/ggstatsplot/">ggstatsplot</a> package’s function <a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggbetweenstats.html"><code>ggbetweenstats()</code></a> aims to create graphics with details from statistical tests included in the information-rich plots themselves and would compare our groups like this:</p>
+</section>
+<section id="alt-3-the-ggbetweenstats-plot" class="level3">
+<h3 class="anchored" data-anchor-id="alt-3-the-ggbetweenstats-plot">alt 3: The {ggbetweenstats} plot</h3>
+<p>Finally, the <code>{ggstatsplot}</code> package’s function <a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggbetweenstats.html"><code>ggbetweenstats()</code></a> aims to create graphics with details from statistical tests included in the information-rich plots themselves and would compare our groups like this:</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">PMCMRplus</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstantools/">rstantools</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://indrajeetpatil.github.io/ggstatsplot/">ggstatsplot</a></span><span class="op">)</span></span>
-<span><span class="co"># "since the confidence intervals for the effect sizes are computed using</span></span>
-<span><span class="co"># bootstrapping, important to set a seed for reproducibility"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
-<span><span class="fu">ggstatsplot</span><span class="fu">::</span><span class="fu"><a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html">ggbetweenstats</a></span><span class="op">(</span></span>
-<span>  data <span class="op">=</span> <span class="va">PlantGrowth</span>,</span>
-<span>  x <span class="op">=</span> <span class="va">group</span>,</span>
-<span>  y <span class="op">=</span> <span class="va">weight</span>,</span>
-<span>  pairwise.comparisons <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  pairwise.display <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  p.adjust.method <span class="op">=</span> <span class="st">"none"</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PMCMRplus)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstantools)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># "since the confidence intervals for the effect sizes are computed using</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># bootstrapping, important to set a seed for reproducibility"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> PlantGrowth,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> group,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> weight,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"all"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"none"</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
@@ -623,14 +673,19 @@ Note
 <!-- -->
 
 
-</section></section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-piepho2004" class="csl-entry" role="doc-biblioentry">
 Piepho, Hans-Peter. 2004. <span>“An Algorithm for a Letter-Based Representation of All-Pairwise Comparisons.”</span> <em>Journal of Computational and Graphical Statistics</em> 13 (2): 456–66. <a href="https://doi.org/10.1198/1061860043515">https://doi.org/10.1198/1061860043515</a>.
 </div>
 <div id="ref-piepho2018" class="csl-entry" role="doc-biblioentry">
 ———. 2018. <span>“Letters in Mean Comparisons: What They Do and Don<span>’</span>t Mean.”</span> <em>Agronomy Journal</em> 110 (2): 431–34. <a href="https://doi.org/10.2134/agronj2017.10.0580">https://doi.org/10.2134/agronj2017.10.0580</a>.
 </div>
-</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -750,7 +805,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

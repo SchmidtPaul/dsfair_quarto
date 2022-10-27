@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
 
 ```{r}
 pacman::p_load(
+  broom,
   conflicted,
   here,
   janitor,
@@ -22,11 +23,17 @@ pacman::p_load(
 
 There are two download links:
 
- - Download the **original** excel file [here](https://drive.google.com/uc?export=download&id=1HuzLyyIt0Ihh8crV2qV1qahC_lB3Zj2G).
- 
- - Download the **formatted** excel file [here](https://drive.google.com/uc?export=download&id=1xUDsQPI9kIRHYpNOvaOS4kYgOiXA15LD).
- 
-Assuming you are working in a [R-project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects), save the formatted file somewhere within the project directory. I have saved it within a sub folder called `data` so that the relative path to my file is `data/vision_fixed.xls`. 
+-   Download the **original** excel file [here](https://drive.google.com/uc?export=download&id=1HuzLyyIt0Ihh8crV2qV1qahC_lB3Zj2G).
+
+-   Download the **formatted** excel file [here](https://drive.google.com/uc?export=download&id=1xUDsQPI9kIRHYpNOvaOS4kYgOiXA15LD).
+
+# Data
+
+Imagine that this dataset was obtained by you. You spent an entire day walking around the campus of a university and asked a total of 29 people for things like how old they are (`Ages`) and you also tested how well they could see on a scale of 1-10 (`Vision`).
+
+## Import
+
+Assuming you are working in a [R-project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects), save the formatted file somewhere within the project directory. I have saved it within a sub folder called `data` so that the relative path to my file is `data/vision_fixed.xls`.
 
 ```{r}
 path <- here("data", "vision_fixed.xls")
@@ -35,4 +42,62 @@ dat <- read_excel(path)
 dat
 ```
 
+## Goal
 
+Very much like in the previous chapter, our goal is to look at the relationship of two numeric variables: `Ages` and `Vision`. What is new about this data is, that it (i) has missing values and (ii) has a potential outlier.
+
+## Exploring
+
+To quickly get a first feeling for this dataset, we can use `summary()` and draw a plot via `plot()` or `ggplot()`.
+
+```{r}
+summary(dat)
+```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+plot(y = dat$Vision, x = dat$Ages)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(x = Ages, y = Vision) +
+  geom_point(size = 2) +
+  scale_x_continuous(
+    name = "Person's age",
+    limits = c(20, 60),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_y_continuous(
+    name = "Person's vision",
+    limits = c(0, NA),
+    breaks = seq(0, 10, 2),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+    theme_bw()
+```
+:::
+:::
+
+Apparently, most people are in their 20s and can see quite well, however some people are older and they tend to have a vision that's a little worse.
+
+# Correlation & Regression
+
+Let's estimate the correlation and simple linear regression and look at the results in a tidy format:
+
+```{r}
+cor <- cor.test(dat$Vision, dat$Ages)
+tidy(cor)
+reg <- lm(Vision ~ Ages, data = dat)
+tidy(reg)
+```
+
+Thus, we have a moderate, negative correlation of `r round(cor$estimate,3)` and for the regression we have *Vision = `r round(tidy(reg)[[1,2]], 2)` `r round(tidy(reg)[[2,2]], 2)` Ages*.
