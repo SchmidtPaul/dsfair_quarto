@@ -1,6 +1,7 @@
 ---
 title: "Bad data & Outliers"
 date: 2022-10-17
+abstract: "Cleaning data, dealing with missing data and comparing results for correlation and regression before vs. after removing an outlier from the data."
 ---
 
 ```{r}
@@ -11,14 +12,20 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
+# (install &) load packages
 pacman::p_load(
   broom,
   conflicted,
   here,
   janitor,
+  naniar,
   readxl,
   tidyverse
 )
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
 ```
 
 There are two download links:
@@ -29,7 +36,7 @@ There are two download links:
 
 # Data
 
-Imagine that this dataset was obtained by you. You spent an entire day walking around the campus of a university and asked a total of 29 people for things like how old they are (`Ages`) and you also tested how well they could see on a scale of 1-10 (`Vision`).
+Imagine that this dataset was obtained by you. You spent an entire day walking around the campus of a university and asked a total of 29 people for things like how old they are and you also tested how well they could see on a scale of 1-10.
 
 ## Import
 
@@ -42,9 +49,16 @@ dat <- read_excel(path)
 dat
 ```
 
+This is optional, but we could argue that our column names are not in a desirable format. To deal with this, we can use the `clean_names()` functions of [{janitor}](https://sfirke.github.io/janitor/). This package has several more handy functions for cleaning data that are worth checking out.
+
+```{r}
+dat <- dat %>% clean_names()
+dat
+```
+
 ## Goal
 
-Very much like in the previous chapter, our goal is to look at the relationship of two numeric variables: `Ages` and `Vision`. What is new about this data is, that it (i) has missing values and (ii) has a potential outlier.
+Very much like in the previous chapter, our goal is to look at the relationship of two numeric variables: `ages` and `vision`. What is new about this data is, that it (i) has missing values and (ii) has a potential outlier.
 
 ## Exploring
 
@@ -58,7 +72,7 @@ summary(dat)
 ::: {.column width="49%"}
 ```{r}
 #| code-fold: true
-plot(y = dat$Vision, x = dat$Ages)
+plot(y = dat$vision, x = dat$ages)
 ```
 :::
 
@@ -69,7 +83,7 @@ plot(y = dat$Vision, x = dat$Ages)
 ```{r}
 #| code-fold: true
 ggplot(data = dat) +
-  aes(x = Ages, y = Vision) +
+  aes(x = ages, y = vision) +
   geom_point(size = 2) +
   scale_x_continuous(
     name = "Person's age",
@@ -89,15 +103,256 @@ ggplot(data = dat) +
 
 Apparently, most people are in their 20s and can see quite well, however some people are older and they tend to have a vision that's a little worse.
 
-# Correlation & Regression
+# Missing Data?
+
+While the data has 29 rows, it actually only holds `vision` and `ages` information for 28 people. This is because instead of values, there are `NA` (Not Available) for one person. Note that `NA` as missing values are treated somewhat special in R. As an example: If you want to filter for missing values, you cannot write `value == NA`, but must instead write `is.na(value)`:
+
+```{r}
+dat %>% 
+  filter(is.na(vision))
+```
+
+Moreover, if you want to count the missing observations (per group) in a dataset, the most basic way of doing it is `sum(is.na(values))` (or for not-missing: `sum(!is.na(values))`). However, if you are dealing with missing values a lot, you may also want to check out [{naniar}](http://naniar.njtierney.com/), which *provides principled, tidy ways to summarise, visualise, and manipulate missing data*.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# standard functions
+dat %>% 
+  group_by(profession) %>% 
+  summarise(
+    n_rows = n(),
+    n_NA = sum(is.na(vision)),
+    n_notNA = sum(!is.na(vision))
+  )
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# naniar functions
+dat %>% 
+  group_by(profession) %>% 
+  summarise(
+    n_rows = n(),
+    n_NA = n_miss(vision),
+    n_notNA = n_complete(vision)
+  )
+```
+:::
+:::
+
+# Corr. & Reg.
 
 Let's estimate the correlation and simple linear regression and look at the results in a tidy format:
 
 ```{r}
-cor <- cor.test(dat$Vision, dat$Ages)
+cor <- cor.test(dat$vision, dat$ages)
 tidy(cor)
-reg <- lm(Vision ~ Ages, data = dat)
+reg <- lm(vision ~ ages, data = dat)
 tidy(reg)
 ```
 
-Thus, we have a moderate, negative correlation of `r round(cor$estimate,3)` and for the regression we have *Vision = `r round(tidy(reg)[[1,2]], 2)` `r round(tidy(reg)[[2,2]], 2)` Ages*.
+Thus, we have a moderate, negative correlation of `r round(cor$estimate,3)` and for the regression we have *vision = `r round(tidy(reg)[[1,2]], 2)` + `r round(tidy(reg)[[2,2]], 2)` ages*. We can plot the regression line, too:
+
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(x = ages, y = vision) +
+  geom_point(size = 2) +
+    geom_smooth(
+    method = "lm",
+    formula = "y ~ x",
+    se = FALSE,
+    color = "#00923f"
+  ) +
+  scale_x_continuous(
+    name = "Person's age",
+    limits = c(20, 55),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_y_continuous(
+    name = "Person's vision",
+    limits = c(0, NA),
+    breaks = seq(0, 10, 2),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  theme_bw()
+```
+
+# Outlier?
+
+Looking at the plot, you may find one data point to oddly stick out from all others: Apparently there was one person in their mid-20s who had a vision score of only 3, which is the lowest by far.
+
+::: callout-note
+Here, we manually and thus subjectively identified a data point as a potential outlier. We do not discuss automatic and thus objective approaches for outlier detection, but see e.g. [here](https://statsandr.com/blog/outliers-detection-in-r/) or [here](https://datascienceplus.com/outlier-detection-and-treatment-with-r/).
+:::
+
+## Step 1: Investigate
+
+In such a scenario, the first thing you should do is find out more about this suspicious data point. In our case, we would start by finding out the person's name. One way of doing this is by simply filtering the data:
+
+```{r}
+dat %>% 
+  filter(vision == 3)
+```
+
+We find that it was 26 year old Rolando who supposedly had a vision score of only 3. 
+
+## Step 2: Act
+
+Since we pretend it is you who collected the data, you should now
+
+ - think back if you can actually remember Rolando and if he had poor vision and/or
+
+ - find other documents such as your handwritten sheets to verify this number and make sure you did not make any typos transferring the data to your computer.
+ 
+This may reaffirm or correct the suspicious data point and thus end the discussion on whether it is an outlier that should be removed from the data. However, you may also decide to delete this value. Yet, it must be realized, that deleting one or multiple values from a dataset almost always affects the results from subsequent statistical analyses - especially if the values stick out from the rest.
+
+# Corr. & Reg. - again
+
+Let us estimate correlation and regression again, but this time excluding Rolando from the dataset. Note that there are multiple ways of obtaining such a subset - two are shown here:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat_noRo <- dat %>% 
+  filter(person != "Rolando")
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat_noRo <- dat %>% 
+  filter(vision > 3)
+```
+:::
+:::
+
+We now apply the same functions to this new dataset:
+
+```{r}
+cor_noRo <- cor.test(dat_noRo$vision, dat_noRo$ages)
+reg_noRo <- lm(vision ~ ages, data = dat_noRo)
+```
+
+and directly compare these results to those from above:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+tidy(cor) %>%
+  select(1, 3, 5, 6)
+
+tidy(reg) %>% 
+  select(1, 2, 3)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+tidy(cor_noRo) %>%
+  select(1, 3, 5, 6)
+
+tidy(reg_noRo) %>% 
+  select(1, 2, 3)
+```
+:::
+:::
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(x = ages, y = vision) +
+  geom_point(size = 2) +
+    geom_smooth(
+    method = "lm",
+    formula = "y ~ x",
+    se = FALSE,
+    color = "#00923f"
+  ) +
+  scale_x_continuous(
+    name = "Person's age",
+    limits = c(20, 55),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_y_continuous(
+    name = "Person's vision",
+    limits = c(0, NA),
+    breaks = seq(0, 10, 2),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  theme_bw()
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+ggplot(data = dat_noRo) +
+  aes(x = ages, y = vision) +
+  geom_point(size = 2) +
+    geom_smooth(
+    method = "lm",
+    formula = "y ~ x",
+    se = FALSE,
+    color = "#e4572e"
+  ) +
+  scale_x_continuous(
+    name = "Person's age",
+    limits = c(20, 55),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_y_continuous(
+    name = "Person's vision",
+    limits = c(0, NA),
+    breaks = seq(0, 10, 2),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  theme_bw()
+```
+:::
+:::
+
+As we can see, removing Rolando from the dataset changed the correlation  quite a bit from -0.5 to -0.7. Furthermore, it's p-value became notably smaller. While it was already < 0.05 and thus statistically significant in this case, it must be realized that in other cases removing a single data point can indeed make the difference between a p-value larger and smaller 0.05. 
+
+Yet, regarding the parameter estimates - intercept ($a$) and slope ($b$) - of the simple linear regression, the changes are not as striking. Even with a visual comparison of the two regression lines, one must look closely to spot the differences. 
+
+## R² - Coeff. of det.
+
+Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando's data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination $R^2$, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via `glance()`, which is another function from [{broom}](https://github.com/tidymodels/broom):
+
+::: columns
+::: {.column width="49%"}
+```{r}
+glance(reg)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+glance(reg_noRo)
+```
+:::
+:::
+
+
+Finally, we find that removing Rolando from the dataset increased the $R^2$ for the simple linear regression from 25% to 49%.
+

@@ -1,7 +1,6 @@
 ---
 title: "Compact Letter Display (CLD)"
 date: 2022-10-03
-bibliography: references.bib
 tbl-cap-location: bottom
 ---
 

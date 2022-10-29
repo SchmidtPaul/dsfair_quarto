@@ -1,7 +1,7 @@
 ---
 title: "The tidyverse"
 date: 2022-10-09
-bibliography: references.bib
+abstract: "Pipe (%>%), Tibbles, dplyr-verbs, long/wide format and more from the tidyverse."
 ---
 
 ```{r}
@@ -560,7 +560,7 @@ tbl %>%
 :::
 
 ::: callout-important
-Once you used `group_by()` on a table, it stays grouped unless you use `ungroup()` on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results.
+Once you used `group_by()` on a table, it stays grouped unless you use `ungroup()` on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results. You can find an example and further resources on such unintended outcomes [here](https://twitter.com/SchmidtPaul1989/status/1586284894556418049).
 :::
 
 ::: custom-callout-tip
@@ -569,15 +569,174 @@ Once you used `group_by()` on a table, it stays grouped unless you use `ungroup(
 -   [Group by one or more variables with group_by()](https://dplyr.tidyverse.org/reference/group_by.html)
 :::
 
+# long/wide format
+
+Sometimes, data is referred to as being in *long format* or *wide format*. As the name suggests, long formatted tables have more rows, but fewer columns than wide formatted tables, while containing the same information. I find the easiest way to understand the two is by looking at examples like in the following image, which was taken from [statology.org](https://www.statology.org/long-vs-wide-data/) [-@LongWideStatology]:
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: '80%'
+here::here("img", "longwide.png") %>% 
+  knitr::include_graphics()
+```
+
+Converting one format into the other is called *pivoting* in the tidyverse and the relevant functions `pivot_longer()` and `pivot_wider()` are provided in [{tidyr}](https://tidyr.tidyverse.org/reference/index.html).
+
+::: callout-note
+You may have used other functions in this context. Here are some alternatives that [are superseded](https://github.com/tidyverse/tidyr#related-work):
+
+-   `melt()` & `dcast()` of {data.table}
+-   `fold()` & `unfold()` of {databases}
+-   `melt()` & `cast()` of {reshape}
+-   `melt()` & `dcast()` of {reshape2}
+-   `unpivot()` & `pivot()` of {spreadsheets}
+-   `gather()` & `spread()` of {tidyr} \< v1.0.0
+:::
+
+The `PlantGrowth` data from above is actually already in long format, yet I create a version of it that is shorter (only 3 instead of 10 observations per group) and has an additional column called `nr` with is a running number per observation in each group:
+
+```{r}
+long_dat <- PlantGrowth %>%
+  group_by(group) %>% # for each level in the "group" column
+  slice(1:3) %>% # keep only the rows 1-3
+  mutate(nr = 1:n(), # add a "nr" column with numbers 1 - ...
+         .before = "weight") %>% # add this column left of "weight" column
+  ungroup() # remove the grouping from above
+```
+
+We can now use `pivot_wider()` and create a wide formatted version of the `long_dat` table and save it as `wide_dat`. Note that the function has multiple arguments you can use, but for me it is usually enough to use `names from =` and `values_from =`. In the former you provide the name of the column whose entries should be the names of the new columns in the wide formatted data. In the latter you provide the name of the column whose values should be written in the new columns in the wide formatted data:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+long_dat
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+wide_dat <- long_dat %>%
+  pivot_wider(names_from = "group", 
+              values_from = "weight")
+
+wide_dat
+```
+:::
+:::
+
+We can use `pivot_longer` to reverse the step above, i.e. create a long formatted version of the `wide_dat` table. Again, the function has multiple arguments you can use, but for me it is usually enough to use `cols =`, `names_to =` and `values_to =`. In the first one, you provide the names of the columns who should be reduced to fewer columns with more rows. In the other two you simply give the names that the created columns should have instead of the default `name` and `value`. Note that it is sometimes easier to provide the names of columns that should not go into `cols =` (right) instead of the ones that should (left).
+
+::: columns
+::: {.column width="49%"}
+```{r}
+wide_dat %>%
+  pivot_longer(
+    cols = c(ctrl, trt1, trt2),
+    names_to = "group",
+    values_to = "weight"
+  )
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+wide_dat %>%
+  pivot_longer(
+    cols = -nr,
+    names_to = "group",
+    values_to = "weight"
+  )
+```
+:::
+:::
+
+::: custom-callout-tip
+-   [12.3 Pivoting](https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting) in *R for data science* [@Wickham_2017]
+-   [Pivoting with tidyr](https://tidyr.tidyverse.org/articles/pivot.html)
+-   [tidyr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
+:::
+
+# forcats
+
+In my experience, R beginners really only care about the difference between `factor` and `character` variables once the factor level order is not as they want it to be - typically on the x-axis of a plot. Luckily, [{forcats}](https://forcats.tidyverse.org/) can deal with this.
+
+In the following example, we create a column `fct` that is a copy of the column `chr`, except that they are formatted as `factor` and `character`, respectively.
+
+```{r}
+dat <- tribble(
+     ~val,   ~chr,
+       10, "Ctrl", 
+       15,    "A",
+        8,    "B"
+) %>% 
+  mutate(fct = as.factor(chr))
+
+ggplot(dat) +
+  aes(y = val, x = fct) +
+  geom_col()
+```
+
+Even though the data is sorted so that Ctrl is first, then A, then B, the x-Axis is sorted differently[^4]. This is because factor levels are always sorted alphabetically by default. We can reorder them via different functions in {forcats}:
+
+[^4]: It does not make a difference here, whether we put `x = chr` or `x = fct` in the ggplot statement.
+
+```{r}
+dat <- dat %>% 
+  mutate(
+    fct2 = fct_relevel(fct, c("Ctrl", "A", "B")),
+    fct3 = fct_reorder(fct, val, mean)
+    )
+
+str(dat)
+```
+
+Above are just two popular examples for sorting factor levels: `fct_relevel` sorts the levels manually by providing a vector with the level names in the order they should appear, while `fct_reorder` here sorts the levels according to their respective group mean[^5] of the values in the `val` column.
+
+[^5]: Yes, the mean in this example is not really a mean, since there is only one number per group.
+
+You can see that it worked in the output of `str(dat)` above and in the plots below.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ggplot(dat) +
+  aes(y = val, x = fct2) +
+  geom_col()
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ggplot(dat) +
+  aes(y = val, x = fct3) +
+  geom_col()
+```
+:::
+:::
+
 # stringr
 
 In computer programming, a string is traditionally a sequence of characters (or *text* if you will). Taken directly from [the documentation](https://stringr.tidyverse.org/):
 
 > Strings are not glamorous, high-profile components of R, but they do play a big role in many data cleaning and preparation tasks. The stringr package provide a cohesive set of functions designed to make working with strings as easy as possible. If you're not familiar with strings, the best place to start is the [chapter on strings in R for Data Science](https://r4ds.had.co.nz/strings.html).
 
-Below are some brief examples of [{stringr}](https://stringr.tidyverse.org/) functions I use regularly. To show what they can do, let's first create some strings[^4]:
+Below are some brief examples of [{stringr}](https://stringr.tidyverse.org/) functions I use regularly. To show what they can do, let's first create some strings[^6]:
 
-[^4]: Note that while I create two vectors in this example, this will work just as well with columns of a table via \`table %\>% mutate(new = stringrfunction(old))\`
+[^6]: Note that while I create two vectors in this example, this will work just as well with columns of a table via \`table %\>% mutate(new = stringrfunction(old))\`
 
 ```{r}
 a_string <- "  a  string with irregular  spaces. "
@@ -652,163 +811,4 @@ strings %>%
 -   [14 Strings](https://r4ds.had.co.nz/strings.html) in *R for data science* [@Wickham_2017]
 -   [stringr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
 -   [Regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html)
-:::
-
-# forcats
-
-In my experience, R beginners really only care about the difference between `factor` and `character` variables once the factor level order is not as they want it to be - typically on the x-axis of a plot. Luckily, [{forcats}](https://forcats.tidyverse.org/) can deal with this.
-
-In the following example, we create a column `fct` that is a copy of the column `chr`, except that they are formatted as `factor` and `character`, respectively.
-
-```{r}
-dat <- tribble(
-     ~val,   ~chr,
-       10, "Ctrl", 
-       15,    "A",
-        8,    "B"
-) %>% 
-  mutate(fct = as.factor(chr))
-
-ggplot(dat) +
-  aes(y = val, x = fct) +
-  geom_col()
-```
-
-Even though the data is sorted so that Ctrl is first, then A, then B, the x-Axis is sorted differently[^5]. This is because factor levels are always sorted alphabetically by default. We can reorder them via different functions in {forcats}:
-
-[^5]: It does not make a difference here, whether we put `x = chr` or `x = fct` in the ggplot statement.
-
-```{r}
-dat <- dat %>% 
-  mutate(
-    fct2 = fct_relevel(fct, c("Ctrl", "A", "B")),
-    fct3 = fct_reorder(fct, val, mean)
-    )
-
-str(dat)
-```
-
-Above are just two popular examples for sorting factor levels: `fct_relevel` sorts the levels manually by providing a vector with the level names in the order they should appear, while `fct_reorder` here sorts the levels according to their respective group mean[^6] of the values in the `val` column.
-
-[^6]: Yes, the mean in this example is not really a mean, since there is only one number per group.
-
-You can see that it worked in the output of `str(dat)` above and in the plots below.
-
-::: columns
-::: {.column width="49%"}
-```{r}
-#| fig-width: 5
-#| fig-height: 3
-ggplot(dat) +
-  aes(y = val, x = fct2) +
-  geom_col()
-```
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-```{r}
-#| fig-width: 5
-#| fig-height: 3
-ggplot(dat) +
-  aes(y = val, x = fct3) +
-  geom_col()
-```
-:::
-:::
-
-# long/wide format
-
-Sometimes, data is referred to as being in *long format* or *wide format*. As the name suggests, long formatted tables have more rows, but fewer columns than wide formatted tables, while containing the same information. I find the easiest way to understand the two is by looking at examples like in the following image, which was taken from [statology.org](https://www.statology.org/long-vs-wide-data/) [-@LongWideStatology]:
-
-```{r}
-#| echo: false
-#| fig-align: center
-#| out-width: '80%'
-here::here("img", "longwide.png") %>% 
-  knitr::include_graphics()
-```
-
-Converting one format into the other is called *pivoting* in the tidyverse and the relevant functions `pivot_longer()` and `pivot_wider()` are provided in [{tidyr}](https://tidyr.tidyverse.org/reference/index.html).
-
-::: callout-note
-You may have used other functions in this context. Here are some alternatives that [are superseded](https://github.com/tidyverse/tidyr#related-work):
-
--   `melt()` & `dcast()` of {data.table}
--   `fold()` & `unfold()` of {databases}
--   `melt()` & `cast()` of {reshape}
--   `melt()` & `dcast()` of {reshape2}
--   `unpivot()` & `pivot()` of {spreadsheets}
--   `gather()` & `spread()` of {tidyr} < v1.0.0
-:::
-
-The `PlantGrowth` data from above is actually already in long format, yet I create a version of it that is shorter (only 3 instead of 10 observations per group) and has an additional column called `nr` with is a running number per observation in each group:
-
-```{r}
-long_dat <- PlantGrowth %>%
-  group_by(group) %>% # for each level in the "group" column
-  slice(1:3) %>% # keep only the rows 1-3
-  mutate(nr = 1:n(), # add a "nr" column with numbers 1 - ...
-         .before = "weight") %>% # add this column left of "weight" column
-  ungroup() # remove the grouping from above
-```
-
-We can now use `pivot_wider()` and create a wide formatted version of the `long_dat` table and save it as `wide_dat`. Note that the function has multiple arguments you can use, but for me it is usually enough to use `names from =` and `values_from =`. In the former you provide the name of the column whose entries should be the names of the new columns in the wide formatted data. In the latter you provide the name of the column whose values should be written in the new columns in the wide formatted data:
-
-::: columns
-::: {.column width="49%"}
-```{r}
-long_dat
-```
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-```{r}
-wide_dat <- long_dat %>%
-  pivot_wider(names_from = "group", 
-              values_from = "weight")
-
-wide_dat
-```
-:::
-:::
-
-We can use `pivot_longer` to reverse the step above, i.e. create a long formatted version of the `wide_dat` table. Again, the function has multiple arguments you can use, but for me it is usually enough to use `cols =`, `names_to =` and `values_to =`. In the first one, you provide the names of the columns who should be reduced to fewer columns with more rows. In the other two you simply give the names that the created columns should have instead of the default `name` and `value`. Note that it is sometimes easier to provide the names of columns that should not go into `cols =` (right) instead of the ones that should (left).
-
-::: columns
-::: {.column width="49%"}
-```{r}
-wide_dat %>%
-  pivot_longer(
-    cols = c(ctrl, trt1, trt2),
-    names_to = "group",
-    values_to = "weight"
-  )
-```
-:::
-
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-```{r}
-wide_dat %>%
-  pivot_longer(
-    cols = -nr,
-    names_to = "group",
-    values_to = "weight"
-  )
-```
-:::
-:::
-
-::: custom-callout-tip
--   [12.3 Pivoting](https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting) in *R for data science* [@Wickham_2017]
--   [Pivoting with tidyr](https://tidyr.tidyverse.org/articles/pivot.html)
--   [tidyr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
 :::

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.189">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="dcterms.date" content="2022-10-04">
-
 <title>dsfair_quarto - First steps in R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -86,7 +83,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -102,8 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -121,22 +116,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="../styles.css">
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="dsfair_quarto - First steps in R">
-<meta name="twitter:description" content="This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.">
+<meta name="twitter:description" content="Data types, vectors, functions and R packages.">
 <meta name="twitter:card" content="summary">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DSFAIR</span>
@@ -147,13 +135,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
     <a class="dropdown-item" href="../rbasics/firststeps.html">
  <span class="dropdown-text">First Steps</span></a>
   </li>  
@@ -174,18 +162,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Useful things</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-example-analyses" role="button" data-bs-toggle="dropdown" aria-expanded="false">Example Analyses</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-example-analyses">    
-        <li class="dropdown-header">Simple Experiments</li>
-        <li class="dropdown-header">Complex Experiments</li>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">Simple Experiments</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
+<li>
+    <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
+ <span class="dropdown-text">CRD Mead 1993</span></a>
+  </li>  
     </ul>
-  </li>
+</li>
+  <li class="dropdown-header">
+ Complex Experiments</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
     <a class="dropdown-item" href="../summaryarticles/compactletterdisplay.html">
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
@@ -195,10 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Workshop prep</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
   </li>  
   <li class="nav-item compact">
@@ -207,40 +199,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  </a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+<div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lets-go" id="toc-lets-go" class="nav-link active" data-scroll-target="#lets-go">Let’s go</a></li>
+<li><a href="#lets-go" id="toc-lets-go" class="nav-link active" data-scroll-target="#lets-go">Let’s go</a></li>
   <li><a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">data types</a></li>
   <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">vectors</a></li>
   <li><a href="#function-arguments" id="toc-function-arguments" class="nav-link" data-scroll-target="#function-arguments">function arguments</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R packages</a>
+  <li>
+<a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R packages</a>
   <ul class="collapse">
-  <li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r">base R</a></li>
+<li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r">base R</a></li>
   <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link" data-scroll-target="#loading-packages">loading packages</a></li>
   <li><a href="#installing-additional-packages" id="toc-installing-additional-packages" class="nav-link" data-scroll-target="#installing-additional-packages">installing additional packages</a></li>
   <li><a href="#p_load-vs.-library" id="toc-p_load-vs.-library" class="nav-link" data-scroll-target="#p_load-vs.-library"><code>p_load()</code> vs.&nbsp;<code>library()</code></a></li>
-  </ul></li>
-  <li><a href="#keyboard-shortcuts" id="toc-keyboard-shortcuts" class="nav-link" data-scroll-target="#keyboard-shortcuts">Keyboard shortcuts</a></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#keyboard-shortcuts" id="toc-keyboard-shortcuts" class="nav-link" data-scroll-target="#keyboard-shortcuts">Keyboard shortcuts</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">First steps in R</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -278,10 +264,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    Data types, vectors, functions and R packages.
+  </div>
+</div>
 
-</header>
-
-<p>This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.</p>
+</header><p>This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -296,22 +286,21 @@ Note
 </div>
 </div>
 <p>Furthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. “The way I use it” mostly refers to me using the <a href="https://www.tidyverse.org/">{tidyverse}</a>, which <em>“is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures”</em> and has become quite popular over the last years. <a href="https://dplyr.tidyverse.org/articles/base.html">Here</a> is a direct comparison of how to do things in R with <em>base R</em> and via the tidyverse.</p>
-<section id="lets-go" class="level1">
-<h1>Let’s go</h1>
+<section id="lets-go" class="level1"><h1>Let’s go</h1>
 <p>You can use R like a calculator. It does not matter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> whether you put spaces in or not as shown here:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span><span class="op">+</span><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span>   <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">*</span>   <span class="fl">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 12</code></pre>
 </div>
 </div>
-<p>Similar to what you may know from Excel, you can use functions like e.g.&nbsp;<code>sqrt()</code> to obtain the square root of a number:</p>
+<p>Similar to what you may know from Excel, you can use functions like e.g.&nbsp;<code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> to obtain the square root of a number:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 3</code></pre>
 </div>
@@ -319,11 +308,11 @@ Note
 <p>You can find out more about a function by running the command with a question mark in front: <code>?sqrt()</code>.</p>
 <p>Besides built-in functions, R also knows certain things like <span class="math inline">\(\pi\)</span> or the alphabet, which are stored in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Constants.html">built-in constants</a> named <code>pi</code> and <code>letters</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 3.141593</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">letters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 [20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
@@ -331,42 +320,40 @@ Note
 </div>
 <p>Importantly, you may also define your own variables via <code>=</code> or <code>&lt;-</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="va">x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">20</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fl">20</span></span>
+<span><span class="va">x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 20</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a_long_variable_name <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>a_long_variable_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a_long_variable_name</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">4</span></span>
+<span><span class="va">a_long_variable_name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> a_long_variable_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">+</span> <span class="va">a_long_variable_name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 26</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mytext <span class="ot">&lt;-</span> <span class="st">"This is my text"</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mytext</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mytext</span> <span class="op">&lt;-</span> <span class="st">"This is my text"</span></span>
+<span><span class="va">mytext</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "This is my text"</code></pre>
 </div>
 </div>
 <p>Note that the variable <code>x</code> was overwritten - at first it was 3, but then it was 20. Also, as can be seen when the variable <code>a_long_variable_name</code> is defined, you may put more than just a simple number on the right side of the <code>&lt;-</code> or <code>=</code>.</p>
-</section>
-<section id="data-types" class="level1">
-<h1>data types</h1>
-<p>As you just saw, R can deal with both numbers and text. We can check the data type via the <code>typeof()</code> function:</p>
+</section><section id="data-types" class="level1"><h1>data types</h1>
+<p>As you just saw, R can deal with both numbers and text. We can check the data type via the <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "double"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mytext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">mytext</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "character"</code></pre>
 </div>
@@ -375,85 +362,94 @@ Note
 <ul>
 <li>Numbers
 <ul>
-<li><code>integer</code>/<code>int</code>: whole number<br>
-e.g.&nbsp;<em>42</em>, <em>-1504</em></li>
-<li><code>numeric</code>/<code>num</code> &amp; <code>double</code>/<code>dbl</code>: real number<br>
-e.g.&nbsp;<em>3.14</em>, <em>0.051795</em></li>
-</ul></li>
+<li>
+<code>integer</code>/<code>int</code>: whole number<br>
+e.g.&nbsp;<em>42</em>, <em>-1504</em>
+</li>
+<li>
+<code>numeric</code>/<code>num</code> &amp; <code>double</code>/<code>dbl</code>: real number<br>
+e.g.&nbsp;<em>3.14</em>, <em>0.051795</em>
+</li>
+</ul>
+</li>
 <li>Text
 <ul>
-<li><code>character</code>/<code>chr</code>: string values<br>
-e.g.&nbsp;<em>“hello”</em>, <em>“Two words”</em></li>
-</ul></li>
+<li>
+<code>character</code>/<code>chr</code>: string values<br>
+e.g.&nbsp;<em>“hello”</em>, <em>“Two words”</em>
+</li>
+</ul>
+</li>
 <li>Factor
 <ul>
-<li><code>factor</code>/<code>fct</code>: categorical variable that stores both string and integer data values as “levels”<br>
-e.g.&nbsp;<em>Control</em>, <em>Treatment</em></li>
-</ul></li>
+<li>
+<code>factor</code>/<code>fct</code>: categorical variable that stores both string and integer data values as “levels”<br>
+e.g.&nbsp;<em>Control</em>, <em>Treatment</em>
+</li>
+</ul>
+</li>
 <li>TRUE/FALSE
 <ul>
-<li><code>logical</code>/<code>logi</code>: logical value<br>
-either <em>TRUE</em> or <em>FALSE</em></li>
-</ul></li>
+<li>
+<code>logical</code>/<code>logi</code>: logical value<br>
+either <em>TRUE</em> or <em>FALSE</em>
+</li>
 </ul>
-</section>
-<section id="vectors" class="level1">
-<h1>vectors</h1>
-<p>Instead of dealing with single numbers, we obviously want to deal with entire datasets. Before we get to an entire table with multiple rows and columns, the first step is to understand what a <em>vector</em> is in R: It is <em>a sequence of elements that share the same data type</em>. I often think about them as a single column in my dataset. Above, we actually already looked at a vector: <code>letters</code> is a built-in vector with 26 elements of the data type <code>character</code>. We could check this via the <code>length()</code> or <code>str()</code> functions:</p>
+</li>
+</ul></section><section id="vectors" class="level1"><h1>vectors</h1>
+<p>Instead of dealing with single numbers, we obviously want to deal with entire datasets. Before we get to an entire table with multiple rows and columns, the first step is to understand what a <em>vector</em> is in R: It is <em>a sequence of elements that share the same data type</em>. I often think about them as a single column in my dataset. Above, we actually already looked at a vector: <code>letters</code> is a built-in vector with 26 elements of the data type <code>character</code>. We could check this via the <code><a href="https://rdrr.io/r/base/length.html">length()</a></code> or <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 26</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> chr [1:26] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" ...</code></pre>
 </div>
 </div>
 <p>Note how the built-in constant <code>pi</code> is not a vector, because it’s just a single number (<em>a.k.a.</em> a scalar).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> num 3.14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1</code></pre>
 </div>
 </div>
-<p>If you want to create your own vector from scratch, you must put all the elements together in the <code>c()</code> function and separate them with commas:</p>
+<p>If you want to create your own vector from scratch, you must put all the elements together in the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function and separate them with commas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mynumbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">16</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mynumbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mynumbers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">16</span><span class="op">)</span></span>
+<span><span class="va">mynumbers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1]  1  4  9 12 12 12 16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mywords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hakuna"</span>, <span class="st">"Matata"</span>, <span class="st">"Simba"</span>)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mywords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hakuna"</span>, <span class="st">"Matata"</span>, <span class="st">"Simba"</span><span class="op">)</span></span>
+<span><span class="va">mywords</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "Hakuna" "Matata" "Simba" </code></pre>
 </div>
 </div>
-<p>Interestingly, we can still apply the <code>sqrt()</code> function we used above to a vector with numbers and it will simply take the square-root of every element:</p>
+<p>Interestingly, we can still apply the <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> function we used above to a vector with numbers and it will simply take the square-root of every element:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(mynumbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">mynumbers</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1.000000 2.000000 3.000000 3.464102 3.464102 3.464102 4.000000</code></pre>
 </div>
 </div>
-<p>However, there are also functions like <code>mean()</code> which return the mean of all numbers in a vector as a single output element:</p>
+<p>However, there are also functions like <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> which return the mean of all numbers in a vector as a single output element:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mynumbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mynumbers</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 9.428571</code></pre>
 </div>
 </div>
-</section>
-<section id="function-arguments" class="level1">
-<h1>function arguments</h1>
-<p>So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use <code>seq()</code> as an example, which seems simple enough, because it generates a sequence of numbers:</p>
+</section><section id="function-arguments" class="level1"><h1>function arguments</h1>
+<p>So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> as an example, which seems simple enough, because it generates a sequence of numbers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
@@ -461,7 +457,7 @@ either <em>TRUE</em> or <em>FALSE</em></li>
 <p>As you can see, putting in <code>1</code> and <code>10</code> separated by a comma generates a numeric vector with numbers from 1 to 10. However, I would like you to fully understand what is going on here, because it will help a lot with more complex functions.</p>
 <p>See, we could switch the numbers and the function will work as expected:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
 </div>
@@ -469,46 +465,39 @@ either <em>TRUE</em> or <em>FALSE</em></li>
 <p>So this means that the first input is always the starting point and the second one is always the end point of the sequence, right? Well, yes by default, but you can have it your way if you specifically use the names of the arguments.</p>
 <p>Looking at <code>?seq()</code> it says <code>seq(from = 1, to = 1, by = ...)</code> so this <code>seq(10, 1)</code> is more explicitly this: <code>seq(from = 1, to = 10, by = 1)</code>. Here is proof:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
 </div>
 <p>Again, if you do not write out the arguments like this, it will simply assume the default order: The first number supplied is <code>from =</code> the second is <code>to =</code> and the third is <code>by =</code>. However, if we write out the arguments, we can use any order we like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1 3 5 7 9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="fl">9</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1 3 5 7 9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">2</span>, to <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1 3 5 7 9</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 1</code></pre>
 </div>
 </div>
 <p>In short: If you understand why the first three lines of the code above produce the same result, but the last one does not, you are good to go!</p>
-</section>
-<section id="r-packages" class="level1">
-<h1>R packages</h1>
+</section><section id="r-packages" class="level1"><h1>R packages</h1>
 <p>Any function is always part of an R package.</p>
-<section id="base-r" class="level2">
-<h2 class="anchored" data-anchor-id="base-r">base R</h2>
-<p>After installing R there are many functions etc. you can use right away - which is what we did above. For example, when running <code>?mean</code>, the help page will tell you that this function is part of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html">{base}</a> package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the “Packages” tab in RStudio - you will find the <em>base</em> package and it will have a checked box next to it.</p>
-</section>
-<section id="loading-packages" class="level2">
-<h2 class="anchored" data-anchor-id="loading-packages">loading packages</h2>
-<p>When looking at the “Packages” tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is <code>library(package_name)</code>. This command must be run once every time you open a new R session.</p>
-</section>
-<section id="installing-additional-packages" class="level2">
-<h2 class="anchored" data-anchor-id="installing-additional-packages">installing additional packages</h2>
-<p>R really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - <em>e.g.</em> the package <code>{ggplot2}</code>, which is not built-in, has been downloaded <a href="https://cranlogs.r-pkg.org/badges/grand-total/ggplot2">75 million</a> times. In order to install a package, the default command is <code>install.packages(package_name)</code>. Alternatively, you can also click on the “Install” button in the top left of the “Packages” tab and type in the <em>package_name</em> there.</p>
+<section id="base-r" class="level2"><h2 class="anchored" data-anchor-id="base-r">base R</h2>
+<p>After installing R there are many functions etc. you can use right away - which is what we did above. For example, when running <code><a href="https://rdrr.io/r/base/mean.html">?mean</a></code>, the help page will tell you that this function is part of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html">{base}</a> package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the “Packages” tab in RStudio - you will find the <em>base</em> package and it will have a checked box next to it.</p>
+</section><section id="loading-packages" class="level2"><h2 class="anchored" data-anchor-id="loading-packages">loading packages</h2>
+<p>When looking at the “Packages” tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is <code><a href="https://rdrr.io/r/base/library.html">library(package_name)</a></code>. This command must be run once every time you open a new R session.</p>
+</section><section id="installing-additional-packages" class="level2"><h2 class="anchored" data-anchor-id="installing-additional-packages">installing additional packages</h2>
+<p>R really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - <em>e.g.</em> the package <a href="https://ggplot2.tidyverse.org">ggplot2</a>, which is not built-in, has been downloaded <a href="https://cranlogs.r-pkg.org/badges/grand-total/ggplot2">75 million</a> times. In order to install a package, the default command is <code>install.packages(package_name)</code>. Alternatively, you can also click on the “Install” button in the top left of the “Packages” tab and type in the <em>package_name</em> there.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -524,39 +513,34 @@ A package must be loaded every time you open a new R session!</p>
 </div>
 </div>
 <p><a href="https://github.com/qinwf/awesome-R">Here</a> is a curated list of R packages and tools for different areas.</p>
-</section>
-<section id="p_load-vs.-library" class="level2">
-<h2 class="anchored" data-anchor-id="p_load-vs.-library"><code>p_load()</code> vs.&nbsp;<code>library()</code></h2>
+</section><section id="p_load-vs.-library" class="level2"><h2 class="anchored" data-anchor-id="p_load-vs.-library">
+<code>p_load()</code> vs.&nbsp;<code>library()</code>
+</h2>
 <p><a href="https://tidyverse.tidyverse.org/"><img src="https://github.com/trinker/pacman/blob/master/inst/pacman_logo/r_pacman.png?raw=true" width="100"></a></p>
-<p>You now know how to install and load R packages the standard way. However, over the years I switched to using the function <code>p_load()</code> from the {pacman} package instead of <code>library()</code> and <code>install.packages()</code>. The reason is simple: Usually R-scripts start with multiple lines of <code>library()</code> statements that load the necessary packages. However, when this code is run on a different computer, the user may not have all these packages installed and will therefore get an error message. This can be avoided by using the <code>p_load()</code>, because it</p>
+<p>You now know how to install and load R packages the standard way. However, over the years I switched to using the function <code>p_load()</code> from the {pacman} package instead of <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> and <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>. The reason is simple: Usually R-scripts start with multiple lines of <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> statements that load the necessary packages. However, when this code is run on a different computer, the user may not have all these packages installed and will therefore get an error message. This can be avoided by using the <code>p_load()</code>, because it</p>
 <ul>
 <li>loads all packages that are installed and</li>
 <li>installs and loads all packages that are not installed.</li>
 </ul>
-<p>Obviously, {pacman} itself must first be installed (the standard way). Moreover, you may now think that in order to use <code>p_load()</code> we do need a single <code>library(pacman)</code> first. However, we can avoid this by writing <code>pacman::p_load()</code> instead. Simply put, writing <code>package_name::function_name()</code> <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/ns-dblcolon.html">makes sure</a> that this explicit function from this explicit package is being used. Additionally, R actually lets you use this function without loading the corresponding package. Thus, we now arrived at the way I handle packages at the beginning of all my R-scripts:</p>
+<p>Obviously, {pacman} itself must first be installed (the standard way). Moreover, you may now think that in order to use <code>p_load()</code> we do need a single <code><a href="https://github.com/trinker/pacman">library(pacman)</a></code> first. However, we can avoid this by writing <code><a href="https://rdrr.io/pkg/pacman/man/p_load.html">pacman::p_load()</a></code> instead. Simply put, writing <code>package_name::function_name()</code> <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/ns-dblcolon.html">makes sure</a> that this explicit function from this explicit package is being used. Additionally, R actually lets you use this function without loading the corresponding package. Thus, we now arrived at the way I handle packages at the beginning of all my R-scripts:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  package_name_1,</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  package_name_2,</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  package_name_3</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="va">package_name_1</span>,</span>
+<span>  <span class="va">package_name_2</span>,</span>
+<span>  <span class="va">package_name_3</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="keyboard-shortcuts" class="level1">
-<h1>Keyboard shortcuts</h1>
+</section></section><section id="keyboard-shortcuts" class="level1"><h1>Keyboard shortcuts</h1>
 <p>Here are shortcuts I actually use regularly in RStudio:</p>
 <table class="table">
 <colgroup>
 <col style="width: 32%">
 <col style="width: 67%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Shortcut</th>
 <th>Description</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>CTRL+ENTER</td>
@@ -564,7 +548,8 @@ A package must be loaded every time you open a new R session!</p>
 </tr>
 <tr class="even">
 <td>CTRL+SHIFT+M</td>
-<td>Insert <code>%&gt;%</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
+<td>Insert <code>%&gt;%</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
+</td>
 </tr>
 <tr class="odd">
 <td>CTRL+SHIFT+R</td>
@@ -601,17 +586,11 @@ A package must be loaded every time you open a new R session!</p>
 
 <!-- -->
 
-</section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
+</section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
 <li id="fn1"><p>As long as you are dealing with numbers and calculations. Spaces do matter when we are talking about s<em>trings</em> (i.e.&nbsp;text).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The pipe operator %&gt;% is introduced in the next chapter.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -763,7 +742,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb56" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "First steps in R"</span></span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-04</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "Data types, vectors, functions and R packages."</span></span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>

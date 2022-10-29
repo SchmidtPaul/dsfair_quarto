@@ -1,6 +1,7 @@
 ---
 title: "Useful things"
 date: 2022-10-09
+abstract: "A personal collection of useful R packages and more."
 ---
 
 ```{r}
@@ -46,7 +47,7 @@ cor.test(mtcars$mpg,
 
 TO DO
 
-# {desplot} - 
+# {desplot} -
 
 TO DO
 
@@ -73,20 +74,14 @@ Obviously, there are multiple packages who try to address just that. The one I'v
 [^1]: Keep in mind that `p00` is the 0th percentile and thus the minimum. Analogously, `p50` is the median and `p100` the maximum.
 
 ```{r}
-#| eval: false
-library(dlookr)
-
-PlantGrowth %>%
-  group_by(group) %>%
-  describe(weight)
-```
-
-```{r}
-#| echo: false
 PlantGrowth %>%
   group_by(group) %>%
   dlookr::describe(weight)
 ```
+
+::: callout-note
+It is intentional that I did not actually load the {dlookr} package, but instead used its \`describe()\` function via the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method. This is because of a minor bug in the {dlookr} package described [here](https://github.com/choonghyunryu/dlookr/issues/79), which is only relevant if you are using the package with knitr/Rmarkdown/quarto. I am using quarto to generate this website and thus I avoid loading the package. This is fine for me, since I usually only need this one function one time during an analysis. It is also fine for you, since the code works the same way in a standard R script.
+:::
 
 # {ggtext} - automatic word wrapping
 
@@ -137,7 +132,7 @@ ggplot() +
 
 TO DO
 
-# {insight} - 
+# {insight} -
 
 [TO DO](https://easystats.github.io/insight/reference/format_p.html)
 
@@ -149,23 +144,23 @@ TO DO
 
 [TO DO](https://easystats.github.io/modelbased/articles/estimate_response.html)
 
-# {openxlsx} - 
+# {openxlsx} -
 
 TO DO
 
-# {patchwork} - 
+# {patchwork} -
 
 TO DO
 
-# {readxl} - 
+# {readxl} -
 
 TO DO
 
-# {reprex} - 
+# {reprex} -
 
 TO DO
 
-# {scales} - 
+# {scales} -
 
 TO DO
 
@@ -222,5 +217,3 @@ c("A", "D") %>% .[. %not_in% treatments]
 # system('open "file.png"') -
 
 [TO DO](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)
-
-

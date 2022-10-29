@@ -1,0 +1,81 @@
+---
+title: "Completely randomized design"
+date: 2022-10-09
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a completely randmoized design."
+---
+
+```{r}
+#| include: false
+source(here::here("helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
+```
+
+# Data
+
+This example is taken from *"Example 4.3"* of the course material "Quantitative Methods in Biosciences (3402-420)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published on p.52 of Mead [-@mead2002] from a yield trial with melons. The trial had 4 melon varieties (`variety`). Each variety was tested on six field plots. The allocation of treatments (varieties) to experimental units (plots) was completely at random. Thus, the experiment was laid out as a completely randomized design (CRD).
+
+## Import
+
+```{r}
+#| echo: false
+path <- here::here("data", "Mead1993.csv")
+get_url_from_path(path)
+```
+
+```{r}
+dat <- read_csv(path) # use path from above
+dat
+```
+
+## Format
+
+Before anything, the column `variety` should be encoded as a factor, since R by default encoded it as a character variable. There are multiple ways to do this - here are two:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat <- dat %>% 
+  mutate(variety = as.factor(variety))
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat <- dat %>% 
+  mutate(across(variety, ~ as.factor(.x)))
+```
+:::
+:::
+
+## Exploring
+
+### Descriptive statistics
+
+We make use of `dlookr::describe()`[^1] to conveniently obtain a descriptive summary table:
+
+[^1]: As described in the "{dlookr} - descriptive statistics" section in the "Useful things" chapter of this website.
+
+```{r}
+dat %>% 
+  group_by(variety) %>% 
+  dlookr::describe(yield) %>% 
+  select(variety:sd, p00, p100) %>%
+  arrange(desc(mean))
+```

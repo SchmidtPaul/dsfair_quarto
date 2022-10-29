@@ -22,10 +22,11 @@ website:
             href: rbasics/baddata.qmd
           - text: Useful things
             href: rbasics/usefulthings.qmd
-      - text: Example Analyses
+      - text: Simple Experiments
         menu:
-          - text: Simple Experiments
-          - text: Complex Experiments
+          - text: CRD Mead 1993
+            href: exan/simple/crd_mead1993.qmd
+      - text: Complex Experiments
       - text: Summary Articles
         menu:
           - text: Compact Letter Display
@@ -76,6 +77,8 @@ author:
         url: https://www.biomath.de/
 
 editor: visual
+abstract-title: "Content summary"
+bibliography: references.bib
 
 execute:
   warning: false

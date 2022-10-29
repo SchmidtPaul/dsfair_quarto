@@ -1,6 +1,7 @@
 ---
 title: "Correlation & Regression"
 date: 2022-10-09
+abstract: "Correlation and simple linear regression (with and without intercept)."
 ---
 
 ```{r}
@@ -13,12 +14,16 @@ knitr::opts_chunk$set(
 This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn't have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.
 
 ```{r}
-# packages
+# (install &) load packages
 pacman::p_load(
   broom,
   conflicted,
   modelbased,
   tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
 ```
 
 # Data
@@ -108,7 +113,7 @@ So the correlation between number of drinks and blood alcohol content in our sam
 
 ## Test it
 
-If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use `cor.test()` instead of `cor()`. We may also use the {broom} package to get the results in a more convenient format.
+If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use `cor.test()` instead of `cor()`. We may also use the [{broom}](https://broom.tidymodels.org/) package to get the results in a more convenient format.
 
 ::: columns
 ::: {.column width="49%"}
@@ -237,7 +242,7 @@ So I would like you to think about the issue from two other angles:
  
 ### Are the results really saying the intercept is > 0?
  
-No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. `summary()`. We may also use the {broom} package to get the results in a more convenient format.
+No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. `summary()`. We may also use the [{broom}](https://broom.tidymodels.org/) package to get the results in a more convenient format.
 
 ```{r}
 tidy(reg, conf.int = TRUE)
