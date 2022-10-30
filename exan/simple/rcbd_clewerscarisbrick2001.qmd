@@ -1,0 +1,33 @@
+---
+title: "Randomized complete block design"
+date: 2022-10-30
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a randomized complete block design."
+---
+
+```{r}
+#| include: false
+source(here::here("helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  broom,
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
+```
+
+# Data
+
+This example is taken from Chapter *"2 Randomized complete block design"* of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in Clewer and Scarisbrick [-@clewer2001] from a yield (t/ha) trial laid out as a randomized complete `block` design (3 blocks) with `cultivar` (4 cultivars) being the only treatment factor. Thus, we have a total of 12 plots.
+
+

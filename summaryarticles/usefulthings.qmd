@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically.
 
-# {broom} - tidy formatted results
+# {broom}
 
 In R, results from statistical tests, models etc. are often formatted in a way that may not be optimal for further processing steps. Luckily, [{broom}](https://broom.tidymodels.org/) will format the results of [the most common functions](https://broom.tidymodels.org/articles/available-methods.html) into [tidy data structures](https://www.jstatsoft.org/article/view/v059i10).
 
@@ -43,15 +43,15 @@ cor.test(mtcars$mpg,
 :::
 :::
 
-# {conflicted} -
+# {conflicted}
 
 TO DO
 
-# {desplot} -
+# {desplot}
 
 TO DO
 
-# {dlookr} - descriptive statistics
+# {dlookr}
 
 When providing descriptive statistics tables, one may find the number of relevant measures become annoyingly large so that even with the {tidyverse}, several lines of code are necessary. Here are just five measures, and they are not even including the [`na.rm = TRUE`](https://www.statology.org/na-rm/) argument, which is necessary for data with missing values.
 
@@ -83,7 +83,7 @@ PlantGrowth %>%
 It is intentional that I did not actually load the {dlookr} package, but instead used its \`describe()\` function via the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method. This is because of a minor bug in the {dlookr} package described [here](https://github.com/choonghyunryu/dlookr/issues/79), which is only relevant if you are using the package with knitr/Rmarkdown/quarto. I am using quarto to generate this website and thus I avoid loading the package. This is fine for me, since I usually only need this one function one time during an analysis. It is also fine for you, since the code works the same way in a standard R script.
 :::
 
-# {ggtext} - automatic word wrapping
+# {ggtext}
 
 Adding long text to plots created via {ggplot2} is problematic, since you have to insert line breaks yourself. However, [{ggext}](https://wilkelab.org/ggtext/)'s `geom_textbox()` for data labels and `element_textbox_simple()` for title, caption etc. will automatically add line breaks:
 
@@ -128,39 +128,39 @@ ggplot() +
 :::
 :::
 
-# {here} -
+# {here}
 
 TO DO
 
-# {insight} -
+# {insight}
 
 [TO DO](https://easystats.github.io/insight/reference/format_p.html)
 
-# {janitor} -
+# {janitor}
 
 TO DO
 
-# {modelbased} -
+# {modelbased}
 
 [TO DO](https://easystats.github.io/modelbased/articles/estimate_response.html)
 
-# {openxlsx} -
+# {openxlsx}
 
 TO DO
 
-# {patchwork} -
+# {patchwork}
 
 TO DO
 
-# {readxl} -
+# {readxl}
 
 TO DO
 
-# {reprex} -
+# {reprex}
 
 TO DO
 
-# {scales} -
+# {scales}
 
 TO DO
 
@@ -214,6 +214,6 @@ c("A", "D") %>% .[. %not_in% treatments]
 :::
 :::
 
-# system('open "file.png"') -
+# system('open "file.png"')
 
 [TO DO](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)

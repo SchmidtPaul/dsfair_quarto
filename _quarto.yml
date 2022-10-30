@@ -20,8 +20,6 @@ website:
             href: rbasics/correlation_regression.qmd
           - text: Bad data & Outliers
             href: rbasics/baddata.qmd
-          - text: Useful things
-            href: rbasics/usefulthings.qmd
       - text: Simple Experiments
         menu:
           - text: CRD Mead 1993
@@ -29,6 +27,8 @@ website:
       - text: Complex Experiments
       - text: Summary Articles
         menu:
+          - text: Useful things
+            href: summaryarticles/usefulthings.qmd
           - text: Compact Letter Display
             href: summaryarticles/compactletterdisplay.qmd
           - text: Designing Experiments

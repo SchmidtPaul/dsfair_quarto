@@ -374,3 +374,13 @@ ggstatsplot::ggbetweenstats(
   p.adjust.method = "none"
 )
 ```
+
+# TO DO
+
+Provide often used options for coding
+
+-   \`pairs()\`
+
+-   \`adjust = "none"\`
+
+-   \`details = TRUE\`

@@ -12,3 +12,15 @@ get_url_from_path <- function(path) {
     stringr::str_c('# data is available online:\n','path <- "', ., '"') %>%
     cat()
 }
+
+# get formatted p-values from anova
+getp <- function(ANOVA, term){
+  tab <- broom::tidy(ANOVA) %>% 
+    mutate(p_val = insight::format_p(p.value, stars = TRUE))
+  
+  vec <- set_names(x = tab$p_val, nm = tab$term)
+  
+  vec[[term]]
+}
+
+
