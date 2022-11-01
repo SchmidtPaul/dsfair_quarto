@@ -45,7 +45,7 @@ cor.test(mtcars$mpg,
 
 # {conflicted}
 
-TO DO
+Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used. 
 
 # {desplot}
 
