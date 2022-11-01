@@ -25,7 +25,7 @@ website:
           - text: CRD Mead 1993
             href: exan/simple/crd_mead1993.qmd
           - text: RCBD Clewer & Scarisbrickt 2001
-            href: rcbd_clewerscarisbrick2001.qmd
+            href: exan/simple/rcbd_clewerscarisbrick2001.qmd
       - text: Complex Experiments
       - text: Summary Articles
         menu:

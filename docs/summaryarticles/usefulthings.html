@@ -166,6 +166,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
  <span class="dropdown-text">CRD Mead 1993</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../exan/simple/rcbd_clewerscarisbrick2001.html">
+ <span class="dropdown-text">RCBD Clewer &amp; Scarisbrickt 2001</span></a>
+  </li>  
     </ul>
 </li>
   <li class="dropdown-header">
@@ -319,7 +323,7 @@ sample estimates:
 </div>
 </div>
 </section><section id="conflicted" class="level1"><h1>{conflicted}</h1>
-<p>TO DO</p>
+<p>Sometimes, different packages have different functions with identical names. A famous example is the function <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, which exists in <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter">{stats}</a> and <a href="https://dplyr.tidyverse.org/reference/filter.html">{dplyr}</a>. If both of these packages are loaded, it is not clear which of the two functions should be used.</p>
 </section><section id="desplot" class="level1"><h1>{desplot}</h1>
 <p>TO DO</p>
 </section><section id="dlookr" class="level1"><h1>{dlookr}</h1>
@@ -377,7 +381,7 @@ Note
 </div>
 </div>
 </section><section id="ggtext" class="level1"><h1>{ggtext}</h1>
-<p>Adding long text to plots created via {ggplot2} is problematic, since you have to insert line breaks yourself. However, <a href="https://wilkelab.org/ggtext/">{ggext}</a>’s <code><a href="https://rdrr.io/pkg/ggtext/man/geom_textbox.html">geom_textbox()</a></code> for data labels and <code><a href="https://rdrr.io/pkg/ggtext/man/element_textbox.html">element_textbox_simple()</a></code> for title, caption etc. will automatically add line breaks:</p>
+<p>Adding long text to plots created via {ggplot2} is problematic, since you have to insert line breaks yourself. However, <a href="https://wilkelab.org/ggtext/">{ggext}</a>’s <code><a href="https://wilkelab.org/ggtext/reference/geom_textbox.html">geom_textbox()</a></code> for data labels and <code><a href="https://wilkelab.org/ggtext/reference/element_textbox.html">element_textbox_simple()</a></code> for title, caption etc. will automatically add line breaks:</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">longtext</span> <span class="op">&lt;-</span> <span class="st">"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -405,10 +409,10 @@ Note
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.caption <span class="op">=</span></span>
-<span>          <span class="fu"><a href="https://rdrr.io/pkg/ggtext/man/element_textbox.html">element_textbox_simple</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>          <span class="fu"><a href="https://wilkelab.org/ggtext/reference/element_textbox.html">element_textbox_simple</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>        <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fl">1</span>, label <span class="op">=</span> <span class="va">longtext</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggtext/man/geom_textbox.html">geom_textbox</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://wilkelab.org/ggtext/reference/geom_textbox.html">geom_textbox</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="va">longtext</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="usefulthings_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="1500"></p>
@@ -687,7 +691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="fu"># {conflicted}</span></span>
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>TO DO</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>Sometimes, different packages have different functions with identical names. A famous example is the function <span class="in">`filter()`</span>, which exists in <span class="co">[</span><span class="ot">{stats}</span><span class="co">](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter)</span> and <span class="co">[</span><span class="ot">{dplyr}</span><span class="co">](https://dplyr.tidyverse.org/reference/filter.html)</span>. If both of these packages are loaded, it is not clear which of the two functions should be used. </span>
 <span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="fu"># {desplot}</span></span>
 <span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
