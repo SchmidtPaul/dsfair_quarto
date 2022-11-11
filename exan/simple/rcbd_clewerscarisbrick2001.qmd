@@ -12,7 +12,6 @@ source(here::here("helpersrc.R"))
 ```{r}
 # (install &) load packages
 pacman::p_load(
-  broom,
   conflicted,
   desplot,
   emmeans,
@@ -54,9 +53,7 @@ dat <- dat %>%
 
 ## Explore
 
-We make use of `dlookr::describe()`[^1] to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
-
-[^1]: As described in the {dlookr} section of the Summary Article "Useful things".
+We make use of [`dlookr::describe()`](../../summaryarticles/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
 
 ::: columns
 ::: {.column width="49%"}
@@ -64,7 +61,7 @@ We make use of `dlookr::describe()`[^1] to conveniently obtain descriptive summa
 dat %>% 
   group_by(cultivar) %>% 
   dlookr::describe(yield) %>% 
-  select(cultivar:sd) %>%
+  select(2:sd) %>%
   arrange(desc(mean))
 ```
 :::
@@ -77,7 +74,7 @@ dat %>%
 dat %>% 
   group_by(block) %>% 
   dlookr::describe(yield) %>% 
-  select(block:sd) %>%
+  select(2:sd) %>%
   arrange(desc(mean))
 ```
 :::
@@ -104,7 +101,7 @@ ggplot(data = dat) +
   theme_classic()
 ```
 
-Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](https://kwstat.github.io/desplot/). We can even create a second field plan that gives us a feeling for the yields per plot.
+Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../summaryarticles/usefulthings.qmd#desplot). We can even create a second field plan that gives us a feeling for the yields per plot.
 
 ::: columns
 ::: {.column width="49%"}
@@ -145,7 +142,9 @@ desplot(
 :::
 :::
 
-Thus, `C4` seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block `B1` (left), compared to the other blocks. \# Model
+Thus, `C4` seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block `B1` (left), compared to the other blocks. 
+
+# Model
 
 Finally, we can decide to fit a linear model with `yield` as the response variable and (fixed) `cultivar` and `block` effects.
 
@@ -153,10 +152,8 @@ Finally, we can decide to fit a linear model with `yield` as the response variab
 mod <- lm(yield ~ cultivar + block, data = dat)
 ```
 
-::: {.callout-caution icon="false"}
-## TO DO Model assumptions
-
-TO DO
+::: custom-callout-modass
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
 :::
 
 # ANOVA
@@ -182,7 +179,7 @@ mean_comp <- mod %>%
 mean_comp
 ```
 
-Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the Summary Article "Compact Letter Display".
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
 
 Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
 

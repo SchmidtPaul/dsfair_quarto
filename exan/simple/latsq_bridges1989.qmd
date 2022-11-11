@@ -1,0 +1,277 @@
+---
+title: "Latin square design"
+date: 2022-11-11
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a latin square design."
+---
+
+```{r}
+#| include: false
+source(here::here("helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  agridat,
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
+```
+
+# Data
+
+This example data is taken from [{agridat}](https://kwstat.github.io/agridat/). It considers data published in Bridges [-@bridges1989] from a cucumber yield trial with four genotypes set up as a Latin square design. Notice that the original dataset considers two trials (at two locations), but we will focus on only a single trial here.
+
+## Import
+
+```{r}
+dat <- agridat::bridges.cucumber %>% 
+  as_tibble() %>% 
+  filter(loc == "Clemson") %>% # filter data from only one location
+  select(-loc) # remove loc column which is now unnecessary
+
+dat
+```
+
+## Format
+
+For our analysis, `gen`, `row` and `col` should be encoded as factors. However, the `desplot()` function needs `row` and `col` as formatted as integers. Therefore we create copies of these columns encoded as factors and named `rowF` and `colF`. Below are two ways how to achieve this:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat <- dat %>%
+  mutate(
+    colF = as.factor(col),
+    rowF = as.factor(row)
+  )
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat <- dat %>%
+  mutate(across(
+    .cols = c(row, col), 
+    .fns = ~ as.factor(.x), 
+    .names = ("{.col}F"))
+  )
+```
+:::
+:::
+
+## Explore
+
+We make use of [`dlookr::describe()`](../../summaryarticles/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per genotype, per row and per column.
+
+```{r}
+dat %>% 
+  group_by(gen) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(rowF) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(colF) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+:::
+:::
+
+Additionally, we can decide to plot our data:
+
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(y = yield, x = gen, color = colF, shape = rowF) +
+  geom_point() +
+    scale_x_discrete(
+    name = "Genotype"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  scale_color_discrete(
+    name = "Column"
+  ) +
+  scale_shape_discrete(
+    name = "Row"
+  ) +
+  theme_classic()
+```
+
+Finally, since this is an experiment that was laid with a certain experimental design (= a Latin square design) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../summaryarticles/usefulthings.qmd#desplot). We can even create a second field plan that gives us a feeling for the yields per plot.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  flip = TRUE, # row 1 on top, not on bottom
+  form = gen ~ col + row, # fill color per genotype       
+  out1 = rowF, # line between rows
+  out2 = colF, # line between columns
+  out1.gpar = list(col = "black", lwd = 2), # out1 line style
+  out2.gpar = list(col = "black", lwd = 2), # out2 line style
+  text = gen, # gen names per plot
+  cex = 1, # gen names: font size
+  shorten = FALSE, # gen names: don't abbreviate
+  main = "Field layout", # plot title
+  show.key = FALSE # hide legend
+  ) 
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  flip = TRUE, # row 1 on top, not on bottom
+  form = yield ~ col + row, # fill color according to yield     
+  out1 = rowF, # line between rows
+  out2 = colF, # line between columns
+  out1.gpar = list(col = "black", lwd = 2), # out1 line style
+  out2.gpar = list(col = "black", lwd = 2), # out2 line style
+  text = gen, # gen names per plot
+  cex = 1, # gen names: font size
+  shorten = FALSE, # gen names: don't abbreviate
+  main = "Field layout", # plot title
+  show.key = FALSE # hide legend
+  ) 
+```
+:::
+:::
+
+Thus, `Dasher` seems to be the most promising genotype in terms of yield. Moreover, it can be seen that yields were generally higher in column 4 and row 3.
+
+# Model
+
+Finally, we can decide to fit a linear model with `yield` as the response variable and (fixed) `gen`, `rowF` and `colF` effects.
+
+```{r}
+mod <- lm(yield ~ gen + rowF + colF, data = dat)
+```
+
+::: callout-important
+It is crucial to add `rowF`/`colF` and not `row`/`col` to the model here, since only the former are formatted as factors. They should be formatted as factors, so that the model estimates one effect for each of their levels. The model would estimate a single slope for `row` and `col`, respectively, which is nonsensical: It would suggest that row 4 is twice as much as row 2 etc.
+:::
+
+::: custom-callout-modass
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
+:::
+
+# ANOVA
+
+Based on our model, we can then conduct an ANOVA:
+
+```{r}
+ANOVA <- anova(mod)
+ANOVA
+```
+
+Accordingly, the ANOVA's F-test found the genotype effects to be statistically different (`r getp(ANOVA, "gen")`).
+
+# Mean comparison
+
+Besides an ANOVA, one may also want to compare adjusted yield means between genotypes via post hoc tests (t-test, Tukey test etc.).
+
+```{r}
+mean_comp <- mod %>% 
+  emmeans(specs = ~ gen) %>% # adj. mean per genotype
+  cld(Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
+
+Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
+
+```{r}
+#| code-fold: true
+
+my_caption <- "Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per genotype Means followed by a common letter are not significantly different according to the Tukey-test."
+
+ggplot() +
+  aes(x = gen) +
+  # black dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield)
+  ) +
+  # red dots representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean),
+    color = "red",
+    position = position_nudge(x = 0.1)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.1)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = emmean, label = str_trim(.group)),
+    color = "red",
+    position = position_nudge(x = 0.2),
+    hjust = 0
+  ) +
+  scale_x_discrete(
+    name = "Genotype"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  scale_color_discrete(
+    name = "Block"
+  ) +
+  theme_classic() +
+  labs(caption = my_caption) +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot")
+```

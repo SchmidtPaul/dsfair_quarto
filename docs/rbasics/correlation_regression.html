@@ -164,11 +164,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
 <li>
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
- <span class="dropdown-text">CRD Mead 1993</span></a>
+ <span class="dropdown-text">CRD (Mead 1993)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../exan/simple/rcbd_clewerscarisbrick2001.html">
- <span class="dropdown-text">RCBD Clewer &amp; Scarisbrickt 2001</span></a>
+ <span class="dropdown-text">RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exan/simple/latsq_bridges1989.html">
+ <span class="dropdown-text">Latin Square (Bridges 1989)</span></a>
   </li>  
     </ul>
 </li>
@@ -186,6 +190,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
         <li class="dropdown-header">Designing Experiments</li>
+        <li>
+    <a class="dropdown-item" href="../summaryarticles/modeldiagnostics.html">
+ <span class="dropdown-text">Model Diagnostics</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../summaryarticles/workshopprep.html">
  <span class="dropdown-text">Workshop prep</span></a>
@@ -408,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>So the correlation between number of drinks and blood alcohol content in our sample is ca. 0.96 and thus very strong, since it is almost 1.</p>
 </section><section id="test-it" class="level2"><h2 class="anchored" data-anchor-id="test-it">Test it</h2>
-<p>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> instead of <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>. We may also use the <a href="https://broom.tidymodels.org/">{broom}</a> package to get the results in a more convenient format.</p>
+<p>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> instead of <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
@@ -540,7 +548,7 @@ Coefficients:
 </div>
 <p>Here is a little more info why <code>formula = blood_alc ~ drinks</code> leads to R estimating the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> we want: What makes sense is that <code>blood_alc</code> is <span class="math inline">\(y\)</span>, <code>drinks</code> is <span class="math inline">\(x\)</span> and <code>~</code> would therefore be the <span class="math inline">\(=\)</span> in our equation. However, why is it we never had to write anything about <span class="math inline">\(a\)</span> or <span class="math inline">\(b\)</span>? The answer is that (i) when fitting a linear model, there is usually always an intercept (=<span class="math inline">\(a\)</span>) by default and (ii) when writing a numeric variable (=<code>drinks</code>) as on the right side of the equation, it will automatically be assumed to have a slope (=<span class="math inline">\(b\)</span>) multiplied with it. Accordingly, <code>blood_alc ~ drinks</code> automatically translates to <code>blood_alc = a + b*drinks</code> so to speak.</p>
 </section><section id="is-this-right" class="level2"><h2 class="anchored" data-anchor-id="is-this-right">Is this right?</h2>
-<p>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <a href="https://easystats.github.io/modelbased/">{modelbased}</a>:</p>
+<p>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <a href="../../summaryarticles/usefulthings.qmd#modelbased">{modelbased}</a>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">preddat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>drinks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">estimate_expectation</span><span class="op">(</span>model <span class="op">=</span> <span class="va">reg</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -571,7 +579,7 @@ Coefficients:
 <li>Did we even ask the right question or should we have fitted a different model?</li>
 </ol>
 <section id="are-the-results-really-saying-the-intercept-is-0" class="level3"><h3 class="anchored" data-anchor-id="are-the-results-really-saying-the-intercept-is-0">Are the results really saying the intercept is &gt; 0?</h3>
-<p>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g.&nbsp;<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. We may also use the <a href="https://broom.tidymodels.org/">{broom}</a> package to get the results in a more convenient format.</p>
+<p>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g.&nbsp;<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tidy</span><span class="op">(</span><span class="va">reg</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -908,7 +916,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Test it</span></span>
 <span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <span class="in">`cor.test()`</span> instead of <span class="in">`cor()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](https://broom.tidymodels.org/)</span> package to get the results in a more convenient format.</span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <span class="in">`cor.test()`</span> instead of <span class="in">`cor()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../../summaryarticles/usefulthings.qmd#broom)</span> package to get the results in a more convenient format.</span>
 <span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a>::: columns</span>
 <span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
@@ -931,7 +939,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a>Looking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run <span class="in">`?cor.test()`</span> and look at the "Details" section for more info. Here, our correlation estimate of <span class="in">`r scales::number(mycor$estimate, 0.01)`</span> is significantly different from 0, since the p-value is <span class="in">`r scales::number(mycor$p.value, 0.0000000000001)`</span> and therefore $&lt; 0.05$. Furthermore, the confidence interval is <span class="in">`r scales::number(mycor$conf.int[1], 0.001)`</span> - <span class="in">`r scales::number(mycor$conf.int[2], 0.001)`</span> meaning that we are 95% sure that the true correlation is somewhere in that range.</span>
 <span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{correlation}</span><span class="co">](https://easystats.github.io/correlation/)</span> </span>
 <span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{corrr}</span><span class="co">](https://corrr.tidymodels.org/)</span></span>
 <span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -1016,7 +1024,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a><span class="fu">## Is this right?</span></span>
 <span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <span class="co">[</span><span class="ot">{modelbased}</span><span class="co">](https://easystats.github.io/modelbased/)</span>:</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <span class="co">[</span><span class="ot">{modelbased}</span><span class="co">](../../summaryarticles/usefulthings.qmd#modelbased)</span>:</span>
 <span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a>preddat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">drinks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)) <span class="sc">%&gt;%</span> </span>
@@ -1037,7 +1045,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### Are the results really saying the intercept is &gt; 0?</span></span>
 <span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. <span class="in">`summary()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](https://broom.tidymodels.org/)</span> package to get the results in a more convenient format.</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. <span class="in">`summary()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../../summaryarticles/usefulthings.qmd#broom)</span> package to get the results in a more convenient format.</span>
 <span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(reg, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>

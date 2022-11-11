@@ -22,10 +22,12 @@ website:
             href: rbasics/baddata.qmd
       - text: Simple Experiments
         menu:
-          - text: CRD Mead 1993
+          - text: CRD (Mead 1993)
             href: exan/simple/crd_mead1993.qmd
-          - text: RCBD Clewer & Scarisbrickt 2001
+          - text: RCBD (Clewer & Scarisbrickt 2001)
             href: exan/simple/rcbd_clewerscarisbrick2001.qmd
+          - text: Latin Square (Bridges 1989)
+            href: exan/simple/latsq_bridges1989.qmd
       - text: Complex Experiments
       - text: Summary Articles
         menu:
@@ -34,6 +36,8 @@ website:
           - text: Compact Letter Display
             href: summaryarticles/compactletterdisplay.qmd
           - text: Designing Experiments
+          - text: Model Diagnostics
+            href: summaryarticles/modeldiagnostics.qmd
           - text: Workshop prep
             href: summaryarticles/workshopprep.qmd
     right:
@@ -92,4 +96,5 @@ fig-width: 5.5
 fig-height: 3.5
 
 filters: 
-  - custom-callout.lua
+  - src/custom-callout-addref.lua
+  - src/custom-callout-modass.lua

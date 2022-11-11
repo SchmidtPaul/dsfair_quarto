@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically.
 
-# {broom}
+# `{broom}`
 
 In R, results from statistical tests, models etc. are often formatted in a way that may not be optimal for further processing steps. Luckily, [{broom}](https://broom.tidymodels.org/) will format the results of [the most common functions](https://broom.tidymodels.org/articles/available-methods.html) into [tidy data structures](https://www.jstatsoft.org/article/view/v059i10).
 
@@ -43,15 +43,17 @@ cor.test(mtcars$mpg,
 :::
 :::
 
-# {conflicted}
+# `{conflicted}`
 
 Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used. 
 
-# {desplot}
+# `{desplot}`
 
-TO DO
+[{desplot}](https://kwstat.github.io/desplot/) makes it easy to plot experimental designs of field trials in agriculture. However, you do need two columns that provide the x and y coordinates of the individual plots on your field. 
 
-# {dlookr}
+TO DO 
+
+# `{dlookr}`
 
 When providing descriptive statistics tables, one may find the number of relevant measures become annoyingly large so that even with the {tidyverse}, several lines of code are necessary. Here are just five measures, and they are not even including the [`na.rm = TRUE`](https://www.statology.org/na-rm/) argument, which is necessary for data with missing values.
 
@@ -83,7 +85,7 @@ PlantGrowth %>%
 It is intentional that I did not actually load the {dlookr} package, but instead used its \`describe()\` function via the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method. This is because of a minor bug in the {dlookr} package described [here](https://github.com/choonghyunryu/dlookr/issues/79), which is only relevant if you are using the package with knitr/Rmarkdown/quarto. I am using quarto to generate this website and thus I avoid loading the package. This is fine for me, since I usually only need this one function one time during an analysis. It is also fine for you, since the code works the same way in a standard R script.
 :::
 
-# {ggtext}
+# `{ggtext}`
 
 Adding long text to plots created via {ggplot2} is problematic, since you have to insert line breaks yourself. However, [{ggext}](https://wilkelab.org/ggtext/)'s `geom_textbox()` for data labels and `element_textbox_simple()` for title, caption etc. will automatically add line breaks:
 
@@ -128,43 +130,68 @@ ggplot() +
 :::
 :::
 
-# {here}
+# `{here}`
 
 TO DO
 
-# {insight}
+# `{insight}`
 
 [TO DO](https://easystats.github.io/insight/reference/format_p.html)
 
-# {janitor}
+# `{janitor}`
 
 TO DO
 
-# {modelbased}
+# `{modelbased}`
 
 [TO DO](https://easystats.github.io/modelbased/articles/estimate_response.html)
 
-# {openxlsx}
+# `{openxlsx}`
 
 TO DO
 
-# {patchwork}
+# `{pacman}`
+
+[<img src="https://github.com/trinker/pacman/blob/master/inst/pacman_logo/r_pacman.png?raw=true" width="100"/>](https://tidyverse.tidyverse.org/)
+
+You now know how to install and load R packages the standard way. However, over the years I switched to using the function `p_load()` from the {pacman} package instead of `library()` and `install.packages()`. The reason is simple: Usually R-scripts start with multiple lines of `library()` statements that load the necessary packages. However, when this code is run on a different computer, the user may not have all these packages installed and will therefore get an error message. This can be avoided by using the `p_load()`, because it
+
+-   loads all packages that are installed and
+-   installs and loads all packages that are not installed.
+
+Obviously, {pacman} itself must first be installed (the standard way). Moreover, you may now think that in order to use `p_load()` we do need a single `library(pacman)` first. However, we can avoid this by writing `pacman::p_load()` instead. Simply put, writing `package_name::function_name()` [makes sure](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ns-dblcolon.html) that this explicit function from this explicit package is being used. Additionally, R actually lets you use this function without loading the corresponding package. Thus, we now arrived at the way I handle packages at the beginning of all my R-scripts:
+
+```{r}
+#| eval: false
+
+pacman::p_load(
+  package_name_1,
+  package_name_2,
+  package_name_3
+)
+```
+
+# `{patchwork}`
 
 TO DO
 
-# {readxl}
+# `{performance}`
 
 TO DO
 
-# {reprex}
+# `{readxl}`
 
 TO DO
 
-# {scales}
+# `{reprex}`
 
 TO DO
 
-# %in% and %not_in%
+# `{scales}`
+
+TO DO
+
+# `%in%` and `%not_in%`
 
 R has the built-in function `%in%` which checks whether something is present in a vector.
 
@@ -214,6 +241,6 @@ c("A", "D") %>% .[. %not_in% treatments]
 :::
 :::
 
-# system('open "file.png"')
+# `system('open "file.png"')`
 
 [TO DO](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)

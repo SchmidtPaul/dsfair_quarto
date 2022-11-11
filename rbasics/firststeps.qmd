@@ -182,27 +182,6 @@ A package must be loaded every time you open a new R session!
 
 [Here](https://github.com/qinwf/awesome-R) is a curated list of R packages and tools for different areas.
 
-## `p_load()` vs. `library()`
-
-[<img src="https://github.com/trinker/pacman/blob/master/inst/pacman_logo/r_pacman.png?raw=true" width="100"/>](https://tidyverse.tidyverse.org/)
-
-You now know how to install and load R packages the standard way. However, over the years I switched to using the function `p_load()` from the {pacman} package instead of `library()` and `install.packages()`. The reason is simple: Usually R-scripts start with multiple lines of `library()` statements that load the necessary packages. However, when this code is run on a different computer, the user may not have all these packages installed and will therefore get an error message. This can be avoided by using the `p_load()`, because it
-
--   loads all packages that are installed and
--   installs and loads all packages that are not installed.
-
-Obviously, {pacman} itself must first be installed (the standard way). Moreover, you may now think that in order to use `p_load()` we do need a single `library(pacman)` first. However, we can avoid this by writing `pacman::p_load()` instead. Simply put, writing `package_name::function_name()` [makes sure](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ns-dblcolon.html) that this explicit function from this explicit package is being used. Additionally, R actually lets you use this function without loading the corresponding package. Thus, we now arrived at the way I handle packages at the beginning of all my R-scripts:
-
-```{r}
-#| eval: false
-
-pacman::p_load(
-  package_name_1,
-  package_name_2,
-  package_name_3
-)
-```
-
 # Keyboard shortcuts
 
 Here are shortcuts I actually use regularly in RStudio:

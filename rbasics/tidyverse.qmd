@@ -33,7 +33,7 @@ I did not use the tidyverse packages in my first years using R, but I wish I did
 
 During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   ["R for Data Science"](https://r4ds.had.co.nz/) [@Wickham_2017], which is a book that can be read online for free and was written by the package authors themselves.
 :::
 
@@ -131,7 +131,7 @@ plot(x = df$group, y = df$weight) # boxplot for values of each level
 
 However, I really just use `plot()` to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package `{ggplot2}` and its function `ggplot()`. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website's chapters.
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   Cédric Scherer's [-@CedricScherer_2022] [A ggplot2 tutorial for beautiful plotting in R](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)
 -   [ggplot2 extensions gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 :::
@@ -289,7 +289,7 @@ tbl2 %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [5.5 Add new variables with mutate()](https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate) in *R for data science* [@Wickham_2017]
 -   [Create, modify, and delete columns with mutate()](https://dplyr.tidyverse.org/reference/mutate.html)
 -   [A general vectorised if with case_when()](https://dplyr.tidyverse.org/reference/case_when.html)
@@ -370,7 +370,7 @@ tbl3 %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [5.4 Select columns with select()](https://r4ds.had.co.nz/transform.html#select) in *R for data science* [@Wickham_2017]
 -   [Subset columns using their names and types with select()](https://dplyr.tidyverse.org/reference/select.html)
 -   [Select variables that match a pattern with starts_with() etc.](https://tidyselect.r-lib.org/reference/starts_with.html)
@@ -423,7 +423,7 @@ tbl %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [5.2 Filter rows with filter()](https://r4ds.had.co.nz/transform.html#filter-rows-with-filter) in *R for data science* [@Wickham_2017]
 -   [Subset rows using column values with filter()](https://dplyr.tidyverse.org/reference/filter.html)
 :::
@@ -457,7 +457,7 @@ tbl %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [5.3 Arrange rows with arrange()](https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange) in *R for data science* [@Wickham_2017]
 -   [Arrange rows by column values with arrange()](https://dplyr.tidyverse.org/reference/arrange.html)
 -   [How to have NA's displayed first using arrange()](https://stackoverflow.com/a/25267681/8830099)
@@ -563,7 +563,7 @@ tbl %>%
 Once you used `group_by()` on a table, it stays grouped unless you use `ungroup()` on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results. You can find an example and further resources on such unintended outcomes [here](https://twitter.com/SchmidtPaul1989/status/1586284894556418049).
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [5.6 Grouped summaries with summarise()](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise) in *R for data science* [@Wickham_2017]
 -   [Summarise each group to fewer rows with summarise()](https://dplyr.tidyverse.org/reference/summarise.html)
 -   [Group by one or more variables with group_by()](https://dplyr.tidyverse.org/reference/group_by.html)
@@ -657,7 +657,7 @@ wide_dat %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [12.3 Pivoting](https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting) in *R for data science* [@Wickham_2017]
 -   [Pivoting with tidyr](https://tidyr.tidyverse.org/articles/pivot.html)
 -   [tidyr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)
@@ -807,7 +807,7 @@ strings %>%
 :::
 :::
 
-::: custom-callout-tip
+::: custom-callout-addref
 -   [14 Strings](https://r4ds.had.co.nz/strings.html) in *R for data science* [@Wickham_2017]
 -   [stringr cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
 -   [Regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html)

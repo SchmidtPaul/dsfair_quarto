@@ -183,11 +183,15 @@ div.csl-indent {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
 <li>
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
- <span class="dropdown-text">CRD Mead 1993</span></a>
+ <span class="dropdown-text">CRD (Mead 1993)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../exan/simple/rcbd_clewerscarisbrick2001.html">
- <span class="dropdown-text">RCBD Clewer &amp; Scarisbrickt 2001</span></a>
+ <span class="dropdown-text">RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../exan/simple/latsq_bridges1989.html">
+ <span class="dropdown-text">Latin Square (Bridges 1989)</span></a>
   </li>  
     </ul>
 </li>
@@ -205,6 +209,10 @@ div.csl-indent {
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
         <li class="dropdown-header">Designing Experiments</li>
+        <li>
+    <a class="dropdown-item" href="../summaryarticles/modeldiagnostics.html">
+ <span class="dropdown-text">Model Diagnostics</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../summaryarticles/workshopprep.html">
  <span class="dropdown-text">Workshop prep</span></a>
@@ -1891,7 +1899,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-37"><a href="#cb120-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb120-38"><a href="#cb120-38" aria-hidden="true" tabindex="-1"></a>During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.</span>
 <span id="cb120-39"><a href="#cb120-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-40"><a href="#cb120-40" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-40"><a href="#cb120-40" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-41"><a href="#cb120-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">"R for Data Science"</span><span class="co">](https://r4ds.had.co.nz/)</span> <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span>, which is a book that can be read online for free and was written by the package authors themselves.</span>
 <span id="cb120-42"><a href="#cb120-42" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-43"><a href="#cb120-43" aria-hidden="true" tabindex="-1"></a></span>
@@ -1989,7 +1997,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-149"><a href="#cb120-149" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb120-150"><a href="#cb120-150" aria-hidden="true" tabindex="-1"></a>However, I really just use <span class="in">`plot()`</span> to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package <span class="in">`{ggplot2}`</span> and its function <span class="in">`ggplot()`</span>. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website's chapters.</span>
 <span id="cb120-151"><a href="#cb120-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-152"><a href="#cb120-152" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-152"><a href="#cb120-152" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-153"><a href="#cb120-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Cédric Scherer's <span class="co">[</span><span class="ot">-@CedricScherer_2022</span><span class="co">] [A ggplot2 tutorial for beautiful plotting in R]</span>(https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)</span>
 <span id="cb120-154"><a href="#cb120-154" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">ggplot2 extensions gallery</span><span class="co">](https://exts.ggplot2.tidyverse.org/gallery/)</span></span>
 <span id="cb120-155"><a href="#cb120-155" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -2147,7 +2155,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-327"><a href="#cb120-327" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-328"><a href="#cb120-328" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-329"><a href="#cb120-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-330"><a href="#cb120-330" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-330"><a href="#cb120-330" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-331"><a href="#cb120-331" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.5 Add new variables with mutate()</span><span class="co">](https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-332"><a href="#cb120-332" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Create, modify, and delete columns with mutate()</span><span class="co">](https://dplyr.tidyverse.org/reference/mutate.html)</span></span>
 <span id="cb120-333"><a href="#cb120-333" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">A general vectorised if with case_when()</span><span class="co">](https://dplyr.tidyverse.org/reference/case_when.html)</span></span>
@@ -2228,7 +2236,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-422"><a href="#cb120-422" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-423"><a href="#cb120-423" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-424"><a href="#cb120-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-425"><a href="#cb120-425" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-425"><a href="#cb120-425" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-426"><a href="#cb120-426" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.4 Select columns with select()</span><span class="co">](https://r4ds.had.co.nz/transform.html#select)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-427"><a href="#cb120-427" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Subset columns using their names and types with select()</span><span class="co">](https://dplyr.tidyverse.org/reference/select.html)</span></span>
 <span id="cb120-428"><a href="#cb120-428" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Select variables that match a pattern with starts_with() etc.</span><span class="co">](https://tidyselect.r-lib.org/reference/starts_with.html)</span></span>
@@ -2281,7 +2289,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-483"><a href="#cb120-483" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-484"><a href="#cb120-484" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-485"><a href="#cb120-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-486"><a href="#cb120-486" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-486"><a href="#cb120-486" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-487"><a href="#cb120-487" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.2 Filter rows with filter()</span><span class="co">](https://r4ds.had.co.nz/transform.html#filter-rows-with-filter)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-488"><a href="#cb120-488" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Subset rows using column values with filter()</span><span class="co">](https://dplyr.tidyverse.org/reference/filter.html)</span></span>
 <span id="cb120-489"><a href="#cb120-489" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -2315,7 +2323,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-521"><a href="#cb120-521" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-522"><a href="#cb120-522" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-523"><a href="#cb120-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-524"><a href="#cb120-524" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-524"><a href="#cb120-524" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-525"><a href="#cb120-525" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.3 Arrange rows with arrange()</span><span class="co">](https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-526"><a href="#cb120-526" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Arrange rows by column values with arrange()</span><span class="co">](https://dplyr.tidyverse.org/reference/arrange.html)</span></span>
 <span id="cb120-527"><a href="#cb120-527" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">How to have NA's displayed first using arrange()</span><span class="co">](https://stackoverflow.com/a/25267681/8830099)</span></span>
@@ -2421,7 +2429,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-639"><a href="#cb120-639" aria-hidden="true" tabindex="-1"></a>Once you used <span class="in">`group_by()`</span> on a table, it stays grouped unless you use <span class="in">`ungroup()`</span> on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results. You can find an example and further resources on such unintended outcomes <span class="co">[</span><span class="ot">here</span><span class="co">](https://twitter.com/SchmidtPaul1989/status/1586284894556418049)</span>.</span>
 <span id="cb120-640"><a href="#cb120-640" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-641"><a href="#cb120-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-642"><a href="#cb120-642" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-642"><a href="#cb120-642" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-643"><a href="#cb120-643" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">5.6 Grouped summaries with summarise()</span><span class="co">](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-644"><a href="#cb120-644" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Summarise each group to fewer rows with summarise()</span><span class="co">](https://dplyr.tidyverse.org/reference/summarise.html)</span></span>
 <span id="cb120-645"><a href="#cb120-645" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Group by one or more variables with group_by()</span><span class="co">](https://dplyr.tidyverse.org/reference/group_by.html)</span></span>
@@ -2515,7 +2523,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-745"><a href="#cb120-745" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-746"><a href="#cb120-746" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-747"><a href="#cb120-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-748"><a href="#cb120-748" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-748"><a href="#cb120-748" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-749"><a href="#cb120-749" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">12.3 Pivoting</span><span class="co">](https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-750"><a href="#cb120-750" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Pivoting with tidyr</span><span class="co">](https://tidyr.tidyverse.org/articles/pivot.html)</span></span>
 <span id="cb120-751"><a href="#cb120-751" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">tidyr cheat sheet</span><span class="co">](https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf)</span></span>
@@ -2665,7 +2673,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb120-917"><a href="#cb120-917" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-918"><a href="#cb120-918" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb120-919"><a href="#cb120-919" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-920"><a href="#cb120-920" aria-hidden="true" tabindex="-1"></a>::: custom-callout-tip</span>
+<span id="cb120-920"><a href="#cb120-920" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb120-921"><a href="#cb120-921" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">14 Strings</span><span class="co">](https://r4ds.had.co.nz/strings.html)</span> in *R for data science* <span class="co">[</span><span class="ot">@Wickham_2017</span><span class="co">]</span></span>
 <span id="cb120-922"><a href="#cb120-922" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stringr cheat sheet</span><span class="co">](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)</span></span>
 <span id="cb120-923"><a href="#cb120-923" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Regular expressions</span><span class="co">](https://stringr.tidyverse.org/articles/regular-expressions.html)</span></span>
