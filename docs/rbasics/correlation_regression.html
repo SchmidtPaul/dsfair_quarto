@@ -468,6 +468,7 @@ Additional Resources (click to show)
 <ul>
 <li><a href="https://easystats.github.io/correlation/">{correlation}</a></li>
 <li><a href="https://corrr.tidymodels.org/">{corrr}</a></li>
+<li><a href="http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2">{ggcorrplot}</a></li>
 </ul>
 </div>
 </div>
@@ -892,7 +893,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a><span class="fu"># Correlation</span></span>
 <span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a>One way of actually putting a number on this relationship is to estimate the correlation. When people talk about correlation ($\rho$ or $r$) in statistics, they usually refer to the <span class="co">[</span><span class="ot">Pearson correlation coefficient</span><span class="co">](https://www.wikiwand.com/en/Pearson_correlation_coefficient)</span>, which is a measure of linear correlation between two numeric variables. Correlation can only have values between -1 and 1, where 0 means _no correlation_, while all other possible values are either negative or positive correlations. The farther away from 0, the stronger is the correlation. </span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a>One way of actually putting a number on this relationship is to estimate the correlation. When people talk about correlation ($\rho$ or $r$) in statistics, they usually refer to the <span class="co">[</span><span class="ot">Pearson correlation coefficient</span><span class="co">](https://www.wikiwand.com/en/Pearson_correlation_coefficient)</span>, which is a measure of linear correlation between two numeric variables. Correlation can only have values between -1 and 1, where 0 means *no correlation*, while all other possible values are either negative or positive correlations. The farther away from 0, the stronger is the correlation.</span>
 <span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
@@ -902,7 +903,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span>
 <span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a>Simply put, a positive correlation means _"if one variable gets bigger, the other also gets bigger"_ and a negative correlation means _"if one variable gets bigger, the other gets smaller"_. Therefore, it does not matter which of the two variables is the first ("x") or the second ("y") variable. Thus, a correlation estimate is not like a model and it cannot make predictions. Finally, <span class="co">[</span><span class="ot">*"correlation does not imply causation"*</span><span class="co">](https://www.wikiwand.com/en/Correlation_does_not_imply_causation)</span> means that just because you found a (strong) correlation between two things, you cannot conclude that there is a cause-and-effect relationship between the two, which becomes clear when looking at <span class="co">[</span><span class="ot">these examples</span><span class="co">](https://www.tylervigen.com/spurious-correlations)</span>.</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a>Simply put, a positive correlation means *"if one variable gets bigger, the other also gets bigger"* and a negative correlation means *"if one variable gets bigger, the other gets smaller"*. Therefore, it does not matter which of the two variables is the first ("x") or the second ("y") variable. Thus, a correlation estimate is not like a model and it cannot make predictions. Finally, [*"correlation does not imply causation"*](https://www.wikiwand.com/en/Correlation_does_not_imply_causation) means that just because you found a (strong) correlation between two things, you cannot conclude that there is a cause-and-effect relationship between the two, which becomes clear when looking at <span class="co">[</span><span class="ot">these examples</span><span class="co">](https://www.tylervigen.com/spurious-correlations)</span>.</span>
 <span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## Get it</span></span>
 <span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
@@ -940,172 +941,173 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a>Looking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run <span class="in">`?cor.test()`</span> and look at the "Details" section for more info. Here, our correlation estimate of <span class="in">`r scales::number(mycor$estimate, 0.01)`</span> is significantly different from 0, since the p-value is <span class="in">`r scales::number(mycor$p.value, 0.0000000000001)`</span> and therefore $&lt; 0.05$. Furthermore, the confidence interval is <span class="in">`r scales::number(mycor$conf.int[1], 0.001)`</span> - <span class="in">`r scales::number(mycor$conf.int[2], 0.001)`</span> meaning that we are 95% sure that the true correlation is somewhere in that range.</span>
 <span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{correlation}</span><span class="co">](https://easystats.github.io/correlation/)</span> </span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{correlation}</span><span class="co">](https://easystats.github.io/correlation/)</span></span>
 <span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{corrr}</span><span class="co">](https://corrr.tidymodels.org/)</span></span>
-<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simple linear regression</span></span>
-<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a>When people talk about regression in statistics, they usually refer to <span class="co">[</span><span class="ot">simple linear regression</span><span class="co">](https://www.wikiwand.com/en/Simple_linear_regression)</span>, which - simply put - finds the best straight line that goes through dots in a scatter plot of two numeric variables:</span>
-<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: '60%'</span></span>
-<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"img"</span>, <span class="st">"regressionexamples.png"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span>
-<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>The linear model behind such a straight line is simply:</span>
-<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>$$ y = \alpha + \beta x$$</span>
-<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>where $\alpha$ or $a$ is the intercept and $\beta$ or $b$ is the slope, while $y$ and $x$ are our data points. Fitting such a regression is really just finding the optimal estimates for $\alpha$ and $\beta$. </span>
-<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: '60%'</span></span>
-<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"img"</span>, <span class="st">"regressiontheory.png"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span>
-<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a>In contrast to correlation, a simple linear regression is a model and it therefore matters which variable is $y$ (dependent variable) and which is $x$ (independent), because after fitting the regression, the latter can be used to predict the former. </span>
-<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## Get it</span></span>
-<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a>In R, we can use the <span class="in">`lm()`</span> function for fitting linear models so that it fits the simple linear regression equation shown above easily:</span>
-<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> drinks,</span>
-<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
-<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>As you can see, we refer to our data object <span class="in">`dat`</span> in the <span class="in">`data =`</span> argument so that in the <span class="in">`formula =`</span> argument we only need to write the names of the respective columns in <span class="in">`dat`</span>. Furthermore, we store the results in the <span class="in">`reg`</span> object. When looking at this object, we get the following results:</span>
-<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a>reg</span>
-<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>First, our command is repeated and then the "Coefficients" are shown, which are indeed the estimates for $a$ and $b$. So the best straight line is:</span>
-<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>$$ bloodalc = 0.049 + 0.121 * drinks $$</span>
-<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>which looks like this:</span>
-<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
-<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
-<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
-<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
-<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
-<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
-<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
-<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
-<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
-<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
-<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a>Here is a little more info why <span class="in">`formula = blood_alc ~ drinks`</span> leads to R estimating the $a$ and $b$ we want: What makes sense is that <span class="in">`blood_alc`</span> is $y$, <span class="in">`drinks`</span> is $x$ and <span class="in">`~`</span> would therefore be the $=$ in our equation. However, why is it we never had to write anything about $a$ or $b$? The answer is that (i) when fitting a linear model, there is usually always an intercept (=$a$) by default and (ii) when writing a numeric variable (=<span class="in">`drinks`</span>) as on the right side of the equation, it will automatically be assumed to have a slope (=$b$) multiplied with it. Accordingly, <span class="in">`blood_alc ~ drinks`</span> automatically translates to <span class="in">`blood_alc = a + b*drinks`</span> so to speak. </span>
-<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a><span class="fu">## Is this right?</span></span>
-<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <span class="co">[</span><span class="ot">{modelbased}</span><span class="co">](../../summaryarticles/usefulthings.qmd#modelbased)</span>:</span>
-<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a>preddat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">drinks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">estimate_expectation</span>(<span class="at">model =</span> reg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
-<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>preddat</span>
-<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a>You may notice that according to our model, the expected alcohol content in your blood when having 0 drinks is actually 0.049 and thus larger than 0. This is obviously not true in real life. Instead, the true intercept should actually be exactly 0, so what went wrong?</span>
-<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>First of all, data will never be perfect in the sense that the when a parameter really is e.g. 42, its estimate based on measured data is also exactly 42.000000... . Instead, there are e.g. measurement errors: Peter and Max may have forgotten a drink or two or their device to measure the alcohol content is not precise enough. In fact, this would most likely be the underlying reason here - but remember that I made the data up. </span>
-<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a>So I would like you to think about the issue from two other angles:</span>
-<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a><span class="ss"> 1. </span>Are the results really saying the intercept is &gt; 0?</span>
-<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="ss"> 2. </span>Did we even ask the right question or should we have fitted a different model?</span>
-<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### Are the results really saying the intercept is &gt; 0?</span></span>
-<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. <span class="in">`summary()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../../summaryarticles/usefulthings.qmd#broom)</span> package to get the results in a more convenient format.</span>
-<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(reg, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a>you can see that the p-value for the intercept is 0.243, which is larger than 0.05 and thus saying that we could not find the intercept to be significantly different from 0. A second indication can be found when looking at the confidence interval of the expected value for having 0 drinks in the table above: <span class="in">`[-0.0363, 0.1340]`</span>. This interval actually includes 0 which suggests that the true expected blood alcohol content for having 0 drinks may indeed be 0. </span>
-<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a><span class="fu">### Should we have fitted a different model?</span></span>
-<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>We certainly **could** have and we will actually do it now. It must be clear that statistically speaking there was nothing wrong with our analysis. However, from a biological standpoint or in other words - because of our background knowledge and expertise as scientists - we could have indeed actively decided for a regression analysis that does **not** have an intercept and is thus forced to start 0 in terms of blood alcohol content. After all, statistics is just a tool to help us make conclusions. It is a powerful tool, but it will always be our responsibility to "ask the right questions" i.e. apply expedient methods.</span>
-<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a>A simple linear regression without an intercept is strictly speaking no longer "simple", since it no longer has the typical equation, but instead this one:</span>
-<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>$$ y = \beta x$$</span>
-<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>To tell <span class="in">`lm()`</span> that it should not estimate the default intercept, we simply add <span class="in">`0 + `</span> right after the <span class="in">`~`</span>. As expected, we only get one estimate for the slope:</span>
-<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a>reg_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> drinks, <span class="at">data =</span> dat)</span>
-<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>reg_noint</span>
-<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a>meaning that this regression with no intercept is estimated as</span>
-<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a>$$ bloodalc = 0.1298 * drinks $$</span>
-<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a>and must definitely predict 0 <span class="in">`blood_alc`</span> when having 0 <span class="in">`drinks`</span>. As a final result, we can compare both regression lines visually in a ggplot:</span>
-<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
-<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
-<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
-<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
-<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(</span>
-<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ 0 + x"</span>,</span>
-<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#e4572e"</span></span>
-<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
-<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
-<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)</span>
-<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
-<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
-<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{ggcorrplot}</span><span class="co">](http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2)</span></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a><span class="fu"># Simple linear regression</span></span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>When people talk about regression in statistics, they usually refer to <span class="co">[</span><span class="ot">simple linear regression</span><span class="co">](https://www.wikiwand.com/en/Simple_linear_regression)</span>, which - simply put - finds the best straight line that goes through dots in a scatter plot of two numeric variables:</span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: '60%'</span></span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"img"</span>, <span class="st">"regressionexamples.png"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a>The linear model behind such a straight line is simply:</span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a>$$ y = \alpha + \beta x$$</span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>where $\alpha$ or $a$ is the intercept and $\beta$ or $b$ is the slope, while $y$ and $x$ are our data points. Fitting such a regression is really just finding the optimal estimates for $\alpha$ and $\beta$.</span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: '60%'</span></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"img"</span>, <span class="st">"regressiontheory.png"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">include_graphics</span>()</span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>In contrast to correlation, a simple linear regression is a model and it therefore matters which variable is $y$ (dependent variable) and which is $x$ (independent), because after fitting the regression, the latter can be used to predict the former.</span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a><span class="fu">## Get it</span></span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>In R, we can use the <span class="in">`lm()`</span> function for fitting linear models so that it fits the simple linear regression equation shown above easily:</span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> drinks,</span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a>As you can see, we refer to our data object <span class="in">`dat`</span> in the <span class="in">`data =`</span> argument so that in the <span class="in">`formula =`</span> argument we only need to write the names of the respective columns in <span class="in">`dat`</span>. Furthermore, we store the results in the <span class="in">`reg`</span> object. When looking at this object, we get the following results:</span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>reg</span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>First, our command is repeated and then the "Coefficients" are shown, which are indeed the estimates for $a$ and $b$. So the best straight line is:</span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>$$ bloodalc = 0.049 + 0.121 * drinks $$</span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a>which looks like this:</span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>Here is a little more info why <span class="in">`formula = blood_alc ~ drinks`</span> leads to R estimating the $a$ and $b$ we want: What makes sense is that <span class="in">`blood_alc`</span> is $y$, <span class="in">`drinks`</span> is $x$ and <span class="in">`~`</span> would therefore be the $=$ in our equation. However, why is it we never had to write anything about $a$ or $b$? The answer is that (i) when fitting a linear model, there is usually always an intercept (=$a$) by default and (ii) when writing a numeric variable (=<span class="in">`drinks`</span>) as on the right side of the equation, it will automatically be assumed to have a slope (=$b$) multiplied with it. Accordingly, <span class="in">`blood_alc ~ drinks`</span> automatically translates to <span class="in">`blood_alc = a + b*drinks`</span> so to speak.</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Is this right?</span></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <span class="co">[</span><span class="ot">{modelbased}</span><span class="co">](../../summaryarticles/usefulthings.qmd#modelbased)</span>:</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a>preddat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">drinks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">estimate_expectation</span>(<span class="at">model =</span> reg, <span class="at">data =</span> .) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>preddat</span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a>You may notice that according to our model, the expected alcohol content in your blood when having 0 drinks is actually 0.049 and thus larger than 0. This is obviously not true in real life. Instead, the true intercept should actually be exactly 0, so what went wrong?</span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>First of all, data will never be perfect in the sense that the when a parameter really is e.g. 42, its estimate based on measured data is also exactly 42.000000... . Instead, there are e.g. measurement errors: Peter and Max may have forgotten a drink or two or their device to measure the alcohol content is not precise enough. In fact, this would most likely be the underlying reason here - but remember that I made the data up.</span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>So I would like you to think about the issue from two other angles:</span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Are the results really saying the intercept is <span class="sc">\&gt;</span> 0?</span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Did we even ask the right question or should we have fitted a different model?</span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a><span class="fu">### Are the results really saying the intercept is \&gt; 0?</span></span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. <span class="in">`summary()`</span>. We may also use the <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../../summaryarticles/usefulthings.qmd#broom)</span> package to get the results in a more convenient format.</span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(reg, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>you can see that the p-value for the intercept is 0.243, which is larger than 0.05 and thus saying that we could not find the intercept to be significantly different from 0. A second indication can be found when looking at the confidence interval of the expected value for having 0 drinks in the table above: <span class="in">`[-0.0363, 0.1340]`</span>. This interval actually includes 0 which suggests that the true expected blood alcohol content for having 0 drinks may indeed be 0.</span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a><span class="fu">### Should we have fitted a different model?</span></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>We certainly **could** have and we will actually do it now. It must be clear that statistically speaking there was nothing wrong with our analysis. However, from a biological standpoint or in other words - because of our background knowledge and expertise as scientists - we could have indeed actively decided for a regression analysis that does **not** have an intercept and is thus forced to start 0 in terms of blood alcohol content. After all, statistics is just a tool to help us make conclusions. It is a powerful tool, but it will always be our responsibility to "ask the right questions" i.e. apply expedient methods.</span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>A simple linear regression without an intercept is strictly speaking no longer "simple", since it no longer has the typical equation, but instead this one:</span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a>$$ y = \beta x$$</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a>To tell <span class="in">`lm()`</span> that it should not estimate the default intercept, we simply add <span class="in">`0 +`</span> right after the <span class="in">`~`</span>. As expected, we only get one estimate for the slope:</span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>reg_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> drinks, <span class="at">data =</span> dat)</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a>reg_noint</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a>meaning that this regression with no intercept is estimated as</span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>$$ bloodalc = 0.1298 * drinks $$</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a>and must definitely predict 0 <span class="in">`blood_alc`</span> when having 0 <span class="in">`drinks`</span>. As a final result, we can compare both regression lines visually in a ggplot:</span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ 0 + x"</span>,</span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#e4572e"</span></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

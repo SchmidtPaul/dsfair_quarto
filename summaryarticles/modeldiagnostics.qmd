@@ -3,4 +3,49 @@ title: "Model Diagnostics"
 date: 2022-11-11
 ---
 
+# What is it?
+
+All statistical models make certain assumptions about the data generating process, and results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.
+
+## Which assumptions?
+
+### Independence
+
+The errors are independent.
+
+### Linearity
+
+The response can be written as a linear combination of the predictors.
+
+### Normality
+
+The distribution of the errors should follow a normal distribution.
+
+### Equal variance
+
+The error variance is the same at any set of predictor values.
+
+# How to
+
+## diagnose models
+
+When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak & Piepho [-@kozak2018], who show that "residual plots are better for checking ANOVA assumptions than statistical tests".
+
+TO DO: Important Callout Box: check residuals not data!
+
+## get diagnostic plots
+
 TO DO
+
+## judge diagnostic plots
+
+TO DO
+
+## deal with unruly residuals
+
+TO DO
+
+::: custom-callout-addref
+-   [Chapter 13 Model Diagnostics](https://book.stat420.org/model-diagnostics.html) in Applied Statistics with R (Dalpiaz, 2022)
+-   [Chapter 8 Model Diagnostics](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html) in Course Handouts for Bayesian Data Analysis (Lai, 2019)
+:::

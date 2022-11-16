@@ -172,7 +172,7 @@ desplot(
   text = gen, # gen names per plot
   cex = 1, # gen names: font size
   shorten = FALSE, # gen names: don't abbreviate
-  main = "Field layout", # plot title
+  main = "Yield per plot", # plot title
   show.key = FALSE # hide legend
   ) 
 ```

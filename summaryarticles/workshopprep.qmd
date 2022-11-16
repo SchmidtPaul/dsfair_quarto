@@ -32,18 +32,26 @@ if (!require("pacman", quietly = TRUE))
   install.packages("pacman")
 
 pacman::p_load(
+  agridat,
+  broom,
   conflicted,
   desplot,
   dlookr,
   emmeans,
+  ggtext,
   glmmTMB,
   here,
   janitor,
   lme4,
   lmerTest,
+  modelbased,
   multcomp,
   multcompView,
+  naniar,
+  nlme,
   openxlsx,
+  performance,
+  readxl,
   scales,
   tidyverse
 )
