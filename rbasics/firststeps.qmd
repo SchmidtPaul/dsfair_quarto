@@ -181,23 +181,3 @@ A package must be loaded every time you open a new R session!
 :::
 
 [Here](https://github.com/qinwf/awesome-R) is a curated list of R packages and tools for different areas.
-
-# Keyboard shortcuts
-
-Here are shortcuts I actually use regularly in RStudio:
-
-| Shortcut              | Description                                   |
-|-----------------------|-----------------------------------------------|
-| CTRL+ENTER            | Run selected lines of code                    |
-| CTRL+SHIFT+M          | Insert `%>%`[^2]                              |
-| CTRL+SHIFT+R          | Insert code section header                    |
-| CTRL+LEFT/RIGHT       | Jump to Word                                  |
-| CTRL+SHIFT+LEFT/RIGHT | Select Word                                   |
-| ALT+LEFT/RIGHT        | Jump to Line Start/End                        |
-| ALT+SHIFT+LEFT/RIGHT  | Select to Line Start/End                      |
-| CTRL+A                | Highlight everything (to run the entire code) |
-| CTRL+Z                | Undo                                          |
-
-[^2]: The pipe operator %\>% is introduced in the next chapter.
-
-Keyboard shortcuts can be customized in RStudio as described [here](https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts-in-the-RStudio-IDE).

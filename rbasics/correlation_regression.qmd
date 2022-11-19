@@ -225,8 +225,8 @@ Here is a little more info why `formula = blood_alc ~ drinks` leads to R estimat
 After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via [{modelbased}](../../summaryarticles/usefulthings.qmd#modelbased):
 
 ```{r}
-preddat <- data.frame(drinks = seq(0, 9)) %>% 
-  estimate_expectation(model = reg, data = .) %>% 
+preddat <- tibble(drinks = seq(0, 9)) %>% 
+  estimate_expectation(model = reg) %>% 
   as_tibble()
 
 preddat
@@ -295,7 +295,8 @@ ggplot(data = dat) +
   scale_x_continuous(
     name = "Number of drinks",
     limits = c(0, 9),
-    breaks = seq(0, 9)
+    breaks = seq(0, 9),
+    expand = expansion(mult = c(0, 0.1))
   ) +
   scale_y_continuous(
     name = "Blood alcohol content",
