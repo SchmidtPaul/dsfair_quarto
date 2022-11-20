@@ -343,32 +343,32 @@
     "text": "Most statistical methods and all statistical models make certain assumptions (about the data generating process), and (test) results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met."
   },
   {
-    "objectID": "summaryarticles/modeldiagnostics.html#diagnose-models",
-    "href": "summaryarticles/modeldiagnostics.html#diagnose-models",
+    "objectID": "summaryarticles/modeldiagnostics.html#independence",
+    "href": "summaryarticles/modeldiagnostics.html#independence",
     "title": "Model Diagnostics",
-    "section": "diagnose models",
-    "text": "diagnose models\nWhen it comes to diagnosing models, one may separate most approaches into two general categories: significance tests and diagnostic plots. Personally, I follow Kozak & Piepho (2018), who show that “residual plots are better for checking ANOVA assumptions than statistical tests”.\nTO DO: Important Callout Box: check residuals not data!"
+    "section": "Independence",
+    "text": "Independence\nAssumption: Individual observations are independent of each other (as opposed to dependent/correlated).\nModel diagnostics are actually not used to verify this specific assumption. Instead, this assumption is justified if proper randomization was applied as part of the experimental design. Keep in mind, that there are indeed non-classical scenarios like repeated measures over time or certain experimental designs where observations are not (assumed to be) independent, but these are not covered in this chapter."
   },
   {
-    "objectID": "summaryarticles/modeldiagnostics.html#get-diagnostic-plots",
-    "href": "summaryarticles/modeldiagnostics.html#get-diagnostic-plots",
+    "objectID": "summaryarticles/modeldiagnostics.html#normality",
+    "href": "summaryarticles/modeldiagnostics.html#normality",
     "title": "Model Diagnostics",
-    "section": "get diagnostic plots",
-    "text": "get diagnostic plots\nTO DO"
+    "section": "Normality",
+    "text": "Normality\nAssumption: The errors follow a normal distribution.\nA model’s errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.\n\n\n\n\n\n\nYes residuals - not data!\n\n\n\nUnfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model’s residuals should be checked for normality. Please see section “4 | ANSWERING QUESTION 1” in (Kozak and Piepho 2018) for details.\n\n\nQQ plot\nApproximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho (2018) point out that when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal.\n\nmod %>% \n  check_normality() %>% \n  plot(type = \"qq\")\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the normality assumption. A p-value < 0.05 would suggest such a violation:\n\nols_test_normality(mod)\n\n-----------------------------------------------\n       Test             Statistic       pvalue  \n-----------------------------------------------\nShapiro-Wilk              0.9661         0.4379 \nKolmogorov-Smirnov        0.1101         0.8215 \nCramer-von Mises          3.6109         0.0000 \nAnderson-Darling          0.3582         0.4299 \n-----------------------------------------------"
   },
   {
-    "objectID": "summaryarticles/modeldiagnostics.html#judge-diagnostic-plots",
-    "href": "summaryarticles/modeldiagnostics.html#judge-diagnostic-plots",
+    "objectID": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
+    "href": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
     "title": "Model Diagnostics",
-    "section": "judge diagnostic plots",
-    "text": "judge diagnostic plots\nTO DO"
+    "section": "Variance homogeneity",
+    "text": "Variance homogeneity\nAssumption: The error variance is the same at any set of predictor values.\nAlso referred to as homoscedasticity (i.e. the opposite of heteroscedasticity)\nRes-Pred Plot\nWhile this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.\n\nmod %>% \n  check_heteroscedasticity() %>% \n  plot()\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value < 0.05 would suggest such a violation:\n\n\n\nols_test_breusch_pagan(mod)\n\n\n Breusch Pagan Test for Heteroskedasticity\n -----------------------------------------\n Ho: the variance is constant            \n Ha: the variance is not constant        \n\n               Data                \n ----------------------------------\n Response : weight \n Variables: fitted values of weight \n\n        Test Summary          \n -----------------------------\n DF            =    1 \n Chi2          =    3.000303 \n Prob > Chi2   =    0.08324896 \n\n\n\n\n\n\nols_test_bartlett(\n  data = PlantGrowth, \n  \"weight\", \n  group_var = \"group\")\n\n\n    Bartlett's Test of Homogenity of Variances    \n------------------------------------------------\nHo: Variances are equal across groups\nHa: Variances are unequal for atleast two groups\n\n        Test Summary         \n ----------------------------\n DF            =    2 \n Chi2          =    2.878592 \n Prob > Chi2   =    0.2370946"
   },
   {
-    "objectID": "summaryarticles/modeldiagnostics.html#deal-with-unruly-residuals",
-    "href": "summaryarticles/modeldiagnostics.html#deal-with-unruly-residuals",
+    "objectID": "summaryarticles/modeldiagnostics.html#to-do",
+    "href": "summaryarticles/modeldiagnostics.html#to-do",
     "title": "Model Diagnostics",
-    "section": "deal with unruly residuals",
-    "text": "deal with unruly residuals\nTO DO\n\n\n\n\n\n\nAdditional Resources (click to show)\n\n\n\n\n\n\nWhat’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions (Kozak and Piepho 2018)\n\n\nChapter 13 Model Diagnostics in Applied Statistics with R (Dalpiaz, 2022)\n\nChapter 8 Model Diagnostics in Course Handouts for Bayesian Data Analysis (Lai, 2019)"
+    "section": "TO DO",
+    "text": "TO DO\n\nhelp to judge plots\ndeal with unruly residuals\n\n\n\n\n\n\n\nAdditional Resources (click to show)\n\n\n\n\n\nGeneral\n\nWhat’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions (Kozak and Piepho 2018)\n\n\nChapter 13 Model Diagnostics in Applied Statistics with R (Dalpiaz, 2022)\n\nChapter 8 Model Diagnostics in Course Handouts for Bayesian Data Analysis (Lai, 2019)\n🇩🇪 Verbleibende Plots interpretieren, um Ihre Regression zu verbessern\n\n{olsrr}\n\nNormality\n\nR Tutorial: Normal Probability Plot of Residuals\nFor this specific purpose, QQ plots may also be called Normal probability plots\n\n{qqplotr}\n\nHomoscedasticity\n\nDocumentation on tests from {olsrr}\nWikipedia article on Homoscedasticity and heteroscedasticity"
   },
   {
     "objectID": "summaryarticles/usefulthings.html",
@@ -411,47 +411,5 @@
     "title": "Prepare for an upcoming workshop",
     "section": "What else?",
     "text": "What else?\n\nCheck your microphoneMake sure we can hear you when asking a question.\nCheck your camera\nThis is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.\n\nGet familiar with the options/functions\n\nKnow how to mute your microphone. It should be muted at all times except when you are actually talking to us.\nKnow how to use the zoom chat.\nIn zoom, know how to give a “thumbs up” - making a symbol appear on your screen."
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#independence",
-    "href": "summaryarticles/modeldiagnostics.html#independence",
-    "title": "Model Diagnostics",
-    "section": "Independence",
-    "text": "Independence\nAssumption: Individual observations are independent of each other (as opposed to dependent/correlated).\nModel diagnostics are actually not used to verify this specific assumption. Instead, this assumption is justified if proper randomization was applied as part of the experimental design. Keep in mind, that there are indeed non-classical scenarios like repeated measures over time or certain experimental designs where observations are not (assumed to be) independent, but these are not covered in this chapter."
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#linearity",
-    "href": "summaryarticles/modeldiagnostics.html#linearity",
-    "title": "Model Diagnostics",
-    "section": "Linearity",
-    "text": "Linearity\nAssumption: The response can be written as a linear combination of the predictors.\nThis assumption can also be checked via the Res-Pred-plot from the Variance homogeneity section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid."
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#normality",
-    "href": "summaryarticles/modeldiagnostics.html#normality",
-    "title": "Model Diagnostics",
-    "section": "Normality",
-    "text": "Normality\nAssumption: The errors follow a normal distribution.\nA model’s errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.\n\n\n\n\n\n\nYes residuals - not data!\n\n\n\nUnfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model’s residuals should be checked for normality. Please see section “4 | ANSWERING QUESTION 1” in (Kozak and Piepho 2018) for details.\n\n\nQQ plot\nApproximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho (2018) point out that when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal.\n\nmod %>% \n  check_normality() %>% \n  plot(type = \"qq\")\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the normality assumption. A p-value < 0.05 would suggest such a violation:\n\nols_test_normality(mod)\n\n-----------------------------------------------\n       Test             Statistic       pvalue  \n-----------------------------------------------\nShapiro-Wilk              0.9661         0.4379 \nKolmogorov-Smirnov        0.1101         0.8215 \nCramer-von Mises          3.6109         0.0000 \nAnderson-Darling          0.3582         0.4299 \n-----------------------------------------------"
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#equal-variance",
-    "href": "summaryarticles/modeldiagnostics.html#equal-variance",
-    "title": "Model Diagnostics",
-    "section": "Equal variance",
-    "text": "Equal variance\nThe error variance is the same at any set of predictor values."
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#to-do",
-    "href": "summaryarticles/modeldiagnostics.html#to-do",
-    "title": "Model Diagnostics",
-    "section": "TO DO",
-    "text": "TO DO\n\nhelp to judge plots\ndeal with unruly residuals\n\n\n\n\n\n\n\nAdditional Resources (click to show)\n\n\n\n\n\nGeneral\n\nWhat’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions (Kozak and Piepho 2018)\n\n\nChapter 13 Model Diagnostics in Applied Statistics with R (Dalpiaz, 2022)\n\nChapter 8 Model Diagnostics in Course Handouts for Bayesian Data Analysis (Lai, 2019)\n🇩🇪 Verbleibende Plots interpretieren, um Ihre Regression zu verbessern\n\n{olsrr}\n\nNormality\n\nR Tutorial: Normal Probability Plot of Residuals\nFor this specific purpose, QQ plots may also be called Normal probability plots\n\n{qqplotr}\n\nHomoscedasticity\n\nDocumentation on tests from {olsrr}\nWikipedia article on Homoscedasticity and heteroscedasticity"
-  },
-  {
-    "objectID": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
-    "href": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
-    "title": "Model Diagnostics",
-    "section": "Variance homogeneity",
-    "text": "Variance homogeneity\nAssumption: The error variance is the same at any set of predictor values.\nAlso referred to as homoscedasticity (i.e. the opposite of heteroscedasticity)\nRes-Pred Plot\nWhile this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.\n\nmod %>% \n  check_heteroscedasticity() %>% \n  plot()\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value < 0.05 would suggest such a violation:\n\n\n\nols_test_breusch_pagan(mod)\n\n\n Breusch Pagan Test for Heteroskedasticity\n -----------------------------------------\n Ho: the variance is constant            \n Ha: the variance is not constant        \n\n               Data                \n ----------------------------------\n Response : weight \n Variables: fitted values of weight \n\n        Test Summary          \n -----------------------------\n DF            =    1 \n Chi2          =    3.000303 \n Prob > Chi2   =    0.08324896 \n\n\n\n\n\n\nols_test_bartlett(\n  data = PlantGrowth, \n  \"weight\", \n  group_var = \"group\")\n\n\n    Bartlett's Test of Homogenity of Variances    \n------------------------------------------------\nHo: Variances are equal across groups\nHa: Variances are unequal for atleast two groups\n\n        Test Summary         \n ----------------------------\n DF            =    2 \n Chi2          =    2.878592 \n Prob > Chi2   =    0.2370946"
   }
 ]
