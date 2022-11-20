@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.189">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="dcterms.date" content="2022-11-11">
-
 <title>dsfair_quarto - Model Diagnostics</title>
 <style>
 code{white-space: pre-wrap;}
@@ -105,7 +102,6 @@ div.csl-indent {
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -121,8 +117,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -140,21 +135,15 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="../styles.css">
+}</script><link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="dsfair_quarto - Model Diagnostics">
-<meta name="twitter:description" content="All statistical models make certain assumptions about the data generating process, and results will be meaningless or misleading if theses assumptions do not hold.">
+<meta name="twitter:description" content="Most statistical methods and all statistical models make certain assumptions (about the data generating process), and (test) results will be meaningless or misleading if theses assumptions do not…">
 <meta name="twitter:card" content="summary">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DSFAIR</span>
@@ -165,13 +154,13 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
     <a class="dropdown-item" href="../rbasics/firststeps.html">
  <span class="dropdown-text">First Steps</span></a>
   </li>  
@@ -188,11 +177,11 @@ div.csl-indent {
  <span class="dropdown-text">Bad data &amp; Outliers</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">Simple Experiments</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
+<li>
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
  <span class="dropdown-text">CRD (Mead 1993)</span></a>
   </li>  
@@ -205,13 +194,13 @@ div.csl-indent {
  <span class="dropdown-text">Latin Square (Bridges 1989)</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="dropdown-header">
  Complex Experiments</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
     <a class="dropdown-item" href="../summaryarticles/usefulthings.html">
  <span class="dropdown-text">Useful things</span></a>
   </li>  
@@ -229,10 +218,10 @@ div.csl-indent {
  <span class="dropdown-text">Workshop prep</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
     <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
   </li>  
   <li class="nav-item compact">
@@ -241,45 +230,47 @@ div.csl-indent {
  </a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+<div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-it" id="toc-what-is-it" class="nav-link active" data-scroll-target="#what-is-it">What is it?</a>
+<li><a href="#what-is-it" id="toc-what-is-it" class="nav-link active" data-scroll-target="#what-is-it">What is it?</a></li>
+  <li>
+<a href="#which-assumptions" id="toc-which-assumptions" class="nav-link" data-scroll-target="#which-assumptions">Which assumptions?</a>
   <ul class="collapse">
-  <li><a href="#which-assumptions" id="toc-which-assumptions" class="nav-link" data-scroll-target="#which-assumptions">Which assumptions?</a>
+<li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
+  <li>
+<a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality">Normality</a>
   <ul class="collapse">
-  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
-  <li><a href="#linearity" id="toc-linearity" class="nav-link" data-scroll-target="#linearity">Linearity</a></li>
-  <li><a href="#normality" id="toc-normality" class="nav-link" data-scroll-target="#normality">Normality</a></li>
-  <li><a href="#equal-variance" id="toc-equal-variance" class="nav-link" data-scroll-target="#equal-variance">Equal variance</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to">How to</a>
-  <ul class="collapse">
-  <li><a href="#diagnose-models" id="toc-diagnose-models" class="nav-link" data-scroll-target="#diagnose-models">diagnose models</a></li>
-  <li><a href="#get-diagnostic-plots" id="toc-get-diagnostic-plots" class="nav-link" data-scroll-target="#get-diagnostic-plots">get diagnostic plots</a></li>
-  <li><a href="#judge-diagnostic-plots" id="toc-judge-diagnostic-plots" class="nav-link" data-scroll-target="#judge-diagnostic-plots">judge diagnostic plots</a></li>
-  <li><a href="#deal-with-unruly-residuals" id="toc-deal-with-unruly-residuals" class="nav-link" data-scroll-target="#deal-with-unruly-residuals">deal with unruly residuals</a></li>
-  </ul></li>
+<li><a href="#qq-plot" id="toc-qq-plot" class="nav-link" data-scroll-target="#qq-plot">QQ plot</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">Tests</a></li>
   </ul>
-</nav>
+</li>
+  <li>
+<a href="#variance-homogeneity" id="toc-variance-homogeneity" class="nav-link" data-scroll-target="#variance-homogeneity">Variance homogeneity</a>
+  <ul class="collapse">
+<li><a href="#res-pred-plot" id="toc-res-pred-plot" class="nav-link" data-scroll-target="#res-pred-plot">Res-Pred Plot</a></li>
+  <li><a href="#tests-1" id="toc-tests-1" class="nav-link" data-scroll-target="#tests-1">Tests</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#plots-instead-of-tests" id="toc-plots-instead-of-tests" class="nav-link" data-scroll-target="#plots-instead-of-tests">Plots instead of tests</a>
+  <ul class="collapse">
+<li><a href="#to-do" id="toc-to-do" class="nav-link" data-scroll-target="#to-do">TO DO</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Model Diagnostics</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -318,51 +309,148 @@ div.csl-indent {
   </div>
   
 
-</header>
+</header><section id="what-is-it" class="level1"><h1>What is it?</h1>
+<p>Most statistical methods and all statistical models make certain assumptions (about the data generating process), and (test) results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.</p>
+</section><section id="which-assumptions" class="level1"><h1>Which assumptions?</h1>
+<p>As an example, we will specifically address the assumptions that ANOVA (analysis of variance) has. It makes sense to choose ANOVA because of its popularity and relevance in the chapters of this website. The following model will serve as an example throughout the chapter:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">PlantGrowth</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note that both the <code>PlantGrowth</code> data and the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function come with base R and thus don’t need any extra imports. In a next step, we would want to run <code>anova(mod)</code>. While all of the tests and plots that follow could also be produced with base R, I choose to use other packages here that I personally prefer for convenience and/or functionality reasons.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># (install &amp;) load packages</span></span>
+<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
+<span>  <span class="va">easystats</span>, </span>
+<span>  <span class="va">olsrr</span>,</span>
+<span>  <span class="va">qqplotr</span>, </span>
+<span>  <span class="va">tidyverse</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="independence" class="level2"><h2 class="anchored" data-anchor-id="independence">Independence</h2>
+<p><strong>Assumption: Individual observations are independent of each other (as opposed to dependent/correlated).</strong></p>
+<p>Model diagnostics are actually not used to verify this specific assumption. Instead, this assumption is justified if proper randomization was applied as part of the experimental design. Keep in mind, that there are indeed non-classical scenarios like repeated measures over time or certain experimental designs where observations are not (assumed to be) independent, but these are not covered in this chapter.</p>
+</section><section id="normality" class="level2"><h2 class="anchored" data-anchor-id="normality">Normality</h2>
+<p><strong>Assumption: The errors follow a normal distribution.</strong></p>
+<p>A model’s errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Yes residuals - not data!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Unfortunately, it is more common than it should be that people check whether their raw data (i.e.&nbsp;their response variable, e.g.&nbsp;yield) is normally distributed. This is not constructive. Instead, the model’s residuals should be checked for normality. Please see section “4 | ANSWERING QUESTION 1” in <span class="citation" data-cites="kozak2018">(<a href="#ref-kozak2018" role="doc-biblioref">Kozak and Piepho 2018</a>)</span> for details.</p>
+</div>
+</div>
+<section id="qq-plot" class="level3"><h3 class="anchored" data-anchor-id="qq-plot">QQ plot</h3>
+<p>Approximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak &amp; Piepho <span class="citation" data-cites="kozak2018">(<a href="#ref-kozak2018" role="doc-biblioref">2018</a>)</span> point out that <em>when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal</em>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">check_normality</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1650"></p>
+</div>
+</div>
+</section><section id="tests" class="level3"><h3 class="anchored" data-anchor-id="tests">Tests</h3>
+<p>As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:</p>
+<p>There are multiple statistical tests for detecting a violation of the normality assumption. A p-value &lt; 0.05 would suggest such a violation:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ols_test_normality</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>-----------------------------------------------
+       Test             Statistic       pvalue  
+-----------------------------------------------
+Shapiro-Wilk              0.9661         0.4379 
+Kolmogorov-Smirnov        0.1101         0.8215 
+Cramer-von Mises          3.6109         0.0000 
+Anderson-Darling          0.3582         0.4299 
+-----------------------------------------------</code></pre>
+</div>
+</div>
+</section></section><section id="variance-homogeneity" class="level2"><h2 class="anchored" data-anchor-id="variance-homogeneity">Variance homogeneity</h2>
+<p><strong>Assumption: The error variance is the same at any set of predictor values.</strong></p>
+<p>Also referred to as <em>homoscedasticity</em> (i.e.&nbsp;the opposite of <em>heteroscedasticity</em>)</p>
+<section id="res-pred-plot" class="level3"><h3 class="anchored" data-anchor-id="res-pred-plot">Res-Pred Plot</h3>
+<p>While this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">check_heteroscedasticity</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1650"></p>
+</div>
+</div>
+</section><section id="tests-1" class="level3"><h3 class="anchored" data-anchor-id="tests-1">Tests</h3>
+<p>As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:</p>
+<p>There are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value &lt; 0.05 would suggest such a violation:</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ols_test_breusch_pagan</span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>
+ Breusch Pagan Test for Heteroskedasticity
+ -----------------------------------------
+ Ho: the variance is constant            
+ Ha: the variance is not constant        
 
-<section id="what-is-it" class="level1">
-<h1>What is it?</h1>
-<p>All statistical models make certain assumptions about the data generating process, and results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.</p>
-<section id="which-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="which-assumptions">Which assumptions?</h2>
-<section id="independence" class="level3">
-<h3 class="anchored" data-anchor-id="independence">Independence</h3>
-<p>The errors are independent.</p>
-</section>
-<section id="linearity" class="level3">
-<h3 class="anchored" data-anchor-id="linearity">Linearity</h3>
-<p>The response can be written as a linear combination of the predictors.</p>
-</section>
-<section id="normality" class="level3">
-<h3 class="anchored" data-anchor-id="normality">Normality</h3>
-<p>The distribution of the errors should follow a normal distribution.</p>
-</section>
-<section id="equal-variance" class="level3">
-<h3 class="anchored" data-anchor-id="equal-variance">Equal variance</h3>
-<p>The error variance is the same at any set of predictor values.</p>
-</section>
-</section>
-</section>
-<section id="how-to" class="level1">
-<h1>How to</h1>
-<section id="diagnose-models" class="level2">
-<h2 class="anchored" data-anchor-id="diagnose-models">diagnose models</h2>
-<p>When it comes to diagnosing models, one may separate most approaches into two general categories: <strong>significance tests</strong> and <strong>diagnostic plots</strong>. Personally, I follow Kozak &amp; Piepho <span class="citation" data-cites="kozak2018">(<a href="#ref-kozak2018" role="doc-biblioref">2018</a>)</span>, who show that “residual plots are better for checking ANOVA assumptions than statistical tests”.</p>
-<p>TO DO: Important Callout Box: check residuals not data!</p>
-</section>
-<section id="get-diagnostic-plots" class="level2">
-<h2 class="anchored" data-anchor-id="get-diagnostic-plots">get diagnostic plots</h2>
-<p>TO DO</p>
-</section>
-<section id="judge-diagnostic-plots" class="level2">
-<h2 class="anchored" data-anchor-id="judge-diagnostic-plots">judge diagnostic plots</h2>
-<p>TO DO</p>
-</section>
-<section id="deal-with-unruly-residuals" class="level2">
-<h2 class="anchored" data-anchor-id="deal-with-unruly-residuals">deal with unruly residuals</h2>
-<p>TO DO</p>
+               Data                
+ ----------------------------------
+ Response : weight 
+ Variables: fitted values of weight 
+
+        Test Summary          
+ -----------------------------
+ DF            =    1 
+ Chi2          =    3.000303 
+ Prob &gt; Chi2   =    0.08324896 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ols_test_bartlett</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">PlantGrowth</span>, </span>
+<span>  <span class="st">"weight"</span>, </span>
+<span>  group_var <span class="op">=</span> <span class="st">"group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>
+    Bartlett's Test of Homogenity of Variances    
+------------------------------------------------
+Ho: Variances are equal across groups
+Ha: Variances are unequal for atleast two groups
+
+        Test Summary         
+ ----------------------------
+ DF            =    2 
+ Chi2          =    2.878592 
+ Prob &gt; Chi2   =    0.2370946 </code></pre>
+</div>
+</div>
+</div>
+</div>
+<!-- ## Linearity -->
+<!-- **Assumption: The response can be written as a linear combination of the predictors.** -->
+<!-- This assumption can also be checked via the Res-Pred-plot from the *Variance homogeneity* section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. -->
+</section></section></section><section id="plots-instead-of-tests" class="level1"><h1>Plots instead of tests</h1>
+<p>When it comes to diagnosing models, one may separate most approaches into two general categories: <strong>significance tests</strong> and <strong>diagnostic plots</strong>. Personally, I follow Kozak &amp; Piepho <span class="citation" data-cites="kozak2018">(<a href="#ref-kozak2018" role="doc-biblioref">2018</a>)</span>, who show that <em>“residual plots are better for checking ANOVA assumptions than statistical tests”</em>. Here are two key sections from their publication:</p>
+<blockquote class="blockquote">
+<p>According to many authors (e.g., Atkinson, 1987; Belsley, Kuh, &amp; Welsch, 2005; Kozak, 2009; Moser &amp; Stevens, 1992; Quinn &amp; Keough, 2002; Rasch, Kubinger, &amp; Moder, 2011; Schucany &amp; Ng, 2006), significance tests should not be used for checking assumptions. Diagnostic residual plots are a better choice. On such diagnostic plots, we can identify untypical observations, heterogeneous within-treatment variances, and lack of normality of the residuals (and thus, of the dependent variable within treatments).</p>
+<p>[…]</p>
+<p>There are two possible reasons for the overuse of statistical tests to check assumptions. First, many researchers base their knowledge on books first published 40 years ago or earlier. Back then, using statistical tests was relatively simple while using diagnos- tic plots was difficult; thus, these books advised the former, often even not mentioning the latter. Second, most statistical software offers statistical tests for checking assumptions as a default. Using default tests is simple, so users use them. However, we explained why we think that significance tests are not a good way of checking assumptions (in general, not only for ANOVA). First of all, with large samples (a very desirable situation) we risk that even small (and irrel- evant) departures from the null hypothesis (which states that the assumption is met) will be detected as significant, and so we would need to reject the hypothesis and state that the assumption is not met. With small samples, the situation is opposite: much larger (and important) departures would not be found significant. Thus, our advice is to use diagnostic plots instead of hypothesis testing to check ANOVA assumptions.</p>
+</blockquote>
+<section id="to-do" class="level2"><h2 class="anchored" data-anchor-id="to-do">TO DO</h2>
+<ul>
+<li>help to judge plots</li>
+<li>deal with unruly residuals</li>
+</ul>
 <div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -371,11 +459,32 @@ Additional Resources (click to show)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p><strong>General</strong></p>
 <ul>
-<li><a href="https://book.stat420.org/model-diagnostics.html">Chapter 13 Model Diagnostics</a> in Applied Statistics with R (Dalpiaz, 2022)</li>
-<li><a href="https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html">Chapter 8 Model Diagnostics</a> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</li>
+<li>What’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions <span class="citation" data-cites="kozak2018">(<a href="#ref-kozak2018" role="doc-biblioref">Kozak and Piepho 2018</a>)</span>
+</li>
+<li>
+<a href="https://book.stat420.org/model-diagnostics.html">Chapter 13 Model Diagnostics</a> in Applied Statistics with R (Dalpiaz, 2022)</li>
+<li>
+<a href="https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html">Chapter 8 Model Diagnostics</a> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</li>
+<li>🇩🇪 <a href="https://www.qualtrics.com/support/de/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/?rid=langMatch&amp;prevsite=en&amp;newsite=de&amp;geo=DE&amp;geomatch=">Verbleibende Plots interpretieren, um Ihre Regression zu verbessern</a>
+</li>
+<li><a href="https://olsrr.rsquaredacademy.com/">{olsrr}</a></li>
+</ul>
+<p><strong>Normality</strong></p>
+<ul>
+<li><a href="www.r-tutor.com/elementary-statistics/simple-linear-regression/normal-probability-plot-residuals">R Tutorial: Normal Probability Plot of Residuals</a></li>
+<li>For this specific purpose, QQ plots may also be called <a href="https://www.wikiwand.com/en/Normal_probability_plot">Normal probability plots</a>
+</li>
+<li><a href="https://cran.r-project.org/web/packages/qqplotr/vignettes/introduction.html">{qqplotr}</a></li>
+</ul>
+<p><strong>Homoscedasticity</strong></p>
+<ul>
+<li><a href="https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html">Documentation on tests from {olsrr}</a></li>
+<li>Wikipedia article on <a href="https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity">Homoscedasticity and heteroscedasticity</a>
+</li>
 </ul>
 </div>
 </div>
@@ -385,15 +494,11 @@ Additional Resources (click to show)
 <!-- -->
 
 
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+</section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-kozak2018" class="csl-entry" role="doc-biblioentry">
 Kozak, Marcin, and Hans-Peter Piepho. 2018. <span>“What’s Normal Anyway? Residual Plots Are More Telling Than Significance Tests When Checking ANOVA Assumptions.”</span> <em>Journal of Agronomy and Crop Science</em> 204 (1): 86–98. <a href="https://doi.org/10.1111/jac.12220">https://doi.org/10.1111/jac.12220</a>.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -542,57 +647,182 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Model Diagnostics"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-11-11</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># What is it?</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>All statistical models make certain assumptions about the data generating process, and results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Which assumptions?</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Independence</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>The errors are independent.</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">### Linearity</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>The response can be written as a linear combination of the predictors.</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">### Normality</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>The distribution of the errors should follow a normal distribution.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### Equal variance</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>The error variance is the same at any set of predictor values.</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># How to</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## diagnose models</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak &amp; Piepho <span class="co">[</span><span class="ot">-@kozak2018</span><span class="co">]</span>, who show that "residual plots are better for checking ANOVA assumptions than statistical tests".</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>TO DO: Important Callout Box: check residuals not data!</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## get diagnostic plots</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>TO DO</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## judge diagnostic plots</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>TO DO</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## deal with unruly residuals</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>TO DO</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 13 Model Diagnostics</span><span class="co">](https://book.stat420.org/model-diagnostics.html)</span> in Applied Statistics with R (Dalpiaz, 2022)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 8 Model Diagnostics</span><span class="co">](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html)</span> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Model Diagnostics"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-11-11</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"helpersrc.R"</span>))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># What is it?</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>Most statistical methods and all statistical models make certain assumptions (about the data generating process), and (test) results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># Which assumptions?</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>As an example, we will specifically address the assumptions that ANOVA (analysis of variance) has. It makes sense to choose ANOVA because of its popularity and relevance in the chapters of this website. The following model will serve as an example throughout the chapter:</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> group, <span class="at">data =</span> PlantGrowth)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>Note that both the <span class="in">`PlantGrowth`</span> data and the <span class="in">`lm()`</span> function come with base R and thus don't need any extra imports. In a next step, we would want to run <span class="in">`anova(mod)`</span>. While all of the tests and plots that follow could also be produced with base R, I choose to use other packages here that I personally prefer for convenience and/or functionality reasons.</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># (install &amp;) load packages</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  easystats, </span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  olsrr,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  qqplotr, </span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  tidyverse</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Independence</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>**Assumption: Individual observations are independent of each other (as opposed to dependent/correlated).**</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>Model diagnostics are actually not used to verify this specific assumption. Instead, this assumption is justified if proper randomization was applied as part of the experimental design. Keep in mind, that there are indeed non-classical scenarios like repeated measures over time or certain experimental designs where observations are not (assumed to be) independent, but these are not covered in this chapter.</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Normality</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>**Assumption: The errors follow a normal distribution.**</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>A model's errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Yes residuals - not data!</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>Unfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model's residuals should be checked for normality. Please see section "4 \| ANSWERING QUESTION 1" in <span class="co">[</span><span class="ot">@kozak2018</span><span class="co">]</span> for details.</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### QQ plot</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>Approximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak &amp; Piepho <span class="co">[</span><span class="ot">-@kozak2018</span><span class="co">]</span> point out that *when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal*.</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_normality</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">type =</span> <span class="st">"qq"</span>)</span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tests</span></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:</span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>There are multiple statistical tests for detecting a violation of the normality assumption. A p-value <span class="sc">\&lt;</span> 0.05 would suggest such a violation:</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_test_normality</span>(mod)</span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Variance homogeneity</span></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>**Assumption: The error variance is the same at any set of predictor values.**</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>Also referred to as *homoscedasticity* (i.e. the opposite of *heteroscedasticity*)</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Res-Pred Plot</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>While this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>mod <span class="sc">%&gt;%</span> </span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_heteroscedasticity</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tests</span></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:</span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>There are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value <span class="sc">\&lt;</span> 0.05 would suggest such a violation:</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_test_breusch_pagan</span>(mod)</span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="fu">ols_test_bartlett</span>(</span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> PlantGrowth, </span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a>  <span class="st">"weight"</span>, </span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">group_var =</span> <span class="st">"group"</span>)</span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ## Linearity --&gt;</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- **Assumption: The response can be written as a linear combination of the predictors.** --&gt;</span></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- This assumption can also be checked via the Res-Pred-plot from the *Variance homogeneity* section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. --&gt;</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="fu"># Plots instead of tests</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a>When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak &amp; Piepho <span class="co">[</span><span class="ot">-@kozak2018</span><span class="co">]</span>, who show that *"residual plots are better for checking ANOVA assumptions than statistical tests"*. Here are two key sections from their publication:</span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; According to many authors (e.g., Atkinson, 1987; Belsley, Kuh, &amp; Welsch, 2005; Kozak, 2009; Moser &amp; Stevens, 1992; Quinn &amp; Keough, 2002; Rasch, Kubinger, &amp; Moder, 2011; Schucany &amp; Ng, 2006), significance tests should not be used for checking assumptions. Diagnostic residual plots are a better choice. On such diagnostic plots, we can identify untypical observations, heterogeneous within-treatment variances, and lack of normality of the residuals (and thus, of the dependent variable within treatments).</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">...</span><span class="co">]</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; There are two possible reasons for the overuse of statistical</span></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="at">tests to check assumptions. First, many researchers base their</span></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="at">knowledge on books first published 40 years ago or earlier. Back</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="at">then, using statistical tests was relatively simple while using diagnos-</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="at">tic plots was difficult; thus, these books advised the former, often</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="at">even not mentioning the latter. Second, most statistical software</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="at">offers statistical tests for checking assumptions as a default. Using</span></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="at">default tests is simple, so users use them. However, we explained</span></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a><span class="at">why we think that significance tests are not a good way of checking</span></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="at">assumptions (in general, not only for ANOVA). First of all, with large</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a><span class="at">samples (a very desirable situation) we risk that even small (and irrel-</span></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="at">evant) departures from the null hypothesis (which states that the</span></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="at">assumption is met) will be detected as significant, and so we would</span></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="at">need to reject the hypothesis and state that the assumption is not</span></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a><span class="at">met. With small samples, the situation is opposite: much larger (and</span></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="at">important) departures would not be found significant. Thus, our</span></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="at">advice is to use diagnostic plots instead of hypothesis testing to</span></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a><span class="at">check ANOVA assumptions.</span></span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## TO DO</span></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>help to judge plots</span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>deal with unruly residuals</span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a>**General**</span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions <span class="co">[</span><span class="ot">@kozak2018</span><span class="co">]</span></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 13 Model Diagnostics</span><span class="co">](https://book.stat420.org/model-diagnostics.html)</span> in Applied Statistics with R (Dalpiaz, 2022)</span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 8 Model Diagnostics</span><span class="co">](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html)</span> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>🇩🇪 <span class="co">[</span><span class="ot">Verbleibende Plots interpretieren, um Ihre Regression zu verbessern</span><span class="co">](https://www.qualtrics.com/support/de/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/?rid=langMatch&amp;prevsite=en&amp;newsite=de&amp;geo=DE&amp;geomatch=)</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/)</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a>**Normality**</span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">R Tutorial: Normal Probability Plot of Residuals</span><span class="co">](www.r-tutor.com/elementary-statistics/simple-linear-regression/normal-probability-plot-residuals)</span></span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For this specific purpose, QQ plots may also be called <span class="co">[</span><span class="ot">Normal probability plots</span><span class="co">](https://www.wikiwand.com/en/Normal_probability_plot)</span></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{qqplotr}</span><span class="co">](https://cran.r-project.org/web/packages/qqplotr/vignettes/introduction.html)</span></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>**Homoscedasticity**</span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a><span class="ss">-    </span><span class="co">[</span><span class="ot">Documentation on tests from {olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a><span class="ss">-    </span>Wikipedia article on <span class="co">[</span><span class="ot">Homoscedasticity and heteroscedasticity</span><span class="co">](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)</span></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a>:::</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

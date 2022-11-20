@@ -3,49 +3,173 @@ title: "Model Diagnostics"
 date: 2022-11-11
 ---
 
+```{r}
+#| include: false
+source(here::here("helpersrc.R"))
+```
+
 # What is it?
 
-All statistical models make certain assumptions about the data generating process, and results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.
+Most statistical methods and all statistical models make certain assumptions (about the data generating process), and (test) results will be meaningless or misleading if theses assumptions do not hold. Therefore, model diagnostics should be used to check how well the assumptions of any given model are met.
 
-## Which assumptions?
+# Which assumptions?
 
-### Independence
+As an example, we will specifically address the assumptions that ANOVA (analysis of variance) has. It makes sense to choose ANOVA because of its popularity and relevance in the chapters of this website. The following model will serve as an example throughout the chapter:
 
-The errors are independent.
+```{r}
+mod <- lm(weight ~ group, data = PlantGrowth)
+```
 
-### Linearity
+Note that both the `PlantGrowth` data and the `lm()` function come with base R and thus don't need any extra imports. In a next step, we would want to run `anova(mod)`. While all of the tests and plots that follow could also be produced with base R, I choose to use other packages here that I personally prefer for convenience and/or functionality reasons.
 
-The response can be written as a linear combination of the predictors.
+```{r}
+# (install &) load packages
+pacman::p_load(
+  easystats, 
+  olsrr,
+  qqplotr, 
+  tidyverse
+  )
+```
 
-### Normality
+## Independence
 
-The distribution of the errors should follow a normal distribution.
+**Assumption: Individual observations are independent of each other (as opposed to dependent/correlated).**
 
-### Equal variance
+Model diagnostics are actually not used to verify this specific assumption. Instead, this assumption is justified if proper randomization was applied as part of the experimental design. Keep in mind, that there are indeed non-classical scenarios like repeated measures over time or certain experimental designs where observations are not (assumed to be) independent, but these are not covered in this chapter.
 
-The error variance is the same at any set of predictor values.
+## Normality
 
-# How to
+**Assumption: The errors follow a normal distribution.**
 
-## diagnose models
+A model's errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.
 
-When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak & Piepho [-@kozak2018], who show that "residual plots are better for checking ANOVA assumptions than statistical tests".
+::: callout-important
+## Yes residuals - not data!
 
-TO DO: Important Callout Box: check residuals not data!
+Unfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model's residuals should be checked for normality. Please see section "4 \| ANSWERING QUESTION 1" in [@kozak2018] for details.
+:::
 
-## get diagnostic plots
+### QQ plot
 
-TO DO
+Approximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho [-@kozak2018] point out that *when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal*.
 
-## judge diagnostic plots
+```{r}
+mod %>% 
+  check_normality() %>% 
+  plot(type = "qq")
+```
 
-TO DO
+### Tests
 
-## deal with unruly residuals
+As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
 
-TO DO
+There are multiple statistical tests for detecting a violation of the normality assumption. A p-value \< 0.05 would suggest such a violation:
+
+```{r}
+ols_test_normality(mod)
+```
+
+## Variance homogeneity
+
+**Assumption: The error variance is the same at any set of predictor values.**
+
+Also referred to as *homoscedasticity* (i.e. the opposite of *heteroscedasticity*)
+
+### Res-Pred Plot
+
+While this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.
+
+```{r}
+mod %>% 
+  check_heteroscedasticity() %>% 
+  plot()
+```
+
+### Tests
+
+As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
+
+There are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value \< 0.05 would suggest such a violation:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+ols_test_breusch_pagan(mod)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+ols_test_bartlett(
+  data = PlantGrowth, 
+  "weight", 
+  group_var = "group")
+```
+:::
+:::
+
+<!-- ## Linearity -->
+
+<!-- **Assumption: The response can be written as a linear combination of the predictors.** -->
+
+<!-- This assumption can also be checked via the Res-Pred-plot from the *Variance homogeneity* section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. -->
+
+# Plots instead of tests
+
+When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak & Piepho [-@kozak2018], who show that *"residual plots are better for checking ANOVA assumptions than statistical tests"*. Here are two key sections from their publication:
+
+> According to many authors (e.g., Atkinson, 1987; Belsley, Kuh, & Welsch, 2005; Kozak, 2009; Moser & Stevens, 1992; Quinn & Keough, 2002; Rasch, Kubinger, & Moder, 2011; Schucany & Ng, 2006), significance tests should not be used for checking assumptions. Diagnostic residual plots are a better choice. On such diagnostic plots, we can identify untypical observations, heterogeneous within-treatment variances, and lack of normality of the residuals (and thus, of the dependent variable within treatments).
+>
+> [...]
+>
+> There are two possible reasons for the overuse of statistical
+tests to check assumptions. First, many researchers base their
+knowledge on books first published 40 years ago or earlier. Back
+then, using statistical tests was relatively simple while using diagnos-
+tic plots was difficult; thus, these books advised the former, often
+even not mentioning the latter. Second, most statistical software
+offers statistical tests for checking assumptions as a default. Using
+default tests is simple, so users use them. However, we explained
+why we think that significance tests are not a good way of checking
+assumptions (in general, not only for ANOVA). First of all, with large
+samples (a very desirable situation) we risk that even small (and irrel-
+evant) departures from the null hypothesis (which states that the
+assumption is met) will be detected as significant, and so we would
+need to reject the hypothesis and state that the assumption is not
+met. With small samples, the situation is opposite: much larger (and
+important) departures would not be found significant. Thus, our
+advice is to use diagnostic plots instead of hypothesis testing to
+check ANOVA assumptions.
+
+
+## TO DO
+
+- help to judge plots
+- deal with unruly residuals
 
 ::: custom-callout-addref
+
+**General**
+
+-   What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions [@kozak2018]
 -   [Chapter 13 Model Diagnostics](https://book.stat420.org/model-diagnostics.html) in Applied Statistics with R (Dalpiaz, 2022)
 -   [Chapter 8 Model Diagnostics](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html) in Course Handouts for Bayesian Data Analysis (Lai, 2019)
+-   🇩🇪 [Verbleibende Plots interpretieren, um Ihre Regression zu verbessern](https://www.qualtrics.com/support/de/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/?rid=langMatch&prevsite=en&newsite=de&geo=DE&geomatch=)
+-   [{olsrr}](https://olsrr.rsquaredacademy.com/)
+
+**Normality**
+
+-   [R Tutorial: Normal Probability Plot of Residuals](www.r-tutor.com/elementary-statistics/simple-linear-regression/normal-probability-plot-residuals)
+-   For this specific purpose, QQ plots may also be called [Normal probability plots](https://www.wikiwand.com/en/Normal_probability_plot)
+-   [{qqplotr}](https://cran.r-project.org/web/packages/qqplotr/vignettes/introduction.html)
+
+**Homoscedasticity**
+
+-    [Documentation on tests from {olsrr}](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)
+-    Wikipedia article on [Homoscedasticity and heteroscedasticity](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)
+
 :::
