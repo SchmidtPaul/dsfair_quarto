@@ -1,5 +1,5 @@
 ---
-title: "Latin square design"
+title: "One-way latin square design"
 date: 2022-11-11
 abstract: "One-way ANOVA & pairwise comparison post hoc tests in a latin square design."
 ---

@@ -22,12 +22,14 @@ website:
             href: rbasics/baddata.qmd
       - text: Simple Experiments
         menu:
-          - text: CRD (Mead 1993)
+          - text: 1w CRD (Mead 1993)
             href: exan/simple/crd_mead1993.qmd
-          - text: RCBD (Clewer & Scarisbrickt 2001)
+          - text: 1w RCBD (Clewer & Scarisbrickt 2001)
             href: exan/simple/rcbd_clewerscarisbrick2001.qmd
-          - text: Latin Square (Bridges 1989)
+          - text: 1w Latin Square (Bridges 1989)
             href: exan/simple/latsq_bridges1989.qmd
+          - text: 2w RCBD (Gomez & Gomez 1984)
+            href: exan/simple/rcbd_gomezgomez1984.qmd
       - text: Complex Experiments
       - text: Summary Articles
         menu:

@@ -62,7 +62,7 @@ mod %>%
 
 ### Tests
 
-As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
+As explained [further below](modeldiagnostics.qmd#plots-instead-of-tests), I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
 
 There are multiple statistical tests for detecting a violation of the normality assumption. A p-value \< 0.05 would suggest such a violation:
 
@@ -88,7 +88,7 @@ mod %>%
 
 ### Tests
 
-As explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
+As explained [further below](modeldiagnostics.qmd#plots-instead-of-tests), I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:
 
 There are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value \< 0.05 would suggest such a violation:
 
@@ -112,11 +112,11 @@ ols_test_bartlett(
 :::
 :::
 
-<!-- ## Linearity -->
+## Linearity
 
-<!-- **Assumption: The response can be written as a linear combination of the predictors.** -->
+**Assumption: The response can be written as a linear combination of the predictors.**
 
-<!-- This assumption can also be checked via the Res-Pred-plot from the *Variance homogeneity* section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. -->
+This assumption can also be checked via the Res-Pred-plot from the *Variance homogeneity* section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. I am not aware of any statistical tests for linearity.
 
 # Plots instead of tests
 
@@ -129,15 +129,13 @@ When it comes to diagnosing models, one may separate most approaches into two ge
 > There are two possible reasons for the overuse of statistical
 tests to check assumptions. First, many researchers base their
 knowledge on books first published 40 years ago or earlier. Back
-then, using statistical tests was relatively simple while using diagnos-
-tic plots was difficult; thus, these books advised the former, often
+then, using statistical tests was relatively simple while using diagnostic plots was difficult; thus, these books advised the former, often
 even not mentioning the latter. Second, most statistical software
 offers statistical tests for checking assumptions as a default. Using
 default tests is simple, so users use them. However, we explained
 why we think that significance tests are not a good way of checking
 assumptions (in general, not only for ANOVA). First of all, with large
-samples (a very desirable situation) we risk that even small (and irrel-
-evant) departures from the null hypothesis (which states that the
+samples (a very desirable situation) we risk that even small (and irrelevant) departures from the null hypothesis (which states that the
 assumption is met) will be detected as significant, and so we would
 need to reject the hypothesis and state that the assumption is not
 met. With small samples, the situation is opposite: much larger (and
@@ -145,10 +143,10 @@ important) departures would not be found significant. Thus, our
 advice is to use diagnostic plots instead of hypothesis testing to
 check ANOVA assumptions.
 
-
-## TO DO
+# TO DO
 
 - help to judge plots
+- mention linearity
 - deal with unruly residuals
 
 ::: custom-callout-addref

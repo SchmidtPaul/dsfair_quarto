@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.1.189">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="dcterms.date" content="2022-10-30">
-<title>dsfair_quarto - Randomized complete block design</title>
+<title>dsfair_quarto - One-way randomized complete block design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit"
   }
 }</script><link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="dsfair_quarto - Randomized complete block design">
+<meta name="twitter:title" content="dsfair_quarto - One-way randomized complete block design">
 <meta name="twitter:description" content="One-way ANOVA &amp; pairwise comparison post hoc tests in a randomized complete block design.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -183,15 +183,19 @@ div.csl-indent {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
 <li>
     <a class="dropdown-item" href="../../exan/simple/crd_mead1993.html">
- <span class="dropdown-text">CRD (Mead 1993)</span></a>
+ <span class="dropdown-text">1w CRD (Mead 1993)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../exan/simple/rcbd_clewerscarisbrick2001.html">
- <span class="dropdown-text">RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
+ <span class="dropdown-text">1w RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../exan/simple/latsq_bridges1989.html">
- <span class="dropdown-text">Latin Square (Bridges 1989)</span></a>
+ <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../exan/simple/rcbd_gomezgomez1984.html">
+ <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
     </ul>
 </li>
@@ -255,7 +259,7 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Randomized complete block design</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">One-way randomized complete block design</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -728,7 +732,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb19" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Randomized complete block design"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "One-way randomized complete block design"</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-30</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "One-way ANOVA &amp; pairwise comparison post hoc tests in a randomized complete block design."</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -871,7 +875,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-162"><a href="#cb19-162" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb19-163"><a href="#cb19-163" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb19-164"><a href="#cb19-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a>Thus, <span class="in">`C4`</span> seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block <span class="in">`B1`</span> (left), compared to the other blocks. </span>
+<span id="cb19-165"><a href="#cb19-165" aria-hidden="true" tabindex="-1"></a>Thus, <span class="in">`C4`</span> seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block <span class="in">`B1`</span> (left), compared to the other blocks.</span>
 <span id="cb19-166"><a href="#cb19-166" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-167"><a href="#cb19-167" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model</span></span>
 <span id="cb19-168"><a href="#cb19-168" aria-hidden="true" tabindex="-1"></a></span>

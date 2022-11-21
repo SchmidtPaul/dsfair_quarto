@@ -1,5 +1,5 @@
 ---
-title: "Completely randomized design"
+title: "One-way completely randomized design"
 date: 2022-10-27
 abstract: "One-way ANOVA & pairwise comparison post hoc tests in a completely randmoized design."
 ---

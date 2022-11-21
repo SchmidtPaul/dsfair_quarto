@@ -2,86 +2,114 @@
   {
     "objectID": "exan/simple/crd_mead1993.html",
     "href": "exan/simple/crd_mead1993.html",
-    "title": "Completely randomized design",
+    "title": "One-way completely randomized design",
     "section": "",
     "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
   },
   {
     "objectID": "exan/simple/crd_mead1993.html#import",
     "href": "exan/simple/crd_mead1993.html#import",
-    "title": "Completely randomized design",
+    "title": "One-way completely randomized design",
     "section": "Import",
     "text": "Import\n\n\n# data is available online:\npath <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993.csv\"\n\n\n\ndat <- read_csv(path) # use path from above\ndat\n\n# A tibble: 24 × 4\n   variety yield   row   col\n   <chr>   <dbl> <dbl> <dbl>\n 1 v1       25.1     4     2\n 2 v1       17.2     1     6\n 3 v1       26.4     4     1\n 4 v1       16.1     1     4\n 5 v1       22.2     1     2\n 6 v1       15.9     2     4\n 7 v2       40.2     4     4\n 8 v2       35.2     3     1\n 9 v2       32.0     4     6\n10 v2       36.5     2     1\n# … with 14 more rows"
   },
   {
     "objectID": "exan/simple/crd_mead1993.html#format",
     "href": "exan/simple/crd_mead1993.html#format",
-    "title": "Completely randomized design",
+    "title": "One-way completely randomized design",
     "section": "Format",
     "text": "Format\nBefore anything, the column variety should be encoded as a factor, since R by default encoded it as a character variable. There are multiple ways to do this - here are two:\n\n\n\ndat <- dat %>% \n  mutate(variety = as.factor(variety))\n\n\n\n\n\ndat <- dat %>% \n  mutate(across(variety, ~ as.factor(.x)))"
   },
   {
     "objectID": "exan/simple/crd_mead1993.html#explore",
     "href": "exan/simple/crd_mead1993.html#explore",
-    "title": "Completely randomized design",
+    "title": "One-way completely randomized design",
     "section": "Explore",
     "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per variety.\n\ndat %>% \n  group_by(variety) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd, p00, p100) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 7\n  variety     n    na  mean    sd   p00  p100\n  <fct>   <int> <int> <dbl> <dbl> <dbl> <dbl>\n1 v2          6     0  37.4  3.95  32.0  43.3\n2 v4          6     0  29.9  2.23  27.6  33.2\n3 v1          6     0  20.5  4.69  15.9  26.4\n4 v3          6     0  19.5  5.56  11.4  25.9\n\n\nAdditionally, we can decide to plot our data:\n\nClick to show/hide codeggplot(data = dat) +\n  aes(y = yield, x = variety) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Variety\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a completely randomized design; CRD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}:\n\nClick to show/hide codedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = variety ~ col + row, # fill color per variety\n  text = variety, # variety names per plot\n  cex = 1, # variety names: font size\n  shorten = \"no\", # variety names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend \n  )"
   },
   {
     "objectID": "exan/simple/latsq_bridges1989.html",
     "href": "exan/simple/latsq_bridges1989.html",
-    "title": "Latin square design",
+    "title": "One-way latin square design",
     "section": "",
     "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
   },
   {
     "objectID": "exan/simple/latsq_bridges1989.html#import",
     "href": "exan/simple/latsq_bridges1989.html#import",
-    "title": "Latin square design",
+    "title": "One-way latin square design",
     "section": "Import",
     "text": "Import\n\ndat <- agridat::bridges.cucumber %>% \n  as_tibble() %>% \n  filter(loc == \"Clemson\") %>% # filter data from only one location\n  select(-loc) # remove loc column which is now unnecessary\n\ndat\n\n# A tibble: 16 × 4\n   gen        row   col yield\n   <fct>    <int> <int> <dbl>\n 1 Dasher       1     3  44.2\n 2 Dasher       2     4  54.1\n 3 Dasher       3     2  47.2\n 4 Dasher       4     1  36.7\n 5 Guardian     1     4  33  \n 6 Guardian     2     2  13.6\n 7 Guardian     3     1  44.1\n 8 Guardian     4     3  35.8\n 9 Poinsett     1     1  11.5\n10 Poinsett     2     3  22.4\n11 Poinsett     3     4  30.3\n12 Poinsett     4     2  21.5\n13 Sprint       1     2  15.1\n14 Sprint       2     1  20.3\n15 Sprint       3     3  41.3\n16 Sprint       4     4  27.1"
   },
   {
     "objectID": "exan/simple/latsq_bridges1989.html#format",
     "href": "exan/simple/latsq_bridges1989.html#format",
-    "title": "Latin square design",
+    "title": "One-way latin square design",
     "section": "Format",
     "text": "Format\nFor our analysis, gen, row and col should be encoded as factors. However, the desplot() function needs row and col as formatted as integers. Therefore we create copies of these columns encoded as factors and named rowF and colF. Below are two ways how to achieve this:\n\n\n\ndat <- dat %>%\n  mutate(\n    colF = as.factor(col),\n    rowF = as.factor(row)\n  )\n\n\n\n\n\ndat <- dat %>%\n  mutate(across(\n    .cols = c(row, col), \n    .fns = ~ as.factor(.x), \n    .names = (\"{.col}F\"))\n  )"
   },
   {
     "objectID": "exan/simple/latsq_bridges1989.html#explore",
     "href": "exan/simple/latsq_bridges1989.html#explore",
-    "title": "Latin square design",
+    "title": "One-way latin square design",
     "section": "Explore",
     "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per genotype, per row and per column.\n\ndat %>% \n  group_by(gen) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  gen          n    na  mean    sd\n  <fct>    <int> <int> <dbl> <dbl>\n1 Dasher       4     0  45.6  7.21\n2 Guardian     4     0  31.6 12.9 \n3 Sprint       4     0  26.0 11.4 \n4 Poinsett     4     0  21.4  7.71\n\n\n\n\n\ndat %>% \n  group_by(rowF) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  rowF      n    na  mean    sd\n  <fct> <int> <int> <dbl> <dbl>\n1 3         4     0  40.7  7.36\n2 4         4     0  30.3  7.28\n3 2         4     0  27.6 18.1 \n4 1         4     0  26.0 15.4 \n\n\n\n\n\n\ndat %>% \n  group_by(colF) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  colF      n    na  mean    sd\n  <fct> <int> <int> <dbl> <dbl>\n1 4         4     0  36.1 12.2 \n2 3         4     0  35.9  9.67\n3 1         4     0  28.2 14.9 \n4 2         4     0  24.4 15.6 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nClick to show/hide codeggplot(data = dat) +\n  aes(y = yield, x = gen, color = colF, shape = rowF) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Column\"\n  ) +\n  scale_shape_discrete(\n    name = \"Row\"\n  ) +\n  theme_classic()\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a Latin square design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nClick to show/hide codedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per genotype       \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\nClick to show/hide codedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield     \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\nThus, Dasher seems to be the most promising genotype in terms of yield. Moreover, it can be seen that yields were generally higher in column 4 and row 3."
   },
   {
     "objectID": "exan/simple/rcbd_clewerscarisbrick2001.html",
     "href": "exan/simple/rcbd_clewerscarisbrick2001.html",
-    "title": "Randomized complete block design",
+    "title": "One-way randomized complete block design",
     "section": "",
     "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
   },
   {
     "objectID": "exan/simple/rcbd_clewerscarisbrick2001.html#import",
     "href": "exan/simple/rcbd_clewerscarisbrick2001.html#import",
-    "title": "Randomized complete block design",
+    "title": "One-way randomized complete block design",
     "section": "Import",
     "text": "Import\n\n\n# data is available online:\npath <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Clewer&Scarisbrick2001.csv\"\n\n\n\ndat <- read_csv(path) # use path from above\ndat\n\n# A tibble: 12 × 5\n   block cultivar yield   row   col\n   <chr> <chr>    <dbl> <dbl> <dbl>\n 1 B1    C1         7.4     2     1\n 2 B1    C2         9.8     3     1\n 3 B1    C3         7.3     1     1\n 4 B1    C4         9.5     4     1\n 5 B2    C1         6.5     1     2\n 6 B2    C2         6.8     4     2\n 7 B2    C3         6.1     3     2\n 8 B2    C4         8       2     2\n 9 B3    C1         5.6     2     3\n10 B3    C2         6.2     1     3\n11 B3    C3         6.4     3     3\n12 B3    C4         7.4     4     3"
   },
   {
     "objectID": "exan/simple/rcbd_clewerscarisbrick2001.html#format",
     "href": "exan/simple/rcbd_clewerscarisbrick2001.html#format",
-    "title": "Randomized complete block design",
+    "title": "One-way randomized complete block design",
     "section": "Format",
     "text": "Format\nBefore anything, the columns block and cultivar should be encoded as factors, since R by default encoded them as character.\n\ndat <- dat %>%\n  mutate(across(c(block, cultivar), ~ as.factor(.x)))"
   },
   {
     "objectID": "exan/simple/rcbd_clewerscarisbrick2001.html#explore",
     "href": "exan/simple/rcbd_clewerscarisbrick2001.html#explore",
-    "title": "Randomized complete block design",
+    "title": "One-way randomized complete block design",
     "section": "Explore",
     "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %>% \n  group_by(cultivar) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  cultivar     n    na  mean    sd\n  <fct>    <int> <int> <dbl> <dbl>\n1 C4           3     0   8.3 1.08 \n2 C2           3     0   7.6 1.93 \n3 C3           3     0   6.6 0.624\n4 C1           3     0   6.5 0.9  \n\n\n\n\n\n\ndat %>% \n  group_by(block) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 3 × 5\n  block     n    na  mean    sd\n  <fct> <int> <int> <dbl> <dbl>\n1 B1        4     0  8.5  1.33 \n2 B2        4     0  6.85 0.819\n3 B3        4     0  6.4  0.748\n\n\n\n\nAdditionally, we can decide to plot our data:\n\nClick to show/hide codeggplot(data = dat) +\n  aes(y = yield, x = cultivar, color = block) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Cultivar\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Block\"\n  ) +\n  theme_classic()\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nClick to show/hide codedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = cultivar ~ col + row, # fill color per cultivar       \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\nClick to show/hide codedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield      \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\nThus, C4 seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block B1 (left), compared to the other blocks."
+  },
+  {
+    "objectID": "exan/simple/rcbd_gomezgomez1984.html",
+    "href": "exan/simple/rcbd_gomezgomez1984.html",
+    "title": "Two-way randomized complete block design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+  },
+  {
+    "objectID": "exan/simple/rcbd_gomezgomez1984.html#import",
+    "href": "exan/simple/rcbd_gomezgomez1984.html#import",
+    "title": "Two-way randomized complete block design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/riceRCBD.csv\"\n\n\n\ndat <- read_csv(path) # use path from above\ndat\n\n# A tibble: 72 × 6\n     row   col rep   N     G     yield\n   <dbl> <dbl> <chr> <chr> <chr> <dbl>\n 1     2     6 rep1  N1    A      4520\n 2     3     4 rep1  N2    A      5598\n 3     2     3 rep1  N4    A      6192\n 4     1     1 rep1  N6    A      8542\n 5     2     1 rep1  N3    A      5806\n 6     3     1 rep1  N5    A      7470\n 7     4     5 rep1  N1    B      4034\n 8     4     1 rep1  N2    B      6682\n 9     3     2 rep1  N4    B      6869\n10     1     2 rep1  N6    B      6318\n# … with 62 more rows"
+  },
+  {
+    "objectID": "exan/simple/rcbd_gomezgomez1984.html#format",
+    "href": "exan/simple/rcbd_gomezgomez1984.html#format",
+    "title": "Two-way randomized complete block design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns rep, N and G should be encoded as factors, since R by default encoded them as character.\n\ndat <- dat %>%\n  mutate(across(c(rep, N, G), ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "exan/simple/rcbd_gomezgomez1984.html#explore",
+    "href": "exan/simple/rcbd_gomezgomez1984.html#explore",
+    "title": "Two-way randomized complete block design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per nitrogen level, per genotype and also per nitrogen-genotype-combination.\n\n\n\ndat %>% \n  group_by(N) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  N         n    na  mean    sd\n  <fct> <int> <int> <dbl> <dbl>\n1 N3       12     0 5866.  832.\n2 N4       12     0 5864. 1434.\n3 N5       12     0 5812  2349.\n4 N6       12     0 5797. 2660.\n5 N2       12     0 5478.  657.\n6 N1       12     0 4054.  672.\n\ndat %>% \n  group_by(G) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  G         n    na  mean    sd\n  <fct> <int> <int> <dbl> <dbl>\n1 A        18     0 6554. 1475.\n2 B        18     0 6156. 1078.\n3 C        18     0 5563. 1269.\n4 D        18     0 3642. 1434.\n\n\n\n\n\n\ndat %>% \n  group_by(N, G) %>% \n  dlookr::describe(yield) %>% \n  select(2:sd) %>%\n  arrange(desc(mean)) %>% \n  print(n=Inf)\n\n# A tibble: 24 × 6\n   N     G         n    na  mean     sd\n   <fct> <fct> <int> <int> <dbl>  <dbl>\n 1 N6    A         3     0 8701.  270. \n 2 N5    A         3     0 7563.   86.9\n 3 N5    B         3     0 6951.  808. \n 4 N4    B         3     0 6895   166. \n 5 N4    A         3     0 6733.  490. \n 6 N5    C         3     0 6687.  496. \n 7 N6    B         3     0 6540.  936. \n 8 N3    A         3     0 6400   523. \n 9 N3    B         3     0 6259   499. \n10 N6    C         3     0 6065. 1097. \n11 N4    C         3     0 6014   515. \n12 N3    C         3     0 5994   101. \n13 N2    B         3     0 5982   684. \n14 N2    A         3     0 5672   458. \n15 N2    C         3     0 5443.  589. \n16 N2    D         3     0 4816   506. \n17 N3    D         3     0 4812   963. \n18 N1    D         3     0 4481.  463. \n19 N1    B         3     0 4306   646. \n20 N1    A         3     0 4253.  248. \n21 N4    D         3     0 3816  1311. \n22 N1    C         3     0 3177.  453. \n23 N5    D         3     0 2047.  703. \n24 N6    D         3     0 1881.  407. \n\n\n\n\nAdditionally, we can decide to plot our data. One way to deal with the combination of two factors would be to use panels/facets in ggplot2.\nNote that we here define a custom set of colors for the Nitrogen levels that will be used throughout this chapter.\n\nNcolors <- met.brewer(\"VanGogh2\", 6) %>% \n  as.vector() %>% \n  set_names(levels(dat$N))\n\n\nClick to show/hide codeggplot(data = dat) +\n  aes(y = yield, x = N, color = N) +\n  facet_wrap(~G, labeller = label_both) +\n  stat_summary(\n    fun = mean,\n    colour = \"grey\",\n    geom = \"line\",\n    linetype = \"dotted\",\n    group = 1\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Nitrogen\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_manual(\n    values = Ncolors, \n    guide = \"none\"\n  ) +\n  theme_bw()\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nClick to show/hide codedesplot(data = dat,\n        form = rep ~ col + row | rep, # fill color per rep, headers per rep\n        col.regions = c(\"white\", \"grey95\", \"grey90\"),\n        text = G, # genotype names per plot\n        cex = 1, # genotype names: font size\n        shorten = FALSE, # genotype names: don't abbreviate\n        col  = N, # color of genotype names for each N-level\n        col.text = Ncolors, # use custom colors from above\n        out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n        out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n        main = \"Field layout\", # plot title\n        show.key = TRUE, # show legend\n        key.cex = 0.7 # legend font size\n        )"
   },
   {
     "objectID": "index.html",
@@ -158,7 +186,7 @@
     "href": "rbasics/correlation_regression.html#import",
     "title": "Correlation & Regression",
     "section": "Import",
-    "text": "Import\n\n# data (import via URL)\ndataURL <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/DrinksPeterMax.csv\"\ndat <- read_csv(dataURL)\n\ndat\n\n# A tibble: 20 × 3\n   Person drinks blood_alc\n   <chr>   <dbl>     <dbl>\n 1 Max         1       0.2\n 2 Max         2       0.3\n 3 Max         3       0.5\n 4 Max         3       0.6\n 5 Max         4       0.6\n 6 Max         4       0.5\n 7 Max         4       0.7\n 8 Max         5       0.6\n 9 Max         7       0.8\n10 Max         8       1  \n11 Peter       1       0.1\n12 Peter       1       0.1\n13 Peter       1       0.2\n14 Peter       1       0.2\n15 Peter       1       0.1\n16 Peter       3       0.3\n17 Peter       5       0.5\n18 Peter       6       0.8\n19 Peter       8       0.9\n20 Peter       9       1.3"
+    "text": "Import\n\n\n# data is available online:\npath <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/DrinksPeterMax.csv\"\n\n\n\ndat <- read_csv(path) # use path from above\ndat\n\n# A tibble: 20 × 3\n   Person drinks blood_alc\n   <chr>   <dbl>     <dbl>\n 1 Max         1       0.2\n 2 Max         2       0.3\n 3 Max         3       0.5\n 4 Max         3       0.6\n 5 Max         4       0.6\n 6 Max         4       0.5\n 7 Max         4       0.7\n 8 Max         5       0.6\n 9 Max         7       0.8\n10 Max         8       1  \n11 Peter       1       0.1\n12 Peter       1       0.1\n13 Peter       1       0.2\n14 Peter       1       0.2\n15 Peter       1       0.1\n16 Peter       3       0.3\n17 Peter       5       0.5\n18 Peter       6       0.8\n19 Peter       8       0.9\n20 Peter       9       1.3"
   },
   {
     "objectID": "rbasics/correlation_regression.html#goal",
@@ -354,21 +382,21 @@
     "href": "summaryarticles/modeldiagnostics.html#normality",
     "title": "Model Diagnostics",
     "section": "Normality",
-    "text": "Normality\nAssumption: The errors follow a normal distribution.\nA model’s errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.\n\n\n\n\n\n\nYes residuals - not data!\n\n\n\nUnfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model’s residuals should be checked for normality. Please see section “4 | ANSWERING QUESTION 1” in (Kozak and Piepho 2018) for details.\n\n\nQQ plot\nApproximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho (2018) point out that when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal.\n\nmod %>% \n  check_normality() %>% \n  plot(type = \"qq\")\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the normality assumption. A p-value < 0.05 would suggest such a violation:\n\nols_test_normality(mod)\n\n-----------------------------------------------\n       Test             Statistic       pvalue  \n-----------------------------------------------\nShapiro-Wilk              0.9661         0.4379 \nKolmogorov-Smirnov        0.1101         0.8215 \nCramer-von Mises          3.6109         0.0000 \nAnderson-Darling          0.3582         0.4299 \n-----------------------------------------------"
+    "text": "Normality\nAssumption: The errors follow a normal distribution.\nA model’s errors cannot be directly observed, but are estimated by their residuals; these residuals can be used for checking normality.\n\n\n\n\n\n\nYes residuals - not data!\n\n\n\nUnfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model’s residuals should be checked for normality. Please see section “4 | ANSWERING QUESTION 1” in (Kozak and Piepho 2018) for details.\n\n\nQQ plot\nApproximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho (2018) point out that when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal.\n\nmod %>% \n  check_normality() %>% \n  plot(type = \"qq\")\n\n\n\n\nTests\nAs explained further below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the normality assumption. A p-value < 0.05 would suggest such a violation:\n\nols_test_normality(mod)\n\n-----------------------------------------------\n       Test             Statistic       pvalue  \n-----------------------------------------------\nShapiro-Wilk              0.9661         0.4379 \nKolmogorov-Smirnov        0.1101         0.8215 \nCramer-von Mises          3.6109         0.0000 \nAnderson-Darling          0.3582         0.4299 \n-----------------------------------------------"
   },
   {
     "objectID": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
     "href": "summaryarticles/modeldiagnostics.html#variance-homogeneity",
     "title": "Model Diagnostics",
     "section": "Variance homogeneity",
-    "text": "Variance homogeneity\nAssumption: The error variance is the same at any set of predictor values.\nAlso referred to as homoscedasticity (i.e. the opposite of heteroscedasticity)\nRes-Pred Plot\nWhile this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.\n\nmod %>% \n  check_heteroscedasticity() %>% \n  plot()\n\n\n\n\nTests\nAs explained below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value < 0.05 would suggest such a violation:\n\n\n\nols_test_breusch_pagan(mod)\n\n\n Breusch Pagan Test for Heteroskedasticity\n -----------------------------------------\n Ho: the variance is constant            \n Ha: the variance is not constant        \n\n               Data                \n ----------------------------------\n Response : weight \n Variables: fitted values of weight \n\n        Test Summary          \n -----------------------------\n DF            =    1 \n Chi2          =    3.000303 \n Prob > Chi2   =    0.08324896 \n\n\n\n\n\n\nols_test_bartlett(\n  data = PlantGrowth, \n  \"weight\", \n  group_var = \"group\")\n\n\n    Bartlett's Test of Homogenity of Variances    \n------------------------------------------------\nHo: Variances are equal across groups\nHa: Variances are unequal for atleast two groups\n\n        Test Summary         \n ----------------------------\n DF            =    2 \n Chi2          =    2.878592 \n Prob > Chi2   =    0.2370946"
+    "text": "Variance homogeneity\nAssumption: The error variance is the same at any set of predictor values.\nAlso referred to as homoscedasticity (i.e. the opposite of heteroscedasticity)\nRes-Pred Plot\nWhile this plot does not seem to have an established name, it always has raw/standardized/studentized residuals on the y axis and fitted/predicted values on the x axis. Variance homogeneity can be assumed if the residuals form an approximate horizontal band around the 0 line indicating homogeneity of error variance.\n\nmod %>% \n  check_heteroscedasticity() %>% \n  plot()\n\n\n\n\nTests\nAs explained further below, I do not embrace using statistical tests to check assumptions, but instead suggest using the diagnostic plot above. However, for completeness I still provide the following information:\nThere are multiple statistical tests for detecting a violation of the variance homogeneity assumption. A p-value < 0.05 would suggest such a violation:\n\n\n\nols_test_breusch_pagan(mod)\n\n\n Breusch Pagan Test for Heteroskedasticity\n -----------------------------------------\n Ho: the variance is constant            \n Ha: the variance is not constant        \n\n               Data                \n ----------------------------------\n Response : weight \n Variables: fitted values of weight \n\n        Test Summary          \n -----------------------------\n DF            =    1 \n Chi2          =    3.000303 \n Prob > Chi2   =    0.08324896 \n\n\n\n\n\n\nols_test_bartlett(\n  data = PlantGrowth, \n  \"weight\", \n  group_var = \"group\")\n\n\n    Bartlett's Test of Homogenity of Variances    \n------------------------------------------------\nHo: Variances are equal across groups\nHa: Variances are unequal for atleast two groups\n\n        Test Summary         \n ----------------------------\n DF            =    2 \n Chi2          =    2.878592 \n Prob > Chi2   =    0.2370946"
   },
   {
-    "objectID": "summaryarticles/modeldiagnostics.html#to-do",
-    "href": "summaryarticles/modeldiagnostics.html#to-do",
+    "objectID": "summaryarticles/modeldiagnostics.html#linearity",
+    "href": "summaryarticles/modeldiagnostics.html#linearity",
     "title": "Model Diagnostics",
-    "section": "TO DO",
-    "text": "TO DO\n\nhelp to judge plots\ndeal with unruly residuals\n\n\n\n\n\n\n\nAdditional Resources (click to show)\n\n\n\n\n\nGeneral\n\nWhat’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions (Kozak and Piepho 2018)\n\n\nChapter 13 Model Diagnostics in Applied Statistics with R (Dalpiaz, 2022)\n\nChapter 8 Model Diagnostics in Course Handouts for Bayesian Data Analysis (Lai, 2019)\n🇩🇪 Verbleibende Plots interpretieren, um Ihre Regression zu verbessern\n\n{olsrr}\n\nNormality\n\nR Tutorial: Normal Probability Plot of Residuals\nFor this specific purpose, QQ plots may also be called Normal probability plots\n\n{qqplotr}\n\nHomoscedasticity\n\nDocumentation on tests from {olsrr}\nWikipedia article on Homoscedasticity and heteroscedasticity"
+    "section": "Linearity",
+    "text": "Linearity\nAssumption: The response can be written as a linear combination of the predictors.\nThis assumption can also be checked via the Res-Pred-plot from the Variance homogeneity section above. It can assumed to be met if the residuals spread randomly around the 0 line. In other words: At any fitted value, the mean of the residuals should be roughly 0. If this is the case, the linearity assumption is valid. I am not aware of any statistical tests for linearity."
   },
   {
     "objectID": "summaryarticles/usefulthings.html",

@@ -1,5 +1,5 @@
 ---
-title: "Randomized complete block design"
+title: "One-way randomized complete block design"
 date: 2022-10-30
 abstract: "One-way ANOVA & pairwise comparison post hoc tests in a randomized complete block design."
 ---
@@ -142,7 +142,7 @@ desplot(
 :::
 :::
 
-Thus, `C4` seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block `B1` (left), compared to the other blocks. 
+Thus, `C4` seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block `B1` (left), compared to the other blocks.
 
 # Model
 

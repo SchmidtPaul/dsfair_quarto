@@ -6,9 +6,7 @@ abstract: "Correlation and simple linear regression (with and without intercept)
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(
-  class.output = "custom-output"
-)
+source(here::here("helpersrc.R"))
 ```
 
 This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn't have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.
@@ -33,10 +31,13 @@ This is data I made up: Peter and Max went out multiple evenings and at the end 
 ## Import
 
 ```{r}
-# data (import via URL)
-dataURL <- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/DrinksPeterMax.csv"
-dat <- read_csv(dataURL)
+#| echo: false
+path <- here::here("data", "DrinksPeterMax.csv")
+get_url_from_path(path)
+```
 
+```{r}
+dat <- read_csv(path) # use path from above
 dat
 ```
 
