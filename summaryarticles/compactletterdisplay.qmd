@@ -1,6 +1,5 @@
 ---
 title: "Compact Letter Display (CLD)"
-date: 2022-10-03
 tbl-cap-location: bottom
 ---
 
@@ -75,7 +74,7 @@ model_means_cld_plot <-
 
 # What is it?
 
-Compact letter displays are often used to report results of all pairwise comparisons among treatment means in comparative experiments. See Piepho [-@piepho2004] and [-@piepho2018] for more details and find a coding example below.
+Compact letter displays are often used to report results of all pairwise comparisons among treatment means in comparative experiments. See @piepho2004 and @piepho2018 for more details and find a coding example below.
 
 ::: columns
 ::: {.column width="70%"}
@@ -163,7 +162,7 @@ However, in [CRAN version 1.8.0](https://github.com/rvlenth/emmeans/commits/678c
 
 Both notes are very much in line with the delicate matter of how the CLD must be understood. The author and maintainer of the `{emmeans}` package, [Russell V. Lenth](http://homepage.divms.uiowa.edu/~rlenth/) makes the argument that CLDs convey information in a way that may be misleading to the reader. This is because they "display non-findings rather than findings - they group together means based on NOT being able to show they are different" (personal communication). Furthermore, "\[the CLD approach\] works, but it is very black-and-white: with alpha = .05, P values slightly above or below .05 make a difference, but there's no difference between a P value of .051 and one of .987, or between .049 and .00001" ([posted here](https://github.com/rvlenth/emmeans/issues/93#issuecomment-468877941)). He even [wrote here](https://stats.stackexchange.com/a/508092/192956) that "Providing for CLDs at all remains one of my biggest regrets in developing this package". Finally, the former note suggests using alternative plots, which are also created below.
 
-On the other hand, it must be clear that the information conveyed by CLDs is not *wrong* as long as it is interpreted correctly. The [documentation of the `cld()` function](https://www.rdocumentation.org/packages/multcomp/versions/1.4-17/topics/cld) refers to Piepho [-@piepho2004], but even more on point in this context is Piepho [-@piepho2018]:
+On the other hand, it must be clear that the information conveyed by CLDs is not *wrong* as long as it is interpreted correctly. The [documentation of the `cld()` function](https://www.rdocumentation.org/packages/multcomp/versions/1.4-17/topics/cld) refers to @piepho2004, but even more on point in this context is @piepho2018:
 
 > [**Piepho, Hans-Peter**](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257&L=1) **(2018) Letters in Mean Comparisons: What They Do and Don't Mean**, Agronomy Journal, 110(2), 431-434. DOI: [10.2134/agronj2017.10.0580](https://doi.org/10.2134/agronj2017.10.0580) [(ResearchGate)](https://www.researchgate.net/publication/322054734_Letters_in_Mean_Comparisons_What_They_Do_and_Don't_Mean)
 >

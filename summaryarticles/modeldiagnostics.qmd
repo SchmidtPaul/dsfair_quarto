@@ -1,6 +1,5 @@
 ---
 title: "Model Diagnostics"
-date: 2022-11-11
 ---
 
 ```{r}
@@ -47,12 +46,12 @@ A model's errors cannot be directly observed, but are estimated by their residua
 ::: callout-important
 ## Yes residuals - not data!
 
-Unfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model's residuals should be checked for normality. Please see section "4 \| ANSWERING QUESTION 1" in [@kozak2018] for details.
+Unfortunately, it is more common than it should be that people check whether their raw data (i.e. their response variable, e.g. yield) is normally distributed. This is not constructive. Instead, the model's residuals should be checked for normality. Please see section "4 \| ANSWERING QUESTION 1" in @kozak2018 for details.
 :::
 
 ### QQ plot
 
-Approximate normality can be assumed, if the dots in a QQ plot look close to a straight line. Kozak & Piepho [-@kozak2018] point out that *when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal*.
+Approximate normality can be assumed, if the dots in a QQ plot look close to a straight line. @kozak2018 point out that *when it comes to checking normality, we need to be clear that we will never be able to check whether indeed the distribution is fully normal; instead, we should check whether it is approximately normal*.
 
 ```{r}
 mod %>% 
@@ -120,37 +119,91 @@ This assumption can also be checked via the Res-Pred-plot from the *Variance hom
 
 # Plots instead of tests
 
-When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow Kozak & Piepho [-@kozak2018], who show that *"residual plots are better for checking ANOVA assumptions than statistical tests"*. Here are two key sections from their publication:
+When it comes to diagnosing models, one may separate most approaches into two general categories: **significance tests** and **diagnostic plots**. Personally, I follow @kozak2018, who show that *"residual plots are better for checking ANOVA assumptions than statistical tests"*. Here are two key sections from their publication:
 
 > According to many authors (e.g., Atkinson, 1987; Belsley, Kuh, & Welsch, 2005; Kozak, 2009; Moser & Stevens, 1992; Quinn & Keough, 2002; Rasch, Kubinger, & Moder, 2011; Schucany & Ng, 2006), significance tests should not be used for checking assumptions. Diagnostic residual plots are a better choice. On such diagnostic plots, we can identify untypical observations, heterogeneous within-treatment variances, and lack of normality of the residuals (and thus, of the dependent variable within treatments).
 >
-> [...]
+> \[...\]
 >
-> There are two possible reasons for the overuse of statistical
-tests to check assumptions. First, many researchers base their
-knowledge on books first published 40 years ago or earlier. Back
-then, using statistical tests was relatively simple while using diagnostic plots was difficult; thus, these books advised the former, often
-even not mentioning the latter. Second, most statistical software
-offers statistical tests for checking assumptions as a default. Using
-default tests is simple, so users use them. However, we explained
-why we think that significance tests are not a good way of checking
-assumptions (in general, not only for ANOVA). First of all, with large
-samples (a very desirable situation) we risk that even small (and irrelevant) departures from the null hypothesis (which states that the
-assumption is met) will be detected as significant, and so we would
-need to reject the hypothesis and state that the assumption is not
-met. With small samples, the situation is opposite: much larger (and
-important) departures would not be found significant. Thus, our
-advice is to use diagnostic plots instead of hypothesis testing to
-check ANOVA assumptions.
+> There are two possible reasons for the overuse of statistical tests to check assumptions. First, many researchers base their knowledge on books first published 40 years ago or earlier. Back then, using statistical tests was relatively simple while using diagnostic plots was difficult; thus, these books advised the former, often even not mentioning the latter. Second, most statistical software offers statistical tests for checking assumptions as a default. Using default tests is simple, so users use them. However, we explained why we think that significance tests are not a good way of checking assumptions (in general, not only for ANOVA). First of all, with large samples (a very desirable situation) we risk that even small (and irrelevant) departures from the null hypothesis (which states that the assumption is met) will be detected as significant, and so we would need to reject the hypothesis and state that the assumption is not met. With small samples, the situation is opposite: much larger (and important) departures would not be found significant. Thus, our advice is to use diagnostic plots instead of hypothesis testing to check ANOVA assumptions.
 
-# TO DO
+# Problematic cases
 
-- help to judge plots
-- mention linearity
-- deal with unruly residuals
+You may encounter situations where the assumptions for Normality, Variance homogeneity and/or Linearity do not seem to be met. Instead of simply not doing any ANOVA, you have two options to proceed: Transforming your data and using generalized linear models.
+
+## Data transformation
+
+Transforming the response variable (e.g. yield) with a mathematical function (e.g. square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing `yield` with `sqrt(yield)`, you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example[^1] where this approach does as intended.
+
+[^1]: This is the same data as in the [latin square chapter](../../exan/simple/latsq_bridges1989.qmd).
+
+```{r}
+#| code-fold: true
+pacman::p_load(agridat,
+               easystats,
+               emmeans,
+               multcomp,
+               multcompView,
+               tidyverse)
+
+dat <- agridat::bridges.cucumber %>%
+  filter(loc == "Clemson") %>%
+  mutate(colF = as.factor(col),
+         rowF = as.factor(row))
+```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+mod1 <- lm(
+  yield ~ gen + rowF + colF, 
+  data = dat)
+
+mod1 %>% 
+  check_normality() %>% 
+  plot(type = "qq")
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+mod2 <- lm(
+  sqrt(yield) ~ gen + rowF + colF, 
+  data = dat)
+
+mod2 %>% 
+  check_normality() %>% 
+  plot(type = "qq")
+```
+:::
+:::
+
+You can see that the QQ plot for `mod2` does indeed look better than that for `mod1`. Thus, we can and should conduct the ANOVA for `mod2`. Its interpretation or rather the conclusions drawn from it are essentially the same - irrespective of whether yield or the square root of yield was modeled: There are significant differences between the genotypes.
+
+```{r}
+anova(mod2)
+```
+
+It is a little bit different when it comes to mean comparisons via post hoc tests. Not because of the conclusion part - this is the same here, too: e.g. two genotype means may be significantly different from each other according to the Tukey test. However, the mean itself can be irritating, since noone is used to dealing with square roots of yields. However, it is valid to present the means on the backtransformed (= original) scale, as long as it is made clear to the reader that the model fit and mean comparisons were made on a different (= square root) scale.
+
+```{r}
+mod2 %>% 
+  emmeans(specs = ~ gen, type = "response") %>% 
+  cld(Letters = letters)
+```
+
+Note that `type = "response"` can do the back-transformation for us automatically[^2] and specifically see the part of the message below the mean table that reads "Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale".
+
+[^2]: This works only if you did the transformation as part of the model as we did here in `lm()`. It cannot work if you did the transformation by creating a column in the dataset before fitting the model.
+
+## Generalized linear models
+
+TO DO
 
 ::: custom-callout-addref
-
 **General**
 
 -   What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions [@kozak2018]
@@ -167,7 +220,10 @@ check ANOVA assumptions.
 
 **Homoscedasticity**
 
--    [Documentation on tests from {olsrr}](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)
--    Wikipedia article on [Homoscedasticity and heteroscedasticity](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)
+-   [Documentation on tests from {olsrr}](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)
+-   Wikipedia article on [Homoscedasticity and heteroscedasticity](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)
 
+**Transformation**
+
+-   🇩🇪 Chapter 3.3 in @dormann2011
 :::

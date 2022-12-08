@@ -1,6 +1,5 @@
 ---
 title: "One-way latin square design"
-date: 2022-11-11
 abstract: "One-way ANOVA & pairwise comparison post hoc tests in a latin square design."
 ---
 
@@ -28,7 +27,7 @@ conflict_prefer("select", "dplyr")
 
 # Data
 
-This example data is taken from [{agridat}](https://kwstat.github.io/agridat/). It considers data published in Bridges [-@bridges1989] from a cucumber yield trial with four genotypes set up as a Latin square design. Notice that the original dataset considers two trials (at two locations), but we will focus on only a single trial here.
+This example data is taken from [{agridat}](https://kwstat.github.io/agridat/). It considers data published in @bridges1989 from a cucumber yield trial with four genotypes set up as a Latin square design. Notice that the original dataset considers two trials (at two locations), but we will focus on only a single trial here.
 
 ## Import
 
@@ -65,8 +64,8 @@ dat <- dat %>%
   mutate(across(
     .cols = c(row, col), 
     .fns = ~ as.factor(.x), 
-    .names = ("{.col}F"))
-  )
+    .names = ("{.col}F")
+  ))
 ```
 :::
 :::

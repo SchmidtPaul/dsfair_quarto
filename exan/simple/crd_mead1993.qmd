@@ -1,6 +1,5 @@
 ---
 title: "One-way completely randomized design"
-date: 2022-10-27
 abstract: "One-way ANOVA & pairwise comparison post hoc tests in a completely randmoized design."
 ---
 
@@ -27,7 +26,7 @@ conflict_prefer("select", "dplyr")
 
 # Data
 
-This example is taken from *"Example 4.3"* of the course material "Quantitative Methods in Biosciences (3402-420)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published on p.52 of Mead [-@mead2002] from a yield trial with melons. The trial had 4 melon varieties (`variety`). Each variety was tested on six field plots. The allocation of treatments (varieties) to experimental units (plots) was completely at random. Thus, the experiment was laid out as a completely randomized design (CRD).
+This example is taken from *"Example 4.3"* of the course material "Quantitative Methods in Biosciences (3402-420)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published on p.52 of @mead2002 from a yield trial with melons. The trial had 4 melon varieties (`variety`). Each variety was tested on six field plots. The allocation of treatments (varieties) to experimental units (plots) was completely at random. Thus, the experiment was laid out as a completely randomized design (CRD).
 
 ## Import
 

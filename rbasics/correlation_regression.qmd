@@ -1,6 +1,5 @@
 ---
 title: "Correlation & Regression"
-date: 2022-10-09
 abstract: "Correlation and simple linear regression (with and without intercept)."
 ---
 

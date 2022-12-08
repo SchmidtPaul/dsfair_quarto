@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.189">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2022-10-04">
+<meta name="dcterms.date" content="2022-11-21">
 <title>dsfair_quarto - First steps in R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -270,9 +270,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
       
     <div>
-    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 4, 2022</p>
+      <p class="date">November 21, 2022</p>
     </div>
   </div>
     
@@ -685,187 +685,186 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb55" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "First steps in R"</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-10-04</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "Data types, vectors, functions and R packages."</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">class.output =</span> <span class="st">"custom-output"</span></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.</span>
-<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>This is certainly not the best tutorial you'll ever find, so if you want other tutorials check out this curated list of R Tutorials <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/ujjwalkarn/DataScienceR)</span>.</span>
-<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a>Furthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. "The way I use it" mostly refers to me using the <span class="co">[</span><span class="ot">{tidyverse}</span><span class="co">](https://www.tidyverse.org/)</span>, which *"is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures"* and has become quite popular over the last years. [Here](https://dplyr.tidyverse.org/articles/base.html) is a direct comparison of how to do things in R with *base R* and via the tidyverse.</span>
-<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># Let's go</span></span>
-<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a>You can use R like a calculator. It does not matter<span class="ot">[^1]</span> whether you put spaces in or not as shown here:</span>
-<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>As long as you are dealing with numbers and calculations. Spaces do matter when we are talking about s*trings* (i.e. text).</span>
-<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span>
-<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span>   <span class="dv">6</span></span>
-<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>Similar to what you may know from Excel, you can use functions like e.g. <span class="in">`sqrt()`</span> to obtain the square root of a number:</span>
-<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-42"><a href="#cb55-42" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span>
-<span id="cb55-43"><a href="#cb55-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-44"><a href="#cb55-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-45"><a href="#cb55-45" aria-hidden="true" tabindex="-1"></a>You can find out more about a function by running the command with a question mark in front: <span class="in">`?sqrt()`</span>.</span>
-<span id="cb55-46"><a href="#cb55-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-47"><a href="#cb55-47" aria-hidden="true" tabindex="-1"></a>Besides built-in functions, R also knows certain things like $\pi$ or the alphabet, which are stored in the <span class="co">[</span><span class="ot">built-in constants</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Constants.html)</span> named <span class="in">`pi`</span> and <span class="in">`letters`</span>:</span>
-<span id="cb55-48"><a href="#cb55-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-51"><a href="#cb55-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-52"><a href="#cb55-52" aria-hidden="true" tabindex="-1"></a>pi</span>
-<span id="cb55-53"><a href="#cb55-53" aria-hidden="true" tabindex="-1"></a>letters</span>
-<span id="cb55-54"><a href="#cb55-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-55"><a href="#cb55-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-56"><a href="#cb55-56" aria-hidden="true" tabindex="-1"></a>Importantly, you may also define your own variables via <span class="in">`=`</span> or <span class="in">`&lt;-`</span>:</span>
-<span id="cb55-57"><a href="#cb55-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-60"><a href="#cb55-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-61"><a href="#cb55-61" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb55-62"><a href="#cb55-62" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb55-63"><a href="#cb55-63" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">20</span></span>
-<span id="cb55-64"><a href="#cb55-64" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb55-65"><a href="#cb55-65" aria-hidden="true" tabindex="-1"></a>a_long_variable_name <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span></span>
-<span id="cb55-66"><a href="#cb55-66" aria-hidden="true" tabindex="-1"></a>a_long_variable_name</span>
-<span id="cb55-67"><a href="#cb55-67" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> a_long_variable_name</span>
-<span id="cb55-68"><a href="#cb55-68" aria-hidden="true" tabindex="-1"></a>mytext <span class="ot">&lt;-</span> <span class="st">"This is my text"</span></span>
-<span id="cb55-69"><a href="#cb55-69" aria-hidden="true" tabindex="-1"></a>mytext</span>
-<span id="cb55-70"><a href="#cb55-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-71"><a href="#cb55-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-72"><a href="#cb55-72" aria-hidden="true" tabindex="-1"></a>Note that the variable <span class="in">`x`</span> was overwritten - at first it was 3, but then it was 20. Also, as can be seen when the variable <span class="in">`a_long_variable_name`</span> is defined, you may put more than just a simple number on the right side of the <span class="in">`&lt;-`</span> or <span class="in">`=`</span>.</span>
-<span id="cb55-73"><a href="#cb55-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-74"><a href="#cb55-74" aria-hidden="true" tabindex="-1"></a><span class="fu"># data types</span></span>
-<span id="cb55-75"><a href="#cb55-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-76"><a href="#cb55-76" aria-hidden="true" tabindex="-1"></a>As you just saw, R can deal with both numbers and text. We can check the data type via the <span class="in">`typeof()`</span> function:</span>
-<span id="cb55-77"><a href="#cb55-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-80"><a href="#cb55-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-81"><a href="#cb55-81" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span>
-<span id="cb55-82"><a href="#cb55-82" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mytext)</span>
-<span id="cb55-83"><a href="#cb55-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-84"><a href="#cb55-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-85"><a href="#cb55-85" aria-hidden="true" tabindex="-1"></a>Here is a simplified overview over some of R's data types you may see more often:</span>
-<span id="cb55-86"><a href="#cb55-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-87"><a href="#cb55-87" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Numbers</span>
-<span id="cb55-88"><a href="#cb55-88" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`integer`</span>/<span class="in">`int`</span>: whole number\</span>
-<span id="cb55-89"><a href="#cb55-89" aria-hidden="true" tabindex="-1"></a>        e.g. *42*, *-1504*</span>
-<span id="cb55-90"><a href="#cb55-90" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`numeric`</span>/<span class="in">`num`</span> &amp; <span class="in">`double`</span>/<span class="in">`dbl`</span>: real number\</span>
-<span id="cb55-91"><a href="#cb55-91" aria-hidden="true" tabindex="-1"></a>        e.g. *3.14*, *0.051795*</span>
-<span id="cb55-92"><a href="#cb55-92" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Text</span>
-<span id="cb55-93"><a href="#cb55-93" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`character`</span>/<span class="in">`chr`</span>: string values\</span>
-<span id="cb55-94"><a href="#cb55-94" aria-hidden="true" tabindex="-1"></a>        e.g. *"hello"*, *"Two words"*</span>
-<span id="cb55-95"><a href="#cb55-95" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Factor</span>
-<span id="cb55-96"><a href="#cb55-96" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`factor`</span>/<span class="in">`fct`</span>: categorical variable that stores both string and integer data values as "levels"\</span>
-<span id="cb55-97"><a href="#cb55-97" aria-hidden="true" tabindex="-1"></a>        e.g. *Control*, *Treatment*</span>
-<span id="cb55-98"><a href="#cb55-98" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>TRUE/FALSE</span>
-<span id="cb55-99"><a href="#cb55-99" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`logical`</span>/<span class="in">`logi`</span>: logical value\</span>
-<span id="cb55-100"><a href="#cb55-100" aria-hidden="true" tabindex="-1"></a>        either *TRUE* or *FALSE*</span>
-<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a><span class="fu"># vectors</span></span>
-<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a>Instead of dealing with single numbers, we obviously want to deal with entire datasets. Before we get to an entire table with multiple rows and columns, the first step is to understand what a *vector* is in R: It is *a sequence of elements that share the same data type*. I often think about them as a single column in my dataset. Above, we actually already looked at a vector: <span class="in">`letters`</span> is a built-in vector with 26 elements of the data type <span class="in">`character`</span>. We could check this via the <span class="in">`length()`</span> or <span class="in">`str()`</span> functions:</span>
-<span id="cb55-105"><a href="#cb55-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-108"><a href="#cb55-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-109"><a href="#cb55-109" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(letters)</span>
-<span id="cb55-110"><a href="#cb55-110" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(letters)</span>
-<span id="cb55-111"><a href="#cb55-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-112"><a href="#cb55-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-113"><a href="#cb55-113" aria-hidden="true" tabindex="-1"></a>Note how the built-in constant <span class="in">`pi`</span> is not a vector, because it's just a single number (*a.k.a.* a scalar).</span>
-<span id="cb55-114"><a href="#cb55-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-117"><a href="#cb55-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-118"><a href="#cb55-118" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pi)</span>
-<span id="cb55-119"><a href="#cb55-119" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pi)</span>
-<span id="cb55-120"><a href="#cb55-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-121"><a href="#cb55-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-122"><a href="#cb55-122" aria-hidden="true" tabindex="-1"></a>If you want to create your own vector from scratch, you must put all the elements together in the <span class="in">`c()`</span> function and separate them with commas:</span>
-<span id="cb55-123"><a href="#cb55-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-126"><a href="#cb55-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-127"><a href="#cb55-127" aria-hidden="true" tabindex="-1"></a>mynumbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">16</span>)</span>
-<span id="cb55-128"><a href="#cb55-128" aria-hidden="true" tabindex="-1"></a>mynumbers</span>
-<span id="cb55-129"><a href="#cb55-129" aria-hidden="true" tabindex="-1"></a>mywords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hakuna"</span>, <span class="st">"Matata"</span>, <span class="st">"Simba"</span>)</span>
-<span id="cb55-130"><a href="#cb55-130" aria-hidden="true" tabindex="-1"></a>mywords</span>
-<span id="cb55-131"><a href="#cb55-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-132"><a href="#cb55-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-133"><a href="#cb55-133" aria-hidden="true" tabindex="-1"></a>Interestingly, we can still apply the <span class="in">`sqrt()`</span> function we used above to a vector with numbers and it will simply take the square-root of every element:</span>
-<span id="cb55-134"><a href="#cb55-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-137"><a href="#cb55-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-138"><a href="#cb55-138" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(mynumbers)</span>
-<span id="cb55-139"><a href="#cb55-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-140"><a href="#cb55-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-141"><a href="#cb55-141" aria-hidden="true" tabindex="-1"></a>However, there are also functions like <span class="in">`mean()`</span> which return the mean of all numbers in a vector as a single output element:</span>
-<span id="cb55-142"><a href="#cb55-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-145"><a href="#cb55-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-146"><a href="#cb55-146" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mynumbers)</span>
-<span id="cb55-147"><a href="#cb55-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-148"><a href="#cb55-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-149"><a href="#cb55-149" aria-hidden="true" tabindex="-1"></a><span class="fu"># function arguments</span></span>
-<span id="cb55-150"><a href="#cb55-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-151"><a href="#cb55-151" aria-hidden="true" tabindex="-1"></a>So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use <span class="in">`seq()`</span> as an example, which seems simple enough, because it generates a sequence of numbers:</span>
-<span id="cb55-152"><a href="#cb55-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-155"><a href="#cb55-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-156"><a href="#cb55-156" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
-<span id="cb55-157"><a href="#cb55-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-158"><a href="#cb55-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-159"><a href="#cb55-159" aria-hidden="true" tabindex="-1"></a>As you can see, putting in <span class="in">`1`</span> and <span class="in">`10`</span> separated by a comma generates a numeric vector with numbers from 1 to 10. However, I would like you to fully understand what is going on here, because it will help a lot with more complex functions.</span>
-<span id="cb55-160"><a href="#cb55-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-161"><a href="#cb55-161" aria-hidden="true" tabindex="-1"></a>See, we could switch the numbers and the function will work as expected:</span>
-<span id="cb55-162"><a href="#cb55-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-165"><a href="#cb55-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-166"><a href="#cb55-166" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>)</span>
-<span id="cb55-167"><a href="#cb55-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-168"><a href="#cb55-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-169"><a href="#cb55-169" aria-hidden="true" tabindex="-1"></a>So this means that the first input is always the starting point and the second one is always the end point of the sequence, right? Well, yes by default, but you can have it your way if you specifically use the names of the arguments.</span>
-<span id="cb55-170"><a href="#cb55-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-171"><a href="#cb55-171" aria-hidden="true" tabindex="-1"></a>Looking at <span class="in">`?seq()`</span> it says <span class="in">`seq(from = 1, to = 1, by = ...)`</span> so this <span class="in">`seq(10, 1)`</span> is more explicitly this: <span class="in">`seq(from = 1, to = 10, by = 1)`</span>. Here is proof:</span>
-<span id="cb55-172"><a href="#cb55-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-175"><a href="#cb55-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-176"><a href="#cb55-176" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb55-177"><a href="#cb55-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-178"><a href="#cb55-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-179"><a href="#cb55-179" aria-hidden="true" tabindex="-1"></a>Again, if you do not write out the arguments like this, it will simply assume the default order: The first number supplied is <span class="in">`from =`</span> the second is <span class="in">`to =`</span> and the third is <span class="in">`by =`</span>. However, if we write out the arguments, we can use any order we like:</span>
-<span id="cb55-180"><a href="#cb55-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-183"><a href="#cb55-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb55-184"><a href="#cb55-184" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">2</span>)</span>
-<span id="cb55-185"><a href="#cb55-185" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
-<span id="cb55-186"><a href="#cb55-186" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">9</span>)</span>
-<span id="cb55-187"><a href="#cb55-187" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span>
-<span id="cb55-188"><a href="#cb55-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb55-189"><a href="#cb55-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-190"><a href="#cb55-190" aria-hidden="true" tabindex="-1"></a>In short: If you understand why the first three lines of the code above produce the same result, but the last one does not, you are good to go!</span>
-<span id="cb55-191"><a href="#cb55-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-192"><a href="#cb55-192" aria-hidden="true" tabindex="-1"></a><span class="fu"># R packages</span></span>
-<span id="cb55-193"><a href="#cb55-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-194"><a href="#cb55-194" aria-hidden="true" tabindex="-1"></a>Any function is always part of an R package.</span>
-<span id="cb55-195"><a href="#cb55-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-196"><a href="#cb55-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## base R</span></span>
-<span id="cb55-197"><a href="#cb55-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-198"><a href="#cb55-198" aria-hidden="true" tabindex="-1"></a>After installing R there are many functions etc. you can use right away - which is what we did above. For example, when running <span class="in">`?mean`</span>, the help page will tell you that this function is part of the <span class="co">[</span><span class="ot">{base}</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)</span> package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the "Packages" tab in RStudio - you will find the *base* package and it will have a checked box next to it.</span>
-<span id="cb55-199"><a href="#cb55-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-200"><a href="#cb55-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## loading packages</span></span>
-<span id="cb55-201"><a href="#cb55-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-202"><a href="#cb55-202" aria-hidden="true" tabindex="-1"></a>When looking at the "Packages" tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is <span class="in">`library(package_name)`</span>. This command must be run once every time you open a new R session.</span>
-<span id="cb55-203"><a href="#cb55-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-204"><a href="#cb55-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## installing additional packages</span></span>
-<span id="cb55-205"><a href="#cb55-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-206"><a href="#cb55-206" aria-hidden="true" tabindex="-1"></a>R really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - *e.g.* the package `{ggplot2}`, which is not built-in, has been downloaded [75 million](https://cranlogs.r-pkg.org/badges/grand-total/ggplot2) times. In order to install a package, the default command is `install.packages(package_name)`. Alternatively, you can also click on the "Install" button in the top left of the "Packages" tab and type in the *package_name* there.</span>
-<span id="cb55-207"><a href="#cb55-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-208"><a href="#cb55-208" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb55-209"><a href="#cb55-209" aria-hidden="true" tabindex="-1"></a>A package only needs to be installed once, but\</span>
-<span id="cb55-210"><a href="#cb55-210" aria-hidden="true" tabindex="-1"></a>A package must be loaded every time you open a new R session!</span>
-<span id="cb55-211"><a href="#cb55-211" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb55-212"><a href="#cb55-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-213"><a href="#cb55-213" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Here</span><span class="co">](https://github.com/qinwf/awesome-R)</span> is a curated list of R packages and tools for different areas.</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "Data types, vectors, functions and R packages."</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">class.output =</span> <span class="st">"custom-output"</span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>This is certainly not the best tutorial you'll ever find, so if you want other tutorials check out this curated list of R Tutorials <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/ujjwalkarn/DataScienceR)</span>.</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a>Furthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. "The way I use it" mostly refers to me using the <span class="co">[</span><span class="ot">{tidyverse}</span><span class="co">](https://www.tidyverse.org/)</span>, which *"is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures"* and has become quite popular over the last years. [Here](https://dplyr.tidyverse.org/articles/base.html) is a direct comparison of how to do things in R with *base R* and via the tidyverse.</span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a><span class="fu"># Let's go</span></span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>You can use R like a calculator. It does not matter<span class="ot">[^1]</span> whether you put spaces in or not as shown here:</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>As long as you are dealing with numbers and calculations. Spaces do matter when we are talking about s*trings* (i.e. text).</span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span></span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span>   <span class="dv">6</span></span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a>Similar to what you may know from Excel, you can use functions like e.g. <span class="in">`sqrt()`</span> to obtain the square root of a number:</span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-41"><a href="#cb55-41" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span>
+<span id="cb55-42"><a href="#cb55-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-43"><a href="#cb55-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-44"><a href="#cb55-44" aria-hidden="true" tabindex="-1"></a>You can find out more about a function by running the command with a question mark in front: <span class="in">`?sqrt()`</span>.</span>
+<span id="cb55-45"><a href="#cb55-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-46"><a href="#cb55-46" aria-hidden="true" tabindex="-1"></a>Besides built-in functions, R also knows certain things like $\pi$ or the alphabet, which are stored in the <span class="co">[</span><span class="ot">built-in constants</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Constants.html)</span> named <span class="in">`pi`</span> and <span class="in">`letters`</span>:</span>
+<span id="cb55-47"><a href="#cb55-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-50"><a href="#cb55-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-51"><a href="#cb55-51" aria-hidden="true" tabindex="-1"></a>pi</span>
+<span id="cb55-52"><a href="#cb55-52" aria-hidden="true" tabindex="-1"></a>letters</span>
+<span id="cb55-53"><a href="#cb55-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-54"><a href="#cb55-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-55"><a href="#cb55-55" aria-hidden="true" tabindex="-1"></a>Importantly, you may also define your own variables via <span class="in">`=`</span> or <span class="in">`&lt;-`</span>:</span>
+<span id="cb55-56"><a href="#cb55-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-59"><a href="#cb55-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-60"><a href="#cb55-60" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb55-61"><a href="#cb55-61" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb55-62"><a href="#cb55-62" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb55-63"><a href="#cb55-63" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb55-64"><a href="#cb55-64" aria-hidden="true" tabindex="-1"></a>a_long_variable_name <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span></span>
+<span id="cb55-65"><a href="#cb55-65" aria-hidden="true" tabindex="-1"></a>a_long_variable_name</span>
+<span id="cb55-66"><a href="#cb55-66" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> a_long_variable_name</span>
+<span id="cb55-67"><a href="#cb55-67" aria-hidden="true" tabindex="-1"></a>mytext <span class="ot">&lt;-</span> <span class="st">"This is my text"</span></span>
+<span id="cb55-68"><a href="#cb55-68" aria-hidden="true" tabindex="-1"></a>mytext</span>
+<span id="cb55-69"><a href="#cb55-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-70"><a href="#cb55-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-71"><a href="#cb55-71" aria-hidden="true" tabindex="-1"></a>Note that the variable <span class="in">`x`</span> was overwritten - at first it was 3, but then it was 20. Also, as can be seen when the variable <span class="in">`a_long_variable_name`</span> is defined, you may put more than just a simple number on the right side of the <span class="in">`&lt;-`</span> or <span class="in">`=`</span>.</span>
+<span id="cb55-72"><a href="#cb55-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-73"><a href="#cb55-73" aria-hidden="true" tabindex="-1"></a><span class="fu"># data types</span></span>
+<span id="cb55-74"><a href="#cb55-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-75"><a href="#cb55-75" aria-hidden="true" tabindex="-1"></a>As you just saw, R can deal with both numbers and text. We can check the data type via the <span class="in">`typeof()`</span> function:</span>
+<span id="cb55-76"><a href="#cb55-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-79"><a href="#cb55-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-80"><a href="#cb55-80" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span>
+<span id="cb55-81"><a href="#cb55-81" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(mytext)</span>
+<span id="cb55-82"><a href="#cb55-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-83"><a href="#cb55-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-84"><a href="#cb55-84" aria-hidden="true" tabindex="-1"></a>Here is a simplified overview over some of R's data types you may see more often:</span>
+<span id="cb55-85"><a href="#cb55-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-86"><a href="#cb55-86" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Numbers</span>
+<span id="cb55-87"><a href="#cb55-87" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`integer`</span>/<span class="in">`int`</span>: whole number\</span>
+<span id="cb55-88"><a href="#cb55-88" aria-hidden="true" tabindex="-1"></a>        e.g. *42*, *-1504*</span>
+<span id="cb55-89"><a href="#cb55-89" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`numeric`</span>/<span class="in">`num`</span> &amp; <span class="in">`double`</span>/<span class="in">`dbl`</span>: real number\</span>
+<span id="cb55-90"><a href="#cb55-90" aria-hidden="true" tabindex="-1"></a>        e.g. *3.14*, *0.051795*</span>
+<span id="cb55-91"><a href="#cb55-91" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Text</span>
+<span id="cb55-92"><a href="#cb55-92" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`character`</span>/<span class="in">`chr`</span>: string values\</span>
+<span id="cb55-93"><a href="#cb55-93" aria-hidden="true" tabindex="-1"></a>        e.g. *"hello"*, *"Two words"*</span>
+<span id="cb55-94"><a href="#cb55-94" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Factor</span>
+<span id="cb55-95"><a href="#cb55-95" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`factor`</span>/<span class="in">`fct`</span>: categorical variable that stores both string and integer data values as "levels"\</span>
+<span id="cb55-96"><a href="#cb55-96" aria-hidden="true" tabindex="-1"></a>        e.g. *Control*, *Treatment*</span>
+<span id="cb55-97"><a href="#cb55-97" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>TRUE/FALSE</span>
+<span id="cb55-98"><a href="#cb55-98" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span><span class="in">`logical`</span>/<span class="in">`logi`</span>: logical value\</span>
+<span id="cb55-99"><a href="#cb55-99" aria-hidden="true" tabindex="-1"></a>        either *TRUE* or *FALSE*</span>
+<span id="cb55-100"><a href="#cb55-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-101"><a href="#cb55-101" aria-hidden="true" tabindex="-1"></a><span class="fu"># vectors</span></span>
+<span id="cb55-102"><a href="#cb55-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-103"><a href="#cb55-103" aria-hidden="true" tabindex="-1"></a>Instead of dealing with single numbers, we obviously want to deal with entire datasets. Before we get to an entire table with multiple rows and columns, the first step is to understand what a *vector* is in R: It is *a sequence of elements that share the same data type*. I often think about them as a single column in my dataset. Above, we actually already looked at a vector: <span class="in">`letters`</span> is a built-in vector with 26 elements of the data type <span class="in">`character`</span>. We could check this via the <span class="in">`length()`</span> or <span class="in">`str()`</span> functions:</span>
+<span id="cb55-104"><a href="#cb55-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-107"><a href="#cb55-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-108"><a href="#cb55-108" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(letters)</span>
+<span id="cb55-109"><a href="#cb55-109" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(letters)</span>
+<span id="cb55-110"><a href="#cb55-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-111"><a href="#cb55-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-112"><a href="#cb55-112" aria-hidden="true" tabindex="-1"></a>Note how the built-in constant <span class="in">`pi`</span> is not a vector, because it's just a single number (*a.k.a.* a scalar).</span>
+<span id="cb55-113"><a href="#cb55-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-116"><a href="#cb55-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-117"><a href="#cb55-117" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pi)</span>
+<span id="cb55-118"><a href="#cb55-118" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(pi)</span>
+<span id="cb55-119"><a href="#cb55-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-120"><a href="#cb55-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-121"><a href="#cb55-121" aria-hidden="true" tabindex="-1"></a>If you want to create your own vector from scratch, you must put all the elements together in the <span class="in">`c()`</span> function and separate them with commas:</span>
+<span id="cb55-122"><a href="#cb55-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-125"><a href="#cb55-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-126"><a href="#cb55-126" aria-hidden="true" tabindex="-1"></a>mynumbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">16</span>)</span>
+<span id="cb55-127"><a href="#cb55-127" aria-hidden="true" tabindex="-1"></a>mynumbers</span>
+<span id="cb55-128"><a href="#cb55-128" aria-hidden="true" tabindex="-1"></a>mywords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hakuna"</span>, <span class="st">"Matata"</span>, <span class="st">"Simba"</span>)</span>
+<span id="cb55-129"><a href="#cb55-129" aria-hidden="true" tabindex="-1"></a>mywords</span>
+<span id="cb55-130"><a href="#cb55-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-131"><a href="#cb55-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-132"><a href="#cb55-132" aria-hidden="true" tabindex="-1"></a>Interestingly, we can still apply the <span class="in">`sqrt()`</span> function we used above to a vector with numbers and it will simply take the square-root of every element:</span>
+<span id="cb55-133"><a href="#cb55-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-136"><a href="#cb55-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-137"><a href="#cb55-137" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(mynumbers)</span>
+<span id="cb55-138"><a href="#cb55-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-139"><a href="#cb55-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-140"><a href="#cb55-140" aria-hidden="true" tabindex="-1"></a>However, there are also functions like <span class="in">`mean()`</span> which return the mean of all numbers in a vector as a single output element:</span>
+<span id="cb55-141"><a href="#cb55-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-144"><a href="#cb55-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-145"><a href="#cb55-145" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mynumbers)</span>
+<span id="cb55-146"><a href="#cb55-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-147"><a href="#cb55-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-148"><a href="#cb55-148" aria-hidden="true" tabindex="-1"></a><span class="fu"># function arguments</span></span>
+<span id="cb55-149"><a href="#cb55-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-150"><a href="#cb55-150" aria-hidden="true" tabindex="-1"></a>So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use <span class="in">`seq()`</span> as an example, which seems simple enough, because it generates a sequence of numbers:</span>
+<span id="cb55-151"><a href="#cb55-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-154"><a href="#cb55-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-155"><a href="#cb55-155" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb55-156"><a href="#cb55-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-157"><a href="#cb55-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-158"><a href="#cb55-158" aria-hidden="true" tabindex="-1"></a>As you can see, putting in <span class="in">`1`</span> and <span class="in">`10`</span> separated by a comma generates a numeric vector with numbers from 1 to 10. However, I would like you to fully understand what is going on here, because it will help a lot with more complex functions.</span>
+<span id="cb55-159"><a href="#cb55-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-160"><a href="#cb55-160" aria-hidden="true" tabindex="-1"></a>See, we could switch the numbers and the function will work as expected:</span>
+<span id="cb55-161"><a href="#cb55-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-164"><a href="#cb55-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-165"><a href="#cb55-165" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb55-166"><a href="#cb55-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-167"><a href="#cb55-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-168"><a href="#cb55-168" aria-hidden="true" tabindex="-1"></a>So this means that the first input is always the starting point and the second one is always the end point of the sequence, right? Well, yes by default, but you can have it your way if you specifically use the names of the arguments.</span>
+<span id="cb55-169"><a href="#cb55-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-170"><a href="#cb55-170" aria-hidden="true" tabindex="-1"></a>Looking at <span class="in">`?seq()`</span> it says <span class="in">`seq(from = 1, to = 1, by = ...)`</span> so this <span class="in">`seq(10, 1)`</span> is more explicitly this: <span class="in">`seq(from = 1, to = 10, by = 1)`</span>. Here is proof:</span>
+<span id="cb55-171"><a href="#cb55-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-174"><a href="#cb55-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-175"><a href="#cb55-175" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb55-176"><a href="#cb55-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-177"><a href="#cb55-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-178"><a href="#cb55-178" aria-hidden="true" tabindex="-1"></a>Again, if you do not write out the arguments like this, it will simply assume the default order: The first number supplied is <span class="in">`from =`</span> the second is <span class="in">`to =`</span> and the third is <span class="in">`by =`</span>. However, if we write out the arguments, we can use any order we like:</span>
+<span id="cb55-179"><a href="#cb55-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-182"><a href="#cb55-182" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb55-183"><a href="#cb55-183" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">2</span>)</span>
+<span id="cb55-184"><a href="#cb55-184" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb55-185"><a href="#cb55-185" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">9</span>)</span>
+<span id="cb55-186"><a href="#cb55-186" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span>
+<span id="cb55-187"><a href="#cb55-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb55-188"><a href="#cb55-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-189"><a href="#cb55-189" aria-hidden="true" tabindex="-1"></a>In short: If you understand why the first three lines of the code above produce the same result, but the last one does not, you are good to go!</span>
+<span id="cb55-190"><a href="#cb55-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-191"><a href="#cb55-191" aria-hidden="true" tabindex="-1"></a><span class="fu"># R packages</span></span>
+<span id="cb55-192"><a href="#cb55-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-193"><a href="#cb55-193" aria-hidden="true" tabindex="-1"></a>Any function is always part of an R package.</span>
+<span id="cb55-194"><a href="#cb55-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-195"><a href="#cb55-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## base R</span></span>
+<span id="cb55-196"><a href="#cb55-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-197"><a href="#cb55-197" aria-hidden="true" tabindex="-1"></a>After installing R there are many functions etc. you can use right away - which is what we did above. For example, when running <span class="in">`?mean`</span>, the help page will tell you that this function is part of the <span class="co">[</span><span class="ot">{base}</span><span class="co">](https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html)</span> package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the "Packages" tab in RStudio - you will find the *base* package and it will have a checked box next to it.</span>
+<span id="cb55-198"><a href="#cb55-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-199"><a href="#cb55-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## loading packages</span></span>
+<span id="cb55-200"><a href="#cb55-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-201"><a href="#cb55-201" aria-hidden="true" tabindex="-1"></a>When looking at the "Packages" tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is <span class="in">`library(package_name)`</span>. This command must be run once every time you open a new R session.</span>
+<span id="cb55-202"><a href="#cb55-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-203"><a href="#cb55-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## installing additional packages</span></span>
+<span id="cb55-204"><a href="#cb55-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-205"><a href="#cb55-205" aria-hidden="true" tabindex="-1"></a>R really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - *e.g.* the package `{ggplot2}`, which is not built-in, has been downloaded [75 million](https://cranlogs.r-pkg.org/badges/grand-total/ggplot2) times. In order to install a package, the default command is `install.packages(package_name)`. Alternatively, you can also click on the "Install" button in the top left of the "Packages" tab and type in the *package_name* there.</span>
+<span id="cb55-206"><a href="#cb55-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-207"><a href="#cb55-207" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb55-208"><a href="#cb55-208" aria-hidden="true" tabindex="-1"></a>A package only needs to be installed once, but\</span>
+<span id="cb55-209"><a href="#cb55-209" aria-hidden="true" tabindex="-1"></a>A package must be loaded every time you open a new R session!</span>
+<span id="cb55-210"><a href="#cb55-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb55-211"><a href="#cb55-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-212"><a href="#cb55-212" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Here</span><span class="co">](https://github.com/qinwf/awesome-R)</span> is a curated list of R packages and tools for different areas.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

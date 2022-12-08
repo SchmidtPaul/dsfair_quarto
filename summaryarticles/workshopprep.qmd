@@ -1,9 +1,5 @@
 ---
 title: "Prepare for an upcoming workshop"
-format:
-  html:
-    code-tools: false
-date: 2022-09-30
 ---
 
 Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare.

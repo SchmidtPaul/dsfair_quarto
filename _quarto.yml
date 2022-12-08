@@ -87,6 +87,8 @@ author:
 editor: visual
 abstract-title: "Content summary"
 bibliography: references.bib
+date: last-modified
+published-title: "Last updated"
 
 execute:
   warning: false

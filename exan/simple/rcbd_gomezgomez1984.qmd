@@ -1,6 +1,5 @@
 ---
 title: "Two-way randomized complete block design"
-date: 2022-11-20
 abstract: "Two-way ANOVA & pairwise comparison post hoc tests in a randomized complete block design."
 ---
 
@@ -28,7 +27,7 @@ conflict_prefer("select", "dplyr")
 
 # Data
 
-This data is a slightly modified version of a dataset originally published in Gomez & Gomez [-@gomez1984] from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
+This data is a slightly modified version of a dataset originally published in @gomez1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
 
 ## Import
 
@@ -170,7 +169,7 @@ ANOVA <- anova(mod)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically different (`r getp(ANOVA, "N:G")`). 
+Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically different (`r getp(ANOVA, "N:G")`).
 
 # Mean comparison
 

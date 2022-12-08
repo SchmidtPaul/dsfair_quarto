@@ -1,6 +1,5 @@
 ---
 title: "The tidyverse"
-date: 2022-10-09
 abstract: "Pipe (%>%), Tibbles, dplyr-verbs, long/wide format and more from the tidyverse."
 ---
 
@@ -460,7 +459,7 @@ tbl4 <- PlantGrowth %>%
 # this keep only rows 1,2,3,11,12,13,21,22,23
 ```
 
-We can arrange rows via writing the column name (or column index/number). Note that by default values are sorted in ascending order and strings are sorted alphabetically, but this can be reversed by using `desc()`: 
+We can arrange rows via writing the column name (or column index/number). Note that by default values are sorted in ascending order and strings are sorted alphabetically, but this can be reversed by using `desc()`:
 
 ::: columns
 ::: {.column width="49%"}
@@ -625,7 +624,7 @@ Once you used `group_by()` on a table, it stays grouped unless you use `ungroup(
 
 # long/wide format
 
-Sometimes, data is referred to as being in *long format* or *wide format*. As the name suggests, long formatted tables have more rows, but fewer columns than wide formatted tables, while containing the same information. I find the easiest way to understand the two is by looking at examples like in the following image, which was taken from [statology.org](https://www.statology.org/long-vs-wide-data/) [-@LongWideStatology]:
+Sometimes, data is referred to as being in *long format* or *wide format*. As the name suggests, long formatted tables have more rows, but fewer columns than wide formatted tables, while containing the same information. I find the easiest way to understand the two is by looking at examples like in the following image, which was taken from [statology.org](https://www.statology.org/long-vs-wide-data/):
 
 ```{r}
 #| echo: false

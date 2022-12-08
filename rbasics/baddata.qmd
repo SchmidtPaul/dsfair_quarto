@@ -1,6 +1,5 @@
 ---
 title: "Bad data & Outliers"
-date: 2022-10-17
 abstract: "Cleaning data, dealing with missing data and comparing results for correlation and regression before vs. after removing an outlier from the data."
 ---
 
@@ -200,16 +199,16 @@ dat %>%
   filter(vision == 3)
 ```
 
-We find that it was 26 year old Rolando who supposedly had a vision score of only 3. 
+We find that it was 26 year old Rolando who supposedly had a vision score of only 3.
 
 ## Step 2: Act
 
 Since we pretend it is you who collected the data, you should now
 
- - think back if you can actually remember Rolando and if he had poor vision and/or
+-   think back if you can actually remember Rolando and if he had poor vision and/or
 
- - find other documents such as your handwritten sheets to verify this number and make sure you did not make any typos transferring the data to your computer.
- 
+-   find other documents such as your handwritten sheets to verify this number and make sure you did not make any typos transferring the data to your computer.
+
 This may reaffirm or correct the suspicious data point and thus end the discussion on whether it is an outlier that should be removed from the data. However, you may also decide to delete this value. Yet, it must be realized, that deleting one or multiple values from a dataset almost always affects the results from subsequent statistical analyses - especially if the values stick out from the rest.
 
 # Corr. & Reg. - again
@@ -328,9 +327,9 @@ ggplot(data = dat_noRo) +
 :::
 :::
 
-As we can see, removing Rolando from the dataset changed the correlation  quite a bit from -0.5 to -0.7. Furthermore, it's p-value became notably smaller. While it was already < 0.05 and thus statistically significant in this case, it must be realized that in other cases removing a single data point can indeed make the difference between a p-value larger and smaller 0.05. 
+As we can see, removing Rolando from the dataset changed the correlation quite a bit from -0.5 to -0.7. Furthermore, it's p-value became notably smaller. While it was already \< 0.05 and thus statistically significant in this case, it must be realized that in other cases removing a single data point can indeed make the difference between a p-value larger and smaller 0.05.
 
-Yet, regarding the parameter estimates - intercept ($a$) and slope ($b$) - of the simple linear regression, the changes are not as striking. Even with a visual comparison of the two regression lines, one must look closely to spot the differences. 
+Yet, regarding the parameter estimates - intercept ($a$) and slope ($b$) - of the simple linear regression, the changes are not as striking. Even with a visual comparison of the two regression lines, one must look closely to spot the differences.
 
 ## R² - Coeff. of det.
 
@@ -353,6 +352,4 @@ glance(reg_noRo)
 :::
 :::
 
-
 Finally, we find that removing Rolando from the dataset increased the $R^2$ for the simple linear regression from 25% to 49%.
-

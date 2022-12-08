@@ -19,5 +19,3 @@ Moreover, the articles published here serve as the basis for any of my R‑Works
 -   ["Prepare for an upcoming workshop"](summaryarticles/workshopprep.qmd)
 
 -   and my [list of workshops](https://schmidtpaul.github.io/)
-
-

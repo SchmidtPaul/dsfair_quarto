@@ -1,6 +1,5 @@
 ---
 title: "Useful things"
-date: 2022-10-09
 abstract: "A personal collection of useful R packages and more."
 ---
 
@@ -17,41 +16,26 @@ This chapter is a collection of things I wish I had known earlier in my years us
 
 In R, results from statistical tests, models etc. are often formatted in a way that may not be optimal for further processing steps. Luckily, [{broom}](https://broom.tidymodels.org/) will format the results of [the most common functions](https://broom.tidymodels.org/articles/available-methods.html) into [tidy data structures](https://www.jstatsoft.org/article/view/v059i10).
 
-::: columns
-::: {.column width="49%"}
 ```{r}
-# Correlation Analysis
-# for built-in example
-# data "mtcars"
-cor.test(mtcars$mpg, 
-         mtcars$disp)
-```
-:::
+# Correlation Analysis for built-in example data "mtcars"
+mycor <- cor.test(mtcars$mpg, mtcars$disp)
+mycor
 
-::: {.column width="2%"}
-:::
-
-::: {.column width="49%"}
-```{r}
 library(broom)
-library(tidyverse)
-
-cor.test(mtcars$mpg,
-         mtcars$disp) %>%
-  tidy()
+tidy(mycor)
 ```
-:::
-:::
 
 # `{conflicted}`
 
-Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used. 
+Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used.
+
+TO DO
 
 # `{desplot}`
 
-[{desplot}](https://kwstat.github.io/desplot/) makes it easy to plot experimental designs of field trials in agriculture. However, you do need two columns that provide the x and y coordinates of the individual plots on your field. 
+[{desplot}](https://kwstat.github.io/desplot/) makes it easy to plot experimental designs of field trials in agriculture. However, you do need two columns that provide the x and y coordinates of the individual plots on your field.
 
-TO DO 
+TO DO
 
 # `{dlookr}`
 
@@ -103,7 +87,6 @@ library(ggplot2)
 ggplot() +
   
   
-  
   aes(y = 1, x = 1, label = longtext) +
   geom_label() +
   labs(caption = longtext)
@@ -121,8 +104,7 @@ library(ggtext)
 
 ggplot() +
   theme(plot.caption =
-          element_textbox_simple()
-        ) +
+          element_textbox_simple()) +
   aes(y = 1, x = 1, label = longtext) +
   geom_textbox() +
   labs(caption = longtext)
