@@ -48,7 +48,13 @@ website:
       - icon: github
         href: https://github.com/
         aria-label: GitHub
-  twitter-card: true
+  favicon: img/favicon-32x32.png
+  site-url: https://schmidtpaul.github.io/dsfair_quarto/
+  twitter-card:
+    title: "Data Science for Agriculture in R"
+    description: "a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields"
+    image: img/hexagonDSFAIR.png
+    creator: "@SchmidtPaul1989"
   # cookie-consent: true
 
 format:
@@ -98,6 +104,9 @@ execute:
 fig-dpi: 300
 fig-width: 5.5
 fig-height: 3.5
+
+body-header: | 
+  <meta property="og:image" content="img/hexagonDSFAIR.png" />
 
 filters: 
   - src/custom-callout-addref.lua

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -31,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./img/favicon-32x32.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,9 +63,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="dsfair_quarto - Data Science for Agriculture in R">
-<meta name="twitter:description" content="DSFAIR - Data Science for Agriculture in R provides a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other…">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Science for Agriculture in R">
+<meta name="twitter:description" content="a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields">
+<meta name="twitter:image" content="https://schmidtpaul.github.io/dsfair_quarto/img\hexagonDSFAIR.png">
+<meta name="twitter:creator" content="@SchmidtPaul1989">
+<meta name="twitter:image-height" content="1824">
+<meta name="twitter:image-width" content="1580">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -84,10 +89,13 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+    <a class="nav-link active" href="./index.html" aria-current="page">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">R Basics</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">R Basics</span>
+    </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
         <li>
     <a class="dropdown-item" href="./rbasics/firststeps.html">
@@ -108,7 +116,9 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">Simple Experiments</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Simple Experiments</span>
+    </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">    
         <li>
     <a class="dropdown-item" href="./exan/simple/crd_mead1993.html">
@@ -129,9 +139,11 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="dropdown-header">
- Complex Experiments</li>
+ <span class="menu-text">Complex Experiments</span></li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">Summary Articles</a>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Summary Articles</span>
+    </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
         <li>
     <a class="dropdown-item" href="./summaryarticles/usefulthings.html">
@@ -155,12 +167,13 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="https://schmidtpaul.github.io/">Contact</a>
+    <a class="nav-link" href="https://schmidtpaul.github.io/">
+ <span class="menu-text">Contact</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
- </a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -212,6 +225,7 @@ ul.task-list li input[type="checkbox"] {
       <p class="date">November 21, 2022</p>
     </div>
   </div>
+  
     
   </div>
   
@@ -285,7 +299,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -321,24 +352,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
