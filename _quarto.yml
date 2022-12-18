@@ -30,6 +30,8 @@ website:
             href: exan/simple/latsq_bridges1989.qmd
           - text: 2w RCBD (Gomez & Gomez 1984)
             href: exan/simple/rcbd_gomezgomez1984.qmd
+          - text: 2w split-plot (Gomez & Gomez 1984)
+            href: exan/simple/splitplot_gomezgomez1984.qmd
       - text: Complex Experiments
       - text: Summary Articles
         menu:
@@ -38,6 +40,7 @@ website:
           - text: Compact Letter Display
             href: summaryarticles/compactletterdisplay.qmd
           - text: Designing Experiments
+            href: summaryarticles/designingexperiments.qmd
           - text: Model Diagnostics
             href: summaryarticles/modeldiagnostics.qmd
           - text: Workshop prep
@@ -49,6 +52,7 @@ website:
         href: https://github.com/
         aria-label: GitHub
   favicon: img/favicon-32x32.png
+  image: img/hexagonDSFAIR.png
   site-url: https://schmidtpaul.github.io/dsfair_quarto/
   twitter-card:
     title: "Data Science for Agriculture in R"

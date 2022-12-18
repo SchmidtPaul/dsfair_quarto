@@ -99,6 +99,7 @@ Ncolors <- met.brewer("VanGogh2", 6) %>%
 
 ```{r}
 #| code-fold: true
+#| fig-height: 4
 ggplot(data = dat) +
   aes(y = yield, x = N, color = N) +
   facet_wrap(~G, labeller = label_both) +
@@ -139,7 +140,7 @@ desplot(
   form = rep ~ col + row | rep, # fill color per rep, headers per rep
   col.regions = c("white", "grey95", "grey90"),
   text = G, # genotype names per plot
-  cex = 1, # genotype names: font size
+  cex = 0.8, # genotype names: font size
   shorten = "abb", # genotype names: abbreviate
   col = N, # color of genotype names for each N-level
   col.text = Ncolors, # use custom colors from above
@@ -159,14 +160,14 @@ desplot(
   data = dat,
   form = yield ~ col + row | rep, # fill color per rep, headers per rep
   text = G, # genotype names per plot
-  cex = 1, # genotype names: font size
+  cex = 0.8, # genotype names: font size
   shorten = "abb", # genotype names: abbreviate
   col  = N, # color of genotype names for each N-level
   col.text = Ncolors, # use custom colors from above
   out1 = col, out1.gpar = list(col = "darkgrey"), # lines between columns
   out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
   main = "Yield per plot", # plot title
-  show.key = TRUE, # show legend
+  show.key = FALSE, # show legend
   key.cex = 0.7 # legend font size
   )
 ```
@@ -241,7 +242,7 @@ Finally, we can create a plot that displays both the raw data and the results, *
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
+#| fig-height: 5
 
 my_caption <- "The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."
 

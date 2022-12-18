@@ -207,6 +207,10 @@ div.csl-indent {
     <a class="dropdown-item" href="../../exan/simple/rcbd_gomezgomez1984.html">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../exan/simple/splitplot_gomezgomez1984.html">
+ <span class="dropdown-text">2w split-plot (Gomez &amp; Gomez 1984)</span></a>
+  </li>  
     </ul>
 </li>
   <li class="dropdown-header">
@@ -225,7 +229,10 @@ div.csl-indent {
     <a class="dropdown-item" href="../../summaryarticles/compactletterdisplay.html">
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
-        <li class="dropdown-header">Designing Experiments</li>
+        <li>
+    <a class="dropdown-item" href="../../summaryarticles/designingexperiments.html">
+ <span class="dropdown-text">Designing Experiments</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../../summaryarticles/modeldiagnostics.html">
  <span class="dropdown-text">Model Diagnostics</span></a>
@@ -478,7 +485,12 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 <span>    values <span class="op">=</span> <span class="va">Ncolors</span>, </span>
 <span>    guide <span class="op">=</span> <span class="st">"none"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span></span>
+<span>    angle <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>    hjust <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    vjust <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <p><img src="rcbd_gomezgomez1984_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1650"></p>
 </div>
@@ -490,8 +502,8 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 <span>  form <span class="op">=</span> <span class="va">rep</span> <span class="op">~</span> <span class="va">col</span> <span class="op">+</span> <span class="va">row</span> <span class="op">|</span> <span class="va">rep</span>, <span class="co"># fill color per rep, headers per rep</span></span>
 <span>  col.regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"grey95"</span>, <span class="st">"grey90"</span><span class="op">)</span>,</span>
 <span>  text <span class="op">=</span> <span class="va">G</span>, <span class="co"># genotype names per plot</span></span>
-<span>  cex <span class="op">=</span> <span class="fl">1</span>, <span class="co"># genotype names: font size</span></span>
-<span>  shorten <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># genotype names: don't abbreviate</span></span>
+<span>  cex <span class="op">=</span> <span class="fl">0.8</span>, <span class="co"># genotype names: font size</span></span>
+<span>  shorten <span class="op">=</span> <span class="st">"abb"</span>, <span class="co"># genotype names: abbreviate</span></span>
 <span>  col <span class="op">=</span> <span class="va">N</span>, <span class="co"># color of genotype names for each N-level</span></span>
 <span>  col.text <span class="op">=</span> <span class="va">Ncolors</span>, <span class="co"># use custom colors from above</span></span>
 <span>  out1 <span class="op">=</span> <span class="va">col</span>, out1.gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span>, <span class="co"># lines between columns</span></span>
@@ -511,14 +523,14 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 <span>  data <span class="op">=</span> <span class="va">dat</span>,</span>
 <span>  form <span class="op">=</span> <span class="va">yield</span> <span class="op">~</span> <span class="va">col</span> <span class="op">+</span> <span class="va">row</span> <span class="op">|</span> <span class="va">rep</span>, <span class="co"># fill color per rep, headers per rep</span></span>
 <span>  text <span class="op">=</span> <span class="va">G</span>, <span class="co"># genotype names per plot</span></span>
-<span>  cex <span class="op">=</span> <span class="fl">1</span>, <span class="co"># genotype names: font size</span></span>
-<span>  shorten <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># genotype names: don't abbreviate</span></span>
+<span>  cex <span class="op">=</span> <span class="fl">0.8</span>, <span class="co"># genotype names: font size</span></span>
+<span>  shorten <span class="op">=</span> <span class="st">"abb"</span>, <span class="co"># genotype names: abbreviate</span></span>
 <span>  col  <span class="op">=</span> <span class="va">N</span>, <span class="co"># color of genotype names for each N-level</span></span>
 <span>  col.text <span class="op">=</span> <span class="va">Ncolors</span>, <span class="co"># use custom colors from above</span></span>
 <span>  out1 <span class="op">=</span> <span class="va">col</span>, out1.gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span>, <span class="co"># lines between columns</span></span>
 <span>  out2 <span class="op">=</span> <span class="va">row</span>, out2.gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span>, <span class="co"># lines between rows</span></span>
 <span>  main <span class="op">=</span> <span class="st">"Yield per plot"</span>, <span class="co"># plot title</span></span>
-<span>  show.key <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># show legend</span></span>
+<span>  show.key <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># show legend</span></span>
 <span>  key.cex <span class="op">=</span> <span class="fl">0.7</span> <span class="co"># legend font size</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -698,8 +710,15 @@ NOTE: If two or more means share the same grouping symbol,
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span>caption <span class="op">=</span> <span class="va">my_caption</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme</span><span class="op">(</span>plot.caption <span class="op">=</span> <span class="fu">element_textbox_simple</span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">margin</span><span class="op">(</span>t <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>        plot.caption.position <span class="op">=</span> <span class="st">"plot"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">theme</span><span class="op">(</span></span>
+<span>    plot.caption <span class="op">=</span> <span class="fu">element_textbox_simple</span><span class="op">(</span>margin <span class="op">=</span> <span class="fu">margin</span><span class="op">(</span>t <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    plot.caption.position <span class="op">=</span> <span class="st">"plot"</span>,</span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span></span>
+<span>      angle <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>      hjust <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>      vjust <span class="op">=</span> <span class="fl">1</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <p><img src="rcbd_gomezgomez1984_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="1650"></p>
 </div>
@@ -998,195 +1017,208 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
-<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">x =</span> N, <span class="at">color =</span> N) <span class="sc">+</span></span>
-<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>G, <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
-<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> mean,</span>
-<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey"</span>,</span>
-<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
-<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"dotted"</span>,</span>
-<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="dv">1</span></span>
-<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Nitrogen"</span></span>
-<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
-<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
-<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> Ncolors, </span>
-<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
-<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a>Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via <span class="in">`desplot()`</span> from <span class="co">[</span><span class="ot">{desplot}</span><span class="co">](../../summaryarticles/usefulthings.qmd#desplot)</span>.</span>
-<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
-<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> rep <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
-<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"grey95"</span>, <span class="st">"grey90"</span>),</span>
-<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> G, <span class="co"># genotype names per plot</span></span>
-<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="dv">1</span>, <span class="co"># genotype names: font size</span></span>
-<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="cn">FALSE</span>, <span class="co"># genotype names: don't abbreviate</span></span>
-<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> N, <span class="co"># color of genotype names for each N-level</span></span>
-<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.text =</span> Ncolors, <span class="co"># use custom colors from above</span></span>
-<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
-<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
-<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Field layout"</span>, <span class="co"># plot title</span></span>
-<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">TRUE</span>, <span class="co"># show legend</span></span>
-<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.7</span> <span class="co"># legend font size</span></span>
-<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
-<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> yield <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
-<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> G, <span class="co"># genotype names per plot</span></span>
-<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="dv">1</span>, <span class="co"># genotype names: font size</span></span>
-<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="cn">FALSE</span>, <span class="co"># genotype names: don't abbreviate</span></span>
-<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">col  =</span> N, <span class="co"># color of genotype names for each N-level</span></span>
-<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.text =</span> Ncolors, <span class="co"># use custom colors from above</span></span>
-<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
-<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
-<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Yield per plot"</span>, <span class="co"># plot title</span></span>
-<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">TRUE</span>, <span class="co"># show legend</span></span>
-<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.7</span> <span class="co"># legend font size</span></span>
-<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a>repcolors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">met.brewer</span>(<span class="st">"VanGogh3"</span>, <span class="dv">1</span>),</span>
-<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>               <span class="fu">met.brewer</span>(<span class="st">"Hokusai2"</span>, <span class="dv">1</span>),</span>
-<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a>               <span class="fu">met.brewer</span>(<span class="st">"OKeeffe2"</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">levels</span>(dat<span class="sc">$</span>rep))</span>
-<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
-<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> rep <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
-<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.regions =</span> repcolors,</span>
-<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
-<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
-<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Experimental design focus"</span>, <span class="co"># plot title</span></span>
-<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">FALSE</span> <span class="co"># don't show legend</span></span>
-<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model</span></span>
-<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a>Finally, we can decide to fit a linear model with yield as the response variable. In this example it makes sense to mentally group the effects in our model as either *design effects* or *treatment effects*. The treatments here are the genotypes <span class="in">`G`</span> and the nitrogen levels <span class="in">`N`</span> which we will include in the model as main effects, but also via their interaction effect <span class="in">`N:G`</span>. Regarding the design, the model needs to contain a block (<span class="in">`rep`</span>) effect.</span>
-<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>  yield <span class="sc">~</span> N <span class="sc">+</span> G <span class="sc">+</span> N<span class="sc">:</span>G <span class="sc">+</span> rep,</span>
-<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat</span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>::: custom-callout-modass</span>
-<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a>It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the <span class="co">[</span><span class="ot">summary article "Model Diagnostics"</span><span class="co">](../../summaryarticles/modeldiagnostics.qmd)</span></span>
-<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANOVA</span></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">x =</span> N, <span class="at">color =</span> N) <span class="sc">+</span></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>G, <span class="at">labeller =</span> label_both) <span class="sc">+</span></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> mean,</span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey"</span>,</span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"line"</span>,</span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"dotted"</span>,</span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="dv">1</span></span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Nitrogen"</span></span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> Ncolors, </span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span></span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a>Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via <span class="in">`desplot()`</span> from <span class="co">[</span><span class="ot">{desplot}</span><span class="co">](../../summaryarticles/usefulthings.qmd#desplot)</span>.</span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> rep <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.regions =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"grey95"</span>, <span class="st">"grey90"</span>),</span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> G, <span class="co"># genotype names per plot</span></span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="co"># genotype names: font size</span></span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="st">"abb"</span>, <span class="co"># genotype names: abbreviate</span></span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> N, <span class="co"># color of genotype names for each N-level</span></span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.text =</span> Ncolors, <span class="co"># use custom colors from above</span></span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Field layout"</span>, <span class="co"># plot title</span></span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">TRUE</span>, <span class="co"># show legend</span></span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.7</span> <span class="co"># legend font size</span></span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> yield <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> G, <span class="co"># genotype names per plot</span></span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="co"># genotype names: font size</span></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="st">"abb"</span>, <span class="co"># genotype names: abbreviate</span></span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a>  <span class="at">col  =</span> N, <span class="co"># color of genotype names for each N-level</span></span>
+<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.text =</span> Ncolors, <span class="co"># use custom colors from above</span></span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
+<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
+<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Yield per plot"</span>, <span class="co"># plot title</span></span>
+<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">FALSE</span>, <span class="co"># show legend</span></span>
+<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.7</span> <span class="co"># legend font size</span></span>
+<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a>repcolors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">met.brewer</span>(<span class="st">"VanGogh3"</span>, <span class="dv">1</span>),</span>
+<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a>               <span class="fu">met.brewer</span>(<span class="st">"Hokusai2"</span>, <span class="dv">1</span>),</span>
+<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a>               <span class="fu">met.brewer</span>(<span class="st">"OKeeffe2"</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.vector</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">levels</span>(dat<span class="sc">$</span>rep))</span>
+<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
+<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> rep <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per rep, headers per rep</span></span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.regions =</span> repcolors,</span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> col, <span class="at">out1.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between columns</span></span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Experimental design focus"</span>, <span class="co"># plot title</span></span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">FALSE</span> <span class="co"># don't show legend</span></span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model</span></span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a>Finally, we can decide to fit a linear model with yield as the response variable. In this example it makes sense to mentally group the effects in our model as either *design effects* or *treatment effects*. The treatments here are the genotypes <span class="in">`G`</span> and the nitrogen levels <span class="in">`N`</span> which we will include in the model as main effects, but also via their interaction effect <span class="in">`N:G`</span>. Regarding the design, the model needs to contain a block (<span class="in">`rep`</span>) effect.</span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a>  yield <span class="sc">~</span> N <span class="sc">+</span> G <span class="sc">+</span> N<span class="sc">:</span>G <span class="sc">+</span> rep,</span>
+<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat</span>
+<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a>Based on our model, we can then conduct an ANOVA:</span>
-<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod)</span>
-<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a>ANOVA</span>
-<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically different (<span class="in">`r getp(ANOVA, "N:G")`</span>).</span>
-<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mean comparison</span></span>
-<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.). Especially because of the results of this ANOVA, we should compare means for all <span class="in">`N:G`</span> interactions and **not** for the <span class="in">`N`</span> and/or <span class="in">`G`</span> main effects. When doing so, we still have multiple options to choose from. I here decide to compare all genotype means per nitrogen</span>
+<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a>::: custom-callout-modass</span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a>It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the <span class="co">[</span><span class="ot">summary article "Model Diagnostics"</span><span class="co">](../../summaryarticles/modeldiagnostics.qmd)</span></span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANOVA</span></span>
+<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a>Based on our model, we can then conduct an ANOVA:</span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod)</span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>ANOVA</span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> </span>
-<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> N<span class="sc">|</span>G) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
-<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
-<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
-<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <span class="in">`details = TRUE`</span> to the <span class="in">`cld()`</span> statement. Furthermore, check out the <span class="co">[</span><span class="ot">Summary Article "Compact Letter Display"</span><span class="co">](../../summaryarticles/compactletterdisplay.qmd)</span>.</span>
-<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.</span>
-<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically different (<span class="in">`r getp(ANOVA, "N:G")`</span>).</span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mean comparison</span></span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.). Especially because of the results of this ANOVA, we should compare means for all <span class="in">`N:G`</span> interactions and **not** for the <span class="in">`N`</span> and/or <span class="in">`G`</span> main effects. When doing so, we still have multiple options to choose from. I here decide to compare all genotype means per nitrogen</span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> </span>
+<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> N<span class="sc">|</span>G) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
+<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <span class="in">`details = TRUE`</span> to the <span class="in">`cld()`</span> statement. Furthermore, check out the <span class="co">[</span><span class="ot">Summary Article "Compact Letter Display"</span><span class="co">](../../summaryarticles/compactletterdisplay.qmd)</span>.</span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a>Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.</span>
 <span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
-<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>G, <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># facette per G level</span></span>
-<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> N) <span class="sc">+</span></span>
-<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a>  <span class="co"># black dots representing the raw data</span></span>
-<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">color =</span> N)</span>
-<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red dots representing the adjusted means</span></span>
-<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean),</span>
-<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
-<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red error bars representing the confidence limits of the adjusted means</span></span>
-<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb23-292"><a href="#cb23-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb23-293"><a href="#cb23-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL),</span>
-<span id="cb23-294"><a href="#cb23-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb23-295"><a href="#cb23-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.1</span>,</span>
-<span id="cb23-296"><a href="#cb23-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
-<span id="cb23-297"><a href="#cb23-297" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-298"><a href="#cb23-298" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red letters </span></span>
-<span id="cb23-299"><a href="#cb23-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb23-300"><a href="#cb23-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb23-301"><a href="#cb23-301" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">label =</span> <span class="fu">str_trim</span>(.group)),</span>
-<span id="cb23-302"><a href="#cb23-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb23-303"><a href="#cb23-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.35</span>),</span>
-<span id="cb23-304"><a href="#cb23-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span></span>
-<span id="cb23-305"><a href="#cb23-305" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-306"><a href="#cb23-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb23-307"><a href="#cb23-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Nitrogen"</span></span>
-<span id="cb23-308"><a href="#cb23-308" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-309"><a href="#cb23-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb23-310"><a href="#cb23-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
-<span id="cb23-311"><a href="#cb23-311" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb23-312"><a href="#cb23-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
-<span id="cb23-313"><a href="#cb23-313" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-314"><a href="#cb23-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb23-315"><a href="#cb23-315" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> Ncolors, </span>
-<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
-<span id="cb23-317"><a href="#cb23-317" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-318"><a href="#cb23-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb23-319"><a href="#cb23-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my_caption) <span class="sc">+</span></span>
-<span id="cb23-320"><a href="#cb23-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>)),</span>
-<span id="cb23-321"><a href="#cb23-321" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>)</span>
-<span id="cb23-322"><a href="#cb23-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>G, <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># facette per G level</span></span>
+<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> N) <span class="sc">+</span></span>
+<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>  <span class="co"># black dots representing the raw data</span></span>
+<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">color =</span> N)</span>
+<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red dots representing the adjusted means</span></span>
+<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb23-292"><a href="#cb23-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean),</span>
+<span id="cb23-293"><a href="#cb23-293" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb23-294"><a href="#cb23-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
+<span id="cb23-295"><a href="#cb23-295" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-296"><a href="#cb23-296" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red error bars representing the confidence limits of the adjusted means</span></span>
+<span id="cb23-297"><a href="#cb23-297" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb23-298"><a href="#cb23-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb23-299"><a href="#cb23-299" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL),</span>
+<span id="cb23-300"><a href="#cb23-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb23-301"><a href="#cb23-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.1</span>,</span>
+<span id="cb23-302"><a href="#cb23-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
+<span id="cb23-303"><a href="#cb23-303" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-304"><a href="#cb23-304" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red letters </span></span>
+<span id="cb23-305"><a href="#cb23-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb23-306"><a href="#cb23-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb23-307"><a href="#cb23-307" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">label =</span> <span class="fu">str_trim</span>(.group)),</span>
+<span id="cb23-308"><a href="#cb23-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb23-309"><a href="#cb23-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.35</span>),</span>
+<span id="cb23-310"><a href="#cb23-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span></span>
+<span id="cb23-311"><a href="#cb23-311" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-312"><a href="#cb23-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb23-313"><a href="#cb23-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Nitrogen"</span></span>
+<span id="cb23-314"><a href="#cb23-314" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-315"><a href="#cb23-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
+<span id="cb23-317"><a href="#cb23-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb23-318"><a href="#cb23-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb23-319"><a href="#cb23-319" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-320"><a href="#cb23-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb23-321"><a href="#cb23-321" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> Ncolors, </span>
+<span id="cb23-322"><a href="#cb23-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="st">"none"</span></span>
+<span id="cb23-323"><a href="#cb23-323" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-324"><a href="#cb23-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-325"><a href="#cb23-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my_caption) <span class="sc">+</span></span>
+<span id="cb23-326"><a href="#cb23-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-327"><a href="#cb23-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>)),</span>
+<span id="cb23-328"><a href="#cb23-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb23-329"><a href="#cb23-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb23-330"><a href="#cb23-330" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb23-331"><a href="#cb23-331" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-332"><a href="#cb23-332" aria-hidden="true" tabindex="-1"></a>      <span class="at">vjust =</span> <span class="dv">1</span></span>
+<span id="cb23-333"><a href="#cb23-333" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-334"><a href="#cb23-334" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-335"><a href="#cb23-335" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
