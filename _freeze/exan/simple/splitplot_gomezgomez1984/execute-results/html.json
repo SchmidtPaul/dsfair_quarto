@@ -1,0 +1,14 @@
+{
+  "hash": "a3eb93696dc0acfee8dd67ef29edbd60",
+  "result": {
+    "markdown": "---\ntitle: \"Two-way split-plot design\"\nabstract: \"Two-way ANOVA & pairwise comparison post hoc tests in a split-plot design.\"\n---\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")\n```\n:::\n\n\n# Data\n\nThis dataset was originally published in @gomez1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).\n\n## Import\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n```{.custom-output}\n# data is available online:\npath <- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Gomez&Gomez1984.csv\"\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ndat <- read_csv(path) # use path from above\ndat\n```\n\n::: {.cell-output .cell-output-stdout}\n```{.custom-output}\n# A tibble: 72 × 7\n   yield   row   col rep   mainplot G     N     \n   <dbl> <dbl> <dbl> <chr> <chr>    <chr> <chr> \n 1  4520     4     1 rep1  mp1      Simba Goomba\n 2  5598     2     2 rep1  mp2      Simba Koopa \n 3  6192     1     3 rep1  mp3      Simba Toad  \n 4  8542     2     4 rep1  mp4      Simba Peach \n 5  5806     2     5 rep1  mp5      Simba Diddy \n 6  7470     1     6 rep1  mp6      Simba Yoshi \n 7  4034     2     1 rep1  mp1      Nala  Goomba\n 8  6682     4     2 rep1  mp2      Nala  Koopa \n 9  6869     3     3 rep1  mp3      Nala  Toad  \n10  6318     4     4 rep1  mp4      Nala  Peach \n# … with 62 more rows\n```\n:::\n:::\n\n\n## Format\n\nBefore anything, the columns `rep`, `N` and `G` should be encoded as factors, since R by default encoded them as character.\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndat <- dat %>%\n  mutate(across(c(rep, N, G), ~ as.factor(.x)))\n```\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

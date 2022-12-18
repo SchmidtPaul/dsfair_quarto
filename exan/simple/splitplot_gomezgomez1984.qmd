@@ -1,0 +1,54 @@
+---
+title: "Two-way split-plot design"
+abstract: "Two-way ANOVA & pairwise comparison post hoc tests in a split-plot design."
+---
+
+```{r}
+#| include: false
+source(here::here("helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  lme4,
+  lmerTest,
+  MetBrewer,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
+```
+
+# Data
+
+This dataset was originally published in @gomez1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
+
+## Import
+
+```{r}
+#| echo: false
+path <- here::here("data", "Gomez&Gomez1984.csv")
+get_url_from_path(path)
+```
+
+```{r}
+dat <- read_csv(path) # use path from above
+dat
+```
+
+## Format
+
+Before anything, the columns `rep`, `N` and `G` should be encoded as factors, since R by default encoded them as character.
+
+```{r}
+dat <- dat %>%
+  mutate(across(c(rep, N, G), ~ as.factor(.x)))
+```

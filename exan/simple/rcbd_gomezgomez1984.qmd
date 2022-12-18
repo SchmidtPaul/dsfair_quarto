@@ -122,28 +122,80 @@ ggplot(data = dat) +
     values = Ncolors, 
     guide = "none"
   ) +
-  theme_bw()
+  theme_bw() +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    vjust = 1
+  ))
 ```
 
 Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../summaryarticles/usefulthings.qmd#desplot).
 
 ```{r}
 #| code-fold: true
-desplot(data = dat,
-        form = rep ~ col + row | rep, # fill color per rep, headers per rep
-        col.regions = c("white", "grey95", "grey90"),
-        text = G, # genotype names per plot
-        cex = 1, # genotype names: font size
-        shorten = FALSE, # genotype names: don't abbreviate
-        col  = N, # color of genotype names for each N-level
-        col.text = Ncolors, # use custom colors from above
-        out1 = col, out1.gpar = list(col = "darkgrey"), # lines between columns
-        out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
-        main = "Field layout", # plot title
-        show.key = TRUE, # show legend
-        key.cex = 0.7 # legend font size
-        )
+desplot(
+  data = dat,
+  form = rep ~ col + row | rep, # fill color per rep, headers per rep
+  col.regions = c("white", "grey95", "grey90"),
+  text = G, # genotype names per plot
+  cex = 1, # genotype names: font size
+  shorten = "abb", # genotype names: abbreviate
+  col = N, # color of genotype names for each N-level
+  col.text = Ncolors, # use custom colors from above
+  out1 = col, out1.gpar = list(col = "darkgrey"), # lines between columns
+  out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
+  main = "Field layout", # plot title
+  show.key = TRUE, # show legend
+  key.cex = 0.7 # legend font size
+  )
 ```
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  form = yield ~ col + row | rep, # fill color per rep, headers per rep
+  text = G, # genotype names per plot
+  cex = 1, # genotype names: font size
+  shorten = "abb", # genotype names: abbreviate
+  col  = N, # color of genotype names for each N-level
+  col.text = Ncolors, # use custom colors from above
+  out1 = col, out1.gpar = list(col = "darkgrey"), # lines between columns
+  out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
+  main = "Yield per plot", # plot title
+  show.key = TRUE, # show legend
+  key.cex = 0.7 # legend font size
+  )
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+repcolors <- c(met.brewer("VanGogh3", 1),
+               met.brewer("Hokusai2", 1),
+               met.brewer("OKeeffe2", 1)) %>%
+  as.vector() %>%
+  set_names(levels(dat$rep))
+
+desplot(
+  data = dat,
+  form = rep ~ col + row | rep, # fill color per rep, headers per rep
+  col.regions = repcolors,
+  out1 = col, out1.gpar = list(col = "darkgrey"), # lines between columns
+  out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
+  main = "Experimental design focus", # plot title
+  show.key = FALSE # don't show legend
+  )
+```
+:::
+:::
 
 # Model
 
@@ -238,6 +290,13 @@ ggplot() +
   ) +
   theme_bw() +
   labs(caption = my_caption) +
-  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
-        plot.caption.position = "plot")
+  theme(
+    plot.caption = element_textbox_simple(margin = margin(t = 5)),
+    plot.caption.position = "plot",
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      vjust = 1
+    )
+  )
 ```
