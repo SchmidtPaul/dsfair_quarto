@@ -5,7 +5,7 @@ abstract: "Correlation and simple linear regression (with and without intercept)
 
 ```{r}
 #| include: false
-source(here::here("helpersrc.R"))
+source(here::here("src/helpersrc.R"))
 ```
 
 This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn't have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.

@@ -5,7 +5,7 @@ abstract: "One-way ANOVA & pairwise comparison post hoc tests in a randomized co
 
 ```{r}
 #| include: false
-source(here::here("helpersrc.R"))
+source(here::here("src/helpersrc.R"))
 ```
 
 ```{r}

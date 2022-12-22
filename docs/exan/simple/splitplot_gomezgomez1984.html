@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2022-12-18">
+<meta name="dcterms.date" content="2022-12-19">
 <title>dsfair_quarto - Two-way split-plot design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -311,7 +311,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 18, 2022</p>
+      <p class="date">December 19, 2022</p>
     </div>
   </div>
   
@@ -557,7 +557,7 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 <span>  out2 <span class="op">=</span> <span class="va">row</span>, out2.gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span>, <span class="co"># lines between rows</span></span>
 <span>  main <span class="op">=</span> <span class="st">"Experimental design focus"</span>, <span class="co"># plot title</span></span>
 <span>  show.key <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># don't show legend</span></span>
-<span>  key.cex <span class="op">=</span> <span class="fl">0.5</span></span>
+<span>  key.cex <span class="op">=</span> <span class="fl">0.6</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <p><img src="splitplot_gomezgomez1984_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1650"></p>
@@ -663,7 +663,7 @@ NOTE: If two or more means share the same grouping symbol,
 <p>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <code>details = TRUE</code> to the <code>cld()</code> statement. Furthermore, check out the <a href="../../summaryarticles/compactletterdisplay.html">Summary Article “Compact Letter Display”</a>.</p>
 <p>Finally, we can create a plot that displays both the raw data and the results, <em>i.e.</em> the comparisons of the adjusted means that are based on the linear model.</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"The four facettes represent genotypes Simba, Nala, Timon and Pumba. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
 <span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">G</span>, labeller <span class="op">=</span> <span class="va">label_both</span><span class="op">)</span> <span class="op">+</span> <span class="co"># facette per G level</span></span>
@@ -923,7 +923,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"helpersrc.R"</span>))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src/helpersrc.R"</span>))</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
@@ -1113,7 +1113,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> row, <span class="at">out2.gpar =</span> <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"darkgrey"</span>), <span class="co"># lines between rows</span></span>
 <span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Experimental design focus"</span>, <span class="co"># plot title</span></span>
 <span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">TRUE</span>, <span class="co"># don't show legend</span></span>
-<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.5</span></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">key.cex =</span> <span class="fl">0.6</span></span>
 <span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -1164,7 +1164,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
 <span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
 <span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"The four facettes represent genotypes Simba, Nala, Timon and Pumba. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
 <span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>G, <span class="at">labeller =</span> label_both) <span class="sc">+</span> <span class="co"># facette per G level</span></span>

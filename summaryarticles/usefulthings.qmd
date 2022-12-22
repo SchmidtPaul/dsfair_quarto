@@ -27,9 +27,31 @@ tidy(mycor)
 
 # `{conflicted}`
 
-Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used.
+Sometimes, different packages have different functions with identical names. A famous example is the function `filter()`, which exists in [{stats}](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/filter) and [{dplyr}](https://dplyr.tidyverse.org/reference/filter.html). If both of these packages are loaded, it is not clear which of the two functions should be used. This is called a function conflict and it is especially tricky here since {stats} is always loaded. By default, R will simply pick the package that was loaded later - which is obviously not optimal.
 
-TO DO
+One way of dealing with function conflicts is by using the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method, because when writing `dplyr::filter()` instead of `filter()` it is no longer ambiguous which function you are referring to.
+
+Another way of dealing with function conflicts more explicitly is by loading the {conflicted} package. Once it is loaded, function conflicts will lead to an `Error` that forces you to deal with the issue:
+
+```{r}
+#| error: true
+library(conflicted)
+library(dplyr)
+
+PlantGrowth %>% filter(weight > 6)
+```
+
+As you can see, it first suggests using the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method mentioned above, but also points to the `conflict_prefer()` function. By running this function once in the beginning of the script, R will always use the function from the package that you declared the "winner":
+
+```{r}
+library(conflicted)
+library(dplyr)
+
+conflict_prefer("filter", "dplyr")
+
+PlantGrowth %>% filter(weight > 6)
+```
+
 
 # `{desplot}`
 
@@ -66,7 +88,7 @@ PlantGrowth %>%
 ```
 
 ::: callout-note
-It is intentional that I did not actually load the {dlookr} package, but instead used its \`describe()\` function via the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method. This is because of a minor bug in the {dlookr} package described [here](https://github.com/choonghyunryu/dlookr/issues/79), which is only relevant if you are using the package with knitr/Rmarkdown/quarto. I am using quarto to generate this website and thus I avoid loading the package. This is fine for me, since I usually only need this one function one time during an analysis. It is also fine for you, since the code works the same way in a standard R script.
+It is intentional that I did not actually load the {dlookr} package, but instead used its `describe()` function via the [packagename::functionname()](https://stackoverflow.com/questions/35240971/what-are-the-double-colons-in-r) method. This is because of a minor bug in the {dlookr} package described [here](https://github.com/choonghyunryu/dlookr/issues/79), which is only relevant if you are using the package with knitr/Rmarkdown/quarto. I am using quarto to generate this website and thus I avoid loading the package. This is fine for me, since I usually only need this one function one time during an analysis. It is also fine for you, since the code works the same way in a standard R script.
 :::
 
 # `{ggtext}`

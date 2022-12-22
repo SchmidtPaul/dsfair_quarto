@@ -4,7 +4,7 @@ title: "Model Diagnostics"
 
 ```{r}
 #| include: false
-source(here::here("helpersrc.R"))
+source(here::here("src/helpersrc.R"))
 ```
 
 # What is it?

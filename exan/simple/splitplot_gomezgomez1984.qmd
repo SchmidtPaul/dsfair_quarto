@@ -5,7 +5,7 @@ abstract: "Two-way ANOVA & pairwise comparison post hoc tests in a split-plot de
 
 ```{r}
 #| include: false
-source(here::here("helpersrc.R"))
+source(here::here("src/helpersrc.R"))
 ```
 
 ```{r}
@@ -195,7 +195,7 @@ desplot(
   out2 = row, out2.gpar = list(col = "darkgrey"), # lines between rows
   main = "Experimental design focus", # plot title
   show.key = TRUE, # don't show legend
-  key.cex = 0.5
+  key.cex = 0.6
   )
 ```
 :::
@@ -246,7 +246,7 @@ Finally, we can create a plot that displays both the raw data and the results, *
 #| code-fold: true
 #| fig-height: 5
 
-my_caption <- "The four facettes represent genotypes A, B, C and D. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."
+my_caption <- "The four facettes represent genotypes Simba, Nala, Timon and Pumba. Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. For each genotype separately, means followed by a common letter are not significantly different according to the Tukey-test."
 
 ggplot() +
   facet_wrap(~G, labeller = label_both) + # facette per G level
