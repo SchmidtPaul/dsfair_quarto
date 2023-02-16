@@ -5,9 +5,7 @@ abstract: "A personal collection of useful R packages and more."
 
 ```{r}
 #| include: false
-knitr::opts_chunk$set(
-  class.output = "custom-output"
-)
+source(here::here("src/helpersrc.R"))
 ```
 
 This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically.

@@ -84,10 +84,7 @@ No, not necessarily. It is not required to install the zoom software in order to
 -   **Check your camera**\
     This is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.
 
--   **Get familiar with the options/functions**
-
-    -   Know how to mute your microphone. It should be muted at all times except when you are actually talking to us.
-
-    -   Know how to use the zoom chat.
-
-    -   In zoom, know how to give a "thumbs up" - making a symbol appear on your screen.
+-   **Get familiar with the options/functions\
+    **Know how to mute your microphone. It should be muted at all times except when you are actually talking to us.\
+    Know how to use the zoom chat.\
+    Know how to use [non-verbal feedback/meeting reactions](https://support.zoom.us/hc/en-us/articles/115001286183-Using-non-verbal-feedback-and-meeting-reactions-) in zoom (i.e. thumbs up etc.).

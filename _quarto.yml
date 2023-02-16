@@ -43,13 +43,15 @@ website:
             href: summaryarticles/designingexperiments.qmd
           - text: Model Diagnostics
             href: summaryarticles/modeldiagnostics.qmd
+          - text: Why SE equal
+            href: summaryarticles/whyseequal.qmd
           - text: Workshop prep
             href: summaryarticles/workshopprep.qmd
     right:
       - text: Contact
         href: https://schmidtpaul.github.io/
       - icon: github
-        href: https://github.com/
+        href: https://github.com/SchmidtPaul
         aria-label: GitHub
   favicon: img/favicon-32x32.png
   image: img/hexagonDSFAIR.png
