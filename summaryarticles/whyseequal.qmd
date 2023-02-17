@@ -48,7 +48,7 @@ Indeed, the values in the `stderr` column are not identical but different.
 
 # Why are the latter SEM not identical?
 
-When calculating statistic measures like we just did, i.e. separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated[^2], different standard deviations lead to different standard errors. 
+When calculating statistical measures like we just did, *i.e.* separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated[^2], different standard deviations lead to different standard errors. 
 
 [^2]: $SE = SD/\sqrt(n)$ see *e.g.* [Wikipedia](https://www.wikiwand.com/en/Standard_error#Standard_error_of_the_sample_mean)
 
@@ -62,7 +62,7 @@ The key point here is that the former means (=adjusted means[^3]) are not the sa
 
 [^4]: a.k.a. Homoscedasticity, Homogeneity of Variance, Assumption of Equal Variance
 
-[^5]: a balanced design has an equal number of observations for all possible level combinations; read more e.g. [here](https://www.statisticshowto.com/balanced-and-unbalanced-designs/)
+[^5]: a balanced design has an equal number of observations for all possible level combinations; read more *e.g.* [here](https://www.statisticshowto.com/balanced-and-unbalanced-designs/)
 
 # Which is better?
 
@@ -119,6 +119,8 @@ As a final note, keep in mind that the example here is very simple. A major adva
 
 ::: custom-callout-addref
 -   [stackexchange: Standard error in estimated marginal means are all the same](https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same) (Note the answer is from the author of [{emmeans}](https://cran.r-project.org/web/packages/emmeans/index.html))
+
+-   [Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak & Piepho, 2019)](https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635)
 
 -   [stackexchange: Interpreting the standard error from emmeans - R](https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r)
 

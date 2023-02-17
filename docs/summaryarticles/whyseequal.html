@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-02-16">
+<meta name="dcterms.date" content="2023-02-17">
 <title>dsfair_quarto - Why are the StdErr all the same?</title>
 <style>
 code{white-space: pre-wrap;}
@@ -290,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 16, 2023</p>
+      <p class="date">February 17, 2023</p>
     </div>
   </div>
   
@@ -352,7 +352,7 @@ Confidence level used: 0.95 </code></pre>
 </div>
 <p>Indeed, the values in the <code>stderr</code> column are not identical but different.</p>
 </section><section id="why-are-the-latter-sem-not-identical" class="level1"><h1>Why are the latter SEM not identical?</h1>
-<p>When calculating statistic measures like we just did, i.e.&nbsp;separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, different standard deviations lead to different standard errors.</p>
+<p>When calculating statistical measures like we just did, <em>i.e.</em> separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, different standard deviations lead to different standard errors.</p>
 </section><section id="so-why-are-the-former-sem-identical" class="level1"><h1>So why are the former SEM identical?</h1>
 <p>The key point here is that the former means (=adjusted means<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>) are not the same thing as the latter means (= simple arithmetic sample means). To obtain adjusted means, we must first fit a simple linear model and by default these models assume homogeneous error variances<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. As a consequence, the SEM are also homogeneous/identical (given the experiment is balanced<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>).</p>
 <p><strong>And that is basically the answer to the question:</strong> Adjusted means on one hand are based on a linear model which has an underlying assumption that the error variance is homogeneous. Calculating arithmetic means separately per group on the other hand automatically leads to separate variances/standard deviations and thus standard errors.</p>
@@ -418,6 +418,7 @@ Additional Resources (click to show)
 <div class="callout-body-container callout-body">
 <ul>
 <li><p><a href="https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same">stackexchange: Standard error in estimated marginal means are all the same</a> (Note the answer is from the author of <a href="https://cran.r-project.org/web/packages/emmeans/index.html">{emmeans}</a>)</p></li>
+<li><p><a href="https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635">Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak &amp; Piepho, 2019)</a></p></li>
 <li><p><a href="https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r">stackexchange: Interpreting the standard error from emmeans - R</a></p></li>
 <li><p><a href="https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss">IBM: Estimated Marginal Means all have the same standard error in SPSS</a></p></li>
 </ul>
@@ -434,7 +435,7 @@ Additional Resources (click to show)
 <li id="fn2"><p><span class="math inline">\(SE = SD/\sqrt(n)\)</span> see <em>e.g.</em> <a href="https://www.wikiwand.com/en/Standard_error#Standard_error_of_the_sample_mean">Wikipedia</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>a.k.a. adjusted means, estimated marginal means (emmeans), least-squares means (lsmeans), modelbased means<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>a.k.a. Homoscedasticity, Homogeneity of Variance, Assumption of Equal Variance<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>a balanced design has an equal number of observations for all possible level combinations; read more e.g.&nbsp;<a href="https://www.statisticshowto.com/balanced-and-unbalanced-designs/">here</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>a balanced design has an equal number of observations for all possible level combinations; read more <em>e.g.</em> <a href="https://www.statisticshowto.com/balanced-and-unbalanced-designs/">here</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -669,7 +670,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="fu"># Why are the latter SEM not identical?</span></span>
 <span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>When calculating statistic measures like we just did, i.e. separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated<span class="ot">[^2]</span>, different standard deviations lead to different standard errors. </span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>When calculating statistical measures like we just did, *i.e.* separately per group, we are treating the data for the different groups as separate samples. Moreover, because calculations are done separately, each group/sample gets its own mean, standard deviation etc. Because of how the standard error of a sample mean is calculated<span class="ot">[^2]</span>, different standard deviations lead to different standard errors. </span>
 <span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>$SE = SD/\sqrt(n)$ see *e.g.* <span class="co">[</span><span class="ot">Wikipedia</span><span class="co">](https://www.wikiwand.com/en/Standard_error#Standard_error_of_the_sample_mean)</span></span>
 <span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
@@ -683,7 +684,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="ot">[^4]: </span>a.k.a. Homoscedasticity, Homogeneity of Variance, Assumption of Equal Variance</span>
 <span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="ot">[^5]: </span>a balanced design has an equal number of observations for all possible level combinations; read more e.g. <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.statisticshowto.com/balanced-and-unbalanced-designs/)</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="ot">[^5]: </span>a balanced design has an equal number of observations for all possible level combinations; read more *e.g.* <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.statisticshowto.com/balanced-and-unbalanced-designs/)</span></span>
 <span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a><span class="fu"># Which is better?</span></span>
 <span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
@@ -741,10 +742,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
 <span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Standard error in estimated marginal means are all the same</span><span class="co">](https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same)</span> (Note the answer is from the author of <span class="co">[</span><span class="ot">{emmeans}</span><span class="co">](https://cran.r-project.org/web/packages/emmeans/index.html)</span>)</span>
 <span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Interpreting the standard error from emmeans - R</span><span class="co">](https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r)</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak &amp; Piepho, 2019)</span><span class="co">](https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635)</span></span>
 <span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">IBM: Estimated Marginal Means all have the same standard error in SPSS</span><span class="co">](https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss)</span></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Interpreting the standard error from emmeans - R</span><span class="co">](https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r)</span></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">IBM: Estimated Marginal Means all have the same standard error in SPSS</span><span class="co">](https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss)</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
