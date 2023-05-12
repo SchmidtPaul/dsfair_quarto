@@ -198,8 +198,8 @@ ggplot(data = dat) +
   aes(x = drinks, y = blood_alc) +
   geom_point(size = 2) +
   geom_smooth(
-    method = "lm",
-    formula = "y ~ x",
+    method = lm,
+    formula = y ~ x,
     se = FALSE,
     fullrange = TRUE,
     color = "#00923f"
@@ -279,15 +279,15 @@ ggplot(data = dat) +
   aes(x = drinks, y = blood_alc) +
   geom_point(size = 2) +
   geom_smooth(
-    method = "lm",
-    formula = "y ~ x",
+    method = lm,
+    formula = y ~ x,
     se = FALSE,
     fullrange = TRUE,
     color = "#00923f"
   ) +
     geom_smooth(
-    method = "lm",
-    formula = "y ~ 0 + x",
+    method = lm,
+    formula = y ~ 0 + x,
     se = FALSE,
     fullrange = TRUE,
     color = "#e4572e"
