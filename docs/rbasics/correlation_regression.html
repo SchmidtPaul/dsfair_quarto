@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.475">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2022-12-19">
+
+<meta name="dcterms.date" content="2023-05-10">
+
 <title>dsfair_quarto - Correlation &amp; Regression</title>
 <style>
 code{white-space: pre-wrap;}
@@ -83,6 +86,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -99,7 +103,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -117,7 +122,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../styles.css">
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="Data Science for Agriculture in R">
 <meta name="twitter:description" content="a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields">
 <meta name="twitter:image" content="https://schmidtpaul.github.io/dsfair_quarto/img\hexagonDSFAIR.png">
@@ -126,10 +135,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="twitter:image-width" content="1580">
 <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DSFAIR</span>
@@ -140,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Home</span></a>
   </li>  
@@ -148,8 +160,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">R Basics</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
+        <li>
     <a class="dropdown-item" href="../rbasics/firststeps.html">
  <span class="dropdown-text">First Steps</span></a>
   </li>  
@@ -166,13 +178,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Bad data &amp; Outliers</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Simple Experiments</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">    
+        <li>
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
  <span class="dropdown-text">1w CRD (Mead 1993)</span></a>
   </li>  
@@ -193,16 +205,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">2w split-plot (Gomez &amp; Gomez 1984)</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="dropdown-header">
- <span class="menu-text">Complex Experiments</span>
-</li>
+ <span class="menu-text">Complex Experiments</span></li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Summary Articles</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
+        <li>
     <a class="dropdown-item" href="../summaryarticles/usefulthings.html">
  <span class="dropdown-text">Useful things</span></a>
   </li>  
@@ -227,10 +238,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="dropdown-text">Workshop prep</span></a>
   </li>  
     </ul>
-</li>
+  </li>
 </ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
     <a class="nav-link" href="https://schmidtpaul.github.io/">
  <span class="menu-text">Contact</span></a>
   </li>  
@@ -240,48 +251,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-<div id="quarto-search" class="" title="Search"></div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li>
-<a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
   <ul class="collapse">
-<li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import">Import</a></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import">Import</a></li>
   <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
   <li><a href="#exploring" id="toc-exploring" class="nav-link" data-scroll-target="#exploring">Exploring</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a>
+  </ul></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a>
   <ul class="collapse">
-<li><a href="#get-it" id="toc-get-it" class="nav-link" data-scroll-target="#get-it">Get it</a></li>
+  <li><a href="#get-it" id="toc-get-it" class="nav-link" data-scroll-target="#get-it">Get it</a></li>
   <li><a href="#test-it" id="toc-test-it" class="nav-link" data-scroll-target="#test-it">Test it</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a>
+  </ul></li>
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a>
   <ul class="collapse">
-<li><a href="#get-it-1" id="toc-get-it-1" class="nav-link" data-scroll-target="#get-it-1">Get it</a></li>
-  <li>
-<a href="#is-this-right" id="toc-is-this-right" class="nav-link" data-scroll-target="#is-this-right">Is this right?</a>
+  <li><a href="#get-it-1" id="toc-get-it-1" class="nav-link" data-scroll-target="#get-it-1">Get it</a></li>
+  <li><a href="#is-this-right" id="toc-is-this-right" class="nav-link" data-scroll-target="#is-this-right">Is this right?</a>
   <ul class="collapse">
-<li><a href="#are-the-results-really-saying-the-intercept-is-0" id="toc-are-the-results-really-saying-the-intercept-is-0" class="nav-link" data-scroll-target="#are-the-results-really-saying-the-intercept-is-0">Are the results really saying the intercept is &gt; 0?</a></li>
+  <li><a href="#are-the-results-really-saying-the-intercept-is-0" id="toc-are-the-results-really-saying-the-intercept-is-0" class="nav-link" data-scroll-target="#are-the-results-really-saying-the-intercept-is-0">Are the results really saying the intercept is &gt; 0?</a></li>
   <li><a href="#should-we-have-fitted-a-different-model" id="toc-should-we-have-fitted-a-different-model" class="nav-link" data-scroll-target="#should-we-have-fitted-a-different-model">Should we have fitted a different model?</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
-</li>
-  </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Correlation &amp; Regression</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -313,7 +324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 19, 2022</p>
+      <p class="date">May 10, 2023</p>
     </div>
   </div>
   
@@ -327,22 +338,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </div>
 
-</header><p>This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.</p>
+</header>
+
+<p>This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># (install &amp;) load packages</span></span>
-<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
-<span>  <span class="va">broom</span>,</span>
-<span>  <span class="va">conflicted</span>,</span>
-<span>  <span class="va">modelbased</span>,</span>
-<span>  <span class="va">tidyverse</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># handle function conflicts</span></span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span> </span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (install &amp;) load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  broom,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  conflicted,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  modelbased,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>) </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="data" class="level1"><h1>Data</h1>
+<section id="data" class="level1">
+<h1>Data</h1>
 <p>This is data I made up: Peter and Max went out multiple evenings and at the end of every evening wrote down how many drinks they had and what the alcohol content in their blood was.</p>
-<section id="import" class="level2"><h2 class="anchored" data-anchor-id="import">Import</h2>
+<section id="import" class="level2">
+<h2 class="anchored" data-anchor-id="import">Import</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># data is available online:
@@ -350,8 +365,8 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="co"># use path from above</span></span>
-<span><span class="va">dat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(path) <span class="co"># use path from above</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 20 × 3
    Person drinks blood_alc
@@ -378,12 +393,16 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 20 Peter       9       1.3</code></pre>
 </div>
 </div>
-</section><section id="goal" class="level2"><h2 class="anchored" data-anchor-id="goal">Goal</h2>
+</section>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
 <p>The goal of this analysis is to answer the question how the number of drinks relates to the blood alcohol level. Note that we can ignore the column <code>Person</code>, since we do not care whether data came from Peter or Max. Thus, we only focus on the two <em>numeric</em> columns <code>drinks</code> and <code>blood_alc</code>. For them, we will do a correlation and a regression analysis.</p>
-</section><section id="exploring" class="level2"><h2 class="anchored" data-anchor-id="exploring">Exploring</h2>
-<p>To quickly get a first feeling for this dataset, we can use <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> and draw a plot via <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or <code>ggplot()</code>.</p>
+</section>
+<section id="exploring" class="level2">
+<h2 class="anchored" data-anchor-id="exploring">Exploring</h2>
+<p>To quickly get a first feeling for this dataset, we can use <code>summary()</code> and draw a plot via <code>plot()</code> or <code>ggplot()</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>    Person              drinks       blood_alc    
  Length:20          Min.   :1.00   Min.   :0.100  
@@ -397,8 +416,11 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">blood_alc</span>, x <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">drinks</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">y =</span> dat<span class="sc">$</span>blood_alc, <span class="at">x =</span> dat<span class="sc">$</span>drinks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="correlation_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
@@ -406,56 +428,66 @@ path &lt;- "https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/d
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">drinks</span>, y <span class="op">=</span> <span class="va">blood_alc</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Number of drinks"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Blood alcohol content"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <p><img src="correlation_regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
 </div>
 </div>
 <p>Apparently, the number of drinks ranges from 1 to 9 with a mean of 3.85, while the measured blood alcohol levels range from 0.1 to 1.3 with a mean of 0.515. The plots show a clear trend of increasing blood alcohol levels with a higher number of drinks - which is what we would expect.</p>
-</section></section><section id="correlation" class="level1"><h1>Correlation</h1>
+</section>
+</section>
+<section id="correlation" class="level1">
+<h1>Correlation</h1>
 <p>One way of actually putting a number on this relationship is to estimate the correlation. When people talk about correlation (<span class="math inline">\(\rho\)</span> or <span class="math inline">\(r\)</span>) in statistics, they usually refer to the <a href="https://www.wikiwand.com/en/Pearson_correlation_coefficient">Pearson correlation coefficient</a>, which is a measure of linear correlation between two numeric variables. Correlation can only have values between -1 and 1, where 0 means <em>no correlation</em>, while all other possible values are either negative or positive correlations. The farther away from 0, the stronger is the correlation.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../img/correlation.PNG" class="img-fluid figure-img" style="width:60.0%"></p>
+<figure class="figure">
+<p><img src="../img/correlation.PNG" class="img-fluid figure-img" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Simply put, a positive correlation means <em>“if one variable gets bigger, the other also gets bigger”</em> and a negative correlation means <em>“if one variable gets bigger, the other gets smaller”</em>. Therefore, it does not matter which of the two variables is the first (“x”) or the second (“y”) variable. Thus, a correlation estimate is not like a model and it cannot make predictions. Finally, <a href="https://www.wikiwand.com/en/Correlation_does_not_imply_causation"><em>“correlation does not imply causation”</em></a> means that just because you found a (strong) correlation between two things, you cannot conclude that there is a cause-and-effect relationship between the two, which becomes clear when looking at <a href="https://www.tylervigen.com/spurious-correlations">these examples</a>.</p>
-<section id="get-it" class="level2"><h2 class="anchored" data-anchor-id="get-it">Get it</h2>
-<p>If you only want to get the actual correlation estimate, you can use the function <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> and provide the two numeric variables (as vectors):</p>
+<section id="get-it" class="level2">
+<h2 class="anchored" data-anchor-id="get-it">Get it</h2>
+<p>If you only want to get the actual correlation estimate, you can use the function <code>cor()</code> and provide the two numeric variables (as vectors):</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">drinks</span>, <span class="va">dat</span><span class="op">$</span><span class="va">blood_alc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat<span class="sc">$</span>drinks, dat<span class="sc">$</span>blood_alc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] 0.9559151</code></pre>
 </div>
 </div>
 <p>So the correlation between number of drinks and blood alcohol content in our sample is ca. 0.96 and thus very strong, since it is almost 1.</p>
-</section><section id="test-it" class="level2"><h2 class="anchored" data-anchor-id="test-it">Test it</h2>
-<p>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code> instead of <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
+</section>
+<section id="test-it" class="level2">
+<h2 class="anchored" data-anchor-id="test-it">Test it</h2>
+<p>If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use <code>cor.test()</code> instead of <code>cor()</code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mycor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">drinks</span>, </span>
-<span>                  <span class="va">dat</span><span class="op">$</span><span class="va">blood_alc</span><span class="op">)</span></span>
-<span><span class="va">mycor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mycor <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(dat<span class="sc">$</span>drinks, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  dat<span class="sc">$</span>blood_alc)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mycor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>
     Pearson's product-moment correlation
@@ -474,13 +506,12 @@ sample estimates:
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tidy</span><span class="op">(</span><span class="va">mycor</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mycor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 1 × 8
-  estimate statistic  p.value parameter conf.low conf.high method        alter…¹
-     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  
-1    0.956      13.8 5.09e-11        18    0.890     0.983 Pearson's pr… two.si…
-# … with abbreviated variable name ¹​alternative</code></pre>
+  estimate statistic  p.value parameter conf.low conf.high method    alternative
+     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      
+1    0.956      13.8 5.09e-11        18    0.890     0.983 Pearson'… two.sided  </code></pre>
 </div>
 </div>
 </div>
@@ -506,12 +537,16 @@ Additional Resources (click to show)
 </div>
 </div>
 </div>
-</section></section><section id="simple-linear-regression" class="level1"><h1>Simple linear regression</h1>
+</section>
+</section>
+<section id="simple-linear-regression" class="level1">
+<h1>Simple linear regression</h1>
 <p>When people talk about regression in statistics, they usually refer to <a href="https://www.wikiwand.com/en/Simple_linear_regression">simple linear regression</a>, which - simply put - finds the best straight line that goes through dots in a scatter plot of two numeric variables:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../img/regressionexamples.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figure class="figure">
+<p><img src="../img/regressionexamples.png" class="img-fluid figure-img" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -522,21 +557,23 @@ Additional Resources (click to show)
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../img/regressiontheory.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figure class="figure">
+<p><img src="../img/regressiontheory.png" class="img-fluid figure-img" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>In contrast to correlation, a simple linear regression is a model and it therefore matters which variable is <span class="math inline">\(y\)</span> (dependent variable) and which is <span class="math inline">\(x\)</span> (independent), because after fitting the regression, the latter can be used to predict the former.</p>
-<section id="get-it-1" class="level2"><h2 class="anchored" data-anchor-id="get-it-1">Get it</h2>
-<p>In R, we can use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function for fitting linear models so that it fits the simple linear regression equation shown above easily:</p>
+<section id="get-it-1" class="level2">
+<h2 class="anchored" data-anchor-id="get-it-1">Get it</h2>
+<p>In R, we can use the <code>lm()</code> function for fitting linear models so that it fits the simple linear regression equation shown above easily:</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">blood_alc</span> <span class="op">~</span> <span class="va">drinks</span>,</span>
-<span>          data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> drinks,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see, we refer to our data object <code>dat</code> in the <code>data =</code> argument so that in the <code>formula =</code> argument we only need to write the names of the respective columns in <code>dat</code>. Furthermore, we store the results in the <code>reg</code> object. When looking at this object, we get the following results:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reg</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>
 Call:
@@ -551,44 +588,50 @@ Coefficients:
 <p><span class="math display">\[ bloodalc = 0.049 + 0.121 * drinks \]</span></p>
 <p>which looks like this:</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">drinks</span>, y <span class="op">=</span> <span class="va">blood_alc</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_smooth</span><span class="op">(</span></span>
-<span>    method <span class="op">=</span> <span class="st">"lm"</span>,</span>
-<span>    formula <span class="op">=</span> <span class="st">"y ~ x"</span>,</span>
-<span>    se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    fullrange <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"#00923f"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Number of drinks"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Blood alcohol content"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="correlation_regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1650"></p>
+<figure class="figure">
+<p><img src="correlation_regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1650"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here is a little more info why <code>formula = blood_alc ~ drinks</code> leads to R estimating the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> we want: What makes sense is that <code>blood_alc</code> is <span class="math inline">\(y\)</span>, <code>drinks</code> is <span class="math inline">\(x\)</span> and <code>~</code> would therefore be the <span class="math inline">\(=\)</span> in our equation. However, why is it we never had to write anything about <span class="math inline">\(a\)</span> or <span class="math inline">\(b\)</span>? The answer is that (i) when fitting a linear model, there is usually always an intercept (=<span class="math inline">\(a\)</span>) by default and (ii) when writing a numeric variable (=<code>drinks</code>) as on the right side of the equation, it will automatically be assumed to have a slope (=<span class="math inline">\(b\)</span>) multiplied with it. Accordingly, <code>blood_alc ~ drinks</code> automatically translates to <code>blood_alc = a + b*drinks</code> so to speak.</p>
-</section><section id="is-this-right" class="level2"><h2 class="anchored" data-anchor-id="is-this-right">Is this right?</h2>
+</section>
+<section id="is-this-right" class="level2">
+<h2 class="anchored" data-anchor-id="is-this-right">Is this right?</h2>
 <p>After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via <a href="../../summaryarticles/usefulthings.qmd#modelbased">{modelbased}</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">preddat</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>drinks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">estimate_expectation</span><span class="op">(</span>model <span class="op">=</span> <span class="va">reg</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">preddat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>preddat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">drinks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">estimate_expectation</span>(<span class="at">model =</span> reg) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>preddat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 10 × 5
    drinks Predicted     SE  CI_low CI_high
@@ -612,10 +655,11 @@ Coefficients:
 <li>Are the results really saying the intercept is &gt; 0?</li>
 <li>Did we even ask the right question or should we have fitted a different model?</li>
 </ol>
-<section id="are-the-results-really-saying-the-intercept-is-0" class="level3"><h3 class="anchored" data-anchor-id="are-the-results-really-saying-the-intercept-is-0">Are the results really saying the intercept is &gt; 0?</h3>
-<p>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g.&nbsp;<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
+<section id="are-the-results-really-saying-the-intercept-is-0" class="level3">
+<h3 class="anchored" data-anchor-id="are-the-results-really-saying-the-intercept-is-0">Are the results really saying the intercept is &gt; 0?</h3>
+<p>No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g.&nbsp;<code>summary()</code>. We may also use the <a href="../../summaryarticles/usefulthings.qmd#broom">{broom}</a> package to get the results in a more convenient format.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tidy</span><span class="op">(</span><span class="va">reg</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(reg, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 2 × 7
   term        estimate std.error statistic  p.value conf.low conf.high
@@ -625,14 +669,16 @@ Coefficients:
 </div>
 </div>
 <p>you can see that the p-value for the intercept is 0.243, which is larger than 0.05 and thus saying that we could not find the intercept to be significantly different from 0. A second indication can be found when looking at the confidence interval of the expected value for having 0 drinks in the table above: <code>[-0.0363, 0.1340]</code>. This interval actually includes 0 which suggests that the true expected blood alcohol content for having 0 drinks may indeed be 0.</p>
-</section><section id="should-we-have-fitted-a-different-model" class="level3"><h3 class="anchored" data-anchor-id="should-we-have-fitted-a-different-model">Should we have fitted a different model?</h3>
+</section>
+<section id="should-we-have-fitted-a-different-model" class="level3">
+<h3 class="anchored" data-anchor-id="should-we-have-fitted-a-different-model">Should we have fitted a different model?</h3>
 <p>We certainly <strong>could</strong> have and we will actually do it now. It must be clear that statistically speaking there was nothing wrong with our analysis. However, from a biological standpoint or in other words - because of our background knowledge and expertise as scientists - we could have indeed actively decided for a regression analysis that does <strong>not</strong> have an intercept and is thus forced to start 0 in terms of blood alcohol content. After all, statistics is just a tool to help us make conclusions. It is a powerful tool, but it will always be our responsibility to “ask the right questions” i.e.&nbsp;apply expedient methods.</p>
 <p>A simple linear regression without an intercept is strictly speaking no longer “simple”, since it no longer has the typical equation, but instead this one:</p>
 <p><span class="math display">\[ y = \beta x\]</span></p>
-<p>To tell <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> that it should not estimate the default intercept, we simply add <code>0 +</code> right after the <code>~</code>. As expected, we only get one estimate for the slope:</p>
+<p>To tell <code>lm()</code> that it should not estimate the default intercept, we simply add <code>0 +</code> right after the <code>~</code>. As expected, we only get one estimate for the slope:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reg_noint</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">blood_alc</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">drinks</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
-<span><span class="va">reg_noint</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>reg_noint <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> blood_alc <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> drinks, <span class="at">data =</span> dat)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>reg_noint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>
 Call:
@@ -647,38 +693,42 @@ drinks
 <p><span class="math display">\[ bloodalc = 0.1298 * drinks \]</span></p>
 <p>and must definitely predict 0 <code>blood_alc</code> when having 0 <code>drinks</code>. As a final result, we can compare both regression lines visually in a ggplot:</p>
 <div class="cell" data-layout-align="center">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">drinks</span>, y <span class="op">=</span> <span class="va">blood_alc</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_point</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_smooth</span><span class="op">(</span></span>
-<span>    method <span class="op">=</span> <span class="st">"lm"</span>,</span>
-<span>    formula <span class="op">=</span> <span class="st">"y ~ x"</span>,</span>
-<span>    se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    fullrange <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"#00923f"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">geom_smooth</span><span class="op">(</span></span>
-<span>    method <span class="op">=</span> <span class="st">"lm"</span>,</span>
-<span>    formula <span class="op">=</span> <span class="st">"y ~ 0 + x"</span>,</span>
-<span>    se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>    fullrange <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"#e4572e"</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Number of drinks"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">9</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span></span>
-<span>    name <span class="op">=</span> <span class="st">"Blood alcohol content"</span>,</span>
-<span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>    expand <span class="op">=</span> <span class="fu">expansion</span><span class="op">(</span>mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Click to show/hide code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#e4572e"</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of drinks"</span>,</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>),</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Blood alcohol content"</span>,</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>))</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="correlation_regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1650"></p>
+<figure class="figure">
+<p><img src="correlation_regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1650"></p>
 </figure>
 </div>
 </div>
@@ -687,7 +737,12 @@ drinks
 
 <!-- -->
 
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1071,8 +1126,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-230"><a href="#cb26-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
 <span id="cb26-231"><a href="#cb26-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb26-232"><a href="#cb26-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb26-233"><a href="#cb26-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
+<span id="cb26-233"><a href="#cb26-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
 <span id="cb26-235"><a href="#cb26-235" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb26-236"><a href="#cb26-236" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb26-237"><a href="#cb26-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
@@ -1152,15 +1207,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-319"><a href="#cb26-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> drinks, <span class="at">y =</span> blood_alc) <span class="sc">+</span></span>
 <span id="cb26-320"><a href="#cb26-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb26-321"><a href="#cb26-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
-<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ x"</span>,</span>
+<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> x,</span>
 <span id="cb26-324"><a href="#cb26-324" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb26-325"><a href="#cb26-325" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb26-326"><a href="#cb26-326" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#00923f"</span></span>
 <span id="cb26-327"><a href="#cb26-327" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb26-328"><a href="#cb26-328" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(</span>
-<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb26-330"><a href="#cb26-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> <span class="st">"y ~ 0 + x"</span>,</span>
+<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> lm,</span>
+<span id="cb26-330"><a href="#cb26-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,</span>
 <span id="cb26-331"><a href="#cb26-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb26-332"><a href="#cb26-332" aria-hidden="true" tabindex="-1"></a>    <span class="at">fullrange =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb26-333"><a href="#cb26-333" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"#e4572e"</span></span>

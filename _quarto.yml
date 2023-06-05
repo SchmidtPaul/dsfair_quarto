@@ -37,6 +37,8 @@ website:
         menu:
           - text: Useful things
             href: summaryarticles/usefulthings.qmd
+          - text: ggplot2 tutorial
+            href: summaryarticles/ggplot2intro.qmd
           - text: Compact Letter Display
             href: summaryarticles/compactletterdisplay.qmd
           - text: Designing Experiments

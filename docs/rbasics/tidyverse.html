@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.475">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2022-12-08">
+
+<meta name="dcterms.date" content="2023-05-09">
+
 <title>dsfair_quarto - The tidyverse</title>
 <style>
 code{white-space: pre-wrap;}
@@ -102,6 +105,7 @@ div.csl-indent {
 }
 </style>
 
+
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -118,7 +122,8 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -136,7 +141,10 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><link rel="stylesheet" href="../styles.css">
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
 <meta name="twitter:title" content="Data Science for Agriculture in R">
 <meta name="twitter:description" content="a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields">
 <meta name="twitter:image" content="https://schmidtpaul.github.io/dsfair_quarto/img\hexagonDSFAIR.png">
@@ -145,10 +153,13 @@ div.csl-indent {
 <meta name="twitter:image-width" content="1580">
 <meta name="twitter:card" content="summary_large_image">
 </head>
+
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">DSFAIR</span>
@@ -159,7 +170,7 @@ div.csl-indent {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../index.html">
  <span class="menu-text">Home</span></a>
   </li>  
@@ -167,8 +178,8 @@ div.csl-indent {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">R Basics</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">    
+        <li>
     <a class="dropdown-item" href="../rbasics/firststeps.html">
  <span class="dropdown-text">First Steps</span></a>
   </li>  
@@ -185,13 +196,13 @@ div.csl-indent {
  <span class="dropdown-text">Bad data &amp; Outliers</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Simple Experiments</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">    
+        <li>
     <a class="dropdown-item" href="../exan/simple/crd_mead1993.html">
  <span class="dropdown-text">1w CRD (Mead 1993)</span></a>
   </li>  
@@ -212,16 +223,15 @@ div.csl-indent {
  <span class="dropdown-text">2w split-plot (Gomez &amp; Gomez 1984)</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="dropdown-header">
- <span class="menu-text">Complex Experiments</span>
-</li>
+ <span class="menu-text">Complex Experiments</span></li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Summary Articles</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
-<li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">    
+        <li>
     <a class="dropdown-item" href="../summaryarticles/usefulthings.html">
  <span class="dropdown-text">Useful things</span></a>
   </li>  
@@ -246,10 +256,10 @@ div.csl-indent {
  <span class="dropdown-text">Workshop prep</span></a>
   </li>  
     </ul>
-</li>
+  </li>
 </ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
     <a class="nav-link" href="https://schmidtpaul.github.io/">
  <span class="menu-text">Contact</span></a>
   </li>  
@@ -259,49 +269,51 @@ div.csl-indent {
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-<div id="quarto-search" class="" title="Search"></div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-<li>
-<a href="#tables" id="toc-tables" class="nav-link active" data-scroll-target="#tables">Tables</a>
+  <li><a href="#tables" id="toc-tables" class="nav-link active" data-scroll-target="#tables">Tables</a>
   <ul class="collapse">
-<li><a href="#data.frame" id="toc-data.frame" class="nav-link" data-scroll-target="#data.frame">data.frame</a></li>
+  <li><a href="#data.frame" id="toc-data.frame" class="nav-link" data-scroll-target="#data.frame">data.frame</a></li>
   <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble">tibble</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#plots" id="toc-plots" class="nav-link" data-scroll-target="#plots">Plots</a></li>
-  <li>
-<a href="#the-pipe-operator" id="toc-the-pipe-operator" class="nav-link" data-scroll-target="#the-pipe-operator">The pipe operator</a>
+  <li><a href="#the-pipe-operator" id="toc-the-pipe-operator" class="nav-link" data-scroll-target="#the-pipe-operator">The pipe operator</a>
   <ul class="collapse">
-<li><a href="#no-pipe---intermediate-steps" id="toc-no-pipe---intermediate-steps" class="nav-link" data-scroll-target="#no-pipe---intermediate-steps">No pipe - intermediate steps</a></li>
+  <li><a href="#no-pipe---intermediate-steps" id="toc-no-pipe---intermediate-steps" class="nav-link" data-scroll-target="#no-pipe---intermediate-steps">No pipe - intermediate steps</a></li>
   <li><a href="#no-pipe---nesting-functions" id="toc-no-pipe---nesting-functions" class="nav-link" data-scroll-target="#no-pipe---nesting-functions">No pipe - nesting functions</a></li>
   <li><a href="#pipe" id="toc-pipe" class="nav-link" data-scroll-target="#pipe">Pipe!</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#dplyr-verbs" id="toc-dplyr-verbs" class="nav-link" data-scroll-target="#dplyr-verbs">dplyr verbs</a>
+  </ul></li>
+  <li><a href="#dplyr-verbs" id="toc-dplyr-verbs" class="nav-link" data-scroll-target="#dplyr-verbs">dplyr verbs</a>
   <ul class="collapse">
-<li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">mutate()</a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">mutate()</a></li>
   <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select">select()</a></li>
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">filter()</a></li>
   <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">arrange()</a></li>
   <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise">summarise()</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#longwide-format" id="toc-longwide-format" class="nav-link" data-scroll-target="#longwide-format">long/wide format</a></li>
   <li><a href="#forcats" id="toc-forcats" class="nav-link" data-scroll-target="#forcats">forcats</a></li>
   <li><a href="#stringr" id="toc-stringr" class="nav-link" data-scroll-target="#stringr">stringr</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">The tidyverse</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
@@ -333,7 +345,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 8, 2022</p>
+      <p class="date">May 9, 2023</p>
     </div>
   </div>
   
@@ -347,29 +359,35 @@ div.csl-indent {
   </div>
 </div>
 
-</header><p>When using R, you will sooner or later hear about the <a href="https://www.wikiwand.com/en/Tidyverse">{tidyverse}</a>. The tidyverse is a collection of R packages that “share an underlying design philosophy, grammar, and data structures” of tidy data. The individual tidyverse packages comprise some of the most downloaded R packages.</p>
+</header>
+
+<p>When using R, you will sooner or later hear about the <a href="https://www.wikiwand.com/en/Tidyverse">{tidyverse}</a>. The tidyverse is a collection of R packages that “share an underlying design philosophy, grammar, and data structures” of tidy data. The individual tidyverse packages comprise some of the most downloaded R packages.</p>
 <p>Install the complete tidyverse with:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
-<span><span class="co"># or</span></span>
-<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="table">
 <caption>Some of my favorite tidyverse packages</caption>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: center;">ggplot2</th>
 <th style="text-align: center;">dplyr</th>
 <th style="text-align: center;">tibble</th>
 <th style="text-align: center;">forcats</th>
 <th style="text-align: center;">stringr</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: center;"><a href="https://ggplot2.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/ggplot2.png" width="100"></a></td>
 <td style="text-align: center;"><a href="https://dplyr.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/dplyr.png" width="100"></a></td>
 <td style="text-align: center;"><a href="https://tibble.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/tibble.png" width="100"></a></td>
 <td style="text-align: center;"><a href="https://forcats.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/forcats.png" width="100"></a></td>
 <td style="text-align: center;"><a href="https://stringr.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" width="100"></a></td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 <p>I did not use the tidyverse packages in my first years using R, but I wish I did. While you can often reach your goal with or without using the tidyverse packages, I personally prefer using them. Thus, they are used extensively throughout the chapters of this website.</p>
 <p>During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.</p>
@@ -386,18 +404,19 @@ Additional Resources (click to show)
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/">“R for Data Science”</a> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>, which is a book that can be read online for free and was written by the package authors themselves.</li>
+<li><a href="https://r4ds.had.co.nz/">“R for Data Science”</a> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>, which is a book that can be read online for free and was written by the package authors themselves.</li>
 </ul>
 </div>
 </div>
 </div>
-<section id="tables" class="level1"><h1>Tables</h1>
+<section id="tables" class="level1">
+<h1>Tables</h1>
 <p>Finally, we can now talk about data tables with rows and columns. In R, I like to think of a table as multiple vectors side by side, so that each column is a vector.</p>
-<section id="data.frame" class="level2"><h2 class="anchored" data-anchor-id="data.frame">data.frame</h2>
+<section id="data.frame" class="level2">
+<h2 class="anchored" data-anchor-id="data.frame">data.frame</h2>
 <p>Base R has a standard format for data tables called <code>data.frame</code>. Here is an example table that is an R built-in, just like <code>pi</code> is - it is called <code>PlantGrowth</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">PlantGrowth</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>   weight group
 1    4.17  ctrl
@@ -434,14 +453,14 @@ Additional Resources (click to show)
 </div>
 <p>Let us create a copy of this table called <code>df</code> (<strong>d</strong>ata<strong>f</strong>rame) and then use some helpful functions to get a first impression of this data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> PlantGrowth</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>'data.frame':   30 obs. of  2 variables:
  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
  $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>     weight       group   
  Min.   :3.590   ctrl:10  
@@ -455,24 +474,26 @@ Additional Resources (click to show)
 <p>We can see that this dataset has 30 observations (=rows) and 2 variables (=columns) and is of the type “data.frame”. Furthermore, the first variable is called <code>weight</code> and contains numeric values for which we get some measures of central tendency like the minimum, maximum, mean and median. The second variable is called <code>group</code> and is of the type factor containing a total of three different levels, which each appear 10 times.</p>
 <p>If you want to extract/use values of only one column of such a data.frame, you write the name of the data.frame, then a <code>$</code> and finally the name of the respective column. It returns the values of that column as a vector:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
 [16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
 [16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
 Levels: ctrl trt1 trt2</code></pre>
 </div>
 </div>
-</section><section id="tibble" class="level2"><h2 class="anchored" data-anchor-id="tibble">tibble</h2>
+</section>
+<section id="tibble" class="level2">
+<h2 class="anchored" data-anchor-id="tibble">tibble</h2>
 <p>One major aspect of the tidyverse is formatting tables as <strong>tibble instead of data.frame</strong>. A tibble <em>“is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not.”</em> It is super simple to convert a data.frame into a tibble, but you must have the tidyverse R package {tibble} installed and loaded - which it is if you are loading the entire {tidyverse}. Let us convert our <code>df</code> into a tibble and call it <code>tbl</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span></span>
-<span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="va">tbl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 30 × 2
    weight group
@@ -487,7 +508,7 @@ Levels: ctrl trt1 trt2</code></pre>
  8   4.53 ctrl 
  9   5.33 ctrl 
 10   5.14 ctrl 
-# … with 20 more rows</code></pre>
+# ℹ 20 more rows</code></pre>
 </div>
 </div>
 <p>Of course, the data itself does not change - only its format and the way it is displayed to us in R. If you compare the output we get from printing <code>tbl</code> here to that of printing <code>df</code> above, I would like to point out some things I find extremely convenient for tibbles:</p>
@@ -502,17 +523,17 @@ Levels: ctrl trt1 trt2</code></pre>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>tibble [30 × 2] (S3: tbl_df/tbl/data.frame)
  $ weight: num [1:30] 4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
  $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tbl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>     weight       group   
  Min.   :3.590   ctrl:10  
@@ -522,12 +543,12 @@ Levels: ctrl trt1 trt2</code></pre>
  3rd Qu.:5.530            
  Max.   :6.310            </code></pre>
 </div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tbl<span class="sc">$</span>weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
 [16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
 </div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tbl<span class="sc">$</span>group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
 [16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
@@ -538,17 +559,17 @@ Levels: ctrl trt1 trt2</code></pre>
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "data.frame"</code></pre>
 </div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>'data.frame':   30 obs. of  2 variables:
  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
  $ group : Factor w/ 3 levels "ctrl","trt1",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>     weight       group   
  Min.   :3.590   ctrl:10  
@@ -558,12 +579,12 @@ Levels: ctrl trt1 trt2</code></pre>
  3rd Qu.:5.530            
  Max.   :6.310            </code></pre>
 </div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 4.17 5.58 5.18 6.11 4.50 4.61 5.17 4.53 5.33 5.14 4.81 4.17 4.41 3.59 5.87
 [16] 3.83 6.03 4.89 4.32 4.69 6.31 5.12 5.54 5.50 5.37 5.29 4.92 6.15 5.80 5.26</code></pre>
 </div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-overflow-wrap code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl ctrl trt1 trt1 trt1 trt1 trt1
 [16] trt1 trt1 trt1 trt1 trt1 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2 trt2
@@ -573,12 +594,15 @@ Levels: ctrl trt1 trt2</code></pre>
 </div>
 </div>
 <p>Therefore, I almost always format my datasets as tibbles.</p>
-</section></section><section id="plots" class="level1"><h1>Plots</h1>
-<p>Base R has a <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function which is good at getting some first data visualizations with very little code. It guesses what type of plot you would like to see via the data type of the respective data to be plotted:</p>
+</section>
+</section>
+<section id="plots" class="level1">
+<h1>Plots</h1>
+<p>Base R has a <code>plot()</code> function which is good at getting some first data visualizations with very little code. It guesses what type of plot you would like to see via the data type of the respective data to be plotted:</p>
 <div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span> <span class="co"># scatter plot of values in the order they appear</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">group</span><span class="op">)</span> <span class="co"># bar plot of frequency of each level</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">group</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span> <span class="co"># boxplot for values of each level</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>weight) <span class="co"># scatter plot of values in the order they appear</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>group) <span class="co"># bar plot of frequency of each level</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df<span class="sc">$</span>group, <span class="at">y =</span> df<span class="sc">$</span>weight) <span class="co"># boxplot for values of each level</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
@@ -593,7 +617,7 @@ Levels: ctrl trt1 trt2</code></pre>
 </div>
 </div>
 </div>
-<p>However, I really just use <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package <a href="https://ggplot2.tidyverse.org">ggplot2</a> and its function <code>ggplot()</code>. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website’s chapters.</p>
+<p>However, I really just use <code>plot()</code> to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package <code>{ggplot2}</code> and its function <code>ggplot()</code>. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website’s chapters.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -607,50 +631,56 @@ Additional Resources (click to show)
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Cédric Scherer’s <span class="citation" data-cites="CedricScherer_2022">(<a href="#ref-CedricScherer_2022" role="doc-biblioref">2022</a>)</span> <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">A ggplot2 tutorial for beautiful plotting in R</a>
-</li>
+<li>Cédric Scherer’s <span class="citation" data-cites="CedricScherer_2022">(<a href="#ref-CedricScherer_2022" role="doc-biblioref">2022</a>)</span> <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">A ggplot2 tutorial for beautiful plotting in R</a></li>
 <li><a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot2 extensions gallery</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="the-pipe-operator" class="level1"><h1>The pipe operator</h1>
-<p>The pipe operator <em>“completely changed the way how we code in R, making it more simple and readable”</em> <span class="citation" data-cites="álvarez_2021">(<a href="#ref-%C3%A1lvarez_2021" role="doc-biblioref">Álvarez 2021</a>)</span>. I started using the pipe as <code>%&gt;%</code> from the {dplyr} package<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. However, since May 18, 2021 (= R 4.1.0) the pipe is officially part of Base R - although written as <code>|&gt;</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+</section>
+<section id="the-pipe-operator" class="level1">
+<h1>The pipe operator</h1>
+<p>The pipe operator <em>“completely changed the way how we code in R, making it more simple and readable”</em> <span class="citation" data-cites="álvarez_2021">(<a href="#ref-álvarez_2021" role="doc-biblioref">Álvarez 2021</a>)</span>. I started using the pipe as <code>%&gt;%</code> from the {dplyr} package<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. However, since May 18, 2021 (= R 4.1.0) the pipe is officially part of Base R - although written as <code>|&gt;</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>To understand what makes it so great we need to start using more than one function at a time. So far, we have only used functions individually. Yet, in real life you will often find yourself having to combine multiple functions. As a fictional example, let’s say that from the <code>PlantGrowth</code> data, we want to extract a sorted vector of the square root of all weight-values that belong to the <code>ctrl</code> group. I will show three approaches how to accomplish this</p>
-<section id="no-pipe---intermediate-steps" class="level2"><h2 class="anchored" data-anchor-id="no-pipe---intermediate-steps">No pipe - intermediate steps</h2>
+<section id="no-pipe---intermediate-steps" class="level2">
+<h2 class="anchored" data-anchor-id="no-pipe---intermediate-steps">No pipe - intermediate steps</h2>
 <p>Using one function at a time and saving the output in the variables <code>a</code> - <code>d</code>, we can do this:</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">PlantGrowth</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span></span>
-<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">pull</span><span class="op">(</span><span class="va">a</span>, <span class="va">weight</span><span class="op">)</span> <span class="co"># same as: b &lt;- a$weight</span></span>
-<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">c</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">filter</span>(PlantGrowth, group <span class="sc">==</span> <span class="st">"ctrl"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">pull</span>(a, weight) <span class="co"># same as: b &lt;- a$weight</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(b)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(c, <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
 </div>
 </div>
-</section><section id="no-pipe---nesting-functions" class="level2"><h2 class="anchored" data-anchor-id="no-pipe---nesting-functions">No pipe - nesting functions</h2>
+</section>
+<section id="no-pipe---nesting-functions" class="level2">
+<h2 class="anchored" data-anchor-id="no-pipe---nesting-functions">No pipe - nesting functions</h2>
 <p>Just like in MS Excel, it is possible to write functions inside of functions so that we can do this:</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu">pull</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">PlantGrowth</span>, <span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span>, <span class="va">weight</span><span class="op">)</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(PlantGrowth, group <span class="sc">==</span> <span class="st">"ctrl"</span>), weight)), <span class="at">digits =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
 </div>
 </div>
-</section><section id="pipe" class="level2"><h2 class="anchored" data-anchor-id="pipe">Pipe!</h2>
+</section>
+<section id="pipe" class="level2">
+<h2 class="anchored" data-anchor-id="pipe">Pipe!</h2>
 <p>This approach (i) allows you to write functions from left to right / top to bottom and thus in the order they are executed and the way you think about them and (ii) does not create extra variables for intermediate steps:</p>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">PlantGrowth</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"ctrl"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">pull</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>PlantGrowth <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"ctrl"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> [1] 2.0 2.1 2.1 2.1 2.3 2.3 2.3 2.3 2.4 2.5</code></pre>
 </div>
 </div>
-<p>You can think about it like this: Something (in this case the <code>PlantGrowth</code> data.frame) goes into the pipe and is directed to the next function <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. By default, this function takes what came out of the previous pipe and puts it as its first argument. This happens with every pipe. You’ll notice that all the functions who required two arguments above, now only need one argument, <em>i.e.</em> the additional argument, because the main argument stating which data is to be used is by default simply what came out of the previous pipe. Accordingly, the functions <code><a href="https://rdrr.io/r/base/MathFun.html">sqrt()</a></code> and <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> appear empty here, because they only need one piece of information and that is which data they should work with. Finally note that you can easily highlight only some of the lines up until one of the pipes to see the intermediate results.</p>
+<p>You can think about it like this: Something (in this case the <code>PlantGrowth</code> data.frame) goes into the pipe and is directed to the next function <code>filter()</code>. By default, this function takes what came out of the previous pipe and puts it as its first argument. This happens with every pipe. You’ll notice that all the functions who required two arguments above, now only need one argument, <em>i.e.</em> the additional argument, because the main argument stating which data is to be used is by default simply what came out of the previous pipe. Accordingly, the functions <code>sqrt()</code> and <code>sort()</code> appear empty here, because they only need one piece of information and that is which data they should work with. Finally note that you can easily highlight only some of the lines up until one of the pipes to see the intermediate results.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -664,25 +694,29 @@ Note
 <p>The keyboard shortcut for writing <code>%&gt;%</code> in RStudio is <strong>CTRL+SHIFT+M</strong>. Keyboard shortcuts can be customized in RStudio as described <a href="https://support.rstudio.com/hc/en-us/articles/206382178-Customizing-Keyboard-Shortcuts-in-the-RStudio-IDE">here</a>.</p>
 </div>
 </div>
-</section></section><section id="dplyr-verbs" class="level1"><h1>dplyr verbs</h1>
+</section>
+</section>
+<section id="dplyr-verbs" class="level1">
+<h1>dplyr verbs</h1>
 <p>Taken directly from <a href="https://dplyr.tidyverse.org/">the documentation</a>:</p>
 <blockquote class="blockquote">
 <p>{dplyr} is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:</p>
 <ul>
 <li><p><code>mutate()</code> adds new variables that are functions of existing variables.</p></li>
 <li><p><code>select()</code> picks variables based on their names.</p></li>
-<li><p><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> picks cases based on their values.</p></li>
+<li><p><code>filter()</code> picks cases based on their values.</p></li>
 <li><p><code>summarise()</code> reduces multiple values down to a single summary.</p></li>
 <li><p><code>arrange()</code> changes the ordering of the rows.</p></li>
 </ul>
 <p>These all combine naturally with <code>group_by()</code> which allows you to perform any operation “by group”. If you are new to dplyr, the best place to start is <a href="https://r4ds.had.co.nz/transform.html">the data transformation chapter</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>.</p>
 </blockquote>
 <p>In my experience you really can do most of the data manipulation before and after the actual statistics with these functions. In other words, it is exactly these functions who can and should replace the manual work you may currently even be doing in MS Excel. In the following sections I will give very brief examples of how to use these functions while always pointing to more thorough resources.</p>
-<section id="mutate" class="level2"><h2 class="anchored" data-anchor-id="mutate">mutate()</h2>
-<p>This function is useful whenever you want to change existing columns or add new columns to your table. To keep the following examples short and simple, let’s create <code>tbl2</code> as only the first six rows of <code>tbl</code> via the <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> function:</p>
+<section id="mutate" class="level2">
+<h2 class="anchored" data-anchor-id="mutate">mutate()</h2>
+<p>This function is useful whenever you want to change existing columns or add new columns to your table. To keep the following examples short and simple, let’s create <code>tbl2</code> as only the first six rows of <code>tbl</code> via the <code>head()</code> function:</p>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
-<span><span class="va">tbl2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="ot">&lt;-</span> <span class="fu">head</span>(tbl)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>tbl2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 2
   weight group
@@ -699,8 +733,8 @@ Note
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>new <span class="op">=</span> <span class="va">weight</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new =</span> weight <span class="sc">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 3
   weight group   new
@@ -717,8 +751,8 @@ Note
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>weight <span class="op">=</span> <span class="va">weight</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> weight <span class="sc">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 2
   weight group
@@ -737,11 +771,11 @@ Note
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    `Name with Space` <span class="op">=</span> <span class="st">"Hello!"</span>,</span>
-<span>    number10 <span class="op">=</span> <span class="fl">10</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Name with Space</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Hello!"</span>,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">number10 =</span> <span class="dv">10</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 4
   weight group `Name with Space` number10
@@ -758,12 +792,12 @@ Note
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>size <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
-<span>    <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">5.5</span> <span class="op">~</span> <span class="st">"large"</span>,</span>
-<span>    <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">4.5</span> <span class="op">~</span> <span class="st">"small"</span>,</span>
-<span>    <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"normal"</span> <span class="co"># everything else</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">size =</span> <span class="fu">case_when</span>(</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&gt;</span> <span class="fl">5.5</span> <span class="sc">~</span> <span class="st">"large"</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&lt;</span> <span class="fl">4.5</span> <span class="sc">~</span> <span class="st">"small"</span>,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"normal"</span> <span class="co"># everything else</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 3
   weight group size  
@@ -782,11 +816,11 @@ Note
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    <span class="fu">across</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">v2</span><span class="op">)</span>, <span class="op">~</span> <span class="va">.x</span> <span class="op">+</span> <span class="fl">20</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">c</span>(v1, v2), <span class="sc">~</span> .x <span class="sc">+</span> <span class="dv">20</span>)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 5
   weight group    v1    v2    v3
@@ -803,11 +837,11 @@ Note
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="op">~</span> <span class="va">.x</span> <span class="op">+</span> <span class="fl">20</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>tbl2 <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> .x <span class="sc">+</span> <span class="dv">20</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 5
   weight group    v1    v2    v3
@@ -835,9 +869,7 @@ Additional Resources (click to show)
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate">5.5 Add new variables with mutate()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate">5.5 Add new variables with mutate()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://dplyr.tidyverse.org/reference/mutate.html">Create, modify, and delete columns with mutate()</a></li>
 <li><a href="https://dplyr.tidyverse.org/reference/case_when.html">A general vectorised if with case_when()</a></li>
 <li><a href="https://dplyr.tidyverse.org/reference/across.html">Apply a function (or functions) across multiple columns with across()</a></li>
@@ -845,13 +877,15 @@ Additional Resources (click to show)
 </div>
 </div>
 </div>
-</section><section id="select" class="level2"><h2 class="anchored" data-anchor-id="select">select()</h2>
+</section>
+<section id="select" class="level2">
+<h2 class="anchored" data-anchor-id="select">select()</h2>
 <p>This function is useful whenever you want to select a subset of columns or change the order of columns. To provide better examples, let’s first create a table <code>tbl3</code> with a few more columns:</p>
 <div class="cell">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">&lt;-</span> <span class="va">tbl2</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>var1 <span class="op">=</span> <span class="fl">1</span>, var2 <span class="op">=</span> <span class="fl">2</span>, var3 <span class="op">=</span> <span class="st">"text"</span>, var4 <span class="op">=</span> <span class="st">"word"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tbl3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="ot">&lt;-</span> tbl2 <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">var1 =</span> <span class="dv">1</span>, <span class="at">var2 =</span> <span class="dv">2</span>, <span class="at">var3 =</span> <span class="st">"text"</span>, <span class="at">var4 =</span> <span class="st">"word"</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>tbl3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 6
   weight group  var1  var2 var3  var4 
@@ -868,8 +902,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">group</span>, <span class="va">var1</span>, <span class="va">var4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, var1, var4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 3
   group  var1 var4 
@@ -886,8 +920,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">group</span>, <span class="va">var1</span><span class="op">:</span><span class="va">var4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group, var1<span class="sc">:</span>var4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 5
   group  var1  var2 var3  var4 
@@ -906,8 +940,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">group</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 5
   weight  var1  var2 var3  var4 
@@ -924,8 +958,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">contains</span><span class="op">(</span><span class="st">"r"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"r"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 5
   group  var1  var2 var3  var4 
@@ -944,8 +978,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 3
   weight  var1  var2
@@ -962,8 +996,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">var1</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>tbl3 <span class="sc">%&gt;%</span> </span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(var1, <span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 6
    var1 weight group  var2 var3  var4 
@@ -991,9 +1025,7 @@ Additional Resources (click to show)
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/transform.html#select">5.4 Select columns with select()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/transform.html#select">5.4 Select columns with select()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://dplyr.tidyverse.org/reference/select.html">Subset columns using their names and types with select()</a></li>
 <li><a href="https://tidyselect.r-lib.org/reference/starts_with.html">Select variables that match a pattern with starts_with() etc.</a></li>
 <li><a href="https://tidyselect.r-lib.org/reference/where.html">Select variables with a function with where()</a></li>
@@ -1001,14 +1033,16 @@ Additional Resources (click to show)
 </div>
 </div>
 </div>
-</section><section id="filter" class="level2"><h2 class="anchored" data-anchor-id="filter">filter()</h2>
+</section>
+<section id="filter" class="level2">
+<h2 class="anchored" data-anchor-id="filter">filter()</h2>
 <p>This function is useful whenever you want to subset rows based on their values. Note that for the examples here, we use the original <code>tbl</code> with 30 observations.</p>
 <p>Let’s immediately filter for two conditions: Observations that belong to group <code>trt2</code> <strong>and</strong> (<code>&amp;</code>) are larger than 6 (left); Observations that are larger than 6 <strong>or</strong> (<code>|</code>) smaller than 4 (right):</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">6</span> <span class="op">&amp;</span> <span class="va">group</span> <span class="op">==</span> <span class="st">"trt2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="dv">6</span> <span class="sc">&amp;</span> group <span class="sc">==</span> <span class="st">"trt2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 2 × 2
   weight group
@@ -1021,8 +1055,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">6</span> <span class="op">|</span> <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="dv">6</span> <span class="sc">|</span> weight <span class="sc">&lt;</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 2
   weight group
@@ -1041,8 +1075,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"trt1"</span> <span class="op">|</span> <span class="va">group</span> <span class="op">==</span> <span class="st">"trt2"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"trt1"</span> <span class="sc">|</span> group <span class="sc">==</span> <span class="st">"trt2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 20 × 2
    weight group
@@ -1073,8 +1107,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trt1"</span>, <span class="st">"trt2"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"trt1"</span>, <span class="st">"trt2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 20 × 2
    weight group
@@ -1107,8 +1141,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">!=</span> <span class="st">"ctrl"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">!=</span> <span class="st">"ctrl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 20 × 2
    weight group
@@ -1139,8 +1173,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&gt;</span> <span class="fu">mean</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 17 × 2
    weight group
@@ -1179,57 +1213,61 @@ Additional Resources (click to show)
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/transform.html#filter-rows-with-filter">5.2 Filter rows with filter()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/transform.html#filter-rows-with-filter">5.2 Filter rows with filter()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://dplyr.tidyverse.org/reference/filter.html">Subset rows using column values with filter()</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="arrange" class="level2"><h2 class="anchored" data-anchor-id="arrange">arrange()</h2>
+</section>
+<section id="arrange" class="level2">
+<h2 class="anchored" data-anchor-id="arrange">arrange()</h2>
 <p>This function is useful whenever you want to sort rows based on their values. We’ll once more create a new version of our original dataset to best show what this function can do:</p>
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl4</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">slice</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">11</span><span class="op">:</span><span class="fl">13</span>, <span class="fl">21</span><span class="op">:</span><span class="fl">23</span><span class="op">)</span> </span>
-<span><span class="co"># this keep only rows 1,2,3,11,12,13,21,22,23</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="ot">&lt;-</span> tbl <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>, <span class="dv">21</span><span class="sc">:</span><span class="dv">23</span>) </span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this keeps only rows 1,2,3,11,12,13,21,22,23</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can arrange rows via writing the column name (or column index/number). Note that by default values are sorted in ascending order and strings are sorted alphabetically, but this can be reversed by using <code>desc()</code>:</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl4</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="sc">%&gt;%</span> </span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>  weight group
-1   4.17  ctrl
-2   4.17  trt1
-3   4.41  trt1
-4   4.81  trt1
-5   5.12  trt2
-6   5.18  ctrl
-7   5.54  trt2
-8   5.58  ctrl
-9   6.31  trt2</code></pre>
+<pre class="custom-output"><code># A tibble: 9 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   4.17 ctrl 
+2   4.17 trt1 
+3   4.41 trt1 
+4   4.81 trt1 
+5   5.12 trt2 
+6   5.18 ctrl 
+7   5.54 trt2 
+8   5.58 ctrl 
+9   6.31 trt2 </code></pre>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl4</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="sc">%&gt;%</span> </span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>  weight group
-1   6.31  trt2
-2   5.58  ctrl
-3   5.54  trt2
-4   5.18  ctrl
-5   5.12  trt2
-6   4.81  trt1
-7   4.41  trt1
-8   4.17  ctrl
-9   4.17  trt1</code></pre>
+<pre class="custom-output"><code># A tibble: 9 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   6.31 trt2 
+2   5.58 ctrl 
+3   5.54 trt2 
+4   5.18 ctrl 
+5   5.12 trt2 
+6   4.81 trt1 
+7   4.41 trt1 
+8   4.17 ctrl 
+9   4.17 trt1 </code></pre>
 </div>
 </div>
 </div>
@@ -1238,43 +1276,47 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl4</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">group</span>, <span class="va">weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(group, weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>  weight group
-1   4.17  ctrl
-2   5.18  ctrl
-3   5.58  ctrl
-4   4.17  trt1
-5   4.41  trt1
-6   4.81  trt1
-7   5.12  trt2
-8   5.54  trt2
-9   6.31  trt2</code></pre>
+<pre class="custom-output"><code># A tibble: 9 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   4.17 ctrl 
+2   5.18 ctrl 
+3   5.58 ctrl 
+4   4.17 trt1 
+5   4.41 trt1 
+6   4.81 trt1 
+7   5.12 trt2 
+8   5.54 trt2 
+9   6.31 trt2 </code></pre>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myorder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trt1"</span>, <span class="st">"ctrl"</span>, <span class="st">"trt2"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tbl4</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">arrange</span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">myorder</span><span class="op">)</span>, </span>
-<span>    <span class="va">weight</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>myorder <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"trt1"</span>, <span class="st">"ctrl"</span>, <span class="st">"trt2"</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="sc">%&gt;%</span> </span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">match</span>(group, myorder), </span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>    weight</span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>  weight group
-1   4.17  trt1
-2   4.41  trt1
-3   4.81  trt1
-4   4.17  ctrl
-5   5.18  ctrl
-6   5.58  ctrl
-7   5.12  trt2
-8   5.54  trt2
-9   6.31  trt2</code></pre>
+<pre class="custom-output"><code># A tibble: 9 × 2
+  weight group
+   &lt;dbl&gt; &lt;fct&gt;
+1   4.17 trt1 
+2   4.41 trt1 
+3   4.81 trt1 
+4   4.17 ctrl 
+5   5.18 ctrl 
+6   5.58 ctrl 
+7   5.12 trt2 
+8   5.54 trt2 
+9   6.31 trt2 </code></pre>
 </div>
 </div>
 </div>
@@ -1293,23 +1335,23 @@ Additional Resources (click to show)
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange">5.3 Arrange rows with arrange()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange">5.3 Arrange rows with arrange()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://dplyr.tidyverse.org/reference/arrange.html">Arrange rows by column values with arrange()</a></li>
 <li><a href="https://stackoverflow.com/a/25267681/8830099">How to have NA’s displayed first using arrange()</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="summarise" class="level2"><h2 class="anchored" data-anchor-id="summarise">summarise()</h2>
+</section>
+<section id="summarise" class="level2">
+<h2 class="anchored" data-anchor-id="summarise">summarise()</h2>
 <p>This function can be useful whenever you want to summarise data. Yet, it is not very useful (left) unless it is paired with <code>group_by()</code> (right).</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># no group_by </span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>my_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># no group_by </span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">my_mean =</span> <span class="fu">mean</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 1 × 1
   my_mean
@@ -1321,9 +1363,9 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">summarise</span><span class="op">(</span>my_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">my_mean =</span> <span class="fu">mean</span>(weight))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 3 × 2
   group my_mean
@@ -1339,16 +1381,16 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">summarise</span><span class="op">(</span></span>
-<span>    Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
-<span>    StdDev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
-<span>    Min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
-<span>    Median <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
-<span>    Max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,</span>
-<span>    n_Obs <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(weight),</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">StdDev =</span> <span class="fu">sd</span>(weight),</span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="fu">min</span>(weight),</span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(weight),</span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="fu">max</span>(weight),</span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 3 × 7
   group  Mean StdDev   Min Median   Max n_Obs
@@ -1362,16 +1404,16 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>larger5 <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
-<span>    <span class="va">weight</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"yes"</span>,</span>
-<span>    <span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"no"</span></span>
-<span>  <span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span>, <span class="va">larger5</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">summarise</span><span class="op">(</span></span>
-<span>    n_Obs <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    Mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">larger5 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"yes"</span>,</span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>    weight <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"no"</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, larger5) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_Obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(weight)</span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 6 × 4
 # Groups:   group [3]
@@ -1391,13 +1433,13 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span></span>
-<span>    <span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, </span>
-<span>    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
-<span>    <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(is.numeric), </span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> <span class="fu">mean</span>(.x)</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 3 × 5
   group weight    v1    v2    v3
@@ -1411,16 +1453,16 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>v1 <span class="op">=</span> <span class="fl">1</span>, v2 <span class="op">=</span> <span class="fl">2</span>, v3 <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">weight</span>, <span class="va">v3</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span>    Min <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,</span>
-<span>    Max <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">v1 =</span> <span class="dv">1</span>, <span class="at">v2 =</span> <span class="dv">2</span>, <span class="at">v3 =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(</span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(weight, v3),</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="sc">~</span> <span class="fu">min</span>(.x),</span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="sc">~</span> <span class="fu">max</span>(.x)</span>
+<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 3 × 5
   group weight_Min weight_Max v3_Min v3_Max
@@ -1458,21 +1500,23 @@ Additional Resources (click to show)
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise">5.6 Grouped summaries with summarise()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise">5.6 Grouped summaries with summarise()</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://dplyr.tidyverse.org/reference/summarise.html">Summarise each group to fewer rows with summarise()</a></li>
 <li><a href="https://dplyr.tidyverse.org/reference/group_by.html">Group by one or more variables with group_by()</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section></section><section id="longwide-format" class="level1"><h1>long/wide format</h1>
+</section>
+</section>
+<section id="longwide-format" class="level1">
+<h1>long/wide format</h1>
 <p>Sometimes, data is referred to as being in <em>long format</em> or <em>wide format</em>. As the name suggests, long formatted tables have more rows, but fewer columns than wide formatted tables, while containing the same information. I find the easiest way to understand the two is by looking at examples like in the following image, which was taken from <a href="https://www.statology.org/long-vs-wide-data/">statology.org</a>:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="../img/longwide.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figure class="figure">
+<p><img src="../img/longwide.png" class="img-fluid figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1490,35 +1534,29 @@ Note
 <div class="callout-body-container callout-body">
 <p>You may have used other functions in this context. Here are some alternatives that <a href="https://github.com/tidyverse/tidyr#related-work">are superseded</a>:</p>
 <ul>
-<li>
-<code>melt()</code> &amp; <code>dcast()</code> of {data.table}</li>
-<li>
-<code>fold()</code> &amp; <code>unfold()</code> of {databases}</li>
-<li>
-<code>melt()</code> &amp; <code>cast()</code> of {reshape}</li>
-<li>
-<code>melt()</code> &amp; <code>dcast()</code> of {reshape2}</li>
-<li>
-<code>unpivot()</code> &amp; <code>pivot()</code> of {spreadsheets}</li>
-<li>
-<code>gather()</code> &amp; <code>spread()</code> of {tidyr} &lt; v1.0.0</li>
+<li><code>melt()</code> &amp; <code>dcast()</code> of {data.table}</li>
+<li><code>fold()</code> &amp; <code>unfold()</code> of {databases}</li>
+<li><code>melt()</code> &amp; <code>cast()</code> of {reshape}</li>
+<li><code>melt()</code> &amp; <code>dcast()</code> of {reshape2}</li>
+<li><code>unpivot()</code> &amp; <code>pivot()</code> of {spreadsheets}</li>
+<li><code>gather()</code> &amp; <code>spread()</code> of {tidyr} &lt; v1.0.0</li>
 </ul>
 </div>
 </div>
 <p>The <code>PlantGrowth</code> data from above is actually already in long format, yet I create a version of it that is shorter (only 3 instead of 10 observations per group) and has an additional column called <code>nr</code> with is a running number per observation in each group:</p>
 <div class="cell">
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">long_dat</span> <span class="op">&lt;-</span> <span class="va">PlantGrowth</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">group</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># for each level in the "group" column</span></span>
-<span>  <span class="fu">slice</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># keep only the rows 1-3</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>nr <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span>, <span class="co"># add a "nr" column with numbers 1 - ...</span></span>
-<span>         .before <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># add this column left of "weight" column</span></span>
-<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="co"># remove the grouping from above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>long_dat <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="co"># for each level in the "group" column</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="co"># keep only the rows 1-3</span></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nr =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="co"># add a "nr" column with numbers 1 - ...</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">.before =</span> <span class="st">"weight"</span>) <span class="sc">%&gt;%</span> <span class="co"># add this column left of "weight" column</span></span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="co"># remove the grouping from above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now use <code>pivot_wider()</code> and create a wide formatted version of the <code>long_dat</code> table and save it as <code>wide_dat</code>. Note that the function has multiple arguments you can use, but for me it is usually enough to use <code>names from =</code> and <code>values_from =</code>. In the former you provide the name of the column whose entries should be the names of the new columns in the wide formatted data. In the latter you provide the name of the column whose values should be written in the new columns in the wide formatted data:</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">long_dat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>long_dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 9 × 3
      nr weight group
@@ -1538,11 +1576,11 @@ Note
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wide_dat</span> <span class="op">&lt;-</span> <span class="va">long_dat</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="st">"group"</span>, </span>
-<span>              values_from <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">wide_dat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>wide_dat <span class="ot">&lt;-</span> long_dat <span class="sc">%&gt;%</span></span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"group"</span>, </span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">"weight"</span>)</span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a>wide_dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 3 × 4
      nr  ctrl  trt1  trt2
@@ -1558,12 +1596,12 @@ Note
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wide_dat</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">pivot_longer</span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ctrl</span>, <span class="va">trt1</span>, <span class="va">trt2</span><span class="op">)</span>,</span>
-<span>    names_to <span class="op">=</span> <span class="st">"group"</span>,</span>
-<span>    values_to <span class="op">=</span> <span class="st">"weight"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>wide_dat <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(ctrl, trt1, trt2),</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"group"</span>,</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"weight"</span></span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 9 × 3
      nr group weight
@@ -1583,12 +1621,12 @@ Note
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wide_dat</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">pivot_longer</span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="op">-</span><span class="va">nr</span>,</span>
-<span>    names_to <span class="op">=</span> <span class="st">"group"</span>,</span>
-<span>    values_to <span class="op">=</span> <span class="st">"weight"</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>wide_dat <span class="sc">%&gt;%</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>nr,</span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"group"</span>,</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"weight"</span></span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code># A tibble: 9 × 3
      nr group weight
@@ -1619,43 +1657,43 @@ Additional Resources (click to show)
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting">12.3 Pivoting</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting">12.3 Pivoting</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://tidyr.tidyverse.org/articles/pivot.html">Pivoting with tidyr</a></li>
 <li><a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf">tidyr cheat sheet</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="forcats" class="level1"><h1>forcats</h1>
+</section>
+<section id="forcats" class="level1">
+<h1>forcats</h1>
 <p>In my experience, R beginners really only care about the difference between <code>factor</code> and <code>character</code> variables once the factor level order is not as they want it to be - typically on the x-axis of a plot. Luckily, <a href="https://forcats.tidyverse.org/">{forcats}</a> can deal with this.</p>
 <p>In the following example, we create a column <code>fct</code> that is a copy of the column <code>chr</code>, except that they are formatted as <code>factor</code> and <code>character</code>, respectively.</p>
 <div class="cell">
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">tribble</span><span class="op">(</span></span>
-<span>     <span class="op">~</span><span class="va">val</span>,   <span class="op">~</span><span class="va">chr</span>,</span>
-<span>       <span class="fl">10</span>, <span class="st">"Ctrl"</span>, </span>
-<span>       <span class="fl">15</span>,    <span class="st">"A"</span>,</span>
-<span>        <span class="fl">8</span>,    <span class="st">"B"</span></span>
-<span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>fct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">chr</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">val</span>, x <span class="op">=</span> <span class="va">fct</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>     <span class="sc">~</span>val,   <span class="sc">~</span>chr,</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>       <span class="dv">10</span>, <span class="st">"Ctrl"</span>, </span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>       <span class="dv">15</span>,    <span class="st">"A"</span>,</span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>        <span class="dv">8</span>,    <span class="st">"B"</span></span>
+<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fct =</span> <span class="fu">as.factor</span>(chr))</span>
+<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb111-10"><a href="#cb111-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> val, <span class="at">x =</span> fct) <span class="sc">+</span></span>
+<span id="cb111-11"><a href="#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="tidyverse_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="1650"></p>
 </div>
 </div>
 <p>Even though the data is sorted so that Ctrl is first, then A, then B, the x-Axis is sorted differently<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. This is because factor levels are always sorted alphabetically by default. We can reorder them via different functions in {forcats}:</p>
 <div class="cell">
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    fct2 <span class="op">=</span> <span class="fu">fct_relevel</span><span class="op">(</span><span class="va">fct</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ctrl"</span>, <span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    fct3 <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">fct</span>, <span class="va">val</span>, <span class="va">mean</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fct2 =</span> <span class="fu">fct_relevel</span>(fct, <span class="fu">c</span>(<span class="st">"Ctrl"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>)),</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fct3 =</span> <span class="fu">fct_reorder</span>(fct, val, mean)</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>tibble [3 × 5] (S3: tbl_df/tbl/data.frame)
  $ val : num [1:3] 10 15 8
@@ -1670,9 +1708,9 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">val</span>, x <span class="op">=</span> <span class="va">fct2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> val, <span class="at">x =</span> fct2) <span class="sc">+</span></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="tidyverse_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid" width="1500"></p>
 </div>
@@ -1681,31 +1719,33 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">val</span>, x <span class="op">=</span> <span class="va">fct3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat) <span class="sc">+</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> val, <span class="at">x =</span> fct3) <span class="sc">+</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="tidyverse_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid" width="1500"></p>
 </div>
 </div>
 </div>
 </div>
-</section><section id="stringr" class="level1"><h1>stringr</h1>
+</section>
+<section id="stringr" class="level1">
+<h1>stringr</h1>
 <p>In computer programming, a string is traditionally a sequence of characters (or <em>text</em> if you will). Taken directly from <a href="https://stringr.tidyverse.org/">the documentation</a>:</p>
 <blockquote class="blockquote">
 <p>Strings are not glamorous, high-profile components of R, but they do play a big role in many data cleaning and preparation tasks. The stringr package provide a cohesive set of functions designed to make working with strings as easy as possible. If you’re not familiar with strings, the best place to start is the <a href="https://r4ds.had.co.nz/strings.html">chapter on strings in R for Data Science</a>.</p>
 </blockquote>
 <p>Below are some brief examples of <a href="https://stringr.tidyverse.org/">{stringr}</a> functions I use regularly. To show what they can do, let’s first create some strings<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a_string</span> <span class="op">&lt;-</span> <span class="st">"  a  string with irregular  spaces. "</span></span>
-<span><span class="va">strings</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"String 1"</span>, <span class="st">"String Two"</span>, <span class="st">"third string"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>a_string <span class="ot">&lt;-</span> <span class="st">"  a  string with irregular  spaces. "</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>strings <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"String 1"</span>, <span class="st">"String Two"</span>, <span class="st">"third string"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To remove part of a string, use <code>str_remove()</code>. To replace it, use <code>str_replace()</code>.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">strings</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">str_remove</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ing"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>strings <span class="sc">%&gt;%</span> </span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="at">pattern =</span> <span class="st">"ing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "Str 1"     "Str Two"   "third str"</code></pre>
 </div>
@@ -1714,9 +1754,9 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">strings</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">str_replace</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ing"</span>,</span>
-<span>              replacement <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>strings <span class="sc">%&gt;%</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">"ing"</span>,</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">replacement =</span> <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "Str. 1"     "Str. Two"   "third str."</code></pre>
 </div>
@@ -1727,8 +1767,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a_string</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">str_trim</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>a_string <span class="sc">%&gt;%</span> </span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "a  string with irregular  spaces."</code></pre>
 </div>
@@ -1737,8 +1777,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a_string</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">str_squish</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>a_string <span class="sc">%&gt;%</span> </span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_squish</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "a string with irregular spaces."</code></pre>
 </div>
@@ -1749,8 +1789,8 @@ Additional Resources (click to show)
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">strings</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">str_detect</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"Two"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>strings <span class="sc">%&gt;%</span> </span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_detect</span>(<span class="at">pattern =</span> <span class="st">"Two"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] FALSE  TRUE FALSE</code></pre>
 </div>
@@ -1759,8 +1799,8 @@ Additional Resources (click to show)
 
 </div><div class="column" style="width:49%;">
 <div class="cell">
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">strings</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">str_sub</span><span class="op">(</span>start <span class="op">=</span> <span class="fl">1</span>, end <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>strings <span class="sc">%&gt;%</span> </span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>[1] "Stri" "Stri" "thir"</code></pre>
 </div>
@@ -1780,9 +1820,7 @@ Additional Resources (click to show)
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<a href="https://r4ds.had.co.nz/strings.html">14 Strings</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span>
-</li>
+<li><a href="https://r4ds.had.co.nz/strings.html">14 Strings</a> in <em>R for data science</em> <span class="citation" data-cites="Wickham_2017">(<a href="#ref-Wickham_2017" role="doc-biblioref">Wickham and Grolemund 2017</a>)</span></li>
 <li><a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">stringr cheat sheet</a></li>
 <li><a href="https://stringr.tidyverse.org/articles/regular-expressions.html">Regular expressions</a></li>
 </ul>
@@ -1794,7 +1832,10 @@ Additional Resources (click to show)
 <!-- -->
 
 
-</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-álvarez_2021" class="csl-entry" role="doc-biblioentry">
 Álvarez, Adolfo. 2021. <span>“Plumbers, Chains, and Famous Painters: The (Updated) History of the Pipe Operator in r.”</span> <em>Adolfo Álvarez Blog</em>. <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/</a>.
 </div>
@@ -1802,9 +1843,10 @@ Additional Resources (click to show)
 Scherer, Cédric. 2022. <span>“A Ggplot2 Tutorial for Beautiful Plotting in r.”</span> <em>Cédric Scherer Blog</em>. <a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/</a>.
 </div>
 <div id="ref-Wickham_2017" class="csl-entry" role="doc-biblioentry">
-Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. O’Reilly Media, Inc.
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. O’Reilly Media, Inc. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
 <ol>
 <li id="fn1"><p>But it was not the first package to use it. <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/">This blog post</a> has a nice summary of the history of the pipe operator in R.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Note that there are some differences between <code>%&gt;%</code> and <code>|&gt;</code> - find more about it <em>e.g.</em> <a href="https://twitter.com/TimTeaFan/status/1582118234220007424">here</a>, <a href="http://adolfoalvarez.cl/blog/2021-09-16-plumbers-chains-and-famous-painters-the-history-of-the-pipe-operator-in-r/#base-r">here</a> or <a href="https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe">here</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1812,7 +1854,9 @@ Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Ti
 <li id="fn4"><p>It does not make a difference here, whether we put <code>x = chr</code> or <code>x = fct</code> in the ggplot statement.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Yes, the mean in this example is not really a mean, since there is only one number per group.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Note that while I create two vectors in this example, this will work just as well with columns of a table via `table %&gt;% mutate(new = stringrfunction(old))`<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2452,9 +2496,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb129-518"><a href="#cb129-518" aria-hidden="true" tabindex="-1"></a>This function is useful whenever you want to sort rows based on their values. We'll once more create a new version of our original dataset to best show what this function can do:</span>
 <span id="cb129-519"><a href="#cb129-519" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb129-522"><a href="#cb129-522" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb129-523"><a href="#cb129-523" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="ot">&lt;-</span> PlantGrowth <span class="sc">%&gt;%</span></span>
+<span id="cb129-523"><a href="#cb129-523" aria-hidden="true" tabindex="-1"></a>tbl4 <span class="ot">&lt;-</span> tbl <span class="sc">%&gt;%</span></span>
 <span id="cb129-524"><a href="#cb129-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>, <span class="dv">21</span><span class="sc">:</span><span class="dv">23</span>) </span>
-<span id="cb129-525"><a href="#cb129-525" aria-hidden="true" tabindex="-1"></a><span class="co"># this keep only rows 1,2,3,11,12,13,21,22,23</span></span>
+<span id="cb129-525"><a href="#cb129-525" aria-hidden="true" tabindex="-1"></a><span class="co"># this keeps only rows 1,2,3,11,12,13,21,22,23</span></span>
 <span id="cb129-526"><a href="#cb129-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb129-527"><a href="#cb129-527" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb129-528"><a href="#cb129-528" aria-hidden="true" tabindex="-1"></a>We can arrange rows via writing the column name (or column index/number). Note that by default values are sorted in ascending order and strings are sorted alphabetically, but this can be reversed by using <span class="in">`desc()`</span>:</span>
