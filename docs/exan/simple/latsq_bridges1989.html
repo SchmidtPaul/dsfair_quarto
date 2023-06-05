@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.475">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="dcterms.date" content="2022-12-19">
 <title>dsfair_quarto - One-way latin square design</title>
@@ -226,6 +226,10 @@ div.csl-indent {
  <span class="dropdown-text">Useful things</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../summaryarticles/ggplot2intro.html">
+ <span class="dropdown-text">ggplot2 tutorial</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../summaryarticles/compactletterdisplay.html">
  <span class="dropdown-text">Compact Letter Display</span></a>
   </li>  
@@ -349,7 +353,7 @@ div.csl-indent {
 <p>This example data is taken from <a href="https://kwstat.github.io/agridat/">{agridat}</a>. It considers data published in <span class="citation" data-cites="bridges1989">Bridges (<a href="#ref-bridges1989" role="doc-biblioref">1989</a>)</span> from a cucumber yield trial with four genotypes set up as a Latin square design. Notice that the original dataset considers two trials (at two locations), but we will focus on only a single trial here.</p>
 <section id="import" class="level2"><h2 class="anchored" data-anchor-id="import">Import</h2>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">agridat</span><span class="fu">::</span><span class="va"><a href="https://kwstat.github.io/agridat/reference/bridges.cucumber.html">bridges.cucumber</a></span> <span class="op">%&gt;%</span> </span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">agridat</span><span class="fu">::</span><span class="va">bridges.cucumber</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">loc</span> <span class="op">==</span> <span class="st">"Clemson"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># filter data from only one location</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">loc</span><span class="op">)</span> <span class="co"># remove loc column which is now unnecessary</span></span>
