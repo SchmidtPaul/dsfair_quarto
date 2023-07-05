@@ -26,4 +26,4 @@ This website is currently under construction. I am trying to gather three of my 
 
 ## Workshops
 
-Moreover, the chapters published here serve as the basis for any of my R‑Workshops. Check out the ["Prepare for an upcoming workshop"](summaryarticles/workshopprep.qmd) chapter and the [list of previous workshops](https://schmidtpaul.github.io/).
+Moreover, the chapters published here serve as the basis for any of my R‑Workshops. Check out the ["Prepare for an upcoming workshop"](ch/misc/workshopprep.qmd) chapter and the [list of previous workshops](https://schmidtpaul.github.io/).

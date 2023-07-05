@@ -1,0 +1,235 @@
+---
+title: "One-way randomized complete block design"
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a randomized complete block design."
+---
+
+```{r}
+#| include: false
+source(here::here("src/helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflict_prefer("filter", "dplyr") 
+conflict_prefer("select", "dplyr")
+```
+
+# Data
+
+This example is taken from Chapter *"2 Randomized complete block design"* of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @clewer_2001 from a yield (t/ha) trial laid out as a randomized complete `block` design (3 blocks) with `cultivar` (4 cultivars) being the only treatment factor. Thus, we have a total of 12 plots.
+
+## Import
+
+```{r}
+#| echo: false
+path <- here::here("data", "Clewer&Scarisbrick2001.csv")
+get_url_from_path(path)
+```
+
+```{r}
+dat <- read_csv(path) # use path from above
+dat
+```
+
+## Format
+
+Before anything, the columns `block` and `cultivar` should be encoded as factors, since R by default encoded them as character.
+
+```{r}
+dat <- dat %>%
+  mutate(across(c(block, cultivar), ~ as.factor(.x)))
+```
+
+## Explore
+
+We make use of [`dlookr::describe()`](../../misc/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(cultivar) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(block) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+:::
+:::
+
+Additionally, we can decide to plot our data:
+
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(y = yield, x = cultivar, color = block) +
+  geom_point() +
+    scale_x_discrete(
+    name = "Cultivar"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  scale_color_discrete(
+    name = "Block"
+  ) +
+  theme_classic()
+```
+
+Finally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../misc/usefulthings.qmd#desplot). We can even create a second field plan that gives us a feeling for the yields per plot.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  flip = TRUE, # row 1 on top, not on bottom
+  form = cultivar ~ col + row, # fill color per cultivar       
+  out1 = block, # line between blocks                     
+  text = cultivar, # cultivar names per plot
+  cex = 1, # cultviar names: font size
+  shorten = FALSE, # cultivar names: don't abbreviate
+  main = "Field layout", # plot title
+  show.key = FALSE # hide legend
+  ) 
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  flip = TRUE, # row 1 on top, not on bottom
+  form = yield ~ col + row, # fill color according to yield      
+  out1 = block, # line between blocks                     
+  text = cultivar, # cultivar names per plot
+  cex = 1, # cultviar names: font size
+  shorten = FALSE, # cultivar names: don't abbreviate
+  main = "Yield per plot", # plot title
+  show.key = FALSE # hide legend
+  ) 
+```
+:::
+:::
+
+Thus, `C4` seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block `B1` (left), compared to the other blocks.
+
+# Model
+
+Finally, we can decide to fit a linear model with `yield` as the response variable and (fixed) `cultivar` and `block` effects.
+
+```{r}
+mod <- lm(yield ~ cultivar + block, data = dat)
+```
+
+::: custom-callout-modass
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
+:::
+
+# ANOVA
+
+Based on our model, we can then conduct an ANOVA:
+
+```{r}
+ANOVA <- anova(mod)
+ANOVA
+```
+
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "cultivar")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
+
+# Mean comparison
+
+Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
+
+```{r}
+mean_comp <- mod %>% 
+  emmeans(specs = ~ cultivar) %>% # adj. mean per cultivar
+  cld(Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
+
+Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
+
+```{r}
+#| code-fold: true
+
+my_caption <- "Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+
+ggplot() +
+  aes(x = cultivar) +
+  # black dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield)
+  ) +
+  # red dots representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean),
+    color = "red",
+    position = position_nudge(x = 0.1)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.1)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = emmean, label = str_trim(.group)),
+    color = "red",
+    position = position_nudge(x = 0.2),
+    hjust = 0
+  ) +
+  scale_x_discrete(
+    name = "Cultivar"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  scale_color_discrete(
+    name = "Block"
+  ) +
+  theme_classic() +
+  labs(caption = my_caption) +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot")
+```

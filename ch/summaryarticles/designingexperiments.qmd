@@ -1,0 +1,19 @@
+---
+title: "Designing Experiments"
+---
+
+This article is very much under construction, but check out
+
+-   the old version of this chapter [here](https://schmidtpaul.github.io/DSFAIR/DesigningExperiments.html)
+
+-   the packages [{FielDHub}](https://didiermurillof.github.io/FielDHub/) and [{agricolae}](https://myaseen208.com/agricolae/)
+
+-   these publications:
+
+    -   @casler_2015
+
+    -   @piepho_2003
+
+    -   @piepho_2004
+
+    -   @piepho_2022

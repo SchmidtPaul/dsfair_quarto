@@ -1,0 +1,21 @@
+---
+title: "Further resources"
+---
+
+This is a collection of resources I would recommend for topics that are not covered (well enough) on this website.
+
+In general, you should browse through the [Big Book of R](https://www.bigbookofr.com/index.html), which is curated collection of over 300 R programming books on different topics.
+
+# Generalized Linear Models
+
+-   The [online version](https://bookdown.org/roback/bookdown-BeyondMLR/) of "Beyond Multiple Linear Regression - Applied Generalized Linear Models and Multilevel Models in R" by @roback_2021
+
+# Maps
+
+-   [Chapter 6: Maps](https://ggplot2-book.org/maps.html) in @wickham_2016
+-   Drawing beautiful maps programmatically with R, sf and ggplot2 [Part 1](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html), [Part 2](https://r-spatial.org/r/2018/10/25/ggplot2-sf-2.html) and [Part 3](https://r-spatial.org/r/2018/10/25/ggplot2-sf-3.html)
+-   [#30DayMapChallenge](https://30daymapchallenge.com/) - check out the posts of previous years, e.g. [all the contributions of user bydata](https://github.com/bydata/30DayMapChallenge-2022) and [the R code](https://github.com/bydata/30DayMapChallenge-2022/tree/main/R) that created them.
+
+# Meta analyses
+
+- The [online version](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/) of "Doing Meta-Analysis with R: A Hands-On Guide" by @harrer_2021
