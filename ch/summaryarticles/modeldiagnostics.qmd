@@ -135,7 +135,7 @@ You may encounter situations where the assumptions for Normality, Variance homog
 
 Transforming the response variable (e.g. yield) with a mathematical function (e.g. square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing `yield` with `sqrt(yield)`, you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example[^1] where this approach does as intended.
 
-[^1]: This is the same data as in the [latin square chapter](../../exan/simple/latsq_bridges1989.qmd).
+[^1]: This is the same data as in the [latin square chapter](../exan/simple/latsq_bridges1989.qmd).
 
 ```{r}
 #| code-fold: true
@@ -203,7 +203,9 @@ Note that `type = "response"` can do the back-transformation for us automaticall
 
 TO DO
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 **General**
 
 -   What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions [@kozak_2018]

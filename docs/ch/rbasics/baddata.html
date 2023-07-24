@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-06-16">
+<meta name="dcterms.date" content="2023-07-24">
 <title>dsfair_quarto - Bad data &amp; Outliers</title>
 <style>
 code{white-space: pre-wrap;}
@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 16, 2023</p>
+      <p class="date">July 24, 2023</p>
     </div>
   </div>
   
@@ -710,7 +710,7 @@ Note
 <p>As we can see, removing Rolando from the dataset changed the correlation quite a bit from -0.5 to -0.7. Furthermore, it’s p-value became notably smaller. While it was already &lt; 0.05 and thus statistically significant in this case, it must be realized that in other cases removing a single data point can indeed make the difference between a p-value larger and smaller 0.05.</p>
 <p>Yet, regarding the parameter estimates - intercept (<span class="math inline">\(a\)</span>) and slope (<span class="math inline">\(b\)</span>) - of the simple linear regression, the changes are not as striking. Even with a visual comparison of the two regression lines, one must look closely to spot the differences.</p>
 <section id="r²---coeff.-of-det." class="level2"><h2 class="anchored" data-anchor-id="r²---coeff.-of-det.">R² - Coeff. of det.</h2>
-<p>Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando’s data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination <span class="math inline">\(R^2\)</span>, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via <code>glance()</code>, which is another function from <a href="../../misc/usefulthings.qmd#broom">{broom}</a>:</p>
+<p>Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando’s data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination <span class="math inline">\(R^2\)</span>, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via <code>glance()</code>, which is another function from <a href="../../ch/misc/usefulthings.html#broom">{broom}</a>:</p>
 <div class="columns">
 <div class="column" style="width:49%;">
 <div class="cell">
@@ -1362,7 +1362,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb40-373"><a href="#cb40-373" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-374"><a href="#cb40-374" aria-hidden="true" tabindex="-1"></a><span class="fu">## R² - Coeff. of det.</span></span>
 <span id="cb40-375"><a href="#cb40-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-376"><a href="#cb40-376" aria-hidden="true" tabindex="-1"></a>Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando's data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination $R^2$, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via <span class="in">`glance()`</span>, which is another function from <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../../misc/usefulthings.qmd#broom)</span>:</span>
+<span id="cb40-376"><a href="#cb40-376" aria-hidden="true" tabindex="-1"></a>Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando's data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination $R^2$, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via <span class="in">`glance()`</span>, which is another function from <span class="co">[</span><span class="ot">{broom}</span><span class="co">](../misc/usefulthings.qmd#broom)</span>:</span>
 <span id="cb40-377"><a href="#cb40-377" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-378"><a href="#cb40-378" aria-hidden="true" tabindex="-1"></a>::: columns</span>
 <span id="cb40-379"><a href="#cb40-379" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>

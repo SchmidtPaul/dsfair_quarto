@@ -117,7 +117,9 @@ So, yes - the weights seem to display a somewhat consistent amount of variation 
 
 As a final note, keep in mind that the example here is very simple. A major advantage of using adjusted means is that the model they are based on can be more complex and *e.g.* include block effects. Arithmetic (sample) means that are calculated as we did for the descriptive statistics - *i.e.* separately per group - do not account for block effects and basically *don't know anything about the weights of the other groups*.
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 -   [stackexchange: Standard error in estimated marginal means are all the same](https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same) (Note the answer is from the author of [{emmeans}](https://cran.r-project.org/web/packages/emmeans/index.html))
 
 -   [Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak & Piepho, 2019)](https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635)

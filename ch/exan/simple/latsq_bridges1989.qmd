@@ -192,7 +192,9 @@ mod <- lm(yield ~ gen + rowF + colF, data = dat)
 It is crucial to add `rowF`/`colF` and not `row`/`col` to the model here, since only the former are formatted as factors. They should be formatted as factors, so that the model estimates one effect for each of their levels. The model would estimate a single slope for `row` and `col`, respectively, which is nonsensical: It would suggest that row 4 is twice as much as row 2 etc.
 :::
 
-::: custom-callout-modass
+:::{.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
 It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
 :::
 

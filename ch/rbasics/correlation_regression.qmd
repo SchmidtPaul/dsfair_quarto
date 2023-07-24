@@ -113,7 +113,7 @@ So the correlation between number of drinks and blood alcohol content in our sam
 
 ## Test it
 
-If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use `cor.test()` instead of `cor()`. We may also use the [{broom}](../../misc/usefulthings.qmd#broom) package to get the results in a more convenient format.
+If you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use `cor.test()` instead of `cor()`. We may also use the [{broom}](../misc/usefulthings.qmd#broom) package to get the results in a more convenient format.
 
 ::: columns
 ::: {.column width="49%"}
@@ -136,7 +136,9 @@ tidy(mycor)
 
 Looking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run `?cor.test()` and look at the "Details" section for more info. Here, our correlation estimate of `r scales::number(mycor$estimate, 0.01)` is significantly different from 0, since the p-value is `r scales::number(mycor$p.value, 0.0000000000001)` and therefore $< 0.05$. Furthermore, the confidence interval is `r scales::number(mycor$conf.int[1], 0.001)` - `r scales::number(mycor$conf.int[2], 0.001)` meaning that we are 95% sure that the true correlation is somewhere in that range.
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 -   [{correlation}](https://easystats.github.io/correlation/)
 -   [{corrr}](https://corrr.tidymodels.org/)
 -   [{ggcorrplot}](http://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2)
@@ -222,7 +224,7 @@ Here is a little more info why `formula = blood_alc ~ drinks` leads to R estimat
 
 ## Is this right?
 
-After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via [{modelbased}](../../misc/usefulthings.qmd#modelbased):
+After fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via [{modelbased}](../misc/usefulthings.qmd#modelbased):
 
 ```{r}
 preddat <- tibble(drinks = seq(0, 9)) %>% 
@@ -243,7 +245,7 @@ So I would like you to think about the issue from two other angles:
 
 ### Are the results really saying the intercept is \> 0?
 
-No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. `summary()`. We may also use the [{broom}](../../misc/usefulthings.qmd#broom) package to get the results in a more convenient format.
+No, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. `summary()`. We may also use the [{broom}](../misc/usefulthings.qmd#broom) package to get the results in a more convenient format.
 
 ```{r}
 tidy(reg, conf.int = TRUE)

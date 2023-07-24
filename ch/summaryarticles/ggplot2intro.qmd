@@ -28,7 +28,7 @@ Here are some other ggplot2 tutorials and resources that I like:
 
 ## Packages to install & load
 
-We are using [the `p_load()` function of the {pacman} package](https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/usefulthings.html#pacman) to install and load all necessary packages for this tutorial.
+We are using [the `p_load()` function of the {pacman} package](../misc/usefulthings.html#pacman) to install and load all necessary packages for this tutorial.
 
 ```{r}
 pacman::p_load(
@@ -87,7 +87,9 @@ Other geoms you might use include `geom_boxplot()` for boxplots, `geom_line()` f
 
 Now you understand the absolute minimum of how to create a ggplot.
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 -   [List of all `geom_*()` functons](https://ggplot2.tidyverse.org/reference/#geoms)
 :::
 
@@ -176,7 +178,9 @@ This demonstrates how the `limits =` argument can be used differently in `scale_
 
 In the end, it's important to note that setting the limits can exclude data outside the specified range from the plot. This means that the excluded data will not be considered when calculating statistics or generating geoms. In other words, while setting limits can help focus your plot on specific aspects of your data, it can also exclude important information. Always consider the implications of setting limits on your data visualization.
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 -   If you are wondering why I wanted the y-axis to start at 0, read [this](https://academy.datawrapper.de/article/326-why-our-column-and-bar-charts-start-at-zero), [this](https://digitalblog.ons.gov.uk/2016/06/27/does-the-axis-have-to-start-at-zero-part-1-line-charts/) and [this](https://stats.stackexchange.com/questions/184525/how-to-determine-whether-or-not-the-y-axis-of-a-graph-should-start-at-zero)
 -   [List of all scales functions](https://ggplot2.tidyverse.org/reference/index.html#scales)
 :::
@@ -419,7 +423,9 @@ Note that you can also first add a complete `theme_*()` and subsequently change 
 
 Remember, while themes can greatly enhance the aesthetic appeal of your plots, the most important aspect of any plot is its ability to accurately and effectively convey information about your data. Always prioritize clarity and accuracy over aesthetic appeal when creating your plots.
 
-::: custom-callout-addref
+:::{.callout-tip collapse="true"}
+## Additional Resources
+
 -   [List of all complete themes](https://ggplot2.tidyverse.org/reference/ggtheme.html)
 -   [Documenation of the `theme()` function](https://ggplot2.tidyverse.org/reference/theme.html)
 :::

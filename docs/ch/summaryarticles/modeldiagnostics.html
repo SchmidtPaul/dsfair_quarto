@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-06-17">
+<meta name="dcterms.date" content="2023-07-24">
 <title>dsfair_quarto - Model Diagnostics</title>
 <style>
 code{white-space: pre-wrap;}
@@ -283,7 +283,6 @@ div.csl-indent {
   <ul class="collapse">
 <li><a href="#data-transformation" id="toc-data-transformation" class="nav-link" data-scroll-target="#data-transformation">Data transformation</a></li>
   <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models">Generalized linear models</a></li>
-  <li>Additional Resources (click to show)</li>
   </ul>
 </li>
   </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="modeldiagnostics.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -321,7 +320,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 17, 2023</p>
+      <p class="date">July 24, 2023</p>
     </div>
   </div>
   
@@ -555,7 +554,18 @@ NOTE: If two or more means share the same grouping symbol,
 <p>Note that <code>type = "response"</code> can do the back-transformation for us automatically<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and specifically see the part of the message below the mean table that reads “Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale”.</p>
 </section><section id="generalized-linear-models" class="level2"><h2 class="anchored" data-anchor-id="generalized-linear-models">Generalized linear models</h2>
 <p>TO DO</p>
-</section><section class="level2 callout-tip" data-collapse="true"><h2 class="anchored" data-anchor-id="">Additional Resources (click to show)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p><strong>General</strong></p>
 <ul>
 <li>What’s normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions <span class="citation" data-cites="kozak_2018">(<a href="#ref-kozak_2018" role="doc-biblioref">Kozak and Piepho 2018</a>)</span>
@@ -585,12 +595,16 @@ NOTE: If two or more means share the same grouping symbol,
 <ul>
 <li>🇩🇪 Chapter 3.3 in <span class="citation" data-cites="dormann_2011">Dormann and Kühn (<a href="#ref-dormann_2011" role="doc-biblioref">2011</a>)</span>
 </li>
-</ul></section>
+</ul>
+</div>
+</div>
+</div>
+
 
 <!-- -->
 
 
-</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-dormann_2011" class="csl-entry" role="listitem">
 Dormann, Carsten F., and Ingolf Kühn. 2011. <em>Angewandte Statistik Fur Die Biologischen Wissenschaften</em>. 2nd ed. <span>Helmholtz Zentrum fur Umweltforschung-UFZ</span>.
 </div>
@@ -599,7 +613,7 @@ Kozak, Marcin, and Hans-Peter Piepho. 2018. <span>“What’s Normal Anyway? Res
 </div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
-<li id="fn1"><p>This is the same data as in the <a href="../../exan/simple/latsq_bridges1989.qmd">latin square chapter</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>This is the same data as in the <a href="../../ch/exan/simple/latsq_bridges1989.html">latin square chapter</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This works only if you did the transformation as part of the model as we did here in <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. It cannot work if you did the transformation by creating a column in the dataset before fitting the model.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1022,7 +1036,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>Transforming the response variable (e.g. yield) with a mathematical function (e.g. square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing <span class="in">`yield`</span> with <span class="in">`sqrt(yield)`</span>, you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example<span class="ot">[^1]</span> where this approach does as intended.</span>
 <span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>This is the same data as in the <span class="co">[</span><span class="ot">latin square chapter</span><span class="co">](../../exan/simple/latsq_bridges1989.qmd)</span>.</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>This is the same data as in the <span class="co">[</span><span class="ot">latin square chapter</span><span class="co">](../exan/simple/latsq_bridges1989.qmd)</span>.</span>
 <span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
@@ -1090,30 +1104,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>TO DO</span>
 <span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>**General**</span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
 <span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions <span class="co">[</span><span class="ot">@kozak_2018</span><span class="co">]</span></span>
-<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 13 Model Diagnostics</span><span class="co">](https://book.stat420.org/model-diagnostics.html)</span> in Applied Statistics with R (Dalpiaz, 2022)</span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 8 Model Diagnostics</span><span class="co">](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html)</span> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</span>
-<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>🇩🇪 <span class="co">[</span><span class="ot">Verbleibende Plots interpretieren, um Ihre Regression zu verbessern</span><span class="co">](https://www.qualtrics.com/support/de/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/?rid=langMatch&amp;prevsite=en&amp;newsite=de&amp;geo=DE&amp;geomatch=)</span></span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/)</span></span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>**Normality**</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>**General**</span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>What's normal anyway? Residual plots are more telling than significance tests when checking ANOVA assumptions <span class="co">[</span><span class="ot">@kozak_2018</span><span class="co">]</span></span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 13 Model Diagnostics</span><span class="co">](https://book.stat420.org/model-diagnostics.html)</span> in Applied Statistics with R (Dalpiaz, 2022)</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Chapter 8 Model Diagnostics</span><span class="co">](https://bookdown.org/marklhc/notes_bookdown/model-diagnostics.html)</span> in Course Handouts for Bayesian Data Analysis (Lai, 2019)</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>🇩🇪 <span class="co">[</span><span class="ot">Verbleibende Plots interpretieren, um Ihre Regression zu verbessern</span><span class="co">](https://www.qualtrics.com/support/de/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/?rid=langMatch&amp;prevsite=en&amp;newsite=de&amp;geo=DE&amp;geomatch=)</span></span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/)</span></span>
 <span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">R Tutorial: Normal Probability Plot of Residuals</span><span class="co">](www.r-tutor.com/elementary-statistics/simple-linear-regression/normal-probability-plot-residuals)</span></span>
-<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For this specific purpose, QQ plots may also be called <span class="co">[</span><span class="ot">Normal probability plots</span><span class="co">](https://www.wikiwand.com/en/Normal_probability_plot)</span></span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{qqplotr}</span><span class="co">](https://cran.r-project.org/web/packages/qqplotr/vignettes/introduction.html)</span></span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>**Homoscedasticity**</span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a>**Normality**</span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">R Tutorial: Normal Probability Plot of Residuals</span><span class="co">](www.r-tutor.com/elementary-statistics/simple-linear-regression/normal-probability-plot-residuals)</span></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For this specific purpose, QQ plots may also be called <span class="co">[</span><span class="ot">Normal probability plots</span><span class="co">](https://www.wikiwand.com/en/Normal_probability_plot)</span></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{qqplotr}</span><span class="co">](https://cran.r-project.org/web/packages/qqplotr/vignettes/introduction.html)</span></span>
 <span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Documentation on tests from {olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)</span></span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Wikipedia article on <span class="co">[</span><span class="ot">Homoscedasticity and heteroscedasticity</span><span class="co">](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)</span></span>
-<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>**Transformation**</span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>**Homoscedasticity**</span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Documentation on tests from {olsrr}</span><span class="co">](https://olsrr.rsquaredacademy.com/articles/heteroskedasticity.html)</span></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Wikipedia article on <span class="co">[</span><span class="ot">Homoscedasticity and heteroscedasticity</span><span class="co">](https://www.wikiwand.com/en/Homoscedasticity%20and%20heteroscedasticity)</span></span>
 <span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>🇩🇪 Chapter 3.3 in @dormann_2011</span>
-<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>**Transformation**</span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>🇩🇪 Chapter 3.3 in @dormann_2011</span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

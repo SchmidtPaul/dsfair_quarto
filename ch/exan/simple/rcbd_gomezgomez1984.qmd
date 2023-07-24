@@ -27,7 +27,7 @@ conflict_prefer("select", "dplyr")
 
 # Data
 
-This data is a slightly modified version of a dataset originally published in @gomez1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
+This data is a slightly modified version of a dataset originally published in @gomez_1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
 
 ## Import
 
@@ -209,7 +209,9 @@ mod <- lm(
 )
 ```
 
-::: custom-callout-modass
+:::{.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
 It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
 :::
 

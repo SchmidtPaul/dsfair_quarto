@@ -333,7 +333,7 @@ Yet, regarding the parameter estimates - intercept ($a$) and slope ($b$) - of th
 
 ## R² - Coeff. of det.
 
-Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando's data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination $R^2$, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via `glance()`, which is another function from [{broom}](../../misc/usefulthings.qmd#broom):
+Nevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando's data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination $R^2$, which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via `glance()`, which is another function from [{broom}](../misc/usefulthings.qmd#broom):
 
 ::: columns
 ::: {.column width="49%"}

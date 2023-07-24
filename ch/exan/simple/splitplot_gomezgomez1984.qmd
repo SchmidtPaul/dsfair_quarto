@@ -211,7 +211,9 @@ mod <- lmer(yield ~ G + N + G:N +
             data = dat)
 ```
 
-::: custom-callout-modass
+:::{.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
 It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
 :::
 

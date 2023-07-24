@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-06-17">
+<meta name="dcterms.date" content="2023-07-24">
 <title>dsfair_quarto - How I use ggplot2</title>
 <style>
 code{white-space: pre-wrap;}
@@ -264,30 +264,19 @@ div.csl-indent {
   <li><a href="#showcase" id="toc-showcase" class="nav-link" data-scroll-target="#showcase">Showcase</a></li>
   </ul>
 </li>
-  <li>
-<a href="#lets-start" id="toc-lets-start" class="nav-link" data-scroll-target="#lets-start">Let’s start</a>
-  <ul class="collapse">
-<li>Additional Resources (click to show)</li>
-  </ul>
-</li>
+  <li><a href="#lets-start" id="toc-lets-start" class="nav-link" data-scroll-target="#lets-start">Let’s start</a></li>
   <li><a href="#saving-and-reusing-plots" id="toc-saving-and-reusing-plots" class="nav-link" data-scroll-target="#saving-and-reusing-plots">Saving and reusing plots</a></li>
   <li>
 <a href="#axes" id="toc-axes" class="nav-link" data-scroll-target="#axes">Axes</a>
   <ul class="collapse">
 <li><a href="#name" id="toc-name" class="nav-link" data-scroll-target="#name">Name</a></li>
   <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
-  <li>Additional Resources (click to show)</li>
   <li><a href="#breaks" id="toc-breaks" class="nav-link" data-scroll-target="#breaks">Breaks</a></li>
   <li><a href="#labels" id="toc-labels" class="nav-link" data-scroll-target="#labels">Labels</a></li>
   <li><a href="#expand" id="toc-expand" class="nav-link" data-scroll-target="#expand">Expand</a></li>
   </ul>
 </li>
-  <li>
-<a href="#theme" id="toc-theme" class="nav-link" data-scroll-target="#theme">Theme</a>
-  <ul class="collapse">
-<li>Additional Resources (click to show)</li>
-  </ul>
-</li>
+  <li><a href="#theme" id="toc-theme" class="nav-link" data-scroll-target="#theme">Theme</a></li>
   <li><a href="#export" id="toc-export" class="nav-link" data-scroll-target="#export">Export</a></li>
   <li>
 <a href="#color-shape-and-more" id="toc-color-shape-and-more" class="nav-link" data-scroll-target="#color-shape-and-more">Color, Shape and More</a>
@@ -332,7 +321,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 17, 2023</p>
+      <p class="date">July 24, 2023</p>
     </div>
   </div>
   
@@ -365,7 +354,7 @@ div.csl-indent {
 <li>Claus Wilke’s <span class="citation" data-cites="wilke_2019">(<a href="#ref-wilke_2019" role="doc-biblioref">2019</a>)</span> <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a>
 </li>
 </ul></section><section id="packages-to-install-load" class="level2"><h2 class="anchored" data-anchor-id="packages-to-install-load">Packages to install &amp; load</h2>
-<p>We are using <a href="https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/usefulthings.html#pacman">the <code>p_load()</code> function of the {pacman} package</a> to install and load all necessary packages for this tutorial.</p>
+<p>We are using <a href="../misc/usefulthings.html#pacman">the <code>p_load()</code> function of the {pacman} package</a> to install and load all necessary packages for this tutorial.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span></span>
 <span>  <span class="va">ggplot2</span>,</span>
@@ -409,10 +398,25 @@ div.csl-indent {
 <p>Finally, there is <code>geom_point()</code>. This function, known as a geometric object or “geom”, represents the type of plot you want to create. In ggplot2, every type of plot is associated with a specific geom function. For our example,<code>geom_point()</code> is used to create a scatter plot, draws a point for each observation. The <code>geom_point()</code> function is added to the base <code>ggplot()</code> call using the <code>+</code> operator, just like the other layers. In this way, it’s as if we’re telling ggplot: “And here is the type of plot I want you to create.”. Again - it already knows <em>where</em> to draw the points because we told it about the data and aesthetic mapping.</p>
 <p>Other geoms you might use include <code>geom_boxplot()</code> for boxplots, <code>geom_line()</code> for line graphs, and <a href="https://ggplot2.tidyverse.org/reference/#geoms">many more</a>. Each geom function has its own set of aesthetics and other arguments that you can specify to customize your plot. By using these different geoms, you can create a wide variety of plots to meet your specific data visualization needs.</p>
 <p>Now you understand the absolute minimum of how to create a ggplot.</p>
-<section class="level2 callout-tip" data-collapse="true"><h2 class="anchored" data-anchor-id="">Additional Resources (click to show)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li><a href="https://ggplot2.tidyverse.org/reference/#geoms">List of all <code>geom_*()</code> functons</a></li>
-</ul></section></section><section id="saving-and-reusing-plots" class="level1"><h1>Saving and reusing plots</h1>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="saving-and-reusing-plots" class="level1"><h1>Saving and reusing plots</h1>
 <p>In ggplot2, you can save your plots into an object. This allows you to reuse and modify your plots without having to rewrite all the code. This is particularly useful when you are building complex plots layer by layer.</p>
 <p>Let’s take the plot we have created so far. Instead of writing the code for all the layers every time, we can save the plot into an object and then add new layers to this object. This way, we can focus on the new layers we are adding, making our code more readable and manageable.</p>
 <p>Here’s how we can do this:</p>
@@ -484,12 +488,27 @@ div.csl-indent {
 <p>In the right plot, we again use the <code>limits =</code> argument in <code>scale_y_continuous()</code>, but this time we only specify the lower limit (0) and use <code>NA</code> for the upper limit. This tells ggplot2 to start the y-axis at 0 and end it at the maximum value in the data, which is the default behavior. For the x-axis, we provide all three levels (“trt1”, “ctrl”, “trt2”) in the <code>limits =</code> argument of <code>scale_x_discrete()</code>. This not only ensures that all groups are displayed, but also allows us to control the order in which they appear.</p>
 <p>This demonstrates how the <code>limits =</code> argument can be used differently in <code>scale_*_continuous()</code> and <code>scale_*_discrete()</code>. In a continuous scale, it defines the range of values, while in a discrete scale, it specifies which levels to include and their order.</p>
 <p>In the end, it’s important to note that setting the limits can exclude data outside the specified range from the plot. This means that the excluded data will not be considered when calculating statistics or generating geoms. In other words, while setting limits can help focus your plot on specific aspects of your data, it can also exclude important information. Always consider the implications of setting limits on your data visualization.</p>
-</section><section class="level2 callout-tip" data-collapse="true"><h2 class="anchored" data-anchor-id="">Additional Resources (click to show)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li>If you are wondering why I wanted the y-axis to start at 0, read <a href="https://academy.datawrapper.de/article/326-why-our-column-and-bar-charts-start-at-zero">this</a>, <a href="https://digitalblog.ons.gov.uk/2016/06/27/does-the-axis-have-to-start-at-zero-part-1-line-charts/">this</a> and <a href="https://stats.stackexchange.com/questions/184525/how-to-determine-whether-or-not-the-y-axis-of-a-graph-should-start-at-zero">this</a>
 </li>
 <li><a href="https://ggplot2.tidyverse.org/reference/index.html#scales">List of all scales functions</a></li>
-</ul></section><section id="breaks" class="level2"><h2 class="anchored" data-anchor-id="breaks">Breaks</h2>
+</ul>
+</div>
+</div>
+</div>
+</section><section id="breaks" class="level2"><h2 class="anchored" data-anchor-id="breaks">Breaks</h2>
 <p>The breaks = argument in these functions allows you to specify the locations of the tick marks on the axis.</p>
 <div class="columns">
 <div class="column" style="width:49%;">
@@ -748,11 +767,26 @@ Tip
 </div>
 <p>Note that you can also first add a complete <code>theme_*()</code> and subsequently change individual aspects of it with via <code>theme()</code>.</p>
 <p>Remember, while themes can greatly enhance the aesthetic appeal of your plots, the most important aspect of any plot is its ability to accurately and effectively convey information about your data. Always prioritize clarity and accuracy over aesthetic appeal when creating your plots.</p>
-<section class="level2 callout-tip" data-collapse="true"><h2 class="anchored" data-anchor-id="">Additional Resources (click to show)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">List of all complete themes</a></li>
 <li><a href="https://ggplot2.tidyverse.org/reference/theme.html">Documenation of the <code>theme()</code> function</a></li>
-</ul></section><p>We update our <code>myplot</code> according to what we just learned. To get a better overview, we recreate it from scratch:</p>
+</ul>
+</div>
+</div>
+</div>
+<p>We update our <code>myplot</code> according to what we just learned. To get a better overview, we recreate it from scratch:</p>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">PlantGrowth</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">weight</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1209,7 +1243,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Packages to install &amp; load</span></span>
 <span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>We are using <span class="co">[</span><span class="ot">the `p_load()` function of the {pacman} package</span><span class="co">](https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/usefulthings.html#pacman)</span> to install and load all necessary packages for this tutorial.</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>We are using <span class="co">[</span><span class="ot">the `p_load()` function of the {pacman} package</span><span class="co">](../misc/usefulthings.html#pacman)</span> to install and load all necessary packages for this tutorial.</span>
 <span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
@@ -1268,482 +1302,488 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb25-95"><a href="#cb25-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-96"><a href="#cb25-96" aria-hidden="true" tabindex="-1"></a>Now you understand the absolute minimum of how to create a ggplot.</span>
 <span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all `geom_*()` functons</span><span class="co">](https://ggplot2.tidyverse.org/reference/#geoms)</span></span>
-<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a><span class="fu"># Saving and reusing plots</span></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-101"><a href="#cb25-101" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all `geom_*()` functons</span><span class="co">](https://ggplot2.tidyverse.org/reference/#geoms)</span></span>
+<span id="cb25-102"><a href="#cb25-102" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a>In ggplot2, you can save your plots into an object. This allows you to reuse and modify your plots without having to rewrite all the code. This is particularly useful when you are building complex plots layer by layer.</span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="fu"># Saving and reusing plots</span></span>
 <span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a>Let's take the plot we have created so far. Instead of writing the code for all the layers every time, we can save the plot into an object and then add new layers to this object. This way, we can focus on the new layers we are adding, making our code more readable and manageable.</span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a>In ggplot2, you can save your plots into an object. This allows you to reuse and modify your plots without having to rewrite all the code. This is particularly useful when you are building complex plots layer by layer.</span>
 <span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a>Here's how we can do this:</span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a>Let's take the plot we have created so far. Instead of writing the code for all the layers every time, we can save the plot into an object and then add new layers to this object. This way, we can focus on the new layers we are adding, making our code more readable and manageable.</span>
 <span id="cb25-109"><a href="#cb25-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
-<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
-<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a>Be aware that when running this code, you will not get to see the plot you just saved. Instead, you would need to run the <span class="in">`myplot`</span> object to see the plot:</span>
+<span id="cb25-110"><a href="#cb25-110" aria-hidden="true" tabindex="-1"></a>Here's how we can do this:</span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-122"><a href="#cb25-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-123"><a href="#cb25-123" aria-hidden="true" tabindex="-1"></a>myplot</span>
-<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a>This approach of saving and reusing plots not only makes our code more readable and manageable, but also allows us to experiment with different layers and modifications without affecting our original plot.</span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a>Be aware that when running this code, you will not get to see the plot you just saved. Instead, you would need to run the <span class="in">`myplot`</span> object to see the plot:</span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a>myplot</span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>From now on, we will use this approach in our tutorial. At the end of each main section, we will update <span class="in">`myplot`</span> with the new layers we have discussed in that section. This will allow us to build our plot step by step, focusing on one aspect at a time.</span>
+<span id="cb25-128"><a href="#cb25-128" aria-hidden="true" tabindex="-1"></a>This approach of saving and reusing plots not only makes our code more readable and manageable, but also allows us to experiment with different layers and modifications without affecting our original plot.</span>
 <span id="cb25-129"><a href="#cb25-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="fu"># Axes</span></span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a>From now on, we will use this approach in our tutorial. At the end of each main section, we will update <span class="in">`myplot`</span> with the new layers we have discussed in that section. This will allow us to build our plot step by step, focusing on one aspect at a time.</span>
 <span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a>In ggplot2, the <span class="in">`scale_x_*`</span> and <span class="in">`scale_y_*`</span> functions are used to control the appearance of the x and y axes, respectively. These functions allow you to set the scale type (continuous, discrete, etc.), the axis labels, the tick mark labels, and the range of values displayed on the axis.</span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a><span class="fu"># Axes</span></span>
 <span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a>Regarding the scale type, we need to use <span class="in">`scale_y_continuous()`</span> (since <span class="in">`weight`</span> is a continous, metric variable) and <span class="in">`scale_x_discrete()`</span> (since <span class="in">`group`</span> is a discrete, categorical variable) for our scatter plot.</span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a>In ggplot2, the <span class="in">`scale_x_*`</span> and <span class="in">`scale_y_*`</span> functions are used to control the appearance of the x and y axes, respectively. These functions allow you to set the scale type (continuous, discrete, etc.), the axis labels, the tick mark labels, and the range of values displayed on the axis.</span>
 <span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## Name</span></span>
+<span id="cb25-136"><a href="#cb25-136" aria-hidden="true" tabindex="-1"></a>Regarding the scale type, we need to use <span class="in">`scale_y_continuous()`</span> (since <span class="in">`weight`</span> is a continous, metric variable) and <span class="in">`scale_x_discrete()`</span> (since <span class="in">`group`</span> is a discrete, categorical variable) for our scatter plot.</span>
 <span id="cb25-137"><a href="#cb25-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a>The <span class="in">`name =`</span> allows you to change the axis titles.</span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="fu">## Name</span></span>
 <span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-142"><a href="#cb25-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-143"><a href="#cb25-143" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Weight (g)"</span>) <span class="sc">+</span></span>
-<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Treatment Group"</span>)</span>
-<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limits</span></span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a>The <span class="in">`name =`</span> allows you to change the axis titles.</span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Weight (g)"</span>) <span class="sc">+</span></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Treatment Group"</span>)</span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a>The <span class="in">`limits =`</span> argument in the scale<span class="sc">\_\*\_\*</span> functions allows you to specify the range of values displayed on the axis. This can be particularly useful when you want to focus on a specific part of your data. Let's see how this works in practice with our scatter plot example.</span>
+<span id="cb25-150"><a href="#cb25-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limits</span></span>
 <span id="cb25-151"><a href="#cb25-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-156"><a href="#cb25-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-157"><a href="#cb25-157" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)</span>
-<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"ctrl"</span>, <span class="st">"trt2"</span>)</span>
-<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)</span>
-<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"trt1"</span>, <span class="st">"ctrl"</span>, <span class="st">"trt2"</span>)</span>
-<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`limits =`</span> argument in <span class="in">`scale_y_continuous()`</span> to set the y-axis to range from 0 to 7. This works as expected, showing all weights from 0 to 7. However, including only "ctrl" and "trt2" (i.e. the first and last level) in the <span class="in">`limits =`</span> argument of in <span class="in">`scale_x_discrete()`</span>, results in only these two groups being displayed on the x-axis. The key point here is that for a discrete scale, the <span class="in">`limits =`</span> argument needs to include all the levels you want to display.</span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a>The <span class="in">`limits =`</span> argument in the scale<span class="sc">\_\*\_\*</span> functions allows you to specify the range of values displayed on the axis. This can be particularly useful when you want to focus on a specific part of your data. Let's see how this works in practice with our scatter plot example.</span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>)</span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-164"><a href="#cb25-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-165"><a href="#cb25-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"ctrl"</span>, <span class="st">"trt2"</span>)</span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)</span>
+<span id="cb25-182"><a href="#cb25-182" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-183"><a href="#cb25-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"trt1"</span>, <span class="st">"ctrl"</span>, <span class="st">"trt2"</span>)</span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a>In the right plot, we again use the <span class="in">`limits =`</span> argument in <span class="in">`scale_y_continuous()`</span>, but this time we only specify the lower limit (0) and use <span class="in">`NA`</span> for the upper limit. This tells ggplot2 to start the y-axis at 0 and end it at the maximum value in the data, which is the default behavior. For the x-axis, we provide all three levels ("trt1", "ctrl", "trt2") in the <span class="in">`limits =`</span> argument of <span class="in">`scale_x_discrete()`</span>. This not only ensures that all groups are displayed, but also allows us to control the order in which they appear.</span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`limits =`</span> argument in <span class="in">`scale_y_continuous()`</span> to set the y-axis to range from 0 to 7. This works as expected, showing all weights from 0 to 7. However, including only "ctrl" and "trt2" (i.e. the first and last level) in the <span class="in">`limits =`</span> argument of in <span class="in">`scale_x_discrete()`</span>, results in only these two groups being displayed on the x-axis. The key point here is that for a discrete scale, the <span class="in">`limits =`</span> argument needs to include all the levels you want to display.</span>
 <span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a>This demonstrates how the <span class="in">`limits =`</span> argument can be used differently in <span class="in">`scale_*_continuous()`</span> and <span class="in">`scale_*_discrete()`</span>. In a continuous scale, it defines the range of values, while in a discrete scale, it specifies which levels to include and their order.</span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a>In the right plot, we again use the <span class="in">`limits =`</span> argument in <span class="in">`scale_y_continuous()`</span>, but this time we only specify the lower limit (0) and use <span class="in">`NA`</span> for the upper limit. This tells ggplot2 to start the y-axis at 0 and end it at the maximum value in the data, which is the default behavior. For the x-axis, we provide all three levels ("trt1", "ctrl", "trt2") in the <span class="in">`limits =`</span> argument of <span class="in">`scale_x_discrete()`</span>. This not only ensures that all groups are displayed, but also allows us to control the order in which they appear.</span>
 <span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>In the end, it's important to note that setting the limits can exclude data outside the specified range from the plot. This means that the excluded data will not be considered when calculating statistics or generating geoms. In other words, while setting limits can help focus your plot on specific aspects of your data, it can also exclude important information. Always consider the implications of setting limits on your data visualization.</span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a>This demonstrates how the <span class="in">`limits =`</span> argument can be used differently in <span class="in">`scale_*_continuous()`</span> and <span class="in">`scale_*_discrete()`</span>. In a continuous scale, it defines the range of values, while in a discrete scale, it specifies which levels to include and their order.</span>
 <span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If you are wondering why I wanted the y-axis to start at 0, read <span class="co">[</span><span class="ot">this</span><span class="co">](https://academy.datawrapper.de/article/326-why-our-column-and-bar-charts-start-at-zero)</span>, <span class="co">[</span><span class="ot">this</span><span class="co">](https://digitalblog.ons.gov.uk/2016/06/27/does-the-axis-have-to-start-at-zero-part-1-line-charts/)</span> and <span class="co">[</span><span class="ot">this</span><span class="co">](https://stats.stackexchange.com/questions/184525/how-to-determine-whether-or-not-the-y-axis-of-a-graph-should-start-at-zero)</span></span>
-<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all scales functions</span><span class="co">](https://ggplot2.tidyverse.org/reference/index.html#scales)</span></span>
-<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a>In the end, it's important to note that setting the limits can exclude data outside the specified range from the plot. This means that the excluded data will not be considered when calculating statistics or generating geoms. In other words, while setting limits can help focus your plot on specific aspects of your data, it can also exclude important information. Always consider the implications of setting limits on your data visualization.</span>
+<span id="cb25-198"><a href="#cb25-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-199"><a href="#cb25-199" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
 <span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## Breaks</span></span>
-<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>The breaks = argument in these functions allows you to specify the locations of the tick marks on the axis.</span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If you are wondering why I wanted the y-axis to start at 0, read <span class="co">[</span><span class="ot">this</span><span class="co">](https://academy.datawrapper.de/article/326-why-our-column-and-bar-charts-start-at-zero)</span>, <span class="co">[</span><span class="ot">this</span><span class="co">](https://digitalblog.ons.gov.uk/2016/06/27/does-the-axis-have-to-start-at-zero-part-1-line-charts/)</span> and <span class="co">[</span><span class="ot">this</span><span class="co">](https://stats.stackexchange.com/questions/184525/how-to-determine-whether-or-not-the-y-axis-of-a-graph-should-start-at-zero)</span></span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all scales functions</span><span class="co">](https://ggplot2.tidyverse.org/reference/index.html#scales)</span></span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
-<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span></span>
-<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
-<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span></span>
-<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`breaks =`</span> argument in <span class="in">`scale_y_continuous()`</span> to set the y-axis tick marks at 0 and 6. This really results in only two tick marks being displayed on the y-axis. While this is not typically useful for data representation, it serves to illustrate that the <span class="in">`breaks =`</span> argument can be used to place tick marks at any specified values.</span>
-<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>In the right plot, we use the <span class="in">`seq()`</span> function in the <span class="in">`breaks =`</span> argument to set the y-axis tick marks at every integer value from 0 to 6. This provides a more informative view of the data, as it allows us to see the weight values at regular intervals.</span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Breaks</span></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-208"><a href="#cb25-208" aria-hidden="true" tabindex="-1"></a>The breaks = argument in these functions allows you to specify the locations of the tick marks on the axis.</span>
+<span id="cb25-209"><a href="#cb25-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-214"><a href="#cb25-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-215"><a href="#cb25-215" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-222"><a href="#cb25-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span></span>
+<span id="cb25-223"><a href="#cb25-223" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-228"><a href="#cb25-228" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-229"><a href="#cb25-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-234"><a href="#cb25-234" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-235"><a href="#cb25-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-240"><a href="#cb25-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-241"><a href="#cb25-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-246"><a href="#cb25-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a>Instead of having to manually write "6" in <span class="in">`breaks = seq(0, 6)`</span> you can instead do this:</span>
-<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`breaks = seq(0, max(PlantGrowth$weight))`</span> automatically finds the maximum value in the data</span>
-<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`breaks = scales::breaks_width(1)`</span> makes use of the <span class="in">`breaks_width()`</span> function in the <span class="co">[</span><span class="ot">{scales}</span><span class="co">](https://scales.r-lib.org/index.html)</span> package to simply define the width of the breaks</span>
-<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-247"><a href="#cb25-247" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`breaks =`</span> argument in <span class="in">`scale_y_continuous()`</span> to set the y-axis tick marks at 0 and 6. This really results in only two tick marks being displayed on the y-axis. While this is not typically useful for data representation, it serves to illustrate that the <span class="in">`breaks =`</span> argument can be used to place tick marks at any specified values.</span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a>In the right plot, we use the <span class="in">`seq()`</span> function in the <span class="in">`breaks =`</span> argument to set the y-axis tick marks at every integer value from 0 to 6. This provides a more informative view of the data, as it allows us to see the weight values at regular intervals.</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb25-252"><a href="#cb25-252" aria-hidden="true" tabindex="-1"></a>Instead of having to manually write "6" in <span class="in">`breaks = seq(0, 6)`</span> you can instead do this:</span>
 <span id="cb25-253"><a href="#cb25-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## Labels</span></span>
-<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a>The <span class="in">`labels =`</span> argument allows you to specify the text that is displayed for each tick mark on the axis. This can be particularly useful when the values in your data are not self-explanatory or when you want to use more descriptive labels.</span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`breaks = seq(0, max(PlantGrowth$weight))`</span> automatically finds the maximum value in the data</span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`breaks = scales::breaks_width(1)`</span> makes use of the <span class="in">`breaks_width()`</span> function in the <span class="co">[</span><span class="ot">{scales}</span><span class="co">](https://scales.r-lib.org/index.html)</span> package to simply define the width of the breaks</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
-<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment 1"</span>, <span class="st">"Treatment 2"</span>)</span>
-<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
-<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a>In the first example, we simply provide a vector of labels. This works fine as long as the levels on the x-axis are in the same order as the labels in the vector. However, if the levels are not in the expected order, the labels will be associated with the wrong levels.</span>
-<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a>In the second example, we provide a named vector of labels. This ensures that the labels are correctly associated with their corresponding levels, regardless of the order of the levels. This is why using a named vector is often the safer option.</span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## Labels</span></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-260"><a href="#cb25-260" aria-hidden="true" tabindex="-1"></a>The <span class="in">`labels =`</span> argument allows you to specify the text that is displayed for each tick mark on the axis. This can be particularly useful when the values in your data are not self-explanatory or when you want to use more descriptive labels.</span>
+<span id="cb25-261"><a href="#cb25-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-266"><a href="#cb25-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-267"><a href="#cb25-267" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb25-272"><a href="#cb25-272" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-273"><a href="#cb25-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment 1"</span>, <span class="st">"Treatment 2"</span>)</span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-287"><a href="#cb25-287" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-288"><a href="#cb25-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>)</span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a>You can also use <span class="in">`labels =`</span> on continuous axes, if you make use of the <span class="co">[</span><span class="ot">`label_*()` functions</span><span class="co">](https://scales.r-lib.org/reference/index.html#axis-labels)</span> in the <span class="co">[</span><span class="ot">{scales}</span><span class="co">](https://scales.r-lib.org/index.html)</span> package. Here are some examples:</span>
-<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_number()`</span> displays numbers on your axis any way you want. E.g. <span class="in">`decimal.mark = "."`</span> displays axis label 3.14 as 3,14 etc.</span>
-<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_percent()`</span> displays axis labels 0.05, 0.4 as 5%, 40% etc.</span>
-<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_log()`</span> displays axis labels 10, 100, 1000 as $10^1$, $10^2$, $10^3$ etc.</span>
-<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="fu">## Expand</span></span>
-<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a>The <span class="in">`expand =`</span> argument in the scale<span class="sc">\_\*\_\*</span> functions allows you to control the expansion of the scale. This is particularly useful when you want to adjust the space between the plotted data and the axes.</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a>In the first example, we simply provide a vector of labels. This works fine as long as the levels on the x-axis are in the same order as the labels in the vector. However, if the levels are not in the expected order, the labels will be associated with the wrong levels.</span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-307"><a href="#cb25-307" aria-hidden="true" tabindex="-1"></a>In the second example, we provide a named vector of labels. This ensures that the labels are correctly associated with their corresponding levels, regardless of the order of the levels. This is why using a named vector is often the safer option.</span>
+<span id="cb25-308"><a href="#cb25-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a>You can also use <span class="in">`labels =`</span> on continuous axes, if you make use of the <span class="co">[</span><span class="ot">`label_*()` functions</span><span class="co">](https://scales.r-lib.org/reference/index.html#axis-labels)</span> in the <span class="co">[</span><span class="ot">{scales}</span><span class="co">](https://scales.r-lib.org/index.html)</span> package. Here are some examples:</span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_number()`</span> displays numbers on your axis any way you want. E.g. <span class="in">`decimal.mark = "."`</span> displays axis label 3.14 as 3,14 etc.</span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_percent()`</span> displays axis labels 0.05, 0.4 as 5%, 40% etc.</span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`labels = label_log()`</span> displays axis labels 10, 100, 1000 as $10^1$, $10^2$, $10^3$ etc.</span>
+<span id="cb25-315"><a href="#cb25-315" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-316"><a href="#cb25-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a>By default, ggplot2 adds a small amount of space around the data to ensure that the data doesn't overlap with the axes. However, there might be situations where you want to adjust this space. For instance, you might want to remove the space below the 0 on the y-axis.</span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## Expand</span></span>
 <span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
-<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
-<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`expand = c(0, 0)`</span> argument in <span class="in">`scale_y_continuous()`</span> to simply set the expansion to 0 on both sides of the scale. This removes all extra space around the data. However, this also results in the plot being cut off right at the maximum observation, which might not be desirable.</span>
-<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a>In the right plot, we use the <span class="co">[</span><span class="ot">`expansion()`</span><span class="co">](https://ggplot2.tidyverse.org/reference/expansion.html)</span> function in the <span class="in">`expand =`</span> argument. This function allows us to set different expansion multipliers for the lower and upper limits of the scale. Here, we set the lower multiplier to 0 to remove the space below 0, and the upper multiplier to 0.05 to add a small amount (= 5%) of space above the maximum observation.</span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a>The <span class="in">`expand =`</span> argument in the scale<span class="sc">\_\*\_\*</span> functions allows you to control the expansion of the scale. This is particularly useful when you want to adjust the space between the plotted data and the axes.</span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a>By default, ggplot2 adds a small amount of space around the data to ensure that the data doesn't overlap with the axes. However, there might be situations where you want to adjust this space. For instance, you might want to remove the space below the 0 on the y-axis.</span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-330"><a href="#cb25-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-331"><a href="#cb25-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-336"><a href="#cb25-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-337"><a href="#cb25-337" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
+<span id="cb25-358"><a href="#cb25-358" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb25-359"><a href="#cb25-359" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-364"><a href="#cb25-364" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-365"><a href="#cb25-365" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a>For a better understanding of how this expansion-thing works, I found <span class="co">[</span><span class="ot">this cheat sheet</span><span class="co">](https://twitter.com/ChBurkhart/status/1492087527511052290)</span> to be insightful.</span>
-<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a>In the left plot, we use the <span class="in">`expand = c(0, 0)`</span> argument in <span class="in">`scale_y_continuous()`</span> to simply set the expansion to 0 on both sides of the scale. This removes all extra space around the data. However, this also results in the plot being cut off right at the maximum observation, which might not be desirable.</span>
+<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a>In the right plot, we use the <span class="co">[</span><span class="ot">`expansion()`</span><span class="co">](https://ggplot2.tidyverse.org/reference/expansion.html)</span> function in the <span class="in">`expand =`</span> argument. This function allows us to set different expansion multipliers for the lower and upper limits of the scale. Here, we set the lower multiplier to 0 to remove the space below 0, and the upper multiplier to 0.05 to add a small amount (= 5%) of space above the maximum observation.</span>
 <span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a>We update our <span class="in">`myplot`</span> according to what we just learned. To get a better overview, we recreate it from scratch:</span>
-<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
-<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
-<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
-<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="fu"># Theme</span></span>
-<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a>In ggplot2, the <span class="in">`theme()`</span> function is a powerful tool that allows you to customize the non-data components of your plot. This includes the plot background, grid lines, axis lines, text, legend, and more. By using <span class="in">`theme()`</span>, you can create plots that not only represent your data accurately, but also align with your personal or organizational style guidelines.</span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a>For a better understanding of how this expansion-thing works, I found <span class="co">[</span><span class="ot">this cheat sheet</span><span class="co">](https://twitter.com/ChBurkhart/status/1492087527511052290)</span> to be insightful.</span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-380"><a href="#cb25-380" aria-hidden="true" tabindex="-1"></a>We update our <span class="in">`myplot`</span> according to what we just learned. To get a better overview, we recreate it from scratch:</span>
+<span id="cb25-381"><a href="#cb25-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
+<span id="cb25-386"><a href="#cb25-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
+<span id="cb25-387"><a href="#cb25-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
+<span id="cb25-392"><a href="#cb25-392" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb25-393"><a href="#cb25-393" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-398"><a href="#cb25-398" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-399"><a href="#cb25-399" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a>Let's take a look at two examples where we use <span class="in">`theme()`</span> to modify the plot background and the axis lines.</span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a><span class="fu"># Theme</span></span>
 <span id="cb25-405"><a href="#cb25-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-412"><a href="#cb25-412" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"green"</span>))</span>
-<span id="cb25-413"><a href="#cb25-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-424"><a href="#cb25-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">3</span>))</span>
-<span id="cb25-425"><a href="#cb25-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a>In the first example, we use <span class="in">`theme(plot.background = element_rect(fill = "green"))`</span> to change the plot background to green. In the second example, we use <span class="in">`theme(axis.line = element_line(color = "red", linewidth = 3))`</span> to change the color of the axis lines to red and increase their width. While these functions may seem a bit cryptic, the good news is that there are only four different <span class="co">[</span><span class="ot">theme elements</span><span class="co">](https://ggplot2.tidyverse.org/reference/element.html)</span>: <span class="in">`element_blank()`</span> draws nothing, and assigns no space, <span class="in">`element_rect()`</span> for borders and backgrounds, <span class="in">`element_line()`</span> for lines and <span class="in">`element_text()`</span> for text.</span>
-<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a>While the <span class="in">`theme()`</span> function provides a high level of customization, it can be time-consuming to manually specify every detail of your plot. To save time, ggplot2 provides several predefined "complete themes" that you can use. These themes have been professionally designed and provide a quick way to change the overall appearance of your plot.</span>
+<span id="cb25-406"><a href="#cb25-406" aria-hidden="true" tabindex="-1"></a>In ggplot2, the <span class="in">`theme()`</span> function is a powerful tool that allows you to customize the non-data components of your plot. This includes the plot background, grid lines, axis lines, text, legend, and more. By using <span class="in">`theme()`</span>, you can create plots that not only represent your data accurately, but also align with your personal or organizational style guidelines.</span>
+<span id="cb25-407"><a href="#cb25-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-408"><a href="#cb25-408" aria-hidden="true" tabindex="-1"></a>Let's take a look at two examples where we use <span class="in">`theme()`</span> to modify the plot background and the axis lines.</span>
+<span id="cb25-409"><a href="#cb25-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-410"><a href="#cb25-410" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-411"><a href="#cb25-411" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-414"><a href="#cb25-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-415"><a href="#cb25-415" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-416"><a href="#cb25-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"green"</span>))</span>
+<span id="cb25-417"><a href="#cb25-417" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-418"><a href="#cb25-418" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-419"><a href="#cb25-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-420"><a href="#cb25-420" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-421"><a href="#cb25-421" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-422"><a href="#cb25-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-423"><a href="#cb25-423" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-426"><a href="#cb25-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-427"><a href="#cb25-427" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-428"><a href="#cb25-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">3</span>))</span>
+<span id="cb25-429"><a href="#cb25-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-430"><a href="#cb25-430" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-431"><a href="#cb25-431" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-432"><a href="#cb25-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a>The default theme in ggplot2 is <span class="in">`theme_grey()`</span>. However, there are several other themes available, such as <span class="in">`theme_bw()`</span>, <span class="in">`theme_classic()`</span>, <span class="in">`theme_dark()`</span>, and more. Let's take a look at two of these themes that I personally like:</span>
+<span id="cb25-433"><a href="#cb25-433" aria-hidden="true" tabindex="-1"></a>In the first example, we use <span class="in">`theme(plot.background = element_rect(fill = "green"))`</span> to change the plot background to green. In the second example, we use <span class="in">`theme(axis.line = element_line(color = "red", linewidth = 3))`</span> to change the color of the axis lines to red and increase their width. While these functions may seem a bit cryptic, the good news is that there are only four different <span class="co">[</span><span class="ot">theme elements</span><span class="co">](https://ggplot2.tidyverse.org/reference/element.html)</span>: <span class="in">`element_blank()`</span> draws nothing, and assigns no space, <span class="in">`element_rect()`</span> for borders and backgrounds, <span class="in">`element_line()`</span> for lines and <span class="in">`element_text()`</span> for text.</span>
 <span id="cb25-434"><a href="#cb25-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a>Note that you can also first add a complete <span class="in">`theme_*()`</span> and subsequently change individual aspects of it with via <span class="in">`theme()`</span>. </span>
-<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a>Remember, while themes can greatly enhance the aesthetic appeal of your plots, the most important aspect of any plot is its ability to accurately and effectively convey information about your data. Always prioritize clarity and accuracy over aesthetic appeal when creating your plots.</span>
+<span id="cb25-435"><a href="#cb25-435" aria-hidden="true" tabindex="-1"></a>While the <span class="in">`theme()`</span> function provides a high level of customization, it can be time-consuming to manually specify every detail of your plot. To save time, ggplot2 provides several predefined "complete themes" that you can use. These themes have been professionally designed and provide a quick way to change the overall appearance of your plot.</span>
+<span id="cb25-436"><a href="#cb25-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-437"><a href="#cb25-437" aria-hidden="true" tabindex="-1"></a>The default theme in ggplot2 is <span class="in">`theme_grey()`</span>. However, there are several other themes available, such as <span class="in">`theme_bw()`</span>, <span class="in">`theme_classic()`</span>, <span class="in">`theme_dark()`</span>, and more. Let's take a look at two of these themes that I personally like:</span>
+<span id="cb25-438"><a href="#cb25-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-461"><a href="#cb25-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all complete themes</span><span class="co">](https://ggplot2.tidyverse.org/reference/ggtheme.html)</span></span>
-<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Documenation of the `theme()` function</span><span class="co">](https://ggplot2.tidyverse.org/reference/theme.html)</span></span>
-<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a>We update our <span class="in">`myplot`</span> according to what we just learned. To get a better overview, we recreate it from scratch:</span>
+<span id="cb25-462"><a href="#cb25-462" aria-hidden="true" tabindex="-1"></a>Note that you can also first add a complete <span class="in">`theme_*()`</span> and subsequently change individual aspects of it with via <span class="in">`theme()`</span>. </span>
+<span id="cb25-463"><a href="#cb25-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-464"><a href="#cb25-464" aria-hidden="true" tabindex="-1"></a>Remember, while themes can greatly enhance the aesthetic appeal of your plots, the most important aspect of any plot is its ability to accurately and effectively convey information about your data. Always prioritize clarity and accuracy over aesthetic appeal when creating your plots.</span>
+<span id="cb25-465"><a href="#cb25-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-466"><a href="#cb25-466" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb25-467"><a href="#cb25-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
 <span id="cb25-468"><a href="#cb25-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
-<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
-<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-475"><a href="#cb25-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-476"><a href="#cb25-476" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
-<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-487"><a href="#cb25-487" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a><span class="fu"># Export</span></span>
-<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a>Once you have created a plot in ggplot2, you may want to export it as an image file. This can be useful for including the plot in a report, a presentation, or a website.</span>
-<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-496"><a href="#cb25-496" aria-hidden="true" tabindex="-1"></a>In RStudio, you can manually export your plots by clicking on the 'Export' button in the 'Plots' pane. This will open a dialog box where you can choose the format and settings for your exported image.</span>
+<span id="cb25-469"><a href="#cb25-469" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">List of all complete themes</span><span class="co">](https://ggplot2.tidyverse.org/reference/ggtheme.html)</span></span>
+<span id="cb25-470"><a href="#cb25-470" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Documenation of the `theme()` function</span><span class="co">](https://ggplot2.tidyverse.org/reference/theme.html)</span></span>
+<span id="cb25-471"><a href="#cb25-471" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-472"><a href="#cb25-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-473"><a href="#cb25-473" aria-hidden="true" tabindex="-1"></a>We update our <span class="in">`myplot`</span> according to what we just learned. To get a better overview, we recreate it from scratch:</span>
+<span id="cb25-474"><a href="#cb25-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-477"><a href="#cb25-477" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-478"><a href="#cb25-478" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
+<span id="cb25-479"><a href="#cb25-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
+<span id="cb25-480"><a href="#cb25-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-481"><a href="#cb25-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-482"><a href="#cb25-482" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-483"><a href="#cb25-483" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-484"><a href="#cb25-484" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
+<span id="cb25-485"><a href="#cb25-485" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb25-486"><a href="#cb25-486" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-487"><a href="#cb25-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-488"><a href="#cb25-488" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-489"><a href="#cb25-489" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-490"><a href="#cb25-490" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-491"><a href="#cb25-491" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-492"><a href="#cb25-492" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-493"><a href="#cb25-493" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-494"><a href="#cb25-494" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-495"><a href="#cb25-495" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb25-496"><a href="#cb25-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-497"><a href="#cb25-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-498"><a href="#cb25-498" aria-hidden="true" tabindex="-1"></a>However, a more flexible and reproducible way to export your plots is by using the <span class="in">`ggsave()`</span> function provided by ggplot2. This function allows you to specify the details of the exported image directly in your code, ensuring that you can reproduce the exact same image in the future. The <span class="in">`ggsave()`</span> function has several arguments that allow you to specify the details of the exported image:</span>
+<span id="cb25-498"><a href="#cb25-498" aria-hidden="true" tabindex="-1"></a><span class="fu"># Export</span></span>
 <span id="cb25-499"><a href="#cb25-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-502"><a href="#cb25-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-503"><a href="#cb25-503" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb25-504"><a href="#cb25-504" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb25-505"><a href="#cb25-505" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"myplot.png"</span>, </span>
-<span id="cb25-506"><a href="#cb25-506" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> myplot, </span>
-<span id="cb25-507"><a href="#cb25-507" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"C:/Users/YourName/Documents"</span>, </span>
-<span id="cb25-508"><a href="#cb25-508" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">1</span>, </span>
-<span id="cb25-509"><a href="#cb25-509" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">6</span>, </span>
-<span id="cb25-510"><a href="#cb25-510" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">4</span>, </span>
-<span id="cb25-511"><a href="#cb25-511" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, </span>
-<span id="cb25-512"><a href="#cb25-512" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">300</span></span>
-<span id="cb25-513"><a href="#cb25-513" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-514"><a href="#cb25-514" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-515"><a href="#cb25-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-516"><a href="#cb25-516" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**filename:** This is the name of the file that you want to create. You should include the file extension (e.g., .png, .jpg, .pdf) in the filename. The file extension determines the format of the exported image.</span>
-<span id="cb25-517"><a href="#cb25-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-518"><a href="#cb25-518" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**plot:** This is the plot that you want to save. If you don't specify a plot, ggsave() will save the last plot that you created.</span>
-<span id="cb25-519"><a href="#cb25-519" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-520"><a href="#cb25-520" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**path:** This is the directory where you want to save the file. If you don't specify a path, ggsave() will save the file in your current working directory.</span>
+<span id="cb25-500"><a href="#cb25-500" aria-hidden="true" tabindex="-1"></a>Once you have created a plot in ggplot2, you may want to export it as an image file. This can be useful for including the plot in a report, a presentation, or a website.</span>
+<span id="cb25-501"><a href="#cb25-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-502"><a href="#cb25-502" aria-hidden="true" tabindex="-1"></a>In RStudio, you can manually export your plots by clicking on the 'Export' button in the 'Plots' pane. This will open a dialog box where you can choose the format and settings for your exported image.</span>
+<span id="cb25-503"><a href="#cb25-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-504"><a href="#cb25-504" aria-hidden="true" tabindex="-1"></a>However, a more flexible and reproducible way to export your plots is by using the <span class="in">`ggsave()`</span> function provided by ggplot2. This function allows you to specify the details of the exported image directly in your code, ensuring that you can reproduce the exact same image in the future. The <span class="in">`ggsave()`</span> function has several arguments that allow you to specify the details of the exported image:</span>
+<span id="cb25-505"><a href="#cb25-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-508"><a href="#cb25-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-509"><a href="#cb25-509" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb25-510"><a href="#cb25-510" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb25-511"><a href="#cb25-511" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"myplot.png"</span>, </span>
+<span id="cb25-512"><a href="#cb25-512" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> myplot, </span>
+<span id="cb25-513"><a href="#cb25-513" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"C:/Users/YourName/Documents"</span>, </span>
+<span id="cb25-514"><a href="#cb25-514" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="dv">1</span>, </span>
+<span id="cb25-515"><a href="#cb25-515" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">6</span>, </span>
+<span id="cb25-516"><a href="#cb25-516" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">4</span>, </span>
+<span id="cb25-517"><a href="#cb25-517" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, </span>
+<span id="cb25-518"><a href="#cb25-518" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb25-519"><a href="#cb25-519" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-520"><a href="#cb25-520" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb25-521"><a href="#cb25-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-522"><a href="#cb25-522" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**scale:** This is a scaling factor that is applied to the text and elements of the plot. A scale of 1 means that the plot is saved at its original size. A scale of 2 means that the plot is saved at twice its original size.</span>
+<span id="cb25-522"><a href="#cb25-522" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**filename:** This is the name of the file that you want to create. You should include the file extension (e.g., .png, .jpg, .pdf) in the filename. The file extension determines the format of the exported image.</span>
 <span id="cb25-523"><a href="#cb25-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-524"><a href="#cb25-524" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**width, height:** These are the dimensions of the exported image. You can specify the dimensions in any units that you like (e.g., inches, cm, mm).</span>
+<span id="cb25-524"><a href="#cb25-524" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**plot:** This is the plot that you want to save. If you don't specify a plot, ggsave() will save the last plot that you created.</span>
 <span id="cb25-525"><a href="#cb25-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-526"><a href="#cb25-526" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**units:** This is the units in which the width and height are specified. The default is "in" for inches, but you can also use "cm" for centimeters, "mm" for millimeters, or "px" for pixels.</span>
+<span id="cb25-526"><a href="#cb25-526" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**path:** This is the directory where you want to save the file. If you don't specify a path, ggsave() will save the file in your current working directory.</span>
 <span id="cb25-527"><a href="#cb25-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-528"><a href="#cb25-528" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**dpi:** This is the resolution of the exported image in dots per inch. A higher dpi will result in a higher-quality image, but the file size will also be larger. The default dpi is 300, which is suitable for most purposes.</span>
+<span id="cb25-528"><a href="#cb25-528" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**scale:** This is a scaling factor that is applied to the text and elements of the plot. A scale of 1 means that the plot is saved at its original size. A scale of 2 means that the plot is saved at twice its original size.</span>
 <span id="cb25-529"><a href="#cb25-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-530"><a href="#cb25-530" aria-hidden="true" tabindex="-1"></a>In this example, we are saving <span class="in">`myplot`</span> as a PNG file named "myplot.png" in the Documents directory. The plot is saved at its original size (scale = 1) and the dimensions of the image are 6 cm by 4 cm. The resolution of the image is 300 dpi.</span>
+<span id="cb25-530"><a href="#cb25-530" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**width, height:** These are the dimensions of the exported image. You can specify the dimensions in any units that you like (e.g., inches, cm, mm).</span>
 <span id="cb25-531"><a href="#cb25-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-532"><a href="#cb25-532" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb25-533"><a href="#cb25-533" aria-hidden="true" tabindex="-1"></a>If you want to open the image file you've just created directly on your computer, you can use the <span class="in">`system()`</span> function in R. For instance, <span class="in">`system('open "FILENAME"')`</span> will open the specified file. So, in our case, running <span class="in">`system('open "C:/Users/YourName/Documents/myplot.png"')`</span> will open the PNG file we've just created, and it will do so outside of RStudio.</span>
-<span id="cb25-534"><a href="#cb25-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a>I find this approach preferable to viewing my ggplot in RStudio's Plots-pane, because it gives you a more accurate preview of how your plot will look in its final context. The preview in RStudio actually doesn't do this, because the scale and size of the plot adjusts to the size you dragged the Plots-pane to.</span>
-<span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a>Here is a <span class="co">[</span><span class="ot">gist</span><span class="co">](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)</span> of how I used to apply this approach, but nowadays I wrapped all of this into <span class="co">[</span><span class="ot">my own function</span><span class="co">](https://schmidtpaul.github.io/BioMathR/reference/gg_export.html)</span>.</span>
-<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a><span class="fu"># Color, Shape and More</span></span>
-<span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-542"><a href="#cb25-542" aria-hidden="true" tabindex="-1"></a>In ggplot2, the aesthetics of your plot, such as color and shape, can be adjusted to enhance the visual representation of your data. In this section, we will explore how to manipulate these aesthetics using the <span class="in">`geom_point()`</span> function.</span>
-<span id="cb25-543"><a href="#cb25-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-544"><a href="#cb25-544" aria-hidden="true" tabindex="-1"></a>First, let's recreate our <span class="in">`myplot`</span> object, but this time without the <span class="in">`geom_point()`</span> layer. This will provide us with a clean slate to experiment with:</span>
+<span id="cb25-532"><a href="#cb25-532" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**units:** This is the units in which the width and height are specified. The default is "in" for inches, but you can also use "cm" for centimeters, "mm" for millimeters, or "px" for pixels.</span>
+<span id="cb25-533"><a href="#cb25-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-534"><a href="#cb25-534" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**dpi:** This is the resolution of the exported image in dots per inch. A higher dpi will result in a higher-quality image, but the file size will also be larger. The default dpi is 300, which is suitable for most purposes.</span>
+<span id="cb25-535"><a href="#cb25-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-536"><a href="#cb25-536" aria-hidden="true" tabindex="-1"></a>In this example, we are saving <span class="in">`myplot`</span> as a PNG file named "myplot.png" in the Documents directory. The plot is saved at its original size (scale = 1) and the dimensions of the image are 6 cm by 4 cm. The resolution of the image is 300 dpi.</span>
+<span id="cb25-537"><a href="#cb25-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-538"><a href="#cb25-538" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb25-539"><a href="#cb25-539" aria-hidden="true" tabindex="-1"></a>If you want to open the image file you've just created directly on your computer, you can use the <span class="in">`system()`</span> function in R. For instance, <span class="in">`system('open "FILENAME"')`</span> will open the specified file. So, in our case, running <span class="in">`system('open "C:/Users/YourName/Documents/myplot.png"')`</span> will open the PNG file we've just created, and it will do so outside of RStudio.</span>
+<span id="cb25-540"><a href="#cb25-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-541"><a href="#cb25-541" aria-hidden="true" tabindex="-1"></a>I find this approach preferable to viewing my ggplot in RStudio's Plots-pane, because it gives you a more accurate preview of how your plot will look in its final context. The preview in RStudio actually doesn't do this, because the scale and size of the plot adjusts to the size you dragged the Plots-pane to.</span>
+<span id="cb25-542"><a href="#cb25-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-543"><a href="#cb25-543" aria-hidden="true" tabindex="-1"></a>Here is a <span class="co">[</span><span class="ot">gist</span><span class="co">](https://gist.github.com/SchmidtPaul/5cd96b53449f5f50cbda725d4cdacf9b)</span> of how I used to apply this approach, but nowadays I wrapped all of this into <span class="co">[</span><span class="ot">my own function</span><span class="co">](https://schmidtpaul.github.io/BioMathR/reference/gg_export.html)</span>.</span>
+<span id="cb25-544"><a href="#cb25-544" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb25-545"><a href="#cb25-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-548"><a href="#cb25-548" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-549"><a href="#cb25-549" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
-<span id="cb25-550"><a href="#cb25-550" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
-<span id="cb25-551"><a href="#cb25-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb25-552"><a href="#cb25-552" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
-<span id="cb25-553"><a href="#cb25-553" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb25-554"><a href="#cb25-554" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
-<span id="cb25-555"><a href="#cb25-555" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb25-556"><a href="#cb25-556" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-557"><a href="#cb25-557" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb25-558"><a href="#cb25-558" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
-<span id="cb25-559"><a href="#cb25-559" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-560"><a href="#cb25-560" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
-<span id="cb25-561"><a href="#cb25-561" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
-<span id="cb25-562"><a href="#cb25-562" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
-<span id="cb25-563"><a href="#cb25-563" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb25-564"><a href="#cb25-564" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-565"><a href="#cb25-565" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-566"><a href="#cb25-566" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-567"><a href="#cb25-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-568"><a href="#cb25-568" aria-hidden="true" tabindex="-1"></a><span class="fu">## General Aesthetic Modifications</span></span>
-<span id="cb25-569"><a href="#cb25-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-570"><a href="#cb25-570" aria-hidden="true" tabindex="-1"></a>To show you what is possible with <span class="in">`geom_point()`</span>, let's create two new plots. In the first plot, we will set the color of the points to orange. In the second plot, we will modify several aspects of the points, including color, shape, size, and transparency.</span>
-<span id="cb25-571"><a href="#cb25-571" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-572"><a href="#cb25-572" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb25-573"><a href="#cb25-573" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-576"><a href="#cb25-576" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-577"><a href="#cb25-577" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-578"><a href="#cb25-578" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"orange"</span>)</span>
-<span id="cb25-579"><a href="#cb25-579" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-580"><a href="#cb25-580" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-581"><a href="#cb25-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-582"><a href="#cb25-582" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb25-583"><a href="#cb25-583" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-584"><a href="#cb25-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-585"><a href="#cb25-585" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb25-588"><a href="#cb25-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb25-589"><a href="#cb25-589" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
-<span id="cb25-590"><a href="#cb25-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb25-591"><a href="#cb25-591" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"purple"</span>, </span>
-<span id="cb25-592"><a href="#cb25-592" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">18</span>, </span>
-<span id="cb25-593"><a href="#cb25-593" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb25-594"><a href="#cb25-594" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
-<span id="cb25-595"><a href="#cb25-595" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-596"><a href="#cb25-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb25-597"><a href="#cb25-597" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-598"><a href="#cb25-598" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb25-599"><a href="#cb25-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-600"><a href="#cb25-600" aria-hidden="true" tabindex="-1"></a>In the first plot, we use color = "orange" inside the geom_point() function. This sets the color of all points to orange.</span>
-<span id="cb25-601"><a href="#cb25-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-602"><a href="#cb25-602" aria-hidden="true" tabindex="-1"></a>In the second plot, we modify several aspects of the points:</span>
-<span id="cb25-603"><a href="#cb25-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-604"><a href="#cb25-604" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>color = "purple" sets the color of the points to purple.</span>
-<span id="cb25-605"><a href="#cb25-605" aria-hidden="true" tabindex="-1"></a>shape = 18 changes the shape of the points. ggplot2 includes several different shapes that you can use. The number 18 corresponds to a filled diamond shape.</span>
-<span id="cb25-606"><a href="#cb25-606" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>size = 3 increases the size of the points. The size is measured in mm.</span>
-<span id="cb25-607"><a href="#cb25-607" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>alpha = 0.5 sets the transparency of the points. The alpha value ranges from 0 (completely transparent) to 1 (completely opaque).</span>
-<span id="cb25-608"><a href="#cb25-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-609"><a href="#cb25-609" aria-hidden="true" tabindex="-1"></a>These modifications allow us to customize the appearance of the points to suit our preferences and the needs of our data. </span>
-<span id="cb25-610"><a href="#cb25-610" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-611"><a href="#cb25-611" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-612"><a href="#cb25-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-613"><a href="#cb25-613" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aesthetic Mapping with aes()</span></span>
+<span id="cb25-546"><a href="#cb25-546" aria-hidden="true" tabindex="-1"></a><span class="fu"># Color, Shape and More</span></span>
+<span id="cb25-547"><a href="#cb25-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-548"><a href="#cb25-548" aria-hidden="true" tabindex="-1"></a>In ggplot2, the aesthetics of your plot, such as color and shape, can be adjusted to enhance the visual representation of your data. In this section, we will explore how to manipulate these aesthetics using the <span class="in">`geom_point()`</span> function.</span>
+<span id="cb25-549"><a href="#cb25-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-550"><a href="#cb25-550" aria-hidden="true" tabindex="-1"></a>First, let's recreate our <span class="in">`myplot`</span> object, but this time without the <span class="in">`geom_point()`</span> layer. This will provide us with a clean slate to experiment with:</span>
+<span id="cb25-551"><a href="#cb25-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-554"><a href="#cb25-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-555"><a href="#cb25-555" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> PlantGrowth) <span class="sc">+</span></span>
+<span id="cb25-556"><a href="#cb25-556" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> weight, <span class="at">x =</span> group) <span class="sc">+</span></span>
+<span id="cb25-557"><a href="#cb25-557" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-558"><a href="#cb25-558" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Weight (g)"</span>,</span>
+<span id="cb25-559"><a href="#cb25-559" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb25-560"><a href="#cb25-560" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>),</span>
+<span id="cb25-561"><a href="#cb25-561" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb25-562"><a href="#cb25-562" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-563"><a href="#cb25-563" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-564"><a href="#cb25-564" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Treatment Group"</span>,</span>
+<span id="cb25-565"><a href="#cb25-565" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb25-566"><a href="#cb25-566" aria-hidden="true" tabindex="-1"></a>      <span class="at">ctrl =</span> <span class="st">"Control"</span>, </span>
+<span id="cb25-567"><a href="#cb25-567" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt1 =</span> <span class="st">"Treatment 1"</span>, </span>
+<span id="cb25-568"><a href="#cb25-568" aria-hidden="true" tabindex="-1"></a>      <span class="at">trt2 =</span> <span class="st">"Treatment 2"</span></span>
+<span id="cb25-569"><a href="#cb25-569" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-570"><a href="#cb25-570" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-571"><a href="#cb25-571" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb25-572"><a href="#cb25-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-573"><a href="#cb25-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-574"><a href="#cb25-574" aria-hidden="true" tabindex="-1"></a><span class="fu">## General Aesthetic Modifications</span></span>
+<span id="cb25-575"><a href="#cb25-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-576"><a href="#cb25-576" aria-hidden="true" tabindex="-1"></a>To show you what is possible with <span class="in">`geom_point()`</span>, let's create two new plots. In the first plot, we will set the color of the points to orange. In the second plot, we will modify several aspects of the points, including color, shape, size, and transparency.</span>
+<span id="cb25-577"><a href="#cb25-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-578"><a href="#cb25-578" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb25-579"><a href="#cb25-579" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-582"><a href="#cb25-582" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-583"><a href="#cb25-583" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-584"><a href="#cb25-584" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"orange"</span>)</span>
+<span id="cb25-585"><a href="#cb25-585" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-586"><a href="#cb25-586" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-587"><a href="#cb25-587" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-588"><a href="#cb25-588" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb25-589"><a href="#cb25-589" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-590"><a href="#cb25-590" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-591"><a href="#cb25-591" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb25-594"><a href="#cb25-594" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb25-595"><a href="#cb25-595" aria-hidden="true" tabindex="-1"></a>myplot <span class="sc">+</span></span>
+<span id="cb25-596"><a href="#cb25-596" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb25-597"><a href="#cb25-597" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"purple"</span>, </span>
+<span id="cb25-598"><a href="#cb25-598" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">18</span>, </span>
+<span id="cb25-599"><a href="#cb25-599" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb25-600"><a href="#cb25-600" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.5</span></span>
+<span id="cb25-601"><a href="#cb25-601" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-602"><a href="#cb25-602" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-603"><a href="#cb25-603" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-604"><a href="#cb25-604" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb25-605"><a href="#cb25-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-606"><a href="#cb25-606" aria-hidden="true" tabindex="-1"></a>In the first plot, we use color = "orange" inside the geom_point() function. This sets the color of all points to orange.</span>
+<span id="cb25-607"><a href="#cb25-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-608"><a href="#cb25-608" aria-hidden="true" tabindex="-1"></a>In the second plot, we modify several aspects of the points:</span>
+<span id="cb25-609"><a href="#cb25-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-610"><a href="#cb25-610" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>color = "purple" sets the color of the points to purple.</span>
+<span id="cb25-611"><a href="#cb25-611" aria-hidden="true" tabindex="-1"></a>shape = 18 changes the shape of the points. ggplot2 includes several different shapes that you can use. The number 18 corresponds to a filled diamond shape.</span>
+<span id="cb25-612"><a href="#cb25-612" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>size = 3 increases the size of the points. The size is measured in mm.</span>
+<span id="cb25-613"><a href="#cb25-613" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>alpha = 0.5 sets the transparency of the points. The alpha value ranges from 0 (completely transparent) to 1 (completely opaque).</span>
 <span id="cb25-614"><a href="#cb25-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-615"><a href="#cb25-615" aria-hidden="true" tabindex="-1"></a><span class="fu"># End</span></span>
+<span id="cb25-615"><a href="#cb25-615" aria-hidden="true" tabindex="-1"></a>These modifications allow us to customize the appearance of the points to suit our preferences and the needs of our data. </span>
+<span id="cb25-616"><a href="#cb25-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-617"><a href="#cb25-617" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-618"><a href="#cb25-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-619"><a href="#cb25-619" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aesthetic Mapping with aes()</span></span>
+<span id="cb25-620"><a href="#cb25-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-621"><a href="#cb25-621" aria-hidden="true" tabindex="-1"></a><span class="fu"># End</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

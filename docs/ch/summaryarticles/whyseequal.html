@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-02-17">
+<meta name="dcterms.date" content="2023-07-24">
 <title>dsfair_quarto - Why are the StdErr all the same?</title>
 <style>
 code{white-space: pre-wrap;}
@@ -240,12 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#why-is-this-unexpected" id="toc-why-is-this-unexpected" class="nav-link" data-scroll-target="#why-is-this-unexpected">Why is this unexpected?</a></li>
   <li><a href="#why-are-the-latter-sem-not-identical" id="toc-why-are-the-latter-sem-not-identical" class="nav-link" data-scroll-target="#why-are-the-latter-sem-not-identical">Why are the latter SEM not identical?</a></li>
   <li><a href="#so-why-are-the-former-sem-identical" id="toc-so-why-are-the-former-sem-identical" class="nav-link" data-scroll-target="#so-why-are-the-former-sem-identical">So why are the former SEM identical?</a></li>
-  <li>
-<a href="#which-is-better" id="toc-which-is-better" class="nav-link" data-scroll-target="#which-is-better">Which is better?</a>
-  <ul class="collapse">
-<li>Additional Resources (click to show)</li>
-  </ul>
-</li>
+  <li><a href="#which-is-better" id="toc-which-is-better" class="nav-link" data-scroll-target="#which-is-better">Which is better?</a></li>
   </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="whyseequal.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -281,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 17, 2023</p>
+      <p class="date">July 24, 2023</p>
     </div>
   </div>
   
@@ -392,13 +387,28 @@ Confidence level used: 0.95 </code></pre>
 </div>
 <p>So, yes - the weights seem to display a somewhat consistent amount of variation across the groups. One can imagine a scenario where it would have been different, <em>e.g.</em> because the weights of <code>ctrl</code> vary much more than those of the other groups. In such a scenario the AIC would have probably claimed a model with heterogeneous error variances per group to be more appropriate.</p>
 <p>As a final note, keep in mind that the example here is very simple. A major advantage of using adjusted means is that the model they are based on can be more complex and <em>e.g.</em> include block effects. Arithmetic (sample) means that are calculated as we did for the descriptive statistics - <em>i.e.</em> separately per group - do not account for block effects and basically <em>don’t know anything about the weights of the other groups</em>.</p>
-<section class="level2 callout-tip" data-collapse="true"><h2 class="anchored" data-anchor-id="">Additional Resources (click to show)</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
 <li><p><a href="https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same">stackexchange: Standard error in estimated marginal means are all the same</a> (Note the answer is from the author of <a href="https://cran.r-project.org/web/packages/emmeans/index.html">{emmeans}</a>)</p></li>
 <li><p><a href="https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635">Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak &amp; Piepho, 2019)</a></p></li>
 <li><p><a href="https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r">stackexchange: Interpreting the standard error from emmeans - R</a></p></li>
 <li><p><a href="https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss">IBM: Estimated Marginal Means all have the same standard error in SPSS</a></p></li>
-</ul></section>
+</ul>
+</div>
+</div>
+</div>
+
 
 <!-- -->
 
@@ -812,15 +822,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a>As a final note, keep in mind that the example here is very simple. A major advantage of using adjusted means is that the model they are based on can be more complex and *e.g.* include block effects. Arithmetic (sample) means that are calculated as we did for the descriptive statistics - *i.e.* separately per group - do not account for block effects and basically *don't know anything about the weights of the other groups*.</span>
 <span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>::: custom-callout-addref</span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Standard error in estimated marginal means are all the same</span><span class="co">](https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same)</span> (Note the answer is from the author of <span class="co">[</span><span class="ot">{emmeans}</span><span class="co">](https://cran.r-project.org/web/packages/emmeans/index.html)</span>)</span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
 <span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak &amp; Piepho, 2019)</span><span class="co">](https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635)</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Standard error in estimated marginal means are all the same</span><span class="co">](https://stats.stackexchange.com/questions/444707/standard-error-in-estimated-marginal-means-are-all-the-same)</span> (Note the answer is from the author of <span class="co">[</span><span class="ot">{emmeans}</span><span class="co">](https://cran.r-project.org/web/packages/emmeans/index.html)</span>)</span>
 <span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Interpreting the standard error from emmeans - R</span><span class="co">](https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r)</span></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Analyzing designed experiments: Should we report standard deviations or standard errors of the mean or standard errors of the difference or what? (Kozak &amp; Piepho, 2019)</span><span class="co">](https://www.cambridge.org/core/journals/experimental-agriculture/article/abs/analyzing-designed-experiments-should-we-report-standard-deviations-or-standard-errors-of-the-mean-or-standard-errors-of-the-difference-or-what/92DB0AF151C157B9C6E2FA40F9C9B635)</span></span>
 <span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">IBM: Estimated Marginal Means all have the same standard error in SPSS</span><span class="co">](https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss)</span></span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">stackexchange: Interpreting the standard error from emmeans - R</span><span class="co">](https://stats.stackexchange.com/questions/369532/interpreting-the-standard-error-from-emmeans-r)</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">IBM: Estimated Marginal Means all have the same standard error in SPSS</span><span class="co">](https://www.ibm.com/support/pages/estimated-marginal-means-all-have-same-standard-error-spss)</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

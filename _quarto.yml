@@ -119,7 +119,3 @@ fig-height: 3.5
 
 body-header: | 
   <meta property="og:image" content="img/hexagonDSFAIR.png" />
-
-filters: 
-  - src/custom-callout-addref.lua
-  - src/custom-callout-modass.lua
