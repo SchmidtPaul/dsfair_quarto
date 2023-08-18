@@ -136,7 +136,7 @@ tidy(mycor)
 
 Looking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run `?cor.test()` and look at the "Details" section for more info. Here, our correlation estimate of `r scales::number(mycor$estimate, 0.01)` is significantly different from 0, since the p-value is `r scales::number(mycor$p.value, 0.0000000000001)` and therefore $< 0.05$. Furthermore, the confidence interval is `r scales::number(mycor$conf.int[1], 0.001)` - `r scales::number(mycor$conf.int[2], 0.001)` meaning that we are 95% sure that the true correlation is somewhere in that range.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [{correlation}](https://easystats.github.io/correlation/)

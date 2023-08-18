@@ -42,8 +42,6 @@ pacman::p_load(
 
 Here are some beautiful ggplots
 
-
-
 # Let's start
 
 Let us start by creating a plot that requires a minimum amount of code, but is still informative. We make use the `PlantGrowth` data, which is directly accessible in R.
@@ -87,7 +85,7 @@ Other geoms you might use include `geom_boxplot()` for boxplots, `geom_line()` f
 
 Now you understand the absolute minimum of how to create a ggplot.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [List of all `geom_*()` functons](https://ggplot2.tidyverse.org/reference/#geoms)
@@ -178,7 +176,7 @@ This demonstrates how the `limits =` argument can be used differently in `scale_
 
 In the end, it's important to note that setting the limits can exclude data outside the specified range from the plot. This means that the excluded data will not be considered when calculating statistics or generating geoms. In other words, while setting limits can help focus your plot on specific aspects of your data, it can also exclude important information. Always consider the implications of setting limits on your data visualization.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   If you are wondering why I wanted the y-axis to start at 0, read [this](https://academy.datawrapper.de/article/326-why-our-column-and-bar-charts-start-at-zero), [this](https://digitalblog.ons.gov.uk/2016/06/27/does-the-axis-have-to-start-at-zero-part-1-line-charts/) and [this](https://stats.stackexchange.com/questions/184525/how-to-determine-whether-or-not-the-y-axis-of-a-graph-should-start-at-zero)
@@ -419,11 +417,11 @@ myplot +
 :::
 :::
 
-Note that you can also first add a complete `theme_*()` and subsequently change individual aspects of it with via `theme()`. 
+Note that you can also first add a complete `theme_*()` and subsequently change individual aspects of it with via `theme()`.
 
 Remember, while themes can greatly enhance the aesthetic appeal of your plots, the most important aspect of any plot is its ability to accurately and effectively convey information about your data. Always prioritize clarity and accuracy over aesthetic appeal when creating your plots.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [List of all complete themes](https://ggplot2.tidyverse.org/reference/ggtheme.html)
@@ -475,19 +473,19 @@ ggsave(
 )
 ```
 
-* **filename:** This is the name of the file that you want to create. You should include the file extension (e.g., .png, .jpg, .pdf) in the filename. The file extension determines the format of the exported image.
+-   **filename:** This is the name of the file that you want to create. You should include the file extension (e.g., .png, .jpg, .pdf) in the filename. The file extension determines the format of the exported image.
 
-* **plot:** This is the plot that you want to save. If you don't specify a plot, ggsave() will save the last plot that you created.
+-   **plot:** This is the plot that you want to save. If you don't specify a plot, ggsave() will save the last plot that you created.
 
-* **path:** This is the directory where you want to save the file. If you don't specify a path, ggsave() will save the file in your current working directory.
+-   **path:** This is the directory where you want to save the file. If you don't specify a path, ggsave() will save the file in your current working directory.
 
-* **scale:** This is a scaling factor that is applied to the text and elements of the plot. A scale of 1 means that the plot is saved at its original size. A scale of 2 means that the plot is saved at twice its original size.
+-   **scale:** This is a scaling factor that is applied to the text and elements of the plot. A scale of 1 means that the plot is saved at its original size. A scale of 2 means that the plot is saved at twice its original size.
 
-* **width, height:** These are the dimensions of the exported image. You can specify the dimensions in any units that you like (e.g., inches, cm, mm).
+-   **width, height:** These are the dimensions of the exported image. You can specify the dimensions in any units that you like (e.g., inches, cm, mm).
 
-* **units:** This is the units in which the width and height are specified. The default is "in" for inches, but you can also use "cm" for centimeters, "mm" for millimeters, or "px" for pixels.
+-   **units:** This is the units in which the width and height are specified. The default is "in" for inches, but you can also use "cm" for centimeters, "mm" for millimeters, or "px" for pixels.
 
-* **dpi:** This is the resolution of the exported image in dots per inch. A higher dpi will result in a higher-quality image, but the file size will also be larger. The default dpi is 300, which is suitable for most purposes.
+-   **dpi:** This is the resolution of the exported image in dots per inch. A higher dpi will result in a higher-quality image, but the file size will also be larger. The default dpi is 300, which is suitable for most purposes.
 
 In this example, we are saving `myplot` as a PNG file named "myplot.png" in the Documents directory. The plot is saved at its original size (scale = 1) and the dimensions of the image are 6 cm by 4 cm. The resolution of the image is 300 dpi.
 
@@ -557,14 +555,11 @@ In the first plot, we use color = "orange" inside the geom_point() function. Thi
 
 In the second plot, we modify several aspects of the points:
 
-* color = "purple" sets the color of the points to purple.
-shape = 18 changes the shape of the points. ggplot2 includes several different shapes that you can use. The number 18 corresponds to a filled diamond shape.
-* size = 3 increases the size of the points. The size is measured in mm.
-* alpha = 0.5 sets the transparency of the points. The alpha value ranges from 0 (completely transparent) to 1 (completely opaque).
+-   color = "purple" sets the color of the points to purple. shape = 18 changes the shape of the points. ggplot2 includes several different shapes that you can use. The number 18 corresponds to a filled diamond shape.
+-   size = 3 increases the size of the points. The size is measured in mm.
+-   alpha = 0.5 sets the transparency of the points. The alpha value ranges from 0 (completely transparent) to 1 (completely opaque).
 
-These modifications allow us to customize the appearance of the points to suit our preferences and the needs of our data. 
-
-
+These modifications allow us to customize the appearance of the points to suit our preferences and the needs of our data.
 
 ## Aesthetic Mapping with aes()
 

@@ -9,6 +9,7 @@ In general, you should browse through the [Big Book of R](https://www.bigbookofr
 # Generalized Linear Models
 
 -   The [online version](https://bookdown.org/roback/bookdown-BeyondMLR/) of "Beyond Multiple Linear Regression - Applied Generalized Linear Models and Multilevel Models in R" by @roback_2021
+-   The [open access PDF version](https://link.springer.com/book/10.1007/978-3-031-32800-8) "Generalized Linear Mixed Models with Applications in Agriculture and Biology" by @ruiz_2023
 
 # Maps
 
@@ -18,4 +19,4 @@ In general, you should browse through the [Big Book of R](https://www.bigbookofr
 
 # Meta analyses
 
-- The [online version](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/) of "Doing Meta-Analysis with R: A Hands-On Guide" by @harrer_2021
+-   The [online version](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/) of "Doing Meta-Analysis with R: A Hands-On Guide" by @harrer_2021

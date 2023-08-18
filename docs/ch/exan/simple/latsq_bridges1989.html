@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-07-24">
+<meta name="dcterms.date" content="2023-08-18">
 <title>dsfair_quarto - One-way latin square design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -301,7 +301,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 24, 2023</p>
+      <p class="date">August 18, 2023</p>
     </div>
   </div>
   
@@ -1133,7 +1133,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a>It is crucial to add <span class="in">`rowF`</span>/<span class="in">`colF`</span> and not <span class="in">`row`</span>/<span class="in">`col`</span> to the model here, since only the former are formatted as factors. They should be formatted as factors, so that the model estimates one effect for each of their levels. The model would estimate a single slope for <span class="in">`row`</span> and <span class="in">`col`</span>, respectively, which is nonsensical: It would suggest that row 4 is twice as much as row 2 etc.</span>
 <span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>:::{.callout-warning collapse="true"}</span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning collapse="true"}</span>
 <span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions met? (click to show)</span></span>
 <span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a>It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the <span class="co">[</span><span class="ot">summary article "Model Diagnostics"</span><span class="co">](../../summaryarticles/modeldiagnostics.qmd)</span></span>

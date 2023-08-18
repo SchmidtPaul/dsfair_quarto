@@ -203,7 +203,7 @@ Note that `type = "response"` can do the back-transformation for us automaticall
 
 TO DO
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 **General**

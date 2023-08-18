@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-07-24">
+<meta name="dcterms.date" content="2023-08-18">
 <title>dsfair_quarto - Correlation &amp; Regression</title>
 <style>
 code{white-space: pre-wrap;}
@@ -299,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 24, 2023</p>
+      <p class="date">August 18, 2023</p>
     </div>
   </div>
   
@@ -1094,7 +1094,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a>Looking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run <span class="in">`?cor.test()`</span> and look at the "Details" section for more info. Here, our correlation estimate of <span class="in">`r scales::number(mycor$estimate, 0.01)`</span> is significantly different from 0, since the p-value is <span class="in">`r scales::number(mycor$p.value, 0.0000000000001)`</span> and therefore $&lt; 0.05$. Furthermore, the confidence interval is <span class="in">`r scales::number(mycor$conf.int[1], 0.001)`</span> - <span class="in">`r scales::number(mycor$conf.int[2], 0.001)`</span> meaning that we are 95% sure that the true correlation is somewhere in that range.</span>
 <span id="cb26-160"><a href="#cb26-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a>:::{.callout-tip collapse="true"}</span>
+<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
 <span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
 <span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">{correlation}</span><span class="co">](https://easystats.github.io/correlation/)</span></span>
