@@ -30,7 +30,7 @@ I did not use the tidyverse packages in my first years using R, but I wish I did
 
 During the next sections I will try to explain how to use some of these packages and sometimes compare them to the Base R (= non-tidyverse) alternative.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   ["R for Data Science"](https://r4ds.had.co.nz/) [@wickham_2017], which is a book that can be read online for free and was written by the package authors themselves.
@@ -130,7 +130,7 @@ plot(x = df$group, y = df$weight) # boxplot for values of each level
 
 However, I really just use `plot()` to get a quick first glance at data. In order to get professional visualizations I always use the tidyverse package `{ggplot2}` and its function `ggplot()`. It seems like it can create any plot you can imagine and there are multiple examples with increasing complexity spread out through this website's chapters.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   Cédric Scherer's [-@scherer_2022] [A ggplot2 tutorial for beautiful plotting in R](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/)
@@ -291,7 +291,7 @@ tbl2 %>%
 :::
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [5.5 Add new variables with mutate()](https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate) in *R for data science* [@wickham_2017]
@@ -374,7 +374,7 @@ tbl3 %>%
 :::
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [5.4 Select columns with select()](https://r4ds.had.co.nz/transform.html#select) in *R for data science* [@wickham_2017]
@@ -450,7 +450,7 @@ tbl %>%
 :::
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [5.2 Filter rows with filter()](https://r4ds.had.co.nz/transform.html#filter-rows-with-filter) in *R for data science* [@wickham_2017]
@@ -518,7 +518,7 @@ Note that `NA` (= missing values) are always sorted to the end[^3], even when us
 
 [^3]: See the additional resources below if you want it differently.
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [5.3 Arrange rows with arrange()](https://r4ds.had.co.nz/transform.html#arrange-rows-with-arrange) in *R for data science* [@wickham_2017]
@@ -626,7 +626,7 @@ tbl %>%
 Once you used `group_by()` on a table, it stays grouped unless you use `ungroup()` on it afterwards. This was not relevant in the examples above, but you must be aware of this if you are using the grouped (summary) results for further steps, since this can lead to unexpected results. You can find an example and further resources on such unintended outcomes [here](https://twitter.com/SchmidtPaul1989/status/1586284894556418049).
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [5.6 Grouped summaries with summarise()](https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise) in *R for data science* [@wickham_2017]
@@ -722,7 +722,7 @@ wide_dat %>%
 :::
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [12.3 Pivoting](https://r4ds.had.co.nz/tidy-data.html?q=pivot#pivoting) in *R for data science* [@wickham_2017]
@@ -874,7 +874,7 @@ strings %>%
 :::
 :::
 
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Additional Resources
 
 -   [14 Strings](https://r4ds.had.co.nz/strings.html) in *R for data science* [@wickham_2017]
