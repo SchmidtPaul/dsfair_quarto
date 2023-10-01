@@ -59,6 +59,11 @@ website:
       - icon: github
         href: https://github.com/SchmidtPaul
         aria-label: GitHub
+  page-footer: 
+    right:
+      - text: '<p>All content licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>'
+    border: true
+    background: "#00923f"
   favicon: img/favicon-32x32.png
   image: img/hexagonDSFAIR.png
   site-url: https://schmidtpaul.github.io/dsfair_quarto/
@@ -71,9 +76,8 @@ website:
 
 format:
   html:
-    theme: theme.scss
+    anchor-sections: true
     css: styles.css
-    toc: true
     code-fold: false
     code-summary: "Click to show/hide code"
     code-overflow: scroll
@@ -82,25 +86,26 @@ format:
     code-tools: true
     citations-hover: true
     footnotes-hover: true
-  pdf:
+    theme: theme.scss
     toc: true
-    number-sections: true
+  pdf:
     colorlinks: true
-
+    number-sections: true
+    toc: true
+    
 author:
   - name:
       given: Paul
       family: Schmidt
       literal: Paul Schmidt
     orcid: 0000-0003-1528-2082
-    email: schmidtpaul1989@outlook.com
     affiliations:
-      - name: Freelancer &
-        url: https://schmidtpaul.github.io/
-      - name: BioMath GmbH
+      - name: "BioMath GmbH"
         city: Hamburg
         country: Germany
         url: https://www.biomath.de/
+      - name: "& Freelancer"
+        url: https://schmidtpaul.github.io/
 
 editor: visual
 abstract-title: "Content summary"
@@ -116,6 +121,8 @@ execute:
 fig-dpi: 300
 fig-width: 5.5
 fig-height: 3.5
+
+citation: true
 
 body-header: | 
   <meta property="og:image" content="img/hexagonDSFAIR.png" />
