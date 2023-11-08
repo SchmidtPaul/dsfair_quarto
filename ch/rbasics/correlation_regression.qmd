@@ -19,8 +19,8 @@ pacman::p_load(
   tidyverse)
 
 # handle function conflicts
-conflict_prefer("filter", "dplyr") 
-conflict_prefer("select", "dplyr")
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
 ```
 
 # Data

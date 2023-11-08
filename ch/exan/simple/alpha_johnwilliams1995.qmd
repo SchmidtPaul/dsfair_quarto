@@ -1,0 +1,263 @@
+---
+title: "One-way alpha design"
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in an alpha design."
+---
+
+```{r}
+#| include: false
+source(here::here("src/helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  agridat,
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  lme4,
+  lmerTest,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
+conflicts_prefer(lmerTest::lmer)
+```
+
+# Data
+
+This example is taken from Chapter *"3.8 Analysis of an* $\alpha$-design" of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @johnwilliams_1995 from a yield (t/ha) trial laid out as an alpha design. The trial had 24 genotypes (`gen`), 3 complete replicates (`rep`) and 6 incomplete blocks (`block`) within each replicate. The block size was 4.
+
+## Import
+
+The data is available as part of the {agridat} package and needs no further formatting:
+
+```{r}
+dat <- as_tibble(agridat::john.alpha)
+dat
+```
+
+## Exploring
+
+We make use of [`dlookr::describe()`](../../misc/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(gen) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:n, mean, sd) %>%
+  arrange(desc(n), desc(mean)) %>% 
+  print(n = Inf)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(rep, block) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:n, mean, sd) %>%
+  arrange(desc(mean)) %>% 
+  print(n = Inf)
+```
+:::
+:::
+
+Additionally, we can decide to plot our data:
+
+```{r}
+#| code-fold: true
+# sort genotypes by mean yield
+gen_order <- dat %>% 
+  group_by(gen) %>% 
+  summarise(mean = mean(yield)) %>% 
+  arrange(mean) %>% 
+  pull(gen) %>% 
+  as.character()
+
+ggplot(data = dat) +
+  aes(
+    y = yield,
+    x = gen,
+    shape = rep
+  ) +
+  geom_line(
+    aes(group = gen),
+    color = "darkgrey"
+  ) +
+  geom_point() +
+  scale_x_discrete(
+    name = "Genotype",
+    limits = gen_order
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_shape_discrete(
+    name = "Block"
+  ) +
+  guides(shape = guide_legend(nrow = 1)) +
+  theme_classic() +
+  theme(
+    legend.position = "top", 
+    axis.text.x = element_text(angle = 90, vjust = 0.5)
+  )
+```
+
+Finally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../misc/usefulthings.qmd#desplot).
+
+```{r}
+#| code-fold: true
+desplot(
+  data = dat, 
+  flip = TRUE, # row 1 on top, not on bottom
+  form = gen ~ row + col | rep, # fill color per genotype, headers per replicate
+  out1 = block, # lines between incomplete blocks
+  out1.gpar = list(col = "black", lwd = 1, lty = "dashed"), # line type
+  main = "Field layout", # title
+  key.cex = 0.6,
+  layout = c(3, 1) # force all reps drawn in one row
+)
+```
+
+# Modelling
+
+Finally, we can decide to fit a linear model with `yield` as the response variable and (fixed) `gen` and `block` effects. There also needs to be term for the 18 incomplete blocks (*i.e.* `rep:block`) in the model, but it can be taken either as a fixed or a random effect. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# blocks as fixed (linear model)
+mod.fb <- lm(yield ~ gen + rep +
+               rep:block,
+             data = dat)
+
+mod.fb %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# blocks as random (linear mixed model)
+mod.rb <- lmer(yield ~ gen + rep +
+                 (1 | rep:block),
+               data = dat)
+
+mod.rb %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey",
+          lmer.df = "kenward-roger") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+:::
+
+As a result, we find that the model with random block effects has the smaller s.e.d. and is therefore more precise in terms of comparing genotypes.
+
+::: {.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
+:::
+
+# ANOVA
+
+Based on our model, we can then conduct an ANOVA:
+
+```{r}
+ANOVA <- anova(mod.rb, ddf = "Kenward-Roger")
+ANOVA
+```
+
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "gen")`).
+
+# Mean comparison
+
+Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
+
+```{r}
+mean_comp <- mod.rb %>% 
+  emmeans(specs = ~ gen) %>% # adj. mean per genotype
+  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
+
+Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
+
+```{r}
+#| code-fold: true
+# reorder genotype factor levels according to adjusted mean
+my_caption <- "Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+
+ggplot() +
+  # green/red dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield, x = gen)
+  ) +
+  # red diamonds representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean, x = gen),
+    shape = 18,
+    color = "red",
+    position = position_nudge(x = 0.2)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL, x = gen),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.2)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = lower.CL, x = gen, label = str_trim(.group)),
+    color = "red",
+    angle = 90,
+    hjust = 1.1,
+    position = position_nudge(x = 0.2)
+  ) + 
+  scale_x_discrete(
+    name = "Cultivar",
+    limits = as.character(mean_comp$gen)
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  labs(caption = my_caption) +
+  theme_classic() +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot",
+        axis.text.x = element_text(angle = 90, vjust = 0.5))
+```

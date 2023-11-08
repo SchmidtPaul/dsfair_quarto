@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-08-18">
+<meta name="dcterms.date" content="2023-11-07">
 <title>dsfair_quarto - Model Diagnostics</title>
 <style>
 code{white-space: pre-wrap;}
@@ -174,6 +174,14 @@ div.csl-indent {
  <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
@@ -320,7 +328,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 18, 2023</p>
+      <p class="date">November 7, 2023</p>
     </div>
   </div>
   
@@ -532,16 +540,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod2</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span>specs <span class="op">=</span> <span class="op">~</span> <span class="va">gen</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">cld</span><span class="op">(</span>Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"Tukey"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> gen      response   SE df lower.CL upper.CL .group
- Poinsett     20.9 2.87  6     14.4     28.5  a    
- Sprint       25.1 3.14  6     18.0     33.3  a    
- Guardian     30.4 3.46  6     22.5     39.5  ab   
- Dasher       45.3 4.23  6     35.6     56.3   b   
+ Poinsett     20.9 2.87  6     12.0     32.1  a    
+ Sprint       25.1 3.14  6     15.3     37.3  a    
+ Guardian     30.4 3.46  6     19.5     43.7  ab   
+ Dasher       45.3 4.23  6     31.7     61.4   b   
 
 Results are averaged over the levels of: rowF, colF 
 Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 4 estimates 
 Intervals are back-transformed from the sqrt scale 
 Note: contrasts are still on the sqrt scale 
 P value adjustment: tukey method for comparing a family of 4 estimates 
@@ -618,12 +627,12 @@ Kozak, Marcin, and Hans-Peter Piepho. 2018. <span>“What’s Normal Anyway? Res
 </ol></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {Paul Schmidt},
   title = {Model {Diagnostics}},
-  date = {2023-08-18},
+  date = {2023-11-07},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/modeldiagnostics.html},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Paul Schmidt. 2023. <span>“Model Diagnostics.”</span> August 18, 2023.
+Paul Schmidt. 2023. <span>“Model Diagnostics.”</span> November 7, 2023.
 <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/modeldiagnostics.html">https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/modeldiagnostics.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1103,7 +1112,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>mod2 <span class="sc">%&gt;%</span> </span>
 <span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> gen, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">Letters =</span> letters)</span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"Tukey"</span>, <span class="at">Letters =</span> letters)</span>
 <span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>Note that <span class="in">`type = "response"`</span> can do the back-transformation for us automatically<span class="ot">[^2]</span> and specifically see the part of the message below the mean table that reads "Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale".</span>

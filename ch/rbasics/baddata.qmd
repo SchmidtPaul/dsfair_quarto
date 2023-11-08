@@ -23,8 +23,8 @@ pacman::p_load(
 )
 
 # handle function conflicts
-conflict_prefer("filter", "dplyr") 
-conflict_prefer("select", "dplyr")
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
 ```
 
 There are two download links:

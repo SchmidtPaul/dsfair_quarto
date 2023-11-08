@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-08-18">
+<meta name="dcterms.date" content="2023-11-07">
 <title>dsfair_quarto - Correlation &amp; Regression</title>
 <style>
 code{white-space: pre-wrap;}
@@ -155,6 +155,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
@@ -299,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 18, 2023</p>
+      <p class="date">November 7, 2023</p>
     </div>
   </div>
   
@@ -323,8 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span>  <span class="va">tidyverse</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># handle function conflicts</span></span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span> </span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">)</span> </span>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="data" class="level1"><h1>Data</h1>
 <p>This is data I made up: Peter and Max went out multiple evenings and at the end of every evening wrote down how many drinks they had and what the alcohol content in their blood was.</p>
@@ -675,15 +683,15 @@ drinks
 </section></section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {Paul Schmidt},
   title = {Correlation \&amp; {Regression}},
-  date = {2023-08-18},
+  date = {2023-11-07},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/rbasics/correlation_regression.html},
   langid = {en},
   abstract = {Correlation and simple linear regression (with and without
     intercept).}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Paul Schmidt. 2023. <span>“Correlation &amp; Regression.”</span> August
-18, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/rbasics/correlation_regression.html">https://schmidtpaul.github.io/dsfair_quarto//ch/rbasics/correlation_regression.html</a>.
+Paul Schmidt. 2023. <span>“Correlation &amp; Regression.”</span>
+November 7, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/rbasics/correlation_regression.html">https://schmidtpaul.github.io/dsfair_quarto//ch/rbasics/correlation_regression.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -989,8 +997,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>) </span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) </span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>select)</span>
 <span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>

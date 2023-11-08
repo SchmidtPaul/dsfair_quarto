@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-08-18">
+<meta name="dcterms.date" content="2023-11-07">
 <title>dsfair_quarto - One-way latin square design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -174,6 +174,14 @@ div.csl-indent {
  <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../../ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
@@ -301,7 +309,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 18, 2023</p>
+      <p class="date">November 7, 2023</p>
     </div>
   </div>
   
@@ -328,8 +336,8 @@ div.csl-indent {
 <span>  <span class="va">tidyverse</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># handle function conflicts</span></span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span> </span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">)</span> </span>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="data" class="level1"><h1>Data</h1>
 <p>This example data is taken from <a href="https://kwstat.github.io/agridat/">{agridat}</a>. It considers data published in <span class="citation" data-cites="bridges_1989">Bridges (<a href="#ref-bridges_1989" role="doc-biblioref">1989</a>)</span> from a cucumber yield trial with four genotypes set up as a Latin square design. Notice that the original dataset considers two trials (at two locations), but we will focus on only a single trial here.</p>
@@ -573,18 +581,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_comp</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span>specs <span class="op">=</span> <span class="op">~</span> <span class="va">gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># adj. mean per genotype</span></span>
-<span>  <span class="fu">cld</span><span class="op">(</span>Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
+<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"Tukey"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
 <span></span>
 <span><span class="va">mean_comp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> gen      emmean   SE df lower.CL upper.CL .group
- Poinsett   21.4 3.42  6     13.1     29.8  a    
- Sprint     25.9 3.42  6     17.6     34.3  a    
- Guardian   31.6 3.42  6     23.3     40.0  ab   
- Dasher     45.5 3.42  6     37.2     53.9   b   
+ Poinsett   21.4 3.42  6     9.43     33.4  a    
+ Sprint     25.9 3.42  6    13.95     37.9  a    
+ Guardian   31.6 3.42  6    19.63     43.6  ab   
+ Dasher     45.5 3.42  6    33.55     57.5   b   
 
 Results are averaged over the levels of: rowF, colF 
 Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 4 estimates 
 P value adjustment: tukey method for comparing a family of 4 estimates 
 significance level used: alpha = 0.05 
 NOTE: If two or more means share the same grouping symbol,
@@ -658,15 +667,15 @@ Bridges, William. 1989. <span>“Analysis of a Plant Breeding Experiment with He
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {Paul Schmidt},
   title = {One-Way Latin Square Design},
-  date = {2023-08-18},
+  date = {2023-11-07},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/latsq_bridges1989.html},
   langid = {en},
   abstract = {One-way ANOVA \&amp; pairwise comparison post hoc tests in a
     latin square design.}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Paul Schmidt. 2023. <span>“One-Way Latin Square Design.”</span> August
-18, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/latsq_bridges1989.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/latsq_bridges1989.html</a>.
+Paul Schmidt. 2023. <span>“One-Way Latin Square Design.”</span> November
+7, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/latsq_bridges1989.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/latsq_bridges1989.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -974,8 +983,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
 <span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>) </span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) </span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>select)</span>
 <span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>
@@ -1169,7 +1178,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> </span>
 <span id="cb21-246"><a href="#cb21-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> gen) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per genotype</span></span>
-<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
+<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"Tukey"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
 <span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
 <span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

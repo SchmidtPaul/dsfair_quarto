@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-08-18">
+<meta name="dcterms.date" content="2023-11-07">
 <title>dsfair_quarto - Two-way split-plot design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -174,6 +174,14 @@ div.csl-indent {
  <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../../ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
@@ -301,7 +309,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 18, 2023</p>
+      <p class="date">November 7, 2023</p>
     </div>
   </div>
   
@@ -330,9 +338,9 @@ div.csl-indent {
 <span>  <span class="va">tidyverse</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># handle function conflicts</span></span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"filter"</span>, <span class="st">"dplyr"</span><span class="op">)</span> </span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"select"</span>, <span class="st">"dplyr"</span><span class="op">)</span></span>
-<span><span class="fu">conflict_prefer</span><span class="op">(</span><span class="st">"lmer"</span>, <span class="st">"lmerTest"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">)</span> </span>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">)</span></span>
+<span><span class="fu">conflicts_prefer</span><span class="op">(</span><span class="fu">lmerTest</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="data" class="level1"><h1>Data</h1>
 <p>This dataset was originally published in <span class="citation" data-cites="gomez_1984">Gomez and Gomez (<a href="#ref-gomez_1984" role="doc-biblioref">1984</a>)</span> from a yield (kg/ha) trial with 4 genotypes (<code>G</code>) and 6 nitrogen levels (<code>N</code>), leading to 24 treatment level combinations. The data set here has 3 complete replicates (<code>rep</code>) and is laid out as a randomized complete block design (RCBD).</p>
@@ -600,49 +608,50 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_comp</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span>specs <span class="op">=</span> <span class="op">~</span> <span class="va">N</span><span class="op">|</span><span class="va">G</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
-<span>  <span class="fu">cld</span><span class="op">(</span>Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
+<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"Tukey"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
 <span></span>
 <span><span class="va">mean_comp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code>G = Nala:
  N      emmean  SE   df lower.CL upper.CL .group
- Goomba   4306 366 41.9     3568     5044  a    
- Koopa    5982 366 41.9     5244     6720   b   
- Diddy    6259 366 41.9     5521     6997   b   
- Peach    6540 366 41.9     5803     7278   b   
- Toad     6895 366 41.9     6157     7633   b   
- Yoshi    6951 366 41.9     6213     7688   b   
+ Goomba   4306 366 41.9     3297     5315  a    
+ Koopa    5982 366 41.9     4973     6991   b   
+ Diddy    6259 366 41.9     5250     7268   b   
+ Peach    6540 366 41.9     5531     7550   b   
+ Toad     6895 366 41.9     5886     7904   b   
+ Yoshi    6951 366 41.9     5941     7960   b   
 
 G = Pumba:
  N      emmean  SE   df lower.CL upper.CL .group
- Peach    1881 366 41.9     1143     2618  a    
- Yoshi    2047 366 41.9     1309     2784  a    
- Toad     3816 366 41.9     3078     4554   b   
- Goomba   4481 366 41.9     3744     5219   b   
- Diddy    4812 366 41.9     4074     5550   b   
- Koopa    4816 366 41.9     4078     5554   b   
+ Peach    1881 366 41.9      871     2890  a    
+ Yoshi    2047 366 41.9     1037     3056  a    
+ Toad     3816 366 41.9     2807     4825   b   
+ Goomba   4481 366 41.9     3472     5491   b   
+ Diddy    4812 366 41.9     3803     5821   b   
+ Koopa    4816 366 41.9     3807     5825   b   
 
 G = Simba:
  N      emmean  SE   df lower.CL upper.CL .group
- Goomba   4253 366 41.9     3515     4990  a    
- Koopa    5672 366 41.9     4934     6410  ab   
- Diddy    6400 366 41.9     5662     7138   bc  
- Toad     6733 366 41.9     5995     7470   bc  
- Yoshi    7563 366 41.9     6826     8301    cd 
- Peach    8701 366 41.9     7963     9438     d 
+ Goomba   4253 366 41.9     3243     5262  a    
+ Koopa    5672 366 41.9     4663     6681  ab   
+ Diddy    6400 366 41.9     5391     7409   bc  
+ Toad     6733 366 41.9     5723     7742   bc  
+ Yoshi    7563 366 41.9     6554     8573    cd 
+ Peach    8701 366 41.9     7691     9710     d 
 
 G = Timon:
  N      emmean  SE   df lower.CL upper.CL .group
- Goomba   3177 366 41.9     2440     3915  a    
- Koopa    5443 366 41.9     4705     6180   b   
- Diddy    5994 366 41.9     5256     6732   b   
- Toad     6014 366 41.9     5276     6752   b   
- Peach    6065 366 41.9     5328     6803   b   
- Yoshi    6687 366 41.9     5950     7425   b   
+ Goomba   3177 366 41.9     2168     4187  a    
+ Koopa    5443 366 41.9     4433     6452   b   
+ Diddy    5994 366 41.9     4985     7003   b   
+ Toad     6014 366 41.9     5005     7023   b   
+ Peach    6065 366 41.9     5056     7075   b   
+ Yoshi    6687 366 41.9     5678     7697   b   
 
 Results are averaged over the levels of: rep 
 Degrees-of-freedom method: kenward-roger 
 Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 6 estimates 
 P value adjustment: tukey method for comparing a family of 6 estimates 
 significance level used: alpha = 0.05 
 NOTE: If two or more means share the same grouping symbol,
@@ -725,15 +734,15 @@ Gomez, Kwanchai A, and Arturo A Gomez. 1984. <em>Statistical Procedures for Agri
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {Paul Schmidt},
   title = {Two-Way Split-Plot Design},
-  date = {2023-08-18},
+  date = {2023-11-07},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/splitplot_gomezgomez1984.html},
   langid = {en},
   abstract = {Two-way ANOVA \&amp; pairwise comparison post hoc tests in a
     split-plot design.}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Paul Schmidt. 2023. <span>“Two-Way Split-Plot Design.”</span> August 18,
-2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/splitplot_gomezgomez1984.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/splitplot_gomezgomez1984.html</a>.
+Paul Schmidt. 2023. <span>“Two-Way Split-Plot Design.”</span> November
+7, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/splitplot_gomezgomez1984.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/splitplot_gomezgomez1984.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1043,9 +1052,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
 <span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>) </span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"select"</span>, <span class="st">"dplyr"</span>)</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"lmer"</span>, <span class="st">"lmerTest"</span>)</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) </span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>select)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(lmerTest<span class="sc">::</span>lmer)</span>
 <span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>
@@ -1255,7 +1264,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> </span>
 <span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> N<span class="sc">|</span>G) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
-<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"Tukey"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
 <span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
 <span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

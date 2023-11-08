@@ -45,7 +45,7 @@ As you can see, it first suggests using the [packagename::functionname()](https:
 library(conflicted)
 library(dplyr)
 
-conflict_prefer("filter", "dplyr")
+conflicts_prefer(dplyr::filter)
 
 PlantGrowth %>% filter(weight > 6)
 ```

@@ -1,10 +1,52 @@
 [
   {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html",
+    "title": "One-way alpha design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#import",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#import",
+    "title": "One-way alpha design",
+    "section": "Import",
+    "text": "Import\nThe data is available as part of the {agridat} package and needs no further formatting:\n\ndat &lt;- as_tibble(agridat::john.alpha)\ndat\n\n# A tibble: 72 × 7\n    plot rep   block gen   yield   row   col\n   &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;\n 1     1 R1    B1    G11    4.12     1     1\n 2     2 R1    B1    G04    4.45     2     1\n 3     3 R1    B1    G05    5.88     3     1\n 4     4 R1    B1    G22    4.58     4     1\n 5     5 R1    B2    G21    4.65     5     1\n 6     6 R1    B2    G10    4.17     6     1\n 7     7 R1    B2    G20    4.01     7     1\n 8     8 R1    B2    G02    4.34     8     1\n 9     9 R1    B3    G23    4.23     9     1\n10    10 R1    B3    G14    4.76    10     1\n# ℹ 62 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#exploring",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#exploring",
+    "title": "One-way alpha design",
+    "section": "Exploring",
+    "text": "Exploring\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(n), desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 24 × 4\n   gen       n  mean     sd\n   &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 G01       3  5.16 0.534 \n 2 G05       3  5.06 0.841 \n 3 G12       3  4.91 0.641 \n 4 G15       3  4.89 0.207 \n 5 G19       3  4.87 0.398 \n 6 G13       3  4.83 0.619 \n 7 G21       3  4.82 0.503 \n 8 G17       3  4.73 0.379 \n 9 G16       3  4.73 0.502 \n10 G06       3  4.71 0.464 \n11 G22       3  4.64 0.432 \n12 G14       3  4.56 0.186 \n13 G02       3  4.51 0.574 \n14 G18       3  4.44 0.587 \n15 G04       3  4.40 0.0433\n16 G10       3  4.39 0.450 \n17 G11       3  4.38 0.641 \n18 G08       3  4.32 0.584 \n19 G24       3  4.14 0.726 \n20 G23       3  4.14 0.232 \n21 G07       3  4.13 0.510 \n22 G20       3  3.78 0.209 \n23 G09       3  3.61 0.606 \n24 G03       3  3.34 0.456 \n\n\n\n\n\n\ndat %&gt;% \n  group_by(rep, block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 18 × 5\n   rep   block     n  mean     sd\n   &lt;fct&gt; &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 R2    B3        4  5.22 0.149 \n 2 R2    B5        4  5.21 0.185 \n 3 R2    B6        4  5.11 0.323 \n 4 R2    B4        4  5.01 0.587 \n 5 R1    B5        4  4.79 0.450 \n 6 R1    B1        4  4.75 0.772 \n 7 R1    B6        4  4.58 0.819 \n 8 R3    B1        4  4.38 0.324 \n 9 R1    B3        4  4.36 0.337 \n10 R1    B4        4  4.33 0.727 \n11 R3    B3        4  4.30 0.0710\n12 R1    B2        4  4.29 0.273 \n13 R2    B2        4  4.23 0.504 \n14 R3    B4        4  4.22 0.375 \n15 R3    B5        4  4.15 0.398 \n16 R2    B1        4  4.12 0.411 \n17 R3    B2        4  3.96 0.631 \n18 R3    B6        4  3.61 0.542 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nClick to show/hide code# sort genotypes by mean yield\ngen_order &lt;- dat %&gt;% \n  group_by(gen) %&gt;% \n  summarise(mean = mean(yield)) %&gt;% \n  arrange(mean) %&gt;% \n  pull(gen) %&gt;% \n  as.character()\n\nggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = rep\n  ) +\n  geom_line(\n    aes(group = gen),\n    color = \"darkgrey\"\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Genotype\",\n    limits = gen_order\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_classic() +\n  theme(\n    legend.position = \"top\", \n    axis.text.x = element_text(angle = 90, vjust = 0.5)\n  )\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nClick to show/hide codedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ row + col | rep, # fill color per genotype, headers per replicate\n  out1 = block, # lines between incomplete blocks\n  out1.gpar = list(col = \"black\", lwd = 1, lty = \"dashed\"), # line type\n  main = \"Field layout\", # title\n  key.cex = 0.6,\n  layout = c(3, 1) # force all reps drawn in one row\n)"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html",
+    "href": "ch/exan/simple/augm_petersen1994.html",
+    "title": "One-way augmented design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#import",
+    "href": "ch/exan/simple/augm_petersen1994.html#import",
+    "title": "One-way augmented design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Petersen1994.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 48 × 5\n   gen   yield block   row   col\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st     2972 I         1     1\n 2 14     2405 I         2     1\n 3 26     2855 I         3     1\n 4 ci     2592 I         4     1\n 5 17     2572 I         5     1\n 6 wa     2608 I         6     1\n 7 22     2705 I         7     1\n 8 13     2391 I         8     1\n 9 st     3122 II        1     2\n10 ci     3023 II        2     2\n# ℹ 38 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#format",
+    "href": "ch/exan/simple/augm_petersen1994.html#format",
+    "title": "One-way augmented design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns gen and block should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(gen, block), ~ as.factor(.x)))"
+  },
+  {
     "objectID": "ch/exan/simple/crd_mead1993.html",
     "href": "ch/exan/simple/crd_mead1993.html",
     "title": "One-way completely randomized design",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
   },
   {
     "objectID": "ch/exan/simple/crd_mead1993.html#import",
@@ -32,7 +74,7 @@
     "href": "ch/exan/simple/latsq_bridges1989.html",
     "title": "One-way latin square design",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
   },
   {
     "objectID": "ch/exan/simple/latsq_bridges1989.html#import",
@@ -60,7 +102,7 @@
     "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html",
     "title": "One-way randomized complete block design",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
   },
   {
     "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#import",
@@ -88,7 +130,7 @@
     "href": "ch/exan/simple/rcbd_gomezgomez1984.html",
     "title": "Two-way randomized complete block design",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
   },
   {
     "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#import",
@@ -116,7 +158,7 @@
     "href": "ch/exan/simple/splitplot_gomezgomez1984.html",
     "title": "Two-way split-plot design",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")\nconflict_prefer(\"lmer\", \"lmerTest\")"
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
   },
   {
     "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#import",
@@ -200,7 +242,7 @@
     "href": "ch/rbasics/baddata.html",
     "title": "Bad data & Outliers",
     "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  here,\n  janitor,\n  naniar,\n  readxl,\n  tidyverse\n)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")\nThere are two download links:"
+    "text": "# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  here,\n  janitor,\n  naniar,\n  readxl,\n  tidyverse\n)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nThere are two download links:"
   },
   {
     "objectID": "ch/rbasics/baddata.html#import",
@@ -249,7 +291,7 @@
     "href": "ch/rbasics/correlation_regression.html",
     "title": "Correlation & Regression",
     "section": "",
-    "text": "This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.\n# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  modelbased,\n  tidyverse)\n\n# handle function conflicts\nconflict_prefer(\"filter\", \"dplyr\") \nconflict_prefer(\"select\", \"dplyr\")"
+    "text": "This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.\n# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  modelbased,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
   },
   {
     "objectID": "ch/rbasics/correlation_regression.html#import",
@@ -613,7 +655,7 @@
     "href": "ch/summaryarticles/modeldiagnostics.html#data-transformation",
     "title": "Model Diagnostics",
     "section": "Data transformation",
-    "text": "Data transformation\nTransforming the response variable (e.g. yield) with a mathematical function (e.g. square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing yield with sqrt(yield), you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example1 where this approach does as intended.\n\nClick to show/hide codepacman::p_load(agridat,\n               easystats,\n               emmeans,\n               multcomp,\n               multcompView,\n               tidyverse)\n\ndat &lt;- agridat::bridges.cucumber %&gt;%\n  filter(loc == \"Clemson\") %&gt;%\n  mutate(colF = as.factor(col),\n         rowF = as.factor(row))\n\n\n\n\n\nmod1 &lt;- lm(\n  yield ~ gen + rowF + colF, \n  data = dat)\n\nmod1 %&gt;% \n  check_normality() %&gt;% \n  plot(type = \"qq\")\n\n\n\n\n\n\n\n\nmod2 &lt;- lm(\n  sqrt(yield) ~ gen + rowF + colF, \n  data = dat)\n\nmod2 %&gt;% \n  check_normality() %&gt;% \n  plot(type = \"qq\")\n\n\n\n\n\n\nYou can see that the QQ plot for mod2 does indeed look better than that for mod1. Thus, we can and should conduct the ANOVA for mod2. Its interpretation or rather the conclusions drawn from it are essentially the same - irrespective of whether yield or the square root of yield was modeled: There are significant differences between the genotypes.\n\nanova(mod2)\n\nAnalysis of Variance Table\n\nResponse: sqrt(yield)\n          Df  Sum Sq Mean Sq F value  Pr(&gt;F)  \ngen        3 10.5123  3.5041  8.8966 0.01256 *\nrowF       3  5.0283  1.6761  4.2555 0.06228 .\ncolF       3  4.2121  1.4040  3.5647 0.08670 .\nResiduals  6  2.3632  0.3939                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nIt is a little bit different when it comes to mean comparisons via post hoc tests. Not because of the conclusion part - this is the same here, too: e.g. two genotype means may be significantly different from each other according to the Tukey test. However, the mean itself can be irritating, since noone is used to dealing with square roots of yields. However, it is valid to present the means on the backtransformed (= original) scale, as long as it is made clear to the reader that the model fit and mean comparisons were made on a different (= square root) scale.\n\nmod2 %&gt;% \n  emmeans(specs = ~ gen, type = \"response\") %&gt;% \n  cld(Letters = letters)\n\n gen      response   SE df lower.CL upper.CL .group\n Poinsett     20.9 2.87  6     14.4     28.5  a    \n Sprint       25.1 3.14  6     18.0     33.3  a    \n Guardian     30.4 3.46  6     22.5     39.5  ab   \n Dasher       45.3 4.23  6     35.6     56.3   b   \n\nResults are averaged over the levels of: rowF, colF \nConfidence level used: 0.95 \nIntervals are back-transformed from the sqrt scale \nNote: contrasts are still on the sqrt scale \nP value adjustment: tukey method for comparing a family of 4 estimates \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same. \n\n\nNote that type = \"response\" can do the back-transformation for us automatically2 and specifically see the part of the message below the mean table that reads “Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale”."
+    "text": "Data transformation\nTransforming the response variable (e.g. yield) with a mathematical function (e.g. square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing yield with sqrt(yield), you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example1 where this approach does as intended.\n\nClick to show/hide codepacman::p_load(agridat,\n               easystats,\n               emmeans,\n               multcomp,\n               multcompView,\n               tidyverse)\n\ndat &lt;- agridat::bridges.cucumber %&gt;%\n  filter(loc == \"Clemson\") %&gt;%\n  mutate(colF = as.factor(col),\n         rowF = as.factor(row))\n\n\n\n\n\nmod1 &lt;- lm(\n  yield ~ gen + rowF + colF, \n  data = dat)\n\nmod1 %&gt;% \n  check_normality() %&gt;% \n  plot(type = \"qq\")\n\n\n\n\n\n\n\n\nmod2 &lt;- lm(\n  sqrt(yield) ~ gen + rowF + colF, \n  data = dat)\n\nmod2 %&gt;% \n  check_normality() %&gt;% \n  plot(type = \"qq\")\n\n\n\n\n\n\nYou can see that the QQ plot for mod2 does indeed look better than that for mod1. Thus, we can and should conduct the ANOVA for mod2. Its interpretation or rather the conclusions drawn from it are essentially the same - irrespective of whether yield or the square root of yield was modeled: There are significant differences between the genotypes.\n\nanova(mod2)\n\nAnalysis of Variance Table\n\nResponse: sqrt(yield)\n          Df  Sum Sq Mean Sq F value  Pr(&gt;F)  \ngen        3 10.5123  3.5041  8.8966 0.01256 *\nrowF       3  5.0283  1.6761  4.2555 0.06228 .\ncolF       3  4.2121  1.4040  3.5647 0.08670 .\nResiduals  6  2.3632  0.3939                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nIt is a little bit different when it comes to mean comparisons via post hoc tests. Not because of the conclusion part - this is the same here, too: e.g. two genotype means may be significantly different from each other according to the Tukey test. However, the mean itself can be irritating, since noone is used to dealing with square roots of yields. However, it is valid to present the means on the backtransformed (= original) scale, as long as it is made clear to the reader that the model fit and mean comparisons were made on a different (= square root) scale.\n\nmod2 %&gt;% \n  emmeans(specs = ~ gen, type = \"response\") %&gt;% \n  cld(adjust = \"Tukey\", Letters = letters)\n\n gen      response   SE df lower.CL upper.CL .group\n Poinsett     20.9 2.87  6     12.0     32.1  a    \n Sprint       25.1 3.14  6     15.3     37.3  a    \n Guardian     30.4 3.46  6     19.5     43.7  ab   \n Dasher       45.3 4.23  6     31.7     61.4   b   \n\nResults are averaged over the levels of: rowF, colF \nConfidence level used: 0.95 \nConf-level adjustment: sidak method for 4 estimates \nIntervals are back-transformed from the sqrt scale \nNote: contrasts are still on the sqrt scale \nP value adjustment: tukey method for comparing a family of 4 estimates \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same. \n\n\nNote that type = \"response\" can do the back-transformation for us automatically2 and specifically see the part of the message below the mean table that reads “Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale”."
   },
   {
     "objectID": "ch/summaryarticles/modeldiagnostics.html#generalized-linear-models",
@@ -663,5 +705,12 @@
     "title": "Data Science for Agriculture in R",
     "section": "Workshops",
     "text": "Workshops\nMoreover, the chapters published here serve as the basis for any of my R‑Workshops. Check out the “Prepare for an upcoming workshop” chapter and the list of previous workshops."
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#explore",
+    "href": "ch/exan/simple/augm_petersen1994.html#explore",
+    "title": "One-way augmented design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(n), desc(mean))\n\n# A tibble: 33 × 5\n   gen       n    na  mean    sd\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st        6     0 2759.  832.\n 2 ci        6     0 2726.  711.\n 3 wa        6     0 2678.  615.\n 4 19        1     0 3643    NA \n 5 11        1     0 3380    NA \n 6 07        1     0 3265    NA \n 7 03        1     0 3055    NA \n 8 04        1     0 3018    NA \n 9 01        1     0 3013    NA \n10 30        1     0 2955    NA \n# ℹ 23 more rows\n\n\n\n\n\n\ndat %&gt;% \n  group_by(block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  block     n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 VI        8     0 3205.  417.\n2 II        8     0 2864.  258.\n3 IV        8     0 2797.  445.\n4 I         8     0 2638.  202.\n5 III       8     0 2567.  440.\n6 V         8     0 1390.  207.\n\n\n\n\nAdditionally, we can decide to plot our data. Note that we here define custom colors for the genotypes, where all unreplicated entries get a shade of green and all replicated checks get a shade of red.\n\ngreens30 &lt;- colorRampPalette(c(\"#bce2cc\", \"#00923f\"))(30)\noranges3 &lt;- colorRampPalette(c(\"#e4572e\", \"#ad0000\"))(3)\ngen_cols &lt;- set_names(c(greens30, oranges3), nm = levels(dat$gen))\n\n\nClick to show/hide codeggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = block\n  ) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_color_manual(\n    guide = \"none\",\n    values = gen_cols\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_bw() +\n  theme(\n    legend.position = \"top\",\n    axis.text.x = element_text(size = 9)\n  )\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nClick to show/hide codedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per cultivar  \n  col.regions = gen_cols, # custom fill colors\n  out1 = block, # line between blocks                     \n  text = gen, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n)"
   }
 ]

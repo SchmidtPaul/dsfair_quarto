@@ -192,7 +192,7 @@ It is a little bit different when it comes to mean comparisons via post hoc test
 ```{r}
 mod2 %>% 
   emmeans(specs = ~ gen, type = "response") %>% 
-  cld(Letters = letters)
+  cld(adjust = "Tukey", Letters = letters)
 ```
 
 Note that `type = "response"` can do the back-transformation for us automatically[^2] and specifically see the part of the message below the mean table that reads "Intervals are back-transformed from the sqrt scale. Note: contrasts are still on the sqrt scale".

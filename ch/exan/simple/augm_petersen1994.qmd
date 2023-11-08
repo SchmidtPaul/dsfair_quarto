@@ -1,0 +1,275 @@
+---
+title: "One-way augmented design"
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a non-resolvable augmented design."
+---
+
+```{r}
+#| include: false
+source(here::here("src/helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  lme4,
+  lmerTest,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
+conflicts_prefer(lmerTest::lmer)
+```
+
+# Data
+
+This example is taken from Chapter *"3.7 Analysis of a non-resolvable augmented design"* of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @petersen_1994 from a yield trial laid out as an augmented design. The genotypes (`gen`) include 3 standards (`st`, `ci`, `wa`) and 30 new cultivars of interest. The trial was laid out in 6 blocks (`block`). The 3 standards are tested in each block, while each entry is tested in only one of the blocks. Therefore, the blocks are *"incomplete blocks"*.
+
+## Import
+
+```{r}
+#| echo: false
+path <- here::here("data", "Petersen1994.csv")
+get_url_from_path(path)
+```
+
+```{r}
+dat <- read_csv(path) # use path from above
+dat
+```
+
+## Format
+
+Before anything, the columns `gen` and `block` should be encoded as factors, since R by default encoded them as character.
+
+```{r}
+dat <- dat %>%
+  mutate(across(c(gen, block), ~ as.factor(.x)))
+```
+
+## Explore
+
+We make use of [`dlookr::describe()`](../../misc/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(gen) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(n), desc(mean))
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+dat %>% 
+  group_by(block) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+:::
+:::
+
+Additionally, we can decide to plot our data. Note that we here define custom colors for the genotypes, where all unreplicated entries get a shade of green and all replicated checks get a shade of red.
+
+```{r}
+greens30 <- colorRampPalette(c("#bce2cc", "#00923f"))(30)
+oranges3 <- colorRampPalette(c("#e4572e", "#ad0000"))(3)
+gen_cols <- set_names(c(greens30, oranges3), nm = levels(dat$gen))
+```
+
+```{r}
+#| code-fold: true
+ggplot(data = dat) +
+  aes(
+    y = yield,
+    x = gen,
+    shape = block
+  ) +
+  geom_point() +
+    scale_x_discrete(
+    name = "Genotype"
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_color_manual(
+    guide = "none",
+    values = gen_cols
+  ) +
+  scale_shape_discrete(
+    name = "Block"
+  ) +
+  guides(shape = guide_legend(nrow = 1)) +
+  theme_bw() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(size = 9)
+  )
+```
+
+Finally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../misc/usefulthings.qmd#desplot).
+
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  flip = TRUE, # row 1 on top, not on bottom
+  form = gen ~ col + row, # fill color per cultivar  
+  col.regions = gen_cols, # custom fill colors
+  out1 = block, # line between blocks                     
+  text = gen, # cultivar names per plot
+  cex = 1, # cultviar names: font size
+  shorten = FALSE, # cultivar names: don't abbreviate
+  main = "Field layout", # plot title
+  show.key = FALSE # hide legend
+) 
+```
+
+# Model
+
+Finally, we can decide to fit a linear model with `yield` as the response variable and `gen` as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in blocks, we also need `block` effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better. 
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# blocks as fixed (linear model)
+mod.fb <- lm(yield ~ gen + block,
+             data = dat)
+
+mod.fb %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# blocks as random (linear mixed model)
+mod.rb <- lmer(yield ~ gen + (1 | block),
+               data = dat)
+
+mod.rb %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey",
+          lmer.df = "kenward-roger") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+:::
+
+As a result, we find that the model with fixed block effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.
+
+::: {.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
+:::
+
+# ANOVA
+
+Based on our model, we can then conduct an ANOVA:
+
+```{r}
+ANOVA <- anova(mod.fb)
+ANOVA
+```
+
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "gen")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
+
+# Mean comparison
+
+Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
+
+```{r}
+mean_comp <- mod.fb %>% 
+  emmeans(specs = ~ gen) %>% # adj. mean per genotype
+  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Accordingly, notice that *e.g.* for `gen 11`, which is the genotype with the highest adjusted yield mean (=3055), its lower confidence limit (=1587) includes `gen 12`, which is the genotype with the lowest adjusted yield mean (=1632). 
+
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
+
+Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
+
+```{r}
+#| code-fold: true
+# reorder genotype factor levels according to adjusted mean
+my_caption <- "Dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+
+ggplot() +
+  # green/red dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield, x = gen, color = gen)
+  ) +
+  # red diamonds representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean, x = gen),
+    shape = 18,
+    color = "red",
+    position = position_nudge(x = 0.2)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL, x = gen),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.2)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = upper.CL, x = gen, label = str_trim(.group)),
+    color = "red",
+    vjust = -0.2,
+    position = position_nudge(x = 0.2)
+  ) + 
+  scale_color_manual(
+    guide = "none", 
+    values = gen_cols
+  ) + 
+  scale_x_discrete(
+    name = "Cultivar",
+    limits = as.character(mean_comp$gen)
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.1))
+  ) +
+  labs(caption = my_caption) +
+  theme_classic() +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot", 
+        axis.text.x = element_text(size = 9))
+```

@@ -21,8 +21,8 @@ pacman::p_load(
   tidyverse)
 
 # handle function conflicts
-conflict_prefer("filter", "dplyr") 
-conflict_prefer("select", "dplyr")
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
 ```
 
 # Data
@@ -233,7 +233,7 @@ Besides an ANOVA, one may also want to compare adjusted yield means between cult
 ```{r}
 mean_comp <- mod %>% 
   emmeans(specs = ~ N|G) %>% # adj. mean per cultivar
-  cld(Letters = letters) # compact letter display (CLD)
+  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
 
 mean_comp
 ```
