@@ -32,6 +32,8 @@ website:
             href: ch/exan/simple/augm_petersen1994.qmd
           - text: 1w alpha (John & Williams 1995)
             href: ch/exan/simple/alpha_johnwilliams1995.qmd
+          - text: 1w rowcol (Kempton & Fox 1997)
+            href: ch/exan/simple/rowcol_kemptonfox1997.qmd
           - text: 2w RCBD (Gomez & Gomez 1984)
             href: ch/exan/simple/rcbd_gomezgomez1984.qmd
           - text: 2w split-plot (Gomez & Gomez 1984)

@@ -166,7 +166,7 @@ ANOVA <- anova(mod)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "cultivar")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically significant (`r getp(ANOVA, "cultivar")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
 
 # Mean comparison
 

@@ -133,7 +133,7 @@ ANOVA <- anova(mod)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the variety effects to be statistically different (`r getp(ANOVA, "variety")`).
+Accordingly, the ANOVA's F-test found the variety effects to be statistically significant (`r getp(ANOVA, "variety")`).
 
 # Mean comparison
 

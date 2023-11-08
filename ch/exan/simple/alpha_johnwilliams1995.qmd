@@ -41,7 +41,7 @@ dat <- as_tibble(agridat::john.alpha)
 dat
 ```
 
-## Exploring
+## Explore
 
 We make use of [`dlookr::describe()`](../../misc/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
 
@@ -192,7 +192,7 @@ ANOVA <- anova(mod.rb, ddf = "Kenward-Roger")
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "gen")`).
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically significant (`r getp(ANOVA, "gen")`).
 
 # Mean comparison
 

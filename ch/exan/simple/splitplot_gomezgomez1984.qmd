@@ -226,7 +226,7 @@ ANOVA <- anova(mod)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically different (`r getp(ANOVA, "G:N")`).
+Accordingly, the ANOVA's F-test found the nitrogen-genotype-interaction to be statistically significant (`r getp(ANOVA, "G:N")`).
 
 # Mean comparison
 

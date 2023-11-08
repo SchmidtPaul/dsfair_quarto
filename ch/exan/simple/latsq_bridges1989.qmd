@@ -207,7 +207,7 @@ ANOVA <- anova(mod)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the genotype effects to be statistically different (`r getp(ANOVA, "gen")`).
+Accordingly, the ANOVA's F-test found the genotype effects to be statistically significant (`r getp(ANOVA, "gen")`).
 
 # Mean comparison
 

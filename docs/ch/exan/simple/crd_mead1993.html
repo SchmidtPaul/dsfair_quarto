@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-11-07">
+<meta name="dcterms.date" content="2023-11-08">
 <title>dsfair_quarto - One-way completely randomized design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -182,6 +182,10 @@ div.csl-indent {
  <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../../ch/exan/simple/rowcol_kemptonfox1997.html" rel="" target="">
+ <span class="dropdown-text">1w rowcol (Kempton &amp; Fox 1997)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
  <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
   </li>  
@@ -309,7 +313,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 7, 2023</p>
+      <p class="date">November 8, 2023</p>
     </div>
   </div>
   
@@ -473,7 +477,7 @@ Residuals 20  367.65   18.38
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Accordingly, the ANOVA’s F-test found the variety effects to be statistically different (p &lt; .001***).</p>
+<p>Accordingly, the ANOVA’s F-test found the variety effects to be statistically significant (p &lt; .001***).</p>
 </section><section id="mean-comparison" class="level1"><h1>Mean comparison</h1>
 <p>Besides an ANOVA, one may also want to compare adjusted yield means between varieties via post hoc tests (t-test, Tukey test etc.).</p>
 <div class="cell">
@@ -561,7 +565,7 @@ Mead, Roger, Robert N. Curnow, and Anne M. Hasted. 2002. <em>Statistical Methods
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {Paul Schmidt},
   title = {One-Way Completely Randomized Design},
-  date = {2023-11-07},
+  date = {2023-11-08},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/crd_mead1993.html},
   langid = {en},
   abstract = {One-way ANOVA \&amp; pairwise comparison post hoc tests in a
@@ -569,7 +573,7 @@ Mead, Roger, Robert N. Curnow, and Anne M. Hasted. 2002. <em>Statistical Methods
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 Paul Schmidt. 2023. <span>“One-Way Completely Randomized Design.”</span>
-November 7, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/crd_mead1993.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/crd_mead1993.html</a>.
+November 8, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/crd_mead1993.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/crd_mead1993.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -989,7 +993,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a>ANOVA</span>
 <span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test found the variety effects to be statistically different (<span class="in">`r getp(ANOVA, "variety")`</span>).</span>
+<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test found the variety effects to be statistically significant (<span class="in">`r getp(ANOVA, "variety")`</span>).</span>
 <span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mean comparison</span></span>
 <span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a></span>

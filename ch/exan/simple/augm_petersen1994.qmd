@@ -118,7 +118,7 @@ ggplot(data = dat) +
   theme_bw() +
   theme(
     legend.position = "top",
-    axis.text.x = element_text(size = 9)
+    axis.text.x = element_text(size = 7)
   )
 ```
 
@@ -199,7 +199,7 @@ ANOVA <- anova(mod.fb)
 ANOVA
 ```
 
-Accordingly, the ANOVA's F-test found the cultivar effects to be statistically different (`r getp(ANOVA, "gen")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
+Accordingly, the ANOVA's F-test found the cultivar effects to be statistically significant (`r getp(ANOVA, "gen")`). Additionally, the block effects are also statistically significant (`r getp(ANOVA, "block")`), but this is only of secondary concern for us.
 
 # Mean comparison
 
@@ -271,5 +271,5 @@ ggplot() +
   theme_classic() +
   theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
         plot.caption.position = "plot", 
-        axis.text.x = element_text(size = 9))
+        axis.text.x = element_text(size = 7))
 ```

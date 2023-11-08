@@ -1,0 +1,257 @@
+---
+title: "One-way row column design"
+abstract: "One-way ANOVA & pairwise comparison post hoc tests in a resolvable row column design."
+---
+
+```{r}
+#| include: false
+source(here::here("src/helpersrc.R"))
+```
+
+```{r}
+# (install &) load packages
+pacman::p_load(
+  conflicted,
+  desplot,
+  emmeans,
+  ggtext,
+  lme4,
+  lmerTest,
+  multcomp,
+  multcompView,
+  tidyverse)
+
+# handle function conflicts
+conflicts_prefer(dplyr::filter) 
+conflicts_prefer(dplyr::select)
+conflicts_prefer(lmerTest::lmer)
+```
+
+# Data
+
+This example is taken from Chapter *"3.10 Analysis of a resolvable row-column design"* of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @kemptonfox_1996 from a yield trial laid out as a resolvable row-column design. The trial had 35 genotypes (`gen`), 2 complete replicates (`rep`) with 5 rows (`row`) and 7 columns (`col`). Thus, a complete replicate is subdivided into incomplete rows and columns.
+
+## Import
+
+The data is available as part of the {agridat} package:
+
+```{r}
+dat <- as_tibble(agridat::kempton.rowcol)
+dat
+```
+
+## Format
+
+For our analysis, `gen`, `row` and `col` should be encoded as factors. However, the `desplot()` function needs `row` and `col` as formatted as integers. Therefore we create copies of these columns encoded as factors and named `rowF` and `colF`:
+
+```{r}
+dat <- dat %>%
+  mutate(
+    colF = as.factor(col),
+    rowF = as.factor(row)
+  )
+```
+
+## Explore
+
+We make use of [`dlookr::describe()`](../../misc/usefulthings.qmd#dlookr) to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.
+
+```{r}
+dat %>% 
+  group_by(gen) %>% 
+  dlookr::describe(yield) %>% 
+  select(2:sd) %>%
+  arrange(desc(mean))
+```
+
+Additionally, we can decide to plot our data.
+
+```{r}
+#| code-fold: true
+# sort genotypes by mean yield
+gen_order <- dat %>% 
+  group_by(gen) %>% 
+  summarise(mean = mean(yield, na.rm = TRUE)) %>% 
+  arrange(mean) %>% 
+  pull(gen) %>% 
+  as.character()
+
+ggplot(data = dat) +
+  aes(
+    y = yield,
+    x = gen,
+    shape = rep
+  ) +
+  geom_line(
+    aes(group = gen),
+    color = "darkgrey"
+  ) +
+  geom_point() +
+  scale_x_discrete(
+    name = "Genotype",
+    limits = gen_order
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  scale_shape_discrete(
+    name = "Replicate"
+  ) +
+  guides(shape = guide_legend(nrow = 1)) +
+  theme_classic() +
+  theme(
+    legend.position = "top", 
+    axis.text.x = element_text(angle = 90, vjust = 0.5)
+  )
+```
+
+Finally, since this is an experiment that was laid with a certain experimental design (= a resolvable row column design) - it makes sense to also get a field plan. This can be done via `desplot()` from [{desplot}](../../misc/usefulthings.qmd#desplot). In this case it is worth noting that there is missing data, as yield values for two plots are not present in the data.
+
+```{r}
+#| code-fold: true
+desplot(
+  data = dat,
+  form = gen ~ col + row | rep, # fill color per genotype, headers per replicate
+  text = gen, 
+  cex = 0.7, 
+  shorten = "no",
+  out1 = row, out1.gpar=list(col="black"), # lines between rows
+  out2 = col, out2.gpar=list(col="black"), # lines between columns
+  main = "Field layout", 
+  show.key = FALSE
+)     
+```
+
+# Model
+
+Finally, we can decide to fit a linear model with `yield` as the response variable and `gen` as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in rows and columns, we also need `rowF` and `colF` effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better. 
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# blocks as fixed (linear model)
+mod.frc <- lm(yield ~ gen + rowF + colF,
+             data = dat)
+
+mod.frc %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# blocks as random (linear mixed model)
+mod.rrc <- lmer(yield ~ gen + (1 | rowF) + (1 | colF),
+               data = dat)
+
+mod.rrc %>%
+  emmeans(pairwise ~ "gen",
+          adjust = "tukey",
+          lmer.df = "kenward-roger") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean() # get arithmetic mean
+```
+:::
+:::
+
+As a result, we find that the model with random row and column effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.
+
+::: {.callout-warning collapse="true"}
+## Model assumptions met? (click to show)
+
+It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the [summary article "Model Diagnostics"](../../summaryarticles/modeldiagnostics.qmd)
+:::
+
+# ANOVA
+
+Based on our model, we can then conduct an ANOVA:
+
+```{r}
+ANOVA <- anova(mod.rrc)
+ANOVA
+```
+
+Accordingly, the ANOVA's F-test did not find the cultivar effects to be statistically significant (`r getp(ANOVA, "gen")`).
+
+# Mean comparison
+
+Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
+
+```{r}
+mean_comp <- mod.rrc %>% 
+  emmeans(specs = ~ gen) %>% # adj. mean per genotype
+  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+
+mean_comp
+```
+
+It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Thus, this is in agreement with the non-significant ANOVA results.
+
+Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
+
+Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.
+
+```{r}
+#| code-fold: true
+# reorder genotype factor levels according to adjusted mean
+my_caption <- "Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+
+ggplot() +
+  # green/red dots representing the raw data
+  geom_point(
+    data = dat,
+    aes(y = yield, x = gen)
+  ) +
+  # red diamonds representing the adjusted means
+  geom_point(
+    data = mean_comp,
+    aes(y = emmean, x = gen),
+    shape = 18,
+    color = "red",
+    position = position_nudge(x = 0.2)
+  ) +
+  # red error bars representing the confidence limits of the adjusted means
+  geom_errorbar(
+    data = mean_comp,
+    aes(ymin = lower.CL, ymax = upper.CL, x = gen),
+    color = "red",
+    width = 0.1,
+    position = position_nudge(x = 0.2)
+  ) +
+  # red letters 
+  geom_text(
+    data = mean_comp,
+    aes(y = upper.CL, x = gen, label = str_trim(.group)),
+    color = "red",
+    angle = 90,
+    hjust = -0.2,
+    position = position_nudge(x = 0.2)
+  ) + 
+  scale_x_discrete(
+    name = "Cultivar",
+    limits = as.character(mean_comp$gen)
+  ) +
+  scale_y_continuous(
+    name = "Yield",
+    # limits = c(0, NA),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  coord_cartesian(ylim = c(0, NA)) +
+  labs(caption = my_caption) +
+  theme_classic() +
+  theme(plot.caption = element_textbox_simple(margin = margin(t = 5)),
+        plot.caption.position = "plot",
+        axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
