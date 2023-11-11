@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="dcterms.date" content="2023-11-07">
 <title>dsfair_quarto - Model Diagnostics</title>
@@ -89,7 +89,10 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,7 +108,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Data Science for Agriculture in R">
@@ -383,7 +387,10 @@ Yes residuals - not data!
 <span>  <span class="fu">check_normality</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="modeldiagnostics_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="modeldiagnostics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="tests" class="level3"><h3 class="anchored" data-anchor-id="tests">Tests</h3>
@@ -412,7 +419,10 @@ Anderson-Darling          0.3582         0.4299
 <span>  <span class="fu">check_heteroscedasticity</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="modeldiagnostics_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="modeldiagnostics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="tests-1" class="level3"><h3 class="anchored" data-anchor-id="tests-1">Tests</h3>
@@ -480,7 +490,7 @@ Ha: Variances are unequal for atleast two groups
 <section id="data-transformation" class="level2"><h2 class="anchored" data-anchor-id="data-transformation">Data transformation</h2>
 <p>Transforming the response variable (e.g.&nbsp;yield) with a mathematical function (e.g.&nbsp;square root) can actually solve your problem. If the diagnostics of a linear model improve noticeably by replacing <code>yield</code> with <code>sqrt(yield)</code>, you can simply use the latter to conduct an ANOVA and draw conclusions from it. Moreover, you can also compare means via post hoc tests. What follows is an example<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> where this approach does as intended.</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">agridat</span>,</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">agridat</span>,</span>
 <span>               <span class="va">easystats</span>,</span>
 <span>               <span class="va">emmeans</span>,</span>
 <span>               <span class="va">multcomp</span>,</span>
@@ -504,7 +514,10 @@ Ha: Variances are unequal for atleast two groups
 <span>  <span class="fu">check_normality</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="modeldiagnostics_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="modeldiagnostics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -519,7 +532,10 @@ Ha: Variances are unequal for atleast two groups
 <span>  <span class="fu">check_normality</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="modeldiagnostics_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="modeldiagnostics_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="modeldiagnostics_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1171,7 +1187,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","openEffect":"fade","descPosition":"bottom","closeEffect":"fade"});</script>
 
 
 </body></html>

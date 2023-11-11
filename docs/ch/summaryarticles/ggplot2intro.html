@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="dcterms.date" content="2023-08-18">
 <title>dsfair_quarto - How I use ggplot2</title>
@@ -89,7 +89,10 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,7 +108,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Data Science for Agriculture in R">
@@ -385,7 +389,10 @@ div.csl-indent {
 <span>       mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">weight</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="ggplot2intro_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -396,7 +403,10 @@ div.csl-indent {
 <span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">weight</span>, x <span class="op">=</span> <span class="va">group</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="ggplot2intro_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -441,7 +451,10 @@ Additional Resources
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="ggplot2intro_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This approach of saving and reusing plots not only makes our code more readable and manageable, but also allows us to experiment with different layers and modifications without affecting our original plot.</p>
@@ -456,7 +469,10 @@ Additional Resources
 <span>  <span class="fu">scale_y_continuous</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Weight (g)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">scale_x_discrete</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Treatment Group"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="ggplot2intro_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="limits" class="level2"><h2 class="anchored" data-anchor-id="limits">Limits</h2>
@@ -474,7 +490,10 @@ Additional Resources
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ctrl"</span>, <span class="st">"trt2"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="ggplot2intro_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -491,7 +510,10 @@ Additional Resources
 <span>    limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trt1"</span>, <span class="st">"ctrl"</span>, <span class="st">"trt2"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="ggplot2intro_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -535,7 +557,10 @@ Additional Resources
 <span>    name <span class="op">=</span> <span class="st">"Treatment Group"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="ggplot2intro_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -552,7 +577,10 @@ Additional Resources
 <span>    name <span class="op">=</span> <span class="st">"Treatment Group"</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="ggplot2intro_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -594,7 +622,10 @@ Tip
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment 1"</span>, <span class="st">"Treatment 2"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="ggplot2intro_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -616,7 +647,10 @@ Tip
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="ggplot2intro_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -666,7 +700,10 @@ Tip
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="ggplot2intro_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -689,7 +726,10 @@ Tip
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="ggplot2intro_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -738,7 +778,10 @@ Tip
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>plot.background <span class="op">=</span> <span class="fu">element_rect</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="ggplot2intro_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -748,7 +791,10 @@ Tip
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>axis.line <span class="op">=</span> <span class="fu">element_line</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span>, linewidth <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="ggplot2intro_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -762,7 +808,10 @@ Tip
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="ggplot2intro_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -772,7 +821,10 @@ Tip
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="ggplot2intro_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -890,7 +942,10 @@ Tip
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">myplot</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_point</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"orange"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-24-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="ggplot2intro_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -905,7 +960,10 @@ Tip
 <span>    alpha <span class="op">=</span> <span class="fl">0.5</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ggplot2intro_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="ggplot2intro_files/figure-html/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="ggplot2intro_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1822,7 +1880,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"fade","openEffect":"fade","loop":true,"descPosition":"bottom","selector":".lightbox"});</script>
 
 
 </body></html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="dcterms.date" content="2023-06-17">
 <title>dsfair_quarto - Compact Letter Display (CLD)</title>
@@ -89,7 +89,10 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,7 +108,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Data Science for Agriculture in R">
@@ -336,7 +340,10 @@ div.csl-indent {
 <div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1260"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1260"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:30%;">
@@ -483,7 +490,7 @@ Note
 <section id="plot-1-suggested" class="level3"><h3 class="anchored" data-anchor-id="plot-1-suggested">plot 1: suggested</h3>
 <p>I’ve been using and suggesting to use this type of plot for a while now. I know it contains a lot of information and may seem unfamiliar and overwhelming at first glance. However, I argue that if you take the time to understand what you are looking at, this plot is nice as it shows the raw data (black dots), descriptive statistics (black boxes), estimated means (red dots) and a measure of their precision (red error bars) as well as the compact letter display (red letters).</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># ggplot &amp; helper functions</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span>    <span class="co"># more helper functions</span></span>
 <span></span>
@@ -558,13 +565,16 @@ Note
 <span>    caption <span class="op">=</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent (estimated marginal) means ± 95% confidence interval per group. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="plot-2-well-known" class="level3"><h3 class="anchored" data-anchor-id="plot-2-well-known">plot 2: well-known</h3>
 <p>Traditionally, bar plots with error bars are used a lot in this context. In my experience, there is at least one poster with one of them in every university building I. While they are not wrong <em>per se</em>, there is a decade-long discussion about why such “dynamite plots” are not optimal (see e.g.&nbsp;<a href="https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-and-how-to-create-them-with-ggplot2/">this nice blogpost</a>).</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/">ggtext</a></span><span class="op">)</span>    <span class="co"># automatic line breaks in caption</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># ggplot &amp; helper functions</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span>    <span class="co"># more helper functions</span></span>
 <span></span>
@@ -620,7 +630,10 @@ Note
 <span>    caption <span class="op">=</span> <span class="st">"Bars with errorbars represent (estimated marginal) means ± standard error. Means not sharing any letter are significantly different by the Tukey-test at the 5% level of significance."</span></span>
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="alternative-plots" class="level3"><h3 class="anchored" data-anchor-id="alternative-plots">alternative plots</h3>
@@ -628,27 +641,33 @@ Note
 <section id="alt-1-pairwise-p-value-plot-emmeans" class="level4"><h4 class="anchored" data-anchor-id="alt-1-pairwise-p-value-plot-emmeans">alt 1: Pairwise P-value plot {emmeans}</h4>
 <p>This is the Pairwise P-value plot suggested in the former NOTE we received above as an alternative. The documentation reads: <em>Factor levels (or combinations thereof) are plotted on the vertical scale, and P values are plotted on the horizontal scale. Each P value is plotted twice – at vertical positions corresponding to the levels being compared – and connected by a line segment. Thus, it is easy to visualize which P values are small and large, and which levels are compared.</em></p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/pwpp.html">pwpp</a></span><span class="op">(</span><span class="va">model_means</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/pwpp.html">pwpp</a></span><span class="op">(</span><span class="va">model_means</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="alt-2-lighthouse-plot-easystats" class="level4"><h4 class="anchored" data-anchor-id="alt-2-lighthouse-plot-easystats">alt 2: Lighthouse plot {easystats}</h4>
 <p>Within the framework of the <a href="https://easystats.github.io/easystats/">easystats</a> packages, the <em>lighthouse plots</em> came up as a more recent idea. See <a href="https://github.com/easystats/see/issues/12">this issue</a> and <a href="https://easystats.github.io/see/articles/modelbased.html#pairwise-contrasts">this</a> and <a href="https://easystats.github.io/modelbased/articles/estimate_contrasts.html#complex-model">this</a> part of the documentation for more details.</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/">modelbased</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/see/">see</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span>, adjust <span class="op">=</span> <span class="st">"tukey"</span><span class="op">)</span>,</span>
 <span>     <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_means.html">estimate_means</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="alt-3-the-ggbetweenstats-plot" class="level4"><h4 class="anchored" data-anchor-id="alt-3-the-ggbetweenstats-plot">alt 3: The {ggbetweenstats} plot</h4>
 <p>Finally, the <a href="https://indrajeetpatil.github.io/ggstatsplot/">ggstatsplot</a> package’s function <a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggbetweenstats.html"><code>ggbetweenstats()</code></a> aims to create graphics with details from statistical tests included in the information-rich plots themselves and would compare our groups like this:</p>
 <div class="cell">
-<details><summary>Click to show/hide code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">PMCMRplus</span><span class="op">)</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">PMCMRplus</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstantools/">rstantools</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://indrajeetpatil.github.io/ggstatsplot/">ggstatsplot</a></span><span class="op">)</span></span>
 <span><span class="co"># "since the confidence intervals for the effect sizes are computed using</span></span>
@@ -663,7 +682,10 @@ Note
 <span>  p.adjust.method <span class="op">=</span> <span class="st">"none"</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="compactletterdisplay_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1650"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="compactletterdisplay_files/figure-html/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="compactletterdisplay_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="1650"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section></section><section id="see-the-comparisons" class="level2"><h2 class="anchored" data-anchor-id="see-the-comparisons">see the comparisons</h2>
@@ -1528,7 +1550,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"fade","descPosition":"bottom","openEffect":"fade"});</script>
 
 
 </body></html>

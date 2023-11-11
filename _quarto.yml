@@ -98,6 +98,13 @@ format:
     colorlinks: true
     number-sections: true
     toc: true
+
+# remove this once lightbox no longer needs an extension    
+filters:
+  - lightbox
+lightbox:
+  match: auto
+  effect: fade
     
 author:
   - name:
