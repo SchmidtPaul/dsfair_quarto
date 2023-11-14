@@ -123,6 +123,38 @@ However, there are also functions like `mean()` which return the mean of all num
 mean(mynumbers)
 ```
 
+c Comparison Operators
+
+In R, comparison operators are used to compare values and variables, much like you might in mathematics or in spreadsheet formulas. They are fundamental in making decisions and controlling the flow of your code. Here are the most commonly used comparison operators:
+
+Equal to (`==`): Checks if the values on either side are equal.
+Not equal to (`!=`): Determines if two values are different.
+Less than (`<`): Verifies if the value on the left is smaller than the one on the right.
+Greater than (`>`): Checks if the value on the left is larger than the one on the right.
+Less than or equal to (`<=`): True if the left value is less than or equal to the right value.
+Greater than or equal to (`>=`): True if the left value is greater than or equal to the right value.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+5 == 5
+3 < 4
+5 <= 5 
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+5 != 5
+2 > 6
+5 >= 4
+```
+:::
+:::
+
 # function arguments
 
 So far, the functions we used had in common that they required only one input. The really good stuff in R happens with more complex functions which need multiple inputs. Let us use `seq()` as an example, which seems simple enough, because it generates a sequence of numbers:

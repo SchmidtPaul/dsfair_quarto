@@ -55,6 +55,8 @@ website:
         menu:
           - text: Useful things
             href: ch/misc/usefulthings.qmd
+          - text: Exercises
+            href: ch/misc/exercises.qmd
           - text: Other Resources
             href: ch/misc/furtherresources.qmd
           - text: Workshop prep
@@ -63,7 +65,7 @@ website:
       - text: Contact
         href: https://schmidtpaul.github.io/
       - icon: github
-        href: https://github.com/SchmidtPaul
+        href: https://github.com/SchmidtPaul/dsfair_quarto
         aria-label: GitHub
   page-footer: 
     right:
@@ -110,8 +112,8 @@ author:
   - name:
       given: Paul
       family: Schmidt
-      literal: Paul Schmidt
-    orcid: 0000-0003-1528-2082
+      literal: '[Paul Schmidt](https://schmidtpaul.github.io/)'
+    # orcid: 0000-0003-1528-2082
     affiliations:
       - name: "BioMath GmbH"
         city: Hamburg

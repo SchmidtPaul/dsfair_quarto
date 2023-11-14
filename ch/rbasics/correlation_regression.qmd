@@ -199,12 +199,11 @@ which looks like this:
 ggplot(data = dat) +
   aes(x = drinks, y = blood_alc) +
   geom_point(size = 2) +
-  geom_smooth(
-    method = lm,
-    formula = y ~ x,
-    se = FALSE,
-    fullrange = TRUE,
-    color = "#00923f"
+  geom_abline(
+    intercept = reg$coefficients[1],
+    slope = reg$coefficients[2],
+    color = "#00923f", 
+    linewidth = 1
   ) +
   scale_x_continuous(
     name = "Number of drinks",
@@ -280,19 +279,17 @@ and must definitely predict 0 `blood_alc` when having 0 `drinks`. As a final res
 ggplot(data = dat) + 
   aes(x = drinks, y = blood_alc) +
   geom_point(size = 2) +
-  geom_smooth(
-    method = lm,
-    formula = y ~ x,
-    se = FALSE,
-    fullrange = TRUE,
-    color = "#00923f"
+  geom_abline(
+    intercept = reg$coefficients[1],
+    slope = reg$coefficients[2],
+    color = "#00923f", 
+    linewidth = 1
   ) +
-    geom_smooth(
-    method = lm,
-    formula = y ~ 0 + x,
-    se = FALSE,
-    fullrange = TRUE,
-    color = "#e4572e"
+  geom_abline(
+    intercept = reg_noint$coefficients[1],
+    slope = reg_noint$coefficients[2],
+    color = "#e4572e", 
+    linewidth = 1
   ) +
   scale_x_continuous(
     name = "Number of drinks",
