@@ -104,8 +104,20 @@ desplot(
   form = variety ~ col + row, # fill color per variety
   text = variety, # variety names per plot
   cex = 1, # variety names: font size
-  shorten = "no", # variety names: don't abbreviate
   main = "Field layout", # plot title
+  show.key = FALSE # hide legend 
+  )     
+```
+
+```{r}
+#| code-fold: true
+desplot(
+  data = dat, 
+  flip = TRUE, # row 1 on top, not on bottom
+  form = yield ~ col + row, # fill color per variety
+  text = variety, # variety names per plot
+  cex = 1, # variety names: font size
+  main = "Yield per plot", # plot title
   show.key = FALSE # hide legend 
   )     
 ```

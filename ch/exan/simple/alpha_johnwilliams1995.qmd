@@ -312,7 +312,7 @@ avg_sed_mod_RCBD <- lm(yield ~ gen + rep, data = dat) %>%
 avg_sed_mod_RCBD^2
 ```
 
-Finally, the efficiency of this resolvable is then
+Finally, the efficiency of this resolvable design is then
 
 ```{r}
 avg_sed_mod_RCBD^2 / avg_sed_mod_rb^2

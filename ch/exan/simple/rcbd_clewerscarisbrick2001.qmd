@@ -114,7 +114,7 @@ desplot(
   text = cultivar, # cultivar names per plot
   cex = 1, # cultviar names: font size
   shorten = FALSE, # cultivar names: don't abbreviate
-  main = "Field layout", # plot title
+  main = "Field layout: cultivars", # plot title
   show.key = FALSE # hide legend
   ) 
 ```
