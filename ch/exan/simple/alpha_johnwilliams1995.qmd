@@ -30,7 +30,7 @@ conflicts_prefer(lmerTest::lmer)
 
 # Data
 
-This example is taken from Chapter *"3.8 Analysis of an* $\alpha$-design" of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @johnwilliams_1995 from a yield (t/ha) trial laid out as an alpha design. The trial had 24 genotypes (`gen`), 3 complete replicates (`rep`) and 6 incomplete blocks (`block`) within each replicate. The block size was 4.
+This example is taken from Chapter "3.8 Analysis of an $\alpha$-design" of the course material "Mixed models for metric data (3402-451)" by [Prof. Dr. Hans-Peter Piepho](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257). It considers data published in @johnwilliams_1995 from a yield (t/ha) trial laid out as an alpha design. The trial had 24 genotypes (`gen`), 3 complete replicates (`rep`) and 6 incomplete blocks (`block`) within each replicate. The block size was 4.
 
 ## Import
 
@@ -139,17 +139,19 @@ Finally, we can decide to fit a linear model with `yield` as the response variab
 ::: {.column width="49%"}
 ```{r}
 # blocks as fixed (linear model)
-mod.fb <- lm(yield ~ gen + rep +
+mod_fb <- lm(yield ~ gen + rep +
                rep:block,
              data = dat)
 
-mod.fb %>%
+avg_sed_mod_fb <- mod_fb %>%
   emmeans(pairwise ~ "gen",
-          adjust = "tukey") %>%
+          adjust = "none") %>%
   pluck("contrasts") %>% # extract diffs
   as_tibble() %>% # format to table
   pull("SE") %>% # extract s.e.d. column
   mean() # get arithmetic mean
+
+avg_sed_mod_fb
 ```
 :::
 
@@ -159,18 +161,20 @@ mod.fb %>%
 ::: {.column width="49%"}
 ```{r}
 # blocks as random (linear mixed model)
-mod.rb <- lmer(yield ~ gen + rep +
+mod_rb <- lmer(yield ~ gen + rep +
                  (1 | rep:block),
                data = dat)
 
-mod.rb %>%
+avg_sed_mod_rb <- mod_rb %>%
   emmeans(pairwise ~ "gen",
-          adjust = "tukey",
+          adjust = "none",
           lmer.df = "kenward-roger") %>%
   pluck("contrasts") %>% # extract diffs
   as_tibble() %>% # format to table
   pull("SE") %>% # extract s.e.d. column
   mean() # get arithmetic mean
+
+avg_sed_mod_rb
 ```
 :::
 :::
@@ -188,7 +192,7 @@ It would be at this moment (i.e. after fitting the model and before running the 
 Based on our model, we can then conduct an ANOVA:
 
 ```{r}
-ANOVA <- anova(mod.rb, ddf = "Kenward-Roger")
+ANOVA <- anova(mod_rb, ddf = "Kenward-Roger")
 ANOVA
 ```
 
@@ -199,9 +203,9 @@ Accordingly, the ANOVA's F-test found the cultivar effects to be statistically s
 Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
 
 ```{r}
-mean_comp <- mod.rb %>% 
+mean_comp <- mod_rb %>% 
   emmeans(specs = ~ gen) %>% # adj. mean per genotype
-  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+  cld(adjust = "none", Letters = letters) # compact letter display (CLD)
 
 mean_comp
 ```
@@ -213,7 +217,7 @@ Finally, we can create a plot that displays both the raw data and the results, *
 ```{r}
 #| code-fold: true
 # reorder genotype factor levels according to adjusted mean
-my_caption <- "Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+my_caption <- "Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."
 
 ggplot() +
   # green/red dots representing the raw data
@@ -261,3 +265,57 @@ ggplot() +
         plot.caption.position = "plot",
         axis.text.x = element_text(angle = 90, vjust = 0.5))
 ```
+
+# Bonus
+
+Here are some other things you would maybe want to look at for the analysis of this dataset.
+
+## Variance components
+
+To extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# Residual Variance
+summary(mod_fb)$sigma^2
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# Both Variance Components
+as_tibble(VarCorr(mod_rb))
+```
+:::
+:::
+
+## Efficiency
+
+The *efficiency of a resolvable design* can be calculated as its mean s.e.d. compared to the (mean[^1]) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get `avg_sed_mod_rb^2` which is `r round(avg_sed_mod_rb^2, 5)`. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:
+
+[^1]: In this scenario, all s.e.d. of the RCBD model would be identical so we don't really need to get the average, but could instead argue that there is only one constant s.e.d.
+
+```{r}
+avg_sed_mod_RCBD <- lm(yield ~ gen + rep, data = dat) %>% 
+  emmeans(pairwise ~ "gen",
+          adjust = "none",
+          lmer.df = "kenward-roger") %>%
+  pluck("contrasts") %>% # extract diffs
+  as_tibble() %>% # format to table
+  pull("SE") %>% # extract s.e.d. column
+  mean()
+
+avg_sed_mod_RCBD^2
+```
+
+Finally, the efficiency of this resolvable is then
+
+```{r}
+avg_sed_mod_RCBD^2 / avg_sed_mod_rb^2
+```
+
+meaning that the resolvable design is indeed more efficient since the efficiency is > 1.

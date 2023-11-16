@@ -1,6 +1,6 @@
 ---
 title: "The tidyverse"
-abstract: "Pipe (%>%), Tibbles, dplyr-verbs, long/wide format and more from the tidyverse."
+abstract: "Pipe (%>%), Tibbles, dplyr-verbs, long/wide format and more."
 ---
 
 ```{r}

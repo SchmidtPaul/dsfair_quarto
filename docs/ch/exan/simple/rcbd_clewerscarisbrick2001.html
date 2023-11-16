@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-11-08">
+<meta name="dcterms.date" content="2023-11-16">
 <title>dsfair_quarto - One-way randomized complete block design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -321,7 +321,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2023</p>
+      <p class="date">November 16, 2023</p>
     </div>
   </div>
   
@@ -541,20 +541,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_comp</span> <span class="op">&lt;-</span> <span class="va">mod</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span>specs <span class="op">=</span> <span class="op">~</span> <span class="va">cultivar</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
-<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"Tukey"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
+<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"none"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
 <span></span>
 <span><span class="va">mean_comp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre class="custom-output"><code> cultivar emmean    SE df lower.CL upper.CL .group
- C1          6.5 0.365  6     5.22     7.78  a    
- C3          6.6 0.365  6     5.32     7.88  ab   
- C2          7.6 0.365  6     6.32     8.88  ab   
- C4          8.3 0.365  6     7.02     9.58   b   
+ C1          6.5 0.365  6     5.61     7.39  a    
+ C3          6.6 0.365  6     5.71     7.49  a    
+ C2          7.6 0.365  6     6.71     8.49  ab   
+ C4          8.3 0.365  6     7.41     9.19   b   
 
 Results are averaged over the levels of: block 
 Confidence level used: 0.95 
-Conf-level adjustment: sidak method for 4 estimates 
-P value adjustment: tukey method for comparing a family of 4 estimates 
 significance level used: alpha = 0.05 
 NOTE: If two or more means share the same grouping symbol,
       then we cannot show them to be different.
@@ -564,7 +562,7 @@ NOTE: If two or more means share the same grouping symbol,
 <p>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <code>details = TRUE</code> to the <code>cld()</code> statement. Furthermore, check out the <a href="../../../ch/summaryarticles/compactletterdisplay.html">Summary Article “Compact Letter Display”</a>.</p>
 <p>Finally, we can create a plot that displays both the raw data and the results, <em>i.e.</em> the comparisons of the adjusted means that are based on the linear model.</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."</span></span>
 <span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">cultivar</span><span class="op">)</span> <span class="op">+</span></span>
@@ -630,7 +628,7 @@ Clewer, Alan G, and David H Scarisbrick. 2001. <em>Practical Statistics and Expe
 </div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},
   title = {One-Way Randomized Complete Block Design},
-  date = {2023-11-08},
+  date = {2023-11-16},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rcbd_clewerscarisbrick2001.html},
   langid = {en},
   abstract = {One-way ANOVA \&amp; pairwise comparison post hoc tests in a
@@ -638,7 +636,7 @@ Clewer, Alan G, and David H Scarisbrick. 2001. <em>Practical Statistics and Expe
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 [Paul Schmidt](https://schmidtpaul.github.io/). 2023. <span>“One-Way
-Randomized Complete Block Design.”</span> November 8, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rcbd_clewerscarisbrick2001.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rcbd_clewerscarisbrick2001.html</a>.
+Randomized Complete Block Design.”</span> November 16, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rcbd_clewerscarisbrick2001.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rcbd_clewerscarisbrick2001.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1100,7 +1098,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-201"><a href="#cb19-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb19-202"><a href="#cb19-202" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod <span class="sc">%&gt;%</span> </span>
 <span id="cb19-203"><a href="#cb19-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> cultivar) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per cultivar</span></span>
-<span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"Tukey"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
+<span id="cb19-204"><a href="#cb19-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"none"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
 <span id="cb19-205"><a href="#cb19-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-206"><a href="#cb19-206" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
 <span id="cb19-207"><a href="#cb19-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1112,7 +1110,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-215"><a href="#cb19-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb19-216"><a href="#cb19-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
 <span id="cb19-217"><a href="#cb19-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-218"><a href="#cb19-218" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<span id="cb19-218"><a href="#cb19-218" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."</span></span>
 <span id="cb19-219"><a href="#cb19-219" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-220"><a href="#cb19-220" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb19-221"><a href="#cb19-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cultivar) <span class="sc">+</span></span>
@@ -1178,7 +1176,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"fade","openEffect":"fade","selector":".lightbox","descPosition":"bottom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"fade","closeEffect":"fade","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
 
 
 </body></html>

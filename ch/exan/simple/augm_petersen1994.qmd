@@ -148,10 +148,10 @@ Finally, we can decide to fit a linear model with `yield` as the response variab
 ::: {.column width="49%"}
 ```{r}
 # blocks as fixed (linear model)
-mod.fb <- lm(yield ~ gen + block,
+mod_fb <- lm(yield ~ gen + block,
              data = dat)
 
-mod.fb %>%
+mod_fb %>%
   emmeans(pairwise ~ "gen",
           adjust = "tukey") %>%
   pluck("contrasts") %>% # extract diffs
@@ -167,10 +167,10 @@ mod.fb %>%
 ::: {.column width="49%"}
 ```{r}
 # blocks as random (linear mixed model)
-mod.rb <- lmer(yield ~ gen + (1 | block),
+mod_rb <- lmer(yield ~ gen + (1 | block),
                data = dat)
 
-mod.rb %>%
+mod_rb %>%
   emmeans(pairwise ~ "gen",
           adjust = "tukey",
           lmer.df = "kenward-roger") %>%
@@ -195,7 +195,7 @@ It would be at this moment (i.e. after fitting the model and before running the 
 Based on our model, we can then conduct an ANOVA:
 
 ```{r}
-ANOVA <- anova(mod.fb)
+ANOVA <- anova(mod_fb)
 ANOVA
 ```
 
@@ -206,7 +206,7 @@ Accordingly, the ANOVA's F-test found the cultivar effects to be statistically s
 Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).
 
 ```{r}
-mean_comp <- mod.fb %>% 
+mean_comp <- mod_fb %>% 
   emmeans(specs = ~ gen) %>% # adj. mean per genotype
   cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
 
@@ -273,3 +273,30 @@ ggplot() +
         plot.caption.position = "plot", 
         axis.text.x = element_text(size = 7))
 ```
+
+# Bonus
+
+Here are some other things you would maybe want to look at for the analysis of this dataset.
+
+## Variance components
+
+To extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+# Residual Variance
+summary(mod_fb)$sigma^2
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+# Both Variance Components
+as_tibble(VarCorr(mod_rb))
+```
+:::
+:::

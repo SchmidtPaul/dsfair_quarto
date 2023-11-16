@@ -175,7 +175,7 @@ Besides an ANOVA, one may also want to compare adjusted yield means between cult
 ```{r}
 mean_comp <- mod %>% 
   emmeans(specs = ~ cultivar) %>% # adj. mean per cultivar
-  cld(adjust = "Tukey", Letters = letters) # compact letter display (CLD)
+  cld(adjust = "none", Letters = letters) # compact letter display (CLD)
 
 mean_comp
 ```
@@ -187,7 +187,7 @@ Finally, we can create a plot that displays both the raw data and the results, *
 ```{r}
 #| code-fold: true
 
-my_caption <- "Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."
+my_caption <- "Black dots represent raw data. Red dots and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."
 
 ggplot() +
   aes(x = cultivar) +

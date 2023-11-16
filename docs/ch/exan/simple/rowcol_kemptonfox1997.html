@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-11-08">
+<meta name="dcterms.date" content="2023-11-16">
 <title>dsfair_quarto - One-way row column design</title>
 <style>
 code{white-space: pre-wrap;}
@@ -286,6 +286,13 @@ div.csl-indent {
   <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
   <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a></li>
   <li><a href="#mean-comparison" id="toc-mean-comparison" class="nav-link" data-scroll-target="#mean-comparison">Mean comparison</a></li>
+  <li>
+<a href="#bonus" id="toc-bonus" class="nav-link" data-scroll-target="#bonus">Bonus</a>
+  <ul class="collapse">
+<li><a href="#variance-components" id="toc-variance-components" class="nav-link" data-scroll-target="#variance-components">Variance components</a></li>
+  <li><a href="#efficiency" id="toc-efficiency" class="nav-link" data-scroll-target="#efficiency">Efficiency</a></li>
+  </ul>
+</li>
   </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="rowcol_kemptonfox1997.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -321,7 +328,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last updated</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 8, 2023</p>
+      <p class="date">November 16, 2023</p>
     </div>
   </div>
   
@@ -483,18 +490,20 @@ div.csl-indent {
 <div class="column" style="width:49%;">
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># blocks as fixed (linear model)</span></span>
-<span><span class="va">mod.frc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">gen</span> <span class="op">+</span> <span class="va">rowF</span> <span class="op">+</span> <span class="va">colF</span>,</span>
+<span><span class="va">mod_frc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">gen</span> <span class="op">+</span> <span class="va">rep</span> <span class="op">+</span> <span class="va">rowF</span> <span class="op">+</span> <span class="va">colF</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mod.frc</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">avg_sed_mod_frc</span> <span class="op">&lt;-</span> <span class="va">mod_frc</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span><span class="va">pairwise</span> <span class="op">~</span> <span class="st">"gen"</span>,</span>
-<span>          adjust <span class="op">=</span> <span class="st">"tukey"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>          adjust <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">pluck</span><span class="op">(</span><span class="st">"contrasts"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract diffs</span></span>
 <span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># format to table</span></span>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="st">"SE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get arithmetic mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get arithmetic mean</span></span>
+<span></span>
+<span><span class="va">avg_sed_mod_frc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>[1] 1.329788</code></pre>
+<pre class="custom-output"><code>[1] 0.4828268</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:2%;">
@@ -502,24 +511,26 @@ div.csl-indent {
 </div><div class="column" style="width:49%;">
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># blocks as random (linear mixed model)</span></span>
-<span><span class="va">mod.rrc</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">gen</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">rowF</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">colF</span><span class="op">)</span>,</span>
-<span>               data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">mod_rrc</span> <span class="op">&lt;-</span> <span class="fu">lmer</span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">gen</span> <span class="op">+</span> <span class="va">rep</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">rowF</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">colF</span><span class="op">)</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mod.rrc</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">avg_sed_mod_rrc</span> <span class="op">&lt;-</span> <span class="va">mod_rrc</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span><span class="va">pairwise</span> <span class="op">~</span> <span class="st">"gen"</span>,</span>
-<span>          adjust <span class="op">=</span> <span class="st">"tukey"</span>,</span>
+<span>          adjust <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>          lmer.df <span class="op">=</span> <span class="st">"kenward-roger"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">pluck</span><span class="op">(</span><span class="st">"contrasts"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract diffs</span></span>
 <span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># format to table</span></span>
 <span>  <span class="fu">pull</span><span class="op">(</span><span class="st">"SE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get arithmetic mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># get arithmetic mean</span></span>
+<span></span>
+<span><span class="va">avg_sed_mod_rrc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>[1] 1.18948</code></pre>
+<pre class="custom-output"><code>[1] 0.4834463</code></pre>
 </div>
 </div>
 </div>
 </div>
-<p>As a result, we find that the model with random row and column effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.</p>
+<p>As a result, we find that the model with fixed row and column effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -539,77 +550,83 @@ Model assumptions met? (click to show)
 </section><section id="anova" class="level1"><h1>ANOVA</h1>
 <p>Based on our model, we can then conduct an ANOVA:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ANOVA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod.rrc</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ANOVA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_frc</span><span class="op">)</span></span>
 <span><span class="va">ANOVA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code>Type III Analysis of Variance Table with Satterthwaite's method
-    Sum Sq Mean Sq NumDF DenDF F value Pr(&gt;F)
-gen 32.157 0.94578    34    33  0.8969 0.6233</code></pre>
+<pre class="custom-output"><code>Analysis of Variance Table
+
+Response: yield
+          Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+gen       34 32.157  0.9458   5.6767 3.505e-05 ***
+rep        1 24.901 24.9014 149.4615 2.778e-11 ***
+rowF       4  1.436  0.3591   2.1553  0.107861    
+colF       6  4.794  0.7990   4.7956  0.002873 ** 
+Residuals 22  3.665  0.1666                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Accordingly, the ANOVA’s F-test did not find the cultivar effects to be statistically significant (p = 0.623).</p>
+<p>Accordingly, the ANOVA’s F-test did not find the cultivar effects to be statistically significant (p &lt; .001***).</p>
 </section><section id="mean-comparison" class="level1"><h1>Mean comparison</h1>
 <p>Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_comp</span> <span class="op">&lt;-</span> <span class="va">mod.rrc</span> <span class="op">%&gt;%</span> </span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mean_comp</span> <span class="op">&lt;-</span> <span class="va">mod_frc</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">emmeans</span><span class="op">(</span>specs <span class="op">=</span> <span class="op">~</span> <span class="va">gen</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># adj. mean per genotype</span></span>
-<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"Tukey"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
+<span>  <span class="fu">cld</span><span class="op">(</span>adjust <span class="op">=</span> <span class="st">"none"</span>, Letters <span class="op">=</span> <span class="va">letters</span><span class="op">)</span> <span class="co"># compact letter display (CLD)</span></span>
 <span></span>
 <span><span class="va">mean_comp</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre class="custom-output"><code> gen emmean    SE   df lower.CL upper.CL .group
- G15   1.93 1.151 32.5   -2.072     5.93  a    
- G23   3.27 0.804 32.5    0.470     6.06  a    
- G22   3.54 0.794 32.5    0.784     6.31  a    
- G26   3.58 0.842 24.6    0.561     6.59  a    
- G04   3.62 0.796 32.5    0.857     6.39  a    
- G30   3.75 0.851 23.9    0.692     6.81  a    
- G35   3.75 0.800 32.5    0.975     6.54  a    
- G29   3.77 0.800 32.5    0.985     6.55  a    
- G24   3.85 0.853 23.9    0.779     6.91  a    
- G02   3.88 0.847 24.6    0.852     6.92  a    
- G28   3.95 0.811 32.5    1.132     6.77  a    
- G31   3.98 0.802 32.5    1.192     6.77  a    
- G10   4.07 0.804 32.5    1.275     6.87  a    
- G16   4.20 1.163 32.5    0.155     8.24  a    
- G17   4.22 0.794 32.5    1.459     6.98  a    
- G08   4.36 0.796 32.5    1.587     7.12  a    
- G13   4.36 0.804 32.5    1.560     7.15  a    
- G34   4.51 0.859 23.9    1.422     7.60  a    
- G12   4.58 0.802 32.5    1.797     7.37  a    
- G18   4.60 0.804 32.5    1.805     7.40  a    
- G32   4.62 0.847 24.6    1.582     7.65  a    
- G01   4.68 0.858 24.6    1.611     7.76  a    
- G05   4.71 0.798 32.5    1.939     7.49  a    
- G20   4.75 0.872 24.6    1.629     7.87  a    
- G21   4.76 0.858 24.6    1.686     7.83  a    
- G25   4.78 0.796 32.5    2.007     7.54  a    
- G03   4.78 0.804 32.5    1.985     7.58  a    
- G27   4.89 0.800 32.5    2.110     7.67  a    
- G14   4.92 0.804 32.5    2.125     7.72  a    
- G11   4.93 0.847 24.6    1.897     7.96  a    
- G09   4.94 0.849 23.9    1.889     7.99  a    
- G06   4.96 0.796 32.5    2.197     7.73  a    
- G33   5.13 0.796 32.5    2.362     7.90  a    
- G07   5.74 0.802 32.5    2.952     8.53  a    
- G19   6.07 0.796 32.5    3.302     8.84  a    
+<pre class="custom-output"><code> gen emmean    SE df lower.CL upper.CL .group       
+ G15   3.29 0.475 22     2.31     4.28  ab          
+ G04   3.35 0.326 22     2.67     4.03  a           
+ G23   3.54 0.323 22     2.87     4.21  ab          
+ G29   3.57 0.323 22     2.90     4.25  ab          
+ G16   3.59 0.470 22     2.61     4.56  abcde       
+ G26   3.63 0.350 22     2.90     4.35  abc         
+ G02   3.71 0.347 22     2.99     4.43  abcd        
+ G22   3.79 0.327 22     3.12     4.47  abcde       
+ G24   3.82 0.351 22     3.09     4.54  abcdef      
+ G31   3.82 0.322 22     3.15     4.49  abcdef      
+ G35   3.94 0.324 22     3.27     4.61  abcdefg     
+ G17   4.07 0.326 22     3.39     4.75  abcdefgh    
+ G28   4.12 0.320 22     3.45     4.78  abcdefgh    
+ G32   4.15 0.347 22     3.43     4.87  abcdefgh    
+ G30   4.18 0.352 22     3.45     4.91  abcdefgh    
+ G09   4.24 0.352 22     3.51     4.98  abcdefghi   
+ G25   4.28 0.326 22     3.60     4.95   bcdefghi   
+ G34   4.30 0.349 22     3.58     5.03   bcdefghij  
+ G20   4.32 0.337 22     3.62     5.02   bcdefghij  
+ G10   4.56 0.323 22     3.90     5.23    cdefghij  
+ G05   4.60 0.325 22     3.93     5.28     defghijk 
+ G14   4.61 0.322 22     3.94     5.28    cdefghij  
+ G13   4.66 0.322 22     3.99     5.32    cdefghij  
+ G11   4.69 0.347 22     3.98     5.41     defghijk 
+ G08   4.70 0.326 22     4.03     5.38      efghij  
+ G21   4.75 0.344 22     4.04     5.47     defghijk 
+ G27   4.80 0.323 22     4.13     5.48       fghijkl
+ G18   4.84 0.322 22     4.18     5.51        ghijkl
+ G33   4.88 0.325 22     4.21     5.56        ghijkl
+ G01   4.88 0.343 22     4.17     5.60        ghijkl
+ G12   4.98 0.322 22     4.31     5.65         hijkl
+ G03   5.20 0.321 22     4.53     5.86          ijkl
+ G07   5.21 0.323 22     4.54     5.88           jkl
+ G06   5.59 0.326 22     4.92     6.27            kl
+ G19   5.73 0.326 22     5.06     6.41             l
 
-Degrees-of-freedom method: kenward-roger 
+Results are averaged over the levels of: rep, rowF, colF 
 Confidence level used: 0.95 
-Conf-level adjustment: sidak method for 35 estimates 
-P value adjustment: tukey method for comparing a family of 35 estimates 
 significance level used: alpha = 0.05 
 NOTE: If two or more means share the same grouping symbol,
       then we cannot show them to be different.
       But we also did not show them to be the same. </code></pre>
 </div>
 </div>
-<p>It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Thus, this is in agreement with the non-significant ANOVA results.</p>
+<p>It can be seen that the compact letter display is kind of reaching its limit as the way differences are found to be statistically significant here is quite complex.</p>
 <p>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <code>details = TRUE</code> to the <code>cld()</code> statement. Furthermore, check out the <a href="../../../ch/summaryarticles/compactletterdisplay.html">Summary Article “Compact Letter Display”</a>.</p>
 <p>Finally, we can create a plot that displays both the raw data and the results, <em>i.e.</em> the comparisons of the adjusted means that are based on the linear model.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># reorder genotype factor levels according to adjusted mean</span></span>
-<span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
+<span><span class="va">my_caption</span> <span class="op">&lt;-</span> <span class="st">"Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."</span></span>
 <span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># green/red dots representing the raw data</span></span>
@@ -664,19 +681,77 @@ NOTE: If two or more means share the same grouping symbol,
 </div>
 </div>
 </div>
+</section><section id="bonus" class="level1"><h1>Bonus</h1>
+<p>Here are some other things you would maybe want to look at for the analysis of this dataset.</p>
+<section id="variance-components" class="level2"><h2 class="anchored" data-anchor-id="variance-components">Variance components</h2>
+<p>To extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Residual Variance</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_frc</span><span class="op">)</span><span class="op">$</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>[1] 0.1666074</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Both Variance Components</span></span>
+<span><span class="fu">as_tibble</span><span class="op">(</span><span class="fu">VarCorr</span><span class="op">(</span><span class="va">mod_rrc</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code># A tibble: 3 × 5
+  grp      var1        var2    vcov sdcor
+  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 colF     (Intercept) &lt;NA&gt;  0.144  0.380
+2 rowF     (Intercept) &lt;NA&gt;  0.0293 0.171
+3 Residual &lt;NA&gt;        &lt;NA&gt;  0.167  0.409</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section><section id="efficiency" class="level2"><h2 class="anchored" data-anchor-id="efficiency">Efficiency</h2>
+<p>The <em>efficiency of a resolvable design</em> can be calculated as its mean s.e.d. compared to the (mean<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) s.e.d. of the analogous RCBD, i.e.&nbsp;leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get <code>avg_sed_mod_frc^2</code> which is 0.23312. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_sed_mod_RCBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">gen</span> <span class="op">+</span> <span class="va">rep</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">emmeans</span><span class="op">(</span><span class="va">pairwise</span> <span class="op">~</span> <span class="st">"gen"</span>,</span>
+<span>          adjust <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>          lmer.df <span class="op">=</span> <span class="st">"kenward-roger"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">pluck</span><span class="op">(</span><span class="st">"contrasts"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract diffs</span></span>
+<span>  <span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># format to table</span></span>
+<span>  <span class="fu">pull</span><span class="op">(</span><span class="st">"SE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">avg_sed_mod_RCBD</span><span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>[1] 0.3257469</code></pre>
+</div>
+</div>
+<p>Finally, the efficiency of this resolvable is then</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_sed_mod_RCBD</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="va">avg_sed_mod_frc</span><span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>[1] 1.397325</code></pre>
+</div>
+</div>
+<p>meaning that the resolvable design is more efficient since the efficiency is &gt; 1.</p>
 
 
 <!-- -->
 
 
-</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-kemptonfox_1996" class="csl-entry" role="listitem">
 Kempton, R. A., P. N. Fox, and M. Cerezo. 1996. <em>Statistical Methods for Plant Variety Evaluation</em>. Springer Netherlands. <a href="https://doi.org/10.1007/978-94-009-1503-9">https://doi.org/10.1007/978-94-009-1503-9</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<ol>
+<li id="fn1"><p>In this scenario, all s.e.d. of the RCBD model would be identical so we don’t really need to get the average, but could instead argue that there is only one constant s.e.d.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
   author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},
   title = {One-Way Row Column Design},
-  date = {2023-11-08},
+  date = {2023-11-16},
   url = {https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rowcol_kemptonfox1997.html},
   langid = {en},
   abstract = {One-way ANOVA \&amp; pairwise comparison post hoc tests in a
@@ -684,7 +759,7 @@ Kempton, R. A., P. N. Fox, and M. Cerezo. 1996. <em>Statistical Methods for Plan
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 [Paul Schmidt](https://schmidtpaul.github.io/). 2023. <span>“One-Way Row
-Column Design.”</span> November 8, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rowcol_kemptonfox1997.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rowcol_kemptonfox1997.html</a>.
+Column Design.”</span> November 16, 2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rowcol_kemptonfox1997.html">https://schmidtpaul.github.io/dsfair_quarto//ch/exan/simple/rowcol_kemptonfox1997.html</a>.
 </div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -969,263 +1044,321 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "One-way row column design"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "One-way ANOVA &amp; pairwise comparison post hoc tests in a resolvable row column design."</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src/helpersrc.R"</span>))</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co"># (install &amp;) load packages</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  conflicted,</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  desplot,</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  emmeans,</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  ggtext,</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  lme4,</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  lmerTest,</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  multcomp,</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  multcompView,</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) </span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>select)</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(lmerTest<span class="sc">::</span>lmer)</span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>This example is taken from Chapter *"3.10 Analysis of a resolvable row-column design"* of the course material "Mixed models for metric data (3402-451)" by <span class="co">[</span><span class="ot">Prof. Dr. Hans-Peter Piepho</span><span class="co">](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257)</span>. It considers data published in @kemptonfox_1996 from a yield trial laid out as a resolvable row-column design. The trial had 35 genotypes (<span class="in">`gen`</span>), 2 complete replicates (<span class="in">`rep`</span>) with 5 rows (<span class="in">`row`</span>) and 7 columns (<span class="in">`col`</span>). Thus, a complete replicate is subdivided into incomplete rows and columns.</span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Import</span></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>The data is available as part of the {agridat} package:</span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(agridat<span class="sc">::</span>kempton.rowcol)</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>dat</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Format</span></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>For our analysis, <span class="in">`gen`</span>, <span class="in">`row`</span> and <span class="in">`col`</span> should be encoded as factors. However, the <span class="in">`desplot()`</span> function needs <span class="in">`row`</span> and <span class="in">`col`</span> as formatted as integers. Therefore we create copies of these columns encoded as factors and named <span class="in">`rowF`</span> and <span class="in">`colF`</span>:</span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">colF =</span> <span class="fu">as.factor</span>(col),</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">rowF =</span> <span class="fu">as.factor</span>(row)</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Explore</span></span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>We make use of <span class="co">[</span><span class="ot">`dlookr::describe()`</span><span class="co">](../../misc/usefulthings.qmd#dlookr)</span> to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.</span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gen) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>  dlookr<span class="sc">::</span><span class="fu">describe</span>(yield) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span><span class="sc">:</span>sd) <span class="sc">%&gt;%</span></span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>Additionally, we can decide to plot our data.</span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="co"># sort genotypes by mean yield</span></span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>gen_order <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gen) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(yield, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(gen) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> yield,</span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> gen,</span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> rep</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">group =</span> gen),</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"darkgrey"</span></span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Genotype"</span>,</span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> gen_order</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_discrete</span>(</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Replicate"</span></span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">shape =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>, </span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)</span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>Finally, since this is an experiment that was laid with a certain experimental design (= a resolvable row column design) - it makes sense to also get a field plan. This can be done via <span class="in">`desplot()`</span> from <span class="co">[</span><span class="ot">{desplot}</span><span class="co">](../../misc/usefulthings.qmd#desplot)</span>. In this case it is worth noting that there is missing data, as yield values for two plots are not present in the data.</span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> gen <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per genotype, headers per replicate</span></span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> gen, </span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>, </span>
-<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="st">"no"</span>,</span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> row, <span class="at">out1.gpar=</span><span class="fu">list</span>(<span class="at">col=</span><span class="st">"black"</span>), <span class="co"># lines between rows</span></span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> col, <span class="at">out2.gpar=</span><span class="fu">list</span>(<span class="at">col=</span><span class="st">"black"</span>), <span class="co"># lines between columns</span></span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Field layout"</span>, </span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>)     </span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model</span></span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>Finally, we can decide to fit a linear model with <span class="in">`yield`</span> as the response variable and <span class="in">`gen`</span> as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in rows and columns, we also need <span class="in">`rowF`</span> and <span class="in">`colF`</span> effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better. </span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>::: columns</span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a><span class="co"># blocks as fixed (linear model)</span></span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>mod.frc <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> rowF <span class="sc">+</span> colF,</span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dat)</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>mod.frc <span class="sc">%&gt;%</span></span>
-<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(pairwise <span class="sc">~</span> <span class="st">"gen"</span>,</span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">"tukey"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"contrasts"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract diffs</span></span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># format to table</span></span>
-<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"SE"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="co"># get arithmetic mean</span></span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
-<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="co"># blocks as random (linear mixed model)</span></span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>mod.rrc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rowF) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> colF),</span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> dat)</span>
-<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a>mod.rrc <span class="sc">%&gt;%</span></span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(pairwise <span class="sc">~</span> <span class="st">"gen"</span>,</span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">"tukey"</span>,</span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>          <span class="at">lmer.df =</span> <span class="st">"kenward-roger"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"contrasts"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract diffs</span></span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># format to table</span></span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"SE"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
-<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="co"># get arithmetic mean</span></span>
-<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a>As a result, we find that the model with random row and column effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.</span>
-<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning collapse="true"}</span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions met? (click to show)</span></span>
-<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the <span class="co">[</span><span class="ot">summary article "Model Diagnostics"</span><span class="co">](../../summaryarticles/modeldiagnostics.qmd)</span></span>
-<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANOVA</span></span>
-<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>Based on our model, we can then conduct an ANOVA:</span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod.rrc)</span>
-<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>ANOVA</span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test did not find the cultivar effects to be statistically significant (<span class="in">`r getp(ANOVA, "gen")`</span>).</span>
-<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mean comparison</span></span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).</span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod.rrc <span class="sc">%&gt;%</span> </span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> gen) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per genotype</span></span>
-<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"Tukey"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
-<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
-<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a>It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Thus, this is in agreement with the non-significant ANOVA results.</span>
-<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <span class="in">`details = TRUE`</span> to the <span class="in">`cld()`</span> statement. Furthermore, check out the <span class="co">[</span><span class="ot">Summary Article "Compact Letter Display"</span><span class="co">](../../summaryarticles/compactletterdisplay.qmd)</span>.</span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.</span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder genotype factor levels according to adjusted mean</span></span>
-<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the Tukey-test."</span></span>
-<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>  <span class="co"># green/red dots representing the raw data</span></span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">x =</span> gen)</span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red diamonds representing the adjusted means</span></span>
-<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">x =</span> gen),</span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">18</span>,</span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red error bars representing the confidence limits of the adjusted means</span></span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">x =</span> gen),</span>
-<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.1</span>,</span>
-<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red letters </span></span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> upper.CL, <span class="at">x =</span> gen, <span class="at">label =</span> <span class="fu">str_trim</span>(.group)),</span>
-<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
-<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">90</span>,</span>
-<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
-<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Cultivar"</span>,</span>
-<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">as.character</span>(mean_comp<span class="sc">$</span>gen)</span>
-<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
-<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>    <span class="co"># limits = c(0, NA),</span></span>
-<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
-<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span></span>
-<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my_caption) <span class="sc">+</span></span>
-<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>)),</span>
-<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb26" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "One-way row column design"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "One-way ANOVA &amp; pairwise comparison post hoc tests in a resolvable row column design."</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src/helpersrc.R"</span>))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># (install &amp;) load packages</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  conflicted,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  desplot,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  emmeans,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  ggtext,</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  lme4,</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  lmerTest,</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  multcomp,</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  multcompView,</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  tidyverse)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="co"># handle function conflicts</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>filter) </span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span>select)</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(lmerTest<span class="sc">::</span>lmer)</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>This example is taken from Chapter *"3.10 Analysis of a resolvable row-column design"* of the course material "Mixed models for metric data (3402-451)" by <span class="co">[</span><span class="ot">Prof. Dr. Hans-Peter Piepho</span><span class="co">](https://www.uni-hohenheim.de/organisation?tx_base_lsfcontentadmin%5BlsfPerson%5D=6257)</span>. It considers data published in @kemptonfox_1996 from a yield trial laid out as a resolvable row-column design. The trial had 35 genotypes (<span class="in">`gen`</span>), 2 complete replicates (<span class="in">`rep`</span>) with 5 rows (<span class="in">`row`</span>) and 7 columns (<span class="in">`col`</span>). Thus, a complete replicate is subdivided into incomplete rows and columns.</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Import</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>The data is available as part of the {agridat} package:</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(agridat<span class="sc">::</span>kempton.rowcol)</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>dat</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Format</span></span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>For our analysis, <span class="in">`gen`</span>, <span class="in">`row`</span> and <span class="in">`col`</span> should be encoded as factors. However, the <span class="in">`desplot()`</span> function needs <span class="in">`row`</span> and <span class="in">`col`</span> as formatted as integers. Therefore we create copies of these columns encoded as factors and named <span class="in">`rowF`</span> and <span class="in">`colF`</span>:</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">colF =</span> <span class="fu">as.factor</span>(col),</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">rowF =</span> <span class="fu">as.factor</span>(row)</span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Explore</span></span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a>We make use of <span class="co">[</span><span class="ot">`dlookr::describe()`</span><span class="co">](../../misc/usefulthings.qmd#dlookr)</span> to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span> </span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gen) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>  dlookr<span class="sc">::</span><span class="fu">describe</span>(yield) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span><span class="sc">:</span>sd) <span class="sc">%&gt;%</span></span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean))</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a>Additionally, we can decide to plot our data.</span>
+<span id="cb26-78"><a href="#cb26-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a><span class="co"># sort genotypes by mean yield</span></span>
+<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>gen_order <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gen) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(yield, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-87"><a href="#cb26-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-88"><a href="#cb26-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(gen) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat) <span class="sc">+</span></span>
+<span id="cb26-92"><a href="#cb26-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> yield,</span>
+<span id="cb26-94"><a href="#cb26-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> gen,</span>
+<span id="cb26-95"><a href="#cb26-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> rep</span>
+<span id="cb26-96"><a href="#cb26-96" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-97"><a href="#cb26-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb26-98"><a href="#cb26-98" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">group =</span> gen),</span>
+<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"darkgrey"</span></span>
+<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Genotype"</span>,</span>
+<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> gen_order</span>
+<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
+<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>),</span>
+<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb26-110"><a href="#cb26-110" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-111"><a href="#cb26-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_discrete</span>(</span>
+<span id="cb26-112"><a href="#cb26-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Replicate"</span></span>
+<span id="cb26-113"><a href="#cb26-113" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-114"><a href="#cb26-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">shape =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb26-115"><a href="#cb26-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb26-116"><a href="#cb26-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb26-117"><a href="#cb26-117" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>, </span>
+<span id="cb26-118"><a href="#cb26-118" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb26-119"><a href="#cb26-119" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-120"><a href="#cb26-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-121"><a href="#cb26-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-122"><a href="#cb26-122" aria-hidden="true" tabindex="-1"></a>Finally, since this is an experiment that was laid with a certain experimental design (= a resolvable row column design) - it makes sense to also get a field plan. This can be done via <span class="in">`desplot()`</span> from <span class="co">[</span><span class="ot">{desplot}</span><span class="co">](../../misc/usefulthings.qmd#desplot)</span>. In this case it is worth noting that there is missing data, as yield values for two plots are not present in the data.</span>
+<span id="cb26-123"><a href="#cb26-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-126"><a href="#cb26-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-127"><a href="#cb26-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb26-128"><a href="#cb26-128" aria-hidden="true" tabindex="-1"></a><span class="fu">desplot</span>(</span>
+<span id="cb26-129"><a href="#cb26-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dat,</span>
+<span id="cb26-130"><a href="#cb26-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> gen <span class="sc">~</span> col <span class="sc">+</span> row <span class="sc">|</span> rep, <span class="co"># fill color per genotype, headers per replicate</span></span>
+<span id="cb26-131"><a href="#cb26-131" aria-hidden="true" tabindex="-1"></a>  <span class="at">text =</span> gen, </span>
+<span id="cb26-132"><a href="#cb26-132" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>, </span>
+<span id="cb26-133"><a href="#cb26-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">shorten =</span> <span class="st">"no"</span>,</span>
+<span id="cb26-134"><a href="#cb26-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">out1 =</span> row, <span class="at">out1.gpar=</span><span class="fu">list</span>(<span class="at">col=</span><span class="st">"black"</span>), <span class="co"># lines between rows</span></span>
+<span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">out2 =</span> col, <span class="at">out2.gpar=</span><span class="fu">list</span>(<span class="at">col=</span><span class="st">"black"</span>), <span class="co"># lines between columns</span></span>
+<span id="cb26-136"><a href="#cb26-136" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Field layout"</span>, </span>
+<span id="cb26-137"><a href="#cb26-137" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.key =</span> <span class="cn">FALSE</span></span>
+<span id="cb26-138"><a href="#cb26-138" aria-hidden="true" tabindex="-1"></a>)     </span>
+<span id="cb26-139"><a href="#cb26-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-140"><a href="#cb26-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-141"><a href="#cb26-141" aria-hidden="true" tabindex="-1"></a><span class="fu"># Model</span></span>
+<span id="cb26-142"><a href="#cb26-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-143"><a href="#cb26-143" aria-hidden="true" tabindex="-1"></a>Finally, we can decide to fit a linear model with <span class="in">`yield`</span> as the response variable and <span class="in">`gen`</span> as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in rows and columns, we also need <span class="in">`rowF`</span> and <span class="in">`colF`</span> effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better. </span>
+<span id="cb26-144"><a href="#cb26-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-145"><a href="#cb26-145" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb26-146"><a href="#cb26-146" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb26-149"><a href="#cb26-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-150"><a href="#cb26-150" aria-hidden="true" tabindex="-1"></a><span class="co"># blocks as fixed (linear model)</span></span>
+<span id="cb26-151"><a href="#cb26-151" aria-hidden="true" tabindex="-1"></a>mod_frc <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> rep <span class="sc">+</span> rowF <span class="sc">+</span> colF,</span>
+<span id="cb26-152"><a href="#cb26-152" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> dat)</span>
+<span id="cb26-153"><a href="#cb26-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-154"><a href="#cb26-154" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_frc <span class="ot">&lt;-</span> mod_frc <span class="sc">%&gt;%</span></span>
+<span id="cb26-155"><a href="#cb26-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(pairwise <span class="sc">~</span> <span class="st">"gen"</span>,</span>
+<span id="cb26-156"><a href="#cb26-156" aria-hidden="true" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-157"><a href="#cb26-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"contrasts"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract diffs</span></span>
+<span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># format to table</span></span>
+<span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"SE"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
+<span id="cb26-160"><a href="#cb26-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="co"># get arithmetic mean</span></span>
+<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_frc</span>
+<span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-165"><a href="#cb26-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-166"><a href="#cb26-166" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb26-167"><a href="#cb26-167" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-168"><a href="#cb26-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-169"><a href="#cb26-169" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb26-172"><a href="#cb26-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-173"><a href="#cb26-173" aria-hidden="true" tabindex="-1"></a><span class="co"># blocks as random (linear mixed model)</span></span>
+<span id="cb26-174"><a href="#cb26-174" aria-hidden="true" tabindex="-1"></a>mod_rrc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> rep <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> rowF) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> colF),</span>
+<span id="cb26-175"><a href="#cb26-175" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> dat)</span>
+<span id="cb26-176"><a href="#cb26-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-177"><a href="#cb26-177" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_rrc <span class="ot">&lt;-</span> mod_rrc <span class="sc">%&gt;%</span></span>
+<span id="cb26-178"><a href="#cb26-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(pairwise <span class="sc">~</span> <span class="st">"gen"</span>,</span>
+<span id="cb26-179"><a href="#cb26-179" aria-hidden="true" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">"none"</span>,</span>
+<span id="cb26-180"><a href="#cb26-180" aria-hidden="true" tabindex="-1"></a>          <span class="at">lmer.df =</span> <span class="st">"kenward-roger"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-181"><a href="#cb26-181" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"contrasts"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract diffs</span></span>
+<span id="cb26-182"><a href="#cb26-182" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># format to table</span></span>
+<span id="cb26-183"><a href="#cb26-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"SE"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
+<span id="cb26-184"><a href="#cb26-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="co"># get arithmetic mean</span></span>
+<span id="cb26-185"><a href="#cb26-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-186"><a href="#cb26-186" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_rrc</span>
+<span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a>As a result, we find that the model with fixed row and column effects has the slightly smaller s.e.d. and is therefore more precise in terms of comparing genotypes.</span>
+<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-193"><a href="#cb26-193" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning collapse="true"}</span>
+<span id="cb26-194"><a href="#cb26-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model assumptions met? (click to show)</span></span>
+<span id="cb26-195"><a href="#cb26-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-196"><a href="#cb26-196" aria-hidden="true" tabindex="-1"></a>It would be at this moment (i.e. after fitting the model and before running the ANOVA), that you should check whether the model assumptions are met. Find out more in the <span class="co">[</span><span class="ot">summary article "Model Diagnostics"</span><span class="co">](../../summaryarticles/modeldiagnostics.qmd)</span></span>
+<span id="cb26-197"><a href="#cb26-197" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-198"><a href="#cb26-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-199"><a href="#cb26-199" aria-hidden="true" tabindex="-1"></a><span class="fu"># ANOVA</span></span>
+<span id="cb26-200"><a href="#cb26-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-201"><a href="#cb26-201" aria-hidden="true" tabindex="-1"></a>Based on our model, we can then conduct an ANOVA:</span>
+<span id="cb26-202"><a href="#cb26-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-205"><a href="#cb26-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-206"><a href="#cb26-206" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod_frc)</span>
+<span id="cb26-207"><a href="#cb26-207" aria-hidden="true" tabindex="-1"></a>ANOVA</span>
+<span id="cb26-208"><a href="#cb26-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-209"><a href="#cb26-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-210"><a href="#cb26-210" aria-hidden="true" tabindex="-1"></a>Accordingly, the ANOVA's F-test did not find the cultivar effects to be statistically significant (<span class="in">`r getp(ANOVA, "gen")`</span>).</span>
+<span id="cb26-211"><a href="#cb26-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-212"><a href="#cb26-212" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mean comparison</span></span>
+<span id="cb26-213"><a href="#cb26-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-214"><a href="#cb26-214" aria-hidden="true" tabindex="-1"></a>Besides an ANOVA, one may also want to compare adjusted yield means between cultivars via post hoc tests (t-test, Tukey test etc.).</span>
+<span id="cb26-215"><a href="#cb26-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-218"><a href="#cb26-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-219"><a href="#cb26-219" aria-hidden="true" tabindex="-1"></a>mean_comp <span class="ot">&lt;-</span> mod_frc <span class="sc">%&gt;%</span> </span>
+<span id="cb26-220"><a href="#cb26-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> <span class="sc">~</span> gen) <span class="sc">%&gt;%</span> <span class="co"># adj. mean per genotype</span></span>
+<span id="cb26-221"><a href="#cb26-221" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cld</span>(<span class="at">adjust =</span> <span class="st">"none"</span>, <span class="at">Letters =</span> letters) <span class="co"># compact letter display (CLD)</span></span>
+<span id="cb26-222"><a href="#cb26-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-223"><a href="#cb26-223" aria-hidden="true" tabindex="-1"></a>mean_comp</span>
+<span id="cb26-224"><a href="#cb26-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-225"><a href="#cb26-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-226"><a href="#cb26-226" aria-hidden="true" tabindex="-1"></a>It can be seen that the compact letter display is kind of reaching its limit as the way differences are found to be statistically significant here is quite complex.</span>
+<span id="cb26-227"><a href="#cb26-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-228"><a href="#cb26-228" aria-hidden="true" tabindex="-1"></a>Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add <span class="in">`details = TRUE`</span> to the <span class="in">`cld()`</span> statement. Furthermore, check out the <span class="co">[</span><span class="ot">Summary Article "Compact Letter Display"</span><span class="co">](../../summaryarticles/compactletterdisplay.qmd)</span>.</span>
+<span id="cb26-229"><a href="#cb26-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-230"><a href="#cb26-230" aria-hidden="true" tabindex="-1"></a>Finally, we can create a plot that displays both the raw data and the results, *i.e.* the comparisons of the adjusted means that are based on the linear model.</span>
+<span id="cb26-231"><a href="#cb26-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-235"><a href="#cb26-235" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb26-236"><a href="#cb26-236" aria-hidden="true" tabindex="-1"></a><span class="co"># reorder genotype factor levels according to adjusted mean</span></span>
+<span id="cb26-237"><a href="#cb26-237" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">"Black dots represent raw data. Red diamonds and error bars represent adjusted means with 95% confidence limits per cultivar. Means followed by a common letter are not significantly different according to the t-test."</span></span>
+<span id="cb26-238"><a href="#cb26-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-239"><a href="#cb26-239" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-240"><a href="#cb26-240" aria-hidden="true" tabindex="-1"></a>  <span class="co"># green/red dots representing the raw data</span></span>
+<span id="cb26-241"><a href="#cb26-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb26-242"><a href="#cb26-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat,</span>
+<span id="cb26-243"><a href="#cb26-243" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> yield, <span class="at">x =</span> gen)</span>
+<span id="cb26-244"><a href="#cb26-244" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-245"><a href="#cb26-245" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red diamonds representing the adjusted means</span></span>
+<span id="cb26-246"><a href="#cb26-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb26-247"><a href="#cb26-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb26-248"><a href="#cb26-248" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> emmean, <span class="at">x =</span> gen),</span>
+<span id="cb26-249"><a href="#cb26-249" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">18</span>,</span>
+<span id="cb26-250"><a href="#cb26-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb26-251"><a href="#cb26-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
+<span id="cb26-252"><a href="#cb26-252" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-253"><a href="#cb26-253" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red error bars representing the confidence limits of the adjusted means</span></span>
+<span id="cb26-254"><a href="#cb26-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb26-255"><a href="#cb26-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb26-256"><a href="#cb26-256" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">x =</span> gen),</span>
+<span id="cb26-257"><a href="#cb26-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb26-258"><a href="#cb26-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.1</span>,</span>
+<span id="cb26-259"><a href="#cb26-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
+<span id="cb26-260"><a href="#cb26-260" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-261"><a href="#cb26-261" aria-hidden="true" tabindex="-1"></a>  <span class="co"># red letters </span></span>
+<span id="cb26-262"><a href="#cb26-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb26-263"><a href="#cb26-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> mean_comp,</span>
+<span id="cb26-264"><a href="#cb26-264" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> upper.CL, <span class="at">x =</span> gen, <span class="at">label =</span> <span class="fu">str_trim</span>(.group)),</span>
+<span id="cb26-265"><a href="#cb26-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb26-266"><a href="#cb26-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb26-267"><a href="#cb26-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb26-268"><a href="#cb26-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.2</span>)</span>
+<span id="cb26-269"><a href="#cb26-269" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb26-270"><a href="#cb26-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb26-271"><a href="#cb26-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Cultivar"</span>,</span>
+<span id="cb26-272"><a href="#cb26-272" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">as.character</span>(mean_comp<span class="sc">$</span>gen)</span>
+<span id="cb26-273"><a href="#cb26-273" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-274"><a href="#cb26-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb26-275"><a href="#cb26-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Yield"</span>,</span>
+<span id="cb26-276"><a href="#cb26-276" aria-hidden="true" tabindex="-1"></a>    <span class="co"># limits = c(0, NA),</span></span>
+<span id="cb26-277"><a href="#cb26-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb26-278"><a href="#cb26-278" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-279"><a href="#cb26-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="cn">NA</span>)) <span class="sc">+</span></span>
+<span id="cb26-280"><a href="#cb26-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> my_caption) <span class="sc">+</span></span>
+<span id="cb26-281"><a href="#cb26-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb26-282"><a href="#cb26-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.caption =</span> <span class="fu">element_textbox_simple</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>)),</span>
+<span id="cb26-283"><a href="#cb26-283" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb26-284"><a href="#cb26-284" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb26-285"><a href="#cb26-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-286"><a href="#cb26-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-287"><a href="#cb26-287" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bonus</span></span>
+<span id="cb26-288"><a href="#cb26-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-289"><a href="#cb26-289" aria-hidden="true" tabindex="-1"></a>Here are some other things you would maybe want to look at for the analysis of this dataset.</span>
+<span id="cb26-290"><a href="#cb26-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-291"><a href="#cb26-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## Variance components</span></span>
+<span id="cb26-292"><a href="#cb26-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-293"><a href="#cb26-293" aria-hidden="true" tabindex="-1"></a>To extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.</span>
+<span id="cb26-294"><a href="#cb26-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-295"><a href="#cb26-295" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb26-296"><a href="#cb26-296" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb26-299"><a href="#cb26-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-300"><a href="#cb26-300" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual Variance</span></span>
+<span id="cb26-301"><a href="#cb26-301" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_frc)<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb26-302"><a href="#cb26-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-303"><a href="#cb26-303" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-304"><a href="#cb26-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-305"><a href="#cb26-305" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb26-306"><a href="#cb26-306" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-307"><a href="#cb26-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-308"><a href="#cb26-308" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb26-311"><a href="#cb26-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-312"><a href="#cb26-312" aria-hidden="true" tabindex="-1"></a><span class="co"># Both Variance Components</span></span>
+<span id="cb26-313"><a href="#cb26-313" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(<span class="fu">VarCorr</span>(mod_rrc))</span>
+<span id="cb26-314"><a href="#cb26-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-315"><a href="#cb26-315" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-316"><a href="#cb26-316" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-317"><a href="#cb26-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-318"><a href="#cb26-318" aria-hidden="true" tabindex="-1"></a><span class="fu">## Efficiency</span></span>
+<span id="cb26-319"><a href="#cb26-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-320"><a href="#cb26-320" aria-hidden="true" tabindex="-1"></a>The *efficiency of a resolvable design* can be calculated as its mean s.e.d. compared to the (mean<span class="ot">[^1]</span>) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get <span class="in">`avg_sed_mod_frc^2`</span> which is <span class="in">`r round(avg_sed_mod_frc^2, 5)`</span>. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:</span>
+<span id="cb26-321"><a href="#cb26-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>In this scenario, all s.e.d. of the RCBD model would be identical so we don't really need to get the average, but could instead argue that there is only one constant s.e.d.</span>
+<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-326"><a href="#cb26-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-327"><a href="#cb26-327" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_RCBD <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> gen <span class="sc">+</span> rep, <span class="at">data =</span> dat) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-328"><a href="#cb26-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">emmeans</span>(pairwise <span class="sc">~</span> <span class="st">"gen"</span>,</span>
+<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a>          <span class="at">adjust =</span> <span class="st">"none"</span>,</span>
+<span id="cb26-330"><a href="#cb26-330" aria-hidden="true" tabindex="-1"></a>          <span class="at">lmer.df =</span> <span class="st">"kenward-roger"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-331"><a href="#cb26-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">"contrasts"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract diffs</span></span>
+<span id="cb26-332"><a href="#cb26-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="co"># format to table</span></span>
+<span id="cb26-333"><a href="#cb26-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">"SE"</span>) <span class="sc">%&gt;%</span> <span class="co"># extract s.e.d. column</span></span>
+<span id="cb26-334"><a href="#cb26-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>()</span>
+<span id="cb26-335"><a href="#cb26-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-336"><a href="#cb26-336" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_RCBD<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb26-337"><a href="#cb26-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-338"><a href="#cb26-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-339"><a href="#cb26-339" aria-hidden="true" tabindex="-1"></a>Finally, the efficiency of this resolvable is then</span>
+<span id="cb26-340"><a href="#cb26-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-343"><a href="#cb26-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb26-344"><a href="#cb26-344" aria-hidden="true" tabindex="-1"></a>avg_sed_mod_RCBD<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> avg_sed_mod_frc<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb26-345"><a href="#cb26-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-346"><a href="#cb26-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-347"><a href="#cb26-347" aria-hidden="true" tabindex="-1"></a>meaning that the resolvable design is more efficient since the efficiency is &gt; 1.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -1244,7 +1377,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"fade","loop":true,"descPosition":"bottom","closeEffect":"fade","selector":".lightbox"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"fade","closeEffect":"fade","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
 
 
 </body></html>

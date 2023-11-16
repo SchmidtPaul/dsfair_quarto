@@ -544,7 +544,7 @@ myplot +
   geom_point(
     color = "purple", 
     shape = 18, 
-    size = 3, 
+    size = 5, 
     alpha = 0.5
   )
 ```
@@ -563,4 +563,135 @@ These modifications allow us to customize the appearance of the points to suit o
 
 ## Aesthetic Mapping with aes()
 
+One of the most powerful features of ggplot2, however, is its ability to create **dynamic** visual mappings through the `aes()` function. This function is used within ggplot to map data variables to visual properties of the plot, such as color, size, shape, and more. Of course, you are already aware that we have been using `aes()` to define the x and y axes throughout our tutorial.
+
+At its core, `aes()` stands for aesthetic mapping. It's the tool we use to tell ggplot2 how to use the data to modify the appearance of the geoms. For example, if we want to use different colors to represent different groups within our data, `aes()` is how we make that happen.
+
+Finally note that you can define `aes()` and `data =` in general or per individual `geom_`. Thus, these two codes produce the same graph:
+
+::: columns
+::: {.column width="49%"}
+```{r}
+ggplot(data = PlantGrowth) +
+  aes(y = weight,
+      x = group,
+      color = group) +
+  geom_point()
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+ggplot() +
+  geom_point(
+    data = PlantGrowth,
+    aes(y = weight,
+        x = group,
+        color = group)
+    )
+```
+:::
+:::
+
+As a result, we can once more change color, shape, size, and transparency, but this time dynamically. As an example color and shape are mapped so they depend on the group, while size and transparency depend on the weight:
+
+```{r}
+myplot +
+  geom_point(aes(
+    color = group,
+    shape = group,
+    size = weight,
+    alpha = weight
+  ))
+```
+
+Just like we used `scale_x_*` and `scale_y_*` to control the appearance of `aes(x = ..., y = ...)`, there are also scale functions for each aesthetic allowing us to have complete control over the appearance of our plots:
+
+```{r}
+myplot +
+  geom_point(aes(
+    color = group, 
+    shape = group, 
+    size = weight, 
+    alpha = weight
+  )) +
+  scale_color_manual(
+    values = c("orange", "gold", "#00923f")
+  ) +
+  scale_shape_manual(
+    values = c(15, 18, 19)
+  ) +
+  scale_size_continuous(
+    range = c(1, 10) 
+  ) +
+  scale_alpha_continuous(
+    range = c(0.1, 0.4)
+  )
+```
+
+## More on color
+
+I believe color is such an essential aesthetic element in data visualization that it warrants a more detailed exploration.
+
+You don't actually have to manually choose colors for `scale_color_manual()` from long lists of possible colors like [this one](http://sape.inf.usi.ch/sites/default/files/ggplot2-colour-names.png). Instead, you can utilize functions from various packages that generate the necessary number of colors from predefined palettes via packages like [{RColorBrewer}](https://earlglynn.github.io/RNotes/package/RColorBrewer/index.html) or [{METBrewer}](https://github.com/BlakeRMills/MetBrewer#all-palettes).
+
+::: columns
+::: {.column width="49%"}
+```{r}
+color_vector <- RColorBrewer::brewer.pal(3, "Dark2")
+
+myplot +
+  geom_point(aes(color = group), size = 5) +
+  scale_color_manual(values = color_vector)
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+color_vector <- MetBrewer::met.brewer("VanGogh2", 3)
+
+myplot +
+  geom_point(aes(color = group), size = 5) +
+  scale_color_manual(values = color_vector)
+```
+:::
+:::
+
+But in some cases, you don't even have to first generate a vector and then pass it to `scale_color_manual()`. Instead, you can directly use the respective `scale_color_*` function, which automatically selects and applies colors from a palette.
+
+::: columns
+::: {.column width="49%"}
+```{r}
+myplot +
+  geom_point(aes(color = group), size = 5) +
+  scale_color_brewer(palette = "Pastel1")
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+myplot +
+  geom_point(aes(color = group), size = 5) +
+  scale_color_viridis_d()
+```
+:::
+:::
+
+Note that there are actually color palettes that are **color-blind friendly** like [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html#comparison), which was used above via `scale_color_viridis_d()`.
+
+Finally, you sometimes must not or don't need to choose the colors at all, because there is a corporate design you can stick to. Maybe you even just try to match other colors appearing in the document/journal that the graphic will end up in. As an example, this is a screenshot of the [Corporate Design of the German Federal Environment Agency](https://www.umweltbundesamt.de/dokument/corporate-design-des-umweltbundesamtes) 
+
+![](/img/uba_corporate_design.PNG)
+
 # End
+
+TODO
