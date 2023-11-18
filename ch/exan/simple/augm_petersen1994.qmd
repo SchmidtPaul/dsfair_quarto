@@ -11,6 +11,7 @@ source(here::here("src/helpersrc.R"))
 ```{r}
 # (install &) load packages
 pacman::p_load(
+  car,
   conflicted,
   desplot,
   emmeans,
@@ -142,7 +143,7 @@ desplot(
 
 # Model
 
-Finally, we can decide to fit a linear model with `yield` as the response variable and `gen` as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in blocks, we also need `block` effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better. 
+Finally, we can decide to fit a linear model with `yield` as the response variable and `gen` as fixed effects, since our goal is to compare them to each other. Since the trial was laid out in blocks, we also need `block` effects in the model, but these can be taken either as a fixed or as random effects. Since our goal is to compare genotypes, we will determine which of the two models we prefer by comparing the average standard error of a difference (s.e.d.) for the comparisons between adjusted genotype means - the lower the s.e.d. the better.
 
 ::: columns
 ::: {.column width="49%"}
@@ -195,7 +196,7 @@ It would be at this moment (i.e. after fitting the model and before running the 
 Based on our model, we can then conduct an ANOVA:
 
 ```{r}
-ANOVA <- anova(mod_fb)
+ANOVA <- car::Anova(mod_fb, type = "III")
 ANOVA
 ```
 
@@ -213,7 +214,7 @@ mean_comp <- mod_fb %>%
 mean_comp
 ```
 
-It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Accordingly, notice that *e.g.* for `gen 11`, which is the genotype with the highest adjusted yield mean (=3055), its lower confidence limit (=1587) includes `gen 12`, which is the genotype with the lowest adjusted yield mean (=1632). 
+It can be seen that while some genotypes have a higher yield than others, no differences are found to be statistically significant here. Accordingly, notice that *e.g.* for `gen 11`, which is the genotype with the highest adjusted yield mean (=3055), its lower confidence limit (=1587) includes `gen 12`, which is the genotype with the lowest adjusted yield mean (=1632).
 
 Note that if you would like to see the underlying individual contrasts/differences between adjusted means, simply add `details = TRUE` to the `cld()` statement. Furthermore, check out the [Summary Article "Compact Letter Display"](../../summaryarticles/compactletterdisplay.qmd).
 

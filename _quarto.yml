@@ -51,6 +51,8 @@ website:
             href: ch/summaryarticles/modeldiagnostics.qmd
           - text: Why SE equal
             href: ch/summaryarticles/whyseequal.qmd
+          - text: ANOVA Types
+            href: ch/summaryarticles/anovatypes.qmd
       - text: Misc
         menu:
           - text: Useful things

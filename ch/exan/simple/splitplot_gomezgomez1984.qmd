@@ -30,7 +30,7 @@ conflicts_prefer(lmerTest::lmer)
 
 # Data
 
-This dataset was originally published in @gomez_1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a randomized complete block design (RCBD).
+This dataset was originally published in @gomez_1984 from a yield (kg/ha) trial with 4 genotypes (`G`) and 6 nitrogen levels (`N`), leading to 24 treatment level combinations. The data set here has 3 complete replicates (`rep`) and is laid out as a split-plot design.
 
 ## Import
 

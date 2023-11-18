@@ -228,6 +228,37 @@ row_column(
 :::
 :::
 
+## Split-plot
+
+Split-plot designs are used in scenarios where two factors are involved, with one being easier or more cost-effective to randomize than the other. 
+
+::: columns
+::: {.column width="49%"}
+```{r}
+split_plot(
+  wp = paste0("A", 1:3),
+  sp = paste0("B", 1:4),
+  reps = 3,
+  seed = 42
+) %>% plot()
+```
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+```{r}
+split_plot(
+  wp = paste0("A", 1:2),
+  sp = paste0("B", 1:5),
+  reps = 2,
+  seed = 42
+) %>% plot()
+```
+:::
+:::
+
 # Sample Size
 
 TODO

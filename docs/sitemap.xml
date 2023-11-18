@@ -2,94 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/index.html</loc>
-    <lastmod>2023-11-16T19:00:44.055Z</lastmod>
+    <lastmod>2023-11-18T22:54:21.011Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/whyseequal.html</loc>
-    <lastmod>2023-11-16T18:58:35.633Z</lastmod>
+    <lastmod>2023-11-18T22:53:23.511Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/ggplot2intro.html</loc>
-    <lastmod>2023-11-16T18:57:48.398Z</lastmod>
+    <lastmod>2023-11-18T22:52:45.467Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/compactletterdisplay.html</loc>
-    <lastmod>2023-11-16T18:56:43.153Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/firststeps.html</loc>
-    <lastmod>2023-11-16T18:55:36.208Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/baddata.html</loc>
-    <lastmod>2023-11-16T18:54:56.891Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/usefulthings.html</loc>
-    <lastmod>2023-11-16T18:54:25.194Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/exercises.html</loc>
-    <lastmod>2023-11-16T18:53:55.114Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rowcol_kemptonfox1997.html</loc>
-    <lastmod>2023-11-16T18:53:14.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rcbd_clewerscarisbrick2001.html</loc>
-    <lastmod>2023-11-16T18:52:33.666Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/crd_mead1993.html</loc>
-    <lastmod>2023-11-16T18:51:51.820Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/alpha_johnwilliams1995.html</loc>
-    <lastmod>2023-11-16T18:51:11.922Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/augm_petersen1994.html</loc>
-    <lastmod>2023-11-16T18:51:32.443Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/latsq_bridges1989.html</loc>
-    <lastmod>2023-11-16T18:52:11.875Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rcbd_gomezgomez1984.html</loc>
-    <lastmod>2023-11-16T18:52:53.621Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/splitplot_gomezgomez1984.html</loc>
-    <lastmod>2023-11-16T18:53:35.335Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/furtherresources.html</loc>
-    <lastmod>2023-11-16T18:54:02.576Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/workshopprep.html</loc>
-    <lastmod>2023-11-16T18:54:37.580Z</lastmod>
-  </url>
-  <url>
-    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/correlation_regression.html</loc>
-    <lastmod>2023-11-16T18:55:16.233Z</lastmod>
+    <lastmod>2023-11-18T22:51:57.094Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/tidyverse.html</loc>
-    <lastmod>2023-11-16T18:56:05.735Z</lastmod>
+    <lastmod>2023-11-18T22:51:09.350Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/correlation_regression.html</loc>
+    <lastmod>2023-11-18T22:50:19.500Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/workshopprep.html</loc>
+    <lastmod>2023-11-18T22:49:40.022Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/furtherresources.html</loc>
+    <lastmod>2023-11-18T22:49:04.386Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/splitplot_gomezgomez1984.html</loc>
+    <lastmod>2023-11-18T22:48:35.273Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rcbd_gomezgomez1984.html</loc>
+    <lastmod>2023-11-18T22:47:44.074Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/latsq_bridges1989.html</loc>
+    <lastmod>2023-11-18T22:47:04.739Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/augm_petersen1994.html</loc>
+    <lastmod>2023-11-18T22:46:25.285Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/alpha_johnwilliams1995.html</loc>
+    <lastmod>2023-11-18T22:45:37.933Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/crd_mead1993.html</loc>
+    <lastmod>2023-11-18T22:46:44.778Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rcbd_clewerscarisbrick2001.html</loc>
+    <lastmod>2023-11-18T22:47:24.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/exan/simple/rowcol_kemptonfox1997.html</loc>
+    <lastmod>2023-11-18T22:48:05.534Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/exercises.html</loc>
+    <lastmod>2023-11-18T22:48:56.949Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/misc/usefulthings.html</loc>
+    <lastmod>2023-11-18T22:49:27.417Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/baddata.html</loc>
+    <lastmod>2023-11-18T22:49:59.578Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/rbasics/firststeps.html</loc>
+    <lastmod>2023-11-18T22:50:39.790Z</lastmod>
+  </url>
+  <url>
+    <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/anovatypes.html</loc>
+    <lastmod>2023-11-18T22:54:38.938Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/designingexperiments.html</loc>
-    <lastmod>2023-11-16T19:03:30.281Z</lastmod>
+    <lastmod>2023-11-18T22:55:37.164Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/modeldiagnostics.html</loc>
-    <lastmod>2023-11-16T18:58:11.255Z</lastmod>
+    <lastmod>2023-11-18T22:53:04.208Z</lastmod>
   </url>
   <url>
     <loc>https://schmidtpaul.github.io/dsfair_quarto/footer.html</loc>
-    <lastmod>2023-11-16T18:58:44.309Z</lastmod>
+    <lastmod>2023-11-18T22:53:30.484Z</lastmod>
   </url>
 </urlset>

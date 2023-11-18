@@ -182,475 +182,6 @@
     "text": "Footnotes\n\nAlternatively pairs() %&gt;% confint() also works as discussed here.↩︎\nThis does not directly relate to the compact letter display, but I’ve kept it in this chapter anyway.↩︎"
   },
   {
-    "objectID": "ch/rbasics/firststeps.html",
-    "href": "ch/rbasics/firststeps.html",
-    "title": "First steps in R",
-    "section": "",
-    "text": "This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.\nFurthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. “The way I use it” mostly refers to me using the {tidyverse}, which “is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures” and has become quite popular over the last years. Here is a direct comparison of how to do things in R with base R and via the tidyverse."
-  },
-  {
-    "objectID": "ch/rbasics/firststeps.html#base-r",
-    "href": "ch/rbasics/firststeps.html#base-r",
-    "title": "First steps in R",
-    "section": "base R",
-    "text": "base R\nAfter installing R there are many functions etc. you can use right away - which is what we did above. For example, when running ?mean, the help page will tell you that this function is part of the {base} package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the “Packages” tab in RStudio - you will find the base package and it will have a checked box next to it."
-  },
-  {
-    "objectID": "ch/rbasics/firststeps.html#loading-packages",
-    "href": "ch/rbasics/firststeps.html#loading-packages",
-    "title": "First steps in R",
-    "section": "loading packages",
-    "text": "loading packages\nWhen looking at the “Packages” tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is library(package_name). This command must be run once every time you open a new R session."
-  },
-  {
-    "objectID": "ch/rbasics/firststeps.html#installing-additional-packages",
-    "href": "ch/rbasics/firststeps.html#installing-additional-packages",
-    "title": "First steps in R",
-    "section": "installing additional packages",
-    "text": "installing additional packages\nR really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - e.g. the package ggplot2, which is not built-in, has been downloaded 75 million times. In order to install a package, the default command is install.packages(package_name). Alternatively, you can also click on the “Install” button in the top left of the “Packages” tab and type in the package_name there.\n\n\n\n\n\n\nNote\n\n\n\nA package only needs to be installed once, but\nA package must be loaded every time you open a new R session!\n\n\nHere is a curated list of R packages and tools for different areas."
-  },
-  {
-    "objectID": "ch/rbasics/firststeps.html#footnotes",
-    "href": "ch/rbasics/firststeps.html#footnotes",
-    "title": "First steps in R",
-    "section": "Footnotes",
-    "text": "Footnotes\n\nAs long as you are dealing with numbers and calculations. Spaces do matter when we are talking about strings (i.e. text).↩︎"
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html",
-    "href": "ch/rbasics/baddata.html",
-    "title": "Bad data & Outliers",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  here,\n  janitor,\n  naniar,\n  readxl,\n  tidyverse\n)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nThere are two download links:"
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#import",
-    "href": "ch/rbasics/baddata.html#import",
-    "title": "Bad data & Outliers",
-    "section": "Import",
-    "text": "Import\nAssuming you are working in a R-project, save the formatted file somewhere within the project directory. I have saved it within a sub folder called data so that the relative path to my file is data/vision_fixed.xls.\n\npath &lt;- here(\"data\", \"vision_fixed.xls\")\ndat &lt;- read_excel(path)\n\ndat\n\n# A tibble: 29 × 9\n   Person   Ages Gender `Civil state` Height Profession Vision Distance PercDist\n   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n 1 Andrés     25 M      S                180 Student        10      1.5     15  \n 2 Anja       29 F      S                168 Professio…     10      4.5     45  \n 3 Armando    31 M      S                169 Professio…      9      4.5     50  \n 4 Carlos     25 M      M                185 Professio…      8      6       75  \n 5 Cristi…    23 F      &lt;NA&gt;             170 Student        10      3       30  \n 6 Delfa      39 F      M                158 Professio…      6      4.5     75  \n 7 Eduardo    28 M      S                166 Professio…      8      4.5     56.2\n 8 Enrique    NA &lt;NA&gt;   &lt;NA&gt;              NA Professio…     NA      6       NA  \n 9 Fanny      25 F      M                164 Student         9      3       33.3\n10 Franci…    46 M      M                168 Professio…      8      4.5     56.2\n# ℹ 19 more rows\n\n\nThis is optional, but we could argue that our column names are not in a desirable format. To deal with this, we can use the clean_names() functions of {janitor}. This package has several more handy functions for cleaning data that are worth checking out.\n\ndat &lt;- dat %&gt;% clean_names()\ndat\n\n# A tibble: 29 × 9\n   person    ages gender civil_state height profession vision distance perc_dist\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1 Andrés      25 M      S              180 Student        10      1.5      15  \n 2 Anja        29 F      S              168 Professio…     10      4.5      45  \n 3 Armando     31 M      S              169 Professio…      9      4.5      50  \n 4 Carlos      25 M      M              185 Professio…      8      6        75  \n 5 Cristina    23 F      &lt;NA&gt;           170 Student        10      3        30  \n 6 Delfa       39 F      M              158 Professio…      6      4.5      75  \n 7 Eduardo     28 M      S              166 Professio…      8      4.5      56.2\n 8 Enrique     NA &lt;NA&gt;   &lt;NA&gt;            NA Professio…     NA      6        NA  \n 9 Fanny       25 F      M              164 Student         9      3        33.3\n10 Francis…    46 M      M              168 Professio…      8      4.5      56.2\n# ℹ 19 more rows"
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#goal",
-    "href": "ch/rbasics/baddata.html#goal",
-    "title": "Bad data & Outliers",
-    "section": "Goal",
-    "text": "Goal\nVery much like in the previous chapter, our goal is to look at the relationship of two numeric variables: ages and vision. What is new about this data is, that it (i) has missing values and (ii) has a potential outlier."
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#exploring",
-    "href": "ch/rbasics/baddata.html#exploring",
-    "title": "Bad data & Outliers",
-    "section": "Exploring",
-    "text": "Exploring\nTo quickly get a first feeling for this dataset, we can use summary() and draw a plot via plot() or ggplot().\n\nsummary(dat)\n\n    person               ages          gender          civil_state       \n Length:29          Min.   :22.00   Length:29          Length:29         \n Class :character   1st Qu.:25.00   Class :character   Class :character  \n Mode  :character   Median :26.00   Mode  :character   Mode  :character  \n                    Mean   :30.61                                        \n                    3rd Qu.:29.50                                        \n                    Max.   :55.00                                        \n                    NA's   :1                                            \n     height       profession            vision          distance    \n Min.   :145.0   Length:29          Min.   : 3.000   Min.   :1.500  \n 1st Qu.:164.8   Class :character   1st Qu.: 7.000   1st Qu.:1.500  \n Median :168.0   Mode  :character   Median : 9.000   Median :3.000  \n Mean   :168.2                      Mean   : 8.357   Mean   :3.466  \n 3rd Qu.:172.8                      3rd Qu.:10.000   3rd Qu.:4.500  \n Max.   :190.0                      Max.   :10.000   Max.   :6.000  \n NA's   :1                          NA's   :1                       \n   perc_dist     \n Min.   : 15.00  \n 1st Qu.: 20.24  \n Median : 40.18  \n Mean   : 45.45  \n 3rd Qu.: 57.19  \n Max.   :150.00  \n NA's   :1       \n\n\n\n\n\nCodeplot(y = dat$vision, x = dat$ages)\n\n\n\n\n\n\n\n\n\n\n\nCodeggplot(data = dat) +\n  aes(x = ages, y = vision) +\n  geom_point(size = 2) +\n  scale_x_continuous(\n    name = \"Person's age\",\n    limits = c(20, 60),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_y_continuous(\n    name = \"Person's vision\",\n    limits = c(0, NA),\n    breaks = seq(0, 10, 2),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n    theme_bw()\n\n\n\n\n\n\n\n\n\nApparently, most people are in their 20s and can see quite well, however some people are older and they tend to have a vision that’s a little worse."
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#step-1-investigate",
-    "href": "ch/rbasics/baddata.html#step-1-investigate",
-    "title": "Bad data & Outliers",
-    "section": "Step 1: Investigate",
-    "text": "Step 1: Investigate\nIn such a scenario, the first thing you should do is find out more about this suspicious data point. In our case, we would start by finding out the person’s name. One way of doing this is by simply filtering the data:\n\ndat %&gt;% \n  filter(vision == 3)\n\n# A tibble: 1 × 9\n  person   ages gender civil_state height profession   vision distance perc_dist\n  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Rolando    26 M      M              180 Professional      3      4.5       150\n\n\nWe find that it was 26 year old Rolando who supposedly had a vision score of only 3."
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#step-2-act",
-    "href": "ch/rbasics/baddata.html#step-2-act",
-    "title": "Bad data & Outliers",
-    "section": "Step 2: Act",
-    "text": "Step 2: Act\nSince we pretend it is you who collected the data, you should now\n\nthink back if you can actually remember Rolando and if he had poor vision and/or\nfind other documents such as your handwritten sheets to verify this number and make sure you did not make any typos transferring the data to your computer.\n\nThis may reaffirm or correct the suspicious data point and thus end the discussion on whether it is an outlier that should be removed from the data. However, you may also decide to delete this value. Yet, it must be realized, that deleting one or multiple values from a dataset almost always affects the results from subsequent statistical analyses - especially if the values stick out from the rest."
-  },
-  {
-    "objectID": "ch/rbasics/baddata.html#r²---coeff.-of-det.",
-    "href": "ch/rbasics/baddata.html#r²---coeff.-of-det.",
-    "title": "Bad data & Outliers",
-    "section": "R² - Coeff. of det.",
-    "text": "R² - Coeff. of det.\nNevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando’s data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination \\(R^2\\), which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via glance(), which is another function from {broom}:\n\n\n\nglance(reg)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     0.247         0.218  1.54      8.54 0.00709     1  -50.9  108.  112.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\nglance(reg_noRo)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     0.485         0.464  1.04      23.5 0.0000548     1  -38.4  82.7  86.6\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\nFinally, we find that removing Rolando from the dataset increased the \\(R^2\\) for the simple linear regression from 25% to 49%."
-  },
-  {
-    "objectID": "ch/misc/usefulthings.html",
-    "href": "ch/misc/usefulthings.html",
-    "title": "Useful things",
-    "section": "",
-    "text": "This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically."
-  },
-  {
-    "objectID": "ch/misc/usefulthings.html#footnotes",
-    "href": "ch/misc/usefulthings.html#footnotes",
-    "title": "Useful things",
-    "section": "Footnotes",
-    "text": "Footnotes\n\nKeep in mind that p00 is the 0th percentile and thus the minimum. Analogously, p50 is the median and p100 the maximum.↩︎"
-  },
-  {
-    "objectID": "ch/misc/exercises.html",
-    "href": "ch/misc/exercises.html",
-    "title": "Exercises",
-    "section": "",
-    "text": "1 Ex: 1wCRD\n\nExercise# This data holds information about the misture content from multiple samples\n# for each of four different soils. Notice that for this dataset you have no\n# information on any specific field trial layout (i.e. row or col column are\n# not present in the dataset). Therefore you should skip trying to create a\n# field layout with desplot() and instead focus on the following:\n# 1) How many samples per soil were taken?\n# 2) Which soil has the highest value for moisture?\n# 3) Which soil has the highest average value for moisture?\n# 4) Create a ggplot with moisture values per soil!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the LSD test/t-test.\n# Bonus:\n# 7) Repeat the analysis, but this time remove all moisture values larger than\n# 12 at the very beginning.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993b.csv\"\ndat_1wCRD &lt;- read_csv(path, col_types = \"fn\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(multcomp)\nlibrary(multcompView)\n\ndat_1wCRD %&gt;% \n  group_by(soil) %&gt;% \n  summarise(\n    n = n(),\n    max = max(moisture),\n    mean = mean(moisture)\n  )\n\nplot_1wCRD &lt;- ggplot(data = dat_1wCRD) +\n  aes(y = moisture, x = soil) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  )\n\nmod_1wCRD &lt;- lm(moisture ~ soil, dat_1wCRD)\n\nanova(mod_1wCRD)\n  \nmod_1wCRD %&gt;% \n  emmeans(specs = ~ soil) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n2 Ex: 1wRCBD\n\nExercise# This data holds information from a yield (t/ha) trial laid out as a\n# randomized complete block design (3 blocks) with cultivar (4 cultivars)\n# being the only treatment factor. Thus, we have a total of 12 plots.\n# 1) Create a desplot!\n# 2) Which cultivar has the highest average yield?\n# 3) Which block has the highest average yield?\n# 4) Create a ggplot with yield per cultivar.\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n# Bonus:\n# 7) Repeat the analysis, but this time remove all observations from block 1.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Clewer&Scarisbrick2001.csv\"\ndat_1wRCBD &lt;- read_csv(path, col_types = \"ffnii\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(desplot)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wRCBD,\n  flip = TRUE, \n  form = cultivar ~ col + row,\n  text = cultivar,\n  out1 = block,\n  cex = 1,\n  show.key = FALSE\n)\n\ndat_1wRCBD %&gt;% \n  group_by(cultivar) %&gt;% \n  summarise(mean = mean(yield))\n\ndat_1wRCBD %&gt;% \n  group_by(block) %&gt;% \n  summarise(mean = mean(yield))\n\nplot_1wRCBD &lt;- ggplot(data = dat_1wRCBD) +\n  aes(y = yield, x = cultivar, color = block) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  )\n\nmod_1wRCBD &lt;- lm(yield ~ cultivar + block, dat_1wRCBD)\n\nanova(mod_1wRCBD)\n  \nmod_1wRCBD %&gt;% \n  emmeans(specs = ~ cultivar) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n3 Ex: 1wAugLat\n\nExercise# This dataset contains information from an experiment utilizing a resolvable\n# design with checks. Specifically, it features 2 replicates and includes 90\n# unique entries. Additionally, there are 6 checks with extra replication.\n# Each block in the design contains 10 entries, and these incomplete blocks\n# are organized according to a lattice design, which allows them to be grouped\n# into complete replicates, forming a resolvable design structure. In this\n# dataset, standards are coded from 1001 to 1006, while the entries are coded\n# from 2 to 100.\n# 1) Create a desplot!\n# 2) What is the the number of missing values, the number of non-missing\n# values and the average value for yield for each combination of rep and\n# genoCheck?\n# 3) Create a ggplot with geno on the x-axis, yield on the y-axis and\n# dots colored depending on whether a geno is a check or not!\n# 4) Compare the average s.e.d. to find out whether the effects for\n# incomplete blocks should be taken as fixed or random in the model!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/PiephoAugmentedLattice.csv\"\ndat_1wAugLat &lt;- read_csv(path, col_types = \"ffffnnii\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(desplot)\nlibrary(lme4)\nlibrary(lmerTest)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wAugLat,\n  flip = TRUE, \n  form = geno ~ col + row,\n  text = geno,\n  col = genoCheck, \n  col.text = c(\"red\", \"black\"),\n  out1 = rep,\n  out2 = block, \n  show.key = FALSE\n)\n\ndat_1wAugLat %&gt;%\n  group_by(rep, genoCheck) %&gt;%\n  summarise(nobs = sum(!is.na(yield)),\n            nNA  = sum(is.na(yield)),\n            mean = mean(yield, na.rm = TRUE))\n\ngeno_order &lt;- dat_1wAugLat %&gt;% \n  group_by(geno) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  ungroup() %&gt;% \n  arrange(mean) %&gt;% \n  pull(geno) %&gt;% \n  as.character()\n\nmygg &lt;- ggplot(data = dat_1wAugLat) +\n  aes(y = yield, x = geno, color = genoCheck) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_x_discrete(\n    limits = geno_order\n  )\n\nmod_1wAugLat_fb &lt;-   lm(yield ~ geno + rep + block,       data = dat_1wAugLat)\nmod_1wAugLat_rb &lt;- lmer(yield ~ geno + rep + (1 | block), data = dat_1wAugLat)\n\nmod_1wAugLat_fb %&gt;%\n  emmeans(pairwise ~ \"geno\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\n# this takes some time!\nmod_1wAugLat_rb %&gt;%\n  emmeans(pairwise ~ \"geno\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\nanova(mod_1wAugLat_rb)\n  \nmod_1wAugLat_rb %&gt;% \n  emmeans(specs = ~ geno) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n4 Ex: 1wRowCol\n\nExercise# This data contains information from an experiment involving 64 oat\n# genotypes. The experimental design is an 8 x 8 lattice, which has been\n# replicated three times.\n# 1) Create a desplot!\n# 2) Per replicate, what is the the number of missing values, the number of\n# non-missing values and the average value for yield, height and TKW,\n# respectively?\n# 3) Create a ggplot with treat on the x-axis, yield on the y-axis!\n# 4) Compare the average s.e.d. to find out whether the effects for\n# incomplete blocks should be taken as fixed or random in the model!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/RowColFromUtz.csv\"\ndat_1wRowCol &lt;- read_csv(path, col_types = \"fiiffnnn\") %&gt;% \n  mutate(rowF = as.factor(row), colF = as.factor(col))\n\n\n\nSolutionlibrary(emmeans)\nlibrary(lme4)\nlibrary(lmerTest)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wRowCol,\n  flip = TRUE, \n  form = treat ~ col + row,\n  text = treat,\n  out1 = rep,\n  out2 = inc_block, \n  show.key = FALSE\n)\n\ndat_1wRowCol %&gt;%\n  group_by(rep) %&gt;%\n  dlookr::describe(yield, height, TKW) %&gt;% \n  dplyr::select(1:sd)\n\ntreat_order &lt;- dat_1wRowCol %&gt;% \n  group_by(treat) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  ungroup() %&gt;% \n  arrange(mean) %&gt;% \n  pull(treat) %&gt;% \n  as.character()\n\nmygg &lt;- ggplot(data = dat_1wRowCol) +\n  aes(y = yield, x = treat) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_x_discrete(\n    limits = treat_order\n  )\n\nmod_1wRowCol_fb &lt;-   lm(yield ~ treat + rep + inc_block,       data = dat_1wRowCol)\nmod_1wRowCol_rb &lt;- lmer(yield ~ treat + rep + (1 | inc_block), data = dat_1wRowCol)\n\nmod_1wRowCol_fb %&gt;%\n  emmeans(pairwise ~ \"treat\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\n# this takes some time!\nmod_1wRowCol_rb %&gt;%\n  emmeans(pairwise ~ \"treat\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\nanova(mod_1wRowCol_rb)\n  \nmod_1wRowCol_rb %&gt;% \n  emmeans(specs = ~ treat) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n\n\n\nCitationBibTeX citation:@online{schmidt2023,\n  author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},\n  title = {Exercises},\n  date = {2023-11-14},\n  url = {https://schmidtpaul.github.io/dsfair_quarto//ch/misc/exercises.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\n[Paul Schmidt](https://schmidtpaul.github.io/). 2023.\n“Exercises.” November 14, 2023. https://schmidtpaul.github.io/dsfair_quarto//ch/misc/exercises.html."
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html",
-    "title": "One-way row column design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#import",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#import",
-    "title": "One-way row column design",
-    "section": "Import",
-    "text": "Import\nThe data is available as part of the {agridat} package:\n\ndat &lt;- as_tibble(agridat::kempton.rowcol)\ndat\n\n# A tibble: 68 × 5\n   rep     row   col gen   yield\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;\n 1 R1        1     1 G20    3.77\n 2 R1        1     2 G04    3.21\n 3 R1        1     3 G33    4.55\n 4 R1        1     4 G28    4.09\n 5 R1        1     5 G07    5.05\n 6 R1        1     6 G12    4.19\n 7 R1        1     7 G30    3.27\n 8 R1        2     1 G10    3.44\n 9 R1        2     2 G14    4.3 \n10 R1        2     4 G21    3.86\n# ℹ 58 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#format",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#format",
-    "title": "One-way row column design",
-    "section": "Format",
-    "text": "Format\nFor our analysis, gen, row and col should be encoded as factors. However, the desplot() function needs row and col as formatted as integers. Therefore we create copies of these columns encoded as factors and named rowF and colF:\n\ndat &lt;- dat %&gt;%\n  mutate(\n    colF = as.factor(col),\n    rowF = as.factor(row)\n  )"
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#explore",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#explore",
-    "title": "One-way row column design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 35 × 5\n   gen       n    na  mean     sd\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 G19       2     0  6.07 1.84  \n 2 G07       2     0  5.74 0.976 \n 3 G33       2     0  5.13 0.820 \n 4 G06       2     0  4.96 0.940 \n 5 G09       2     0  4.94 1.68  \n 6 G11       2     0  4.93 1.03  \n 7 G14       2     0  4.92 0.877 \n 8 G27       2     0  4.89 1.80  \n 9 G03       2     0  4.78 0.0424\n10 G25       2     0  4.78 0.361 \n# ℹ 25 more rows\n\n\nAdditionally, we can decide to plot our data.\n\nCode# sort genotypes by mean yield\ngen_order &lt;- dat %&gt;% \n  group_by(gen) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  arrange(mean) %&gt;% \n  pull(gen) %&gt;% \n  as.character()\n\nggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = rep\n  ) +\n  geom_line(\n    aes(group = gen),\n    color = \"darkgrey\"\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Genotype\",\n    limits = gen_order\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_shape_discrete(\n    name = \"Replicate\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_classic() +\n  theme(\n    legend.position = \"top\", \n    axis.text.x = element_text(angle = 90, vjust = 0.5)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a resolvable row column design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. In this case it is worth noting that there is missing data, as yield values for two plots are not present in the data.\n\nCodedesplot(\n  data = dat,\n  form = gen ~ col + row | rep, # fill color per genotype, headers per replicate\n  text = gen, \n  cex = 0.7, \n  shorten = \"no\",\n  out1 = row, out1.gpar=list(col=\"black\"), # lines between rows\n  out2 = col, out2.gpar=list(col=\"black\"), # lines between columns\n  main = \"Field layout\", \n  show.key = FALSE\n)"
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#variance-components",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#variance-components",
-    "title": "One-way row column design",
-    "section": "Variance components",
-    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_frc)$sigma^2\n\n[1] 0.1666074\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rrc))\n\n# A tibble: 3 × 5\n  grp      var1        var2    vcov sdcor\n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 colF     (Intercept) &lt;NA&gt;  0.144  0.380\n2 rowF     (Intercept) &lt;NA&gt;  0.0293 0.171\n3 Residual &lt;NA&gt;        &lt;NA&gt;  0.167  0.409"
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#efficiency",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#efficiency",
-    "title": "One-way row column design",
-    "section": "Efficiency",
-    "text": "Efficiency\nThe efficiency of a resolvable design can be calculated as its mean s.e.d. compared to the (mean1) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get avg_sed_mod_frc^2 which is 0.23312. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:\n\navg_sed_mod_RCBD &lt;- lm(yield ~ gen + rep, data = dat) %&gt;% \n  emmeans(pairwise ~ \"gen\",\n          adjust = \"none\",\n          lmer.df = \"kenward-roger\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean()\n\navg_sed_mod_RCBD^2\n\n[1] 0.3257469\n\n\nFinally, the efficiency of this resolvable design is then\n\navg_sed_mod_RCBD^2 / avg_sed_mod_frc^2\n\n[1] 1.397325\n\n\nmeaning that the resolvable design is more efficient since the efficiency is &gt; 1."
-  },
-  {
-    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#footnotes",
-    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#footnotes",
-    "title": "One-way row column design",
-    "section": "Footnotes",
-    "text": "Footnotes\n\nIn this scenario, all s.e.d. of the RCBD model would be identical so we don’t really need to get the average, but could instead argue that there is only one constant s.e.d.↩︎"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html",
-    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html",
-    "title": "One-way randomized complete block design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#import",
-    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#import",
-    "title": "One-way randomized complete block design",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Clewer&Scarisbrick2001.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 12 × 5\n   block cultivar yield   row   col\n   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 B1    C1         7.4     2     1\n 2 B1    C2         9.8     3     1\n 3 B1    C3         7.3     1     1\n 4 B1    C4         9.5     4     1\n 5 B2    C1         6.5     1     2\n 6 B2    C2         6.8     4     2\n 7 B2    C3         6.1     3     2\n 8 B2    C4         8       2     2\n 9 B3    C1         5.6     2     3\n10 B3    C2         6.2     1     3\n11 B3    C3         6.4     3     3\n12 B3    C4         7.4     4     3"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#format",
-    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#format",
-    "title": "One-way randomized complete block design",
-    "section": "Format",
-    "text": "Format\nBefore anything, the columns block and cultivar should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(block, cultivar), ~ as.factor(.x)))"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#explore",
-    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#explore",
-    "title": "One-way randomized complete block design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(cultivar) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  cultivar     n    na  mean    sd\n  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 C4           3     0   8.3 1.08 \n2 C2           3     0   7.6 1.93 \n3 C3           3     0   6.6 0.624\n4 C1           3     0   6.5 0.9  \n\n\n\n\n\n\ndat %&gt;% \n  group_by(block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 3 × 5\n  block     n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 B1        4     0  8.5  1.33 \n2 B2        4     0  6.85 0.819\n3 B3        4     0  6.4  0.748\n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = cultivar, color = block) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Cultivar\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Block\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = cultivar ~ col + row, # fill color per cultivar       \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout: cultivars\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield      \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\nThus, C4 seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block B1 (left), compared to the other blocks."
-  },
-  {
-    "objectID": "ch/exan/simple/crd_mead1993.html",
-    "href": "ch/exan/simple/crd_mead1993.html",
-    "title": "One-way completely randomized design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
-  },
-  {
-    "objectID": "ch/exan/simple/crd_mead1993.html#import",
-    "href": "ch/exan/simple/crd_mead1993.html#import",
-    "title": "One-way completely randomized design",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 24 × 4\n   variety yield   row   col\n   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 v1       25.1     4     2\n 2 v1       17.2     1     6\n 3 v1       26.4     4     1\n 4 v1       16.1     1     4\n 5 v1       22.2     1     2\n 6 v1       15.9     2     4\n 7 v2       40.2     4     4\n 8 v2       35.2     3     1\n 9 v2       32.0     4     6\n10 v2       36.5     2     1\n# ℹ 14 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/crd_mead1993.html#format",
-    "href": "ch/exan/simple/crd_mead1993.html#format",
-    "title": "One-way completely randomized design",
-    "section": "Format",
-    "text": "Format\nBefore anything, the column variety should be encoded as a factor, since R by default encoded it as a character variable. There are multiple ways to do this - here are two:\n\n\n\ndat &lt;- dat %&gt;% \n  mutate(variety = as.factor(variety))\n\n\n\n\n\ndat &lt;- dat %&gt;% \n  mutate(across(variety, ~ as.factor(.x)))"
-  },
-  {
-    "objectID": "ch/exan/simple/crd_mead1993.html#explore",
-    "href": "ch/exan/simple/crd_mead1993.html#explore",
-    "title": "One-way completely randomized design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can a summary per variety.\n\ndat %&gt;% \n  group_by(variety) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd, p00, p100) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 7\n  variety     n    na  mean    sd   p00  p100\n  &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 v2          6     0  37.4  3.95  32.0  43.3\n2 v4          6     0  29.9  2.23  27.6  33.2\n3 v1          6     0  20.5  4.69  15.9  26.4\n4 v3          6     0  19.5  5.56  11.4  25.9\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = variety) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Variety\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a completely randomized design; CRD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}:\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = variety ~ col + row, # fill color per variety\n  text = variety, # variety names per plot\n  cex = 1, # variety names: font size\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend \n  )     \n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color per variety\n  text = variety, # variety names per plot\n  cex = 1, # variety names: font size\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend \n  )"
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html",
-    "title": "One-way alpha design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#import",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html#import",
-    "title": "One-way alpha design",
-    "section": "Import",
-    "text": "Import\nThe data is available as part of the {agridat} package and needs no further formatting:\n\ndat &lt;- as_tibble(agridat::john.alpha)\ndat\n\n# A tibble: 72 × 7\n    plot rep   block gen   yield   row   col\n   &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;\n 1     1 R1    B1    G11    4.12     1     1\n 2     2 R1    B1    G04    4.45     2     1\n 3     3 R1    B1    G05    5.88     3     1\n 4     4 R1    B1    G22    4.58     4     1\n 5     5 R1    B2    G21    4.65     5     1\n 6     6 R1    B2    G10    4.17     6     1\n 7     7 R1    B2    G20    4.01     7     1\n 8     8 R1    B2    G02    4.34     8     1\n 9     9 R1    B3    G23    4.23     9     1\n10    10 R1    B3    G14    4.76    10     1\n# ℹ 62 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#explore",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html#explore",
-    "title": "One-way alpha design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(n), desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 24 × 4\n   gen       n  mean     sd\n   &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 G01       3  5.16 0.534 \n 2 G05       3  5.06 0.841 \n 3 G12       3  4.91 0.641 \n 4 G15       3  4.89 0.207 \n 5 G19       3  4.87 0.398 \n 6 G13       3  4.83 0.619 \n 7 G21       3  4.82 0.503 \n 8 G17       3  4.73 0.379 \n 9 G16       3  4.73 0.502 \n10 G06       3  4.71 0.464 \n11 G22       3  4.64 0.432 \n12 G14       3  4.56 0.186 \n13 G02       3  4.51 0.574 \n14 G18       3  4.44 0.587 \n15 G04       3  4.40 0.0433\n16 G10       3  4.39 0.450 \n17 G11       3  4.38 0.641 \n18 G08       3  4.32 0.584 \n19 G24       3  4.14 0.726 \n20 G23       3  4.14 0.232 \n21 G07       3  4.13 0.510 \n22 G20       3  3.78 0.209 \n23 G09       3  3.61 0.606 \n24 G03       3  3.34 0.456 \n\n\n\n\n\n\ndat %&gt;% \n  group_by(rep, block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 18 × 5\n   rep   block     n  mean     sd\n   &lt;fct&gt; &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 R2    B3        4  5.22 0.149 \n 2 R2    B5        4  5.21 0.185 \n 3 R2    B6        4  5.11 0.323 \n 4 R2    B4        4  5.01 0.587 \n 5 R1    B5        4  4.79 0.450 \n 6 R1    B1        4  4.75 0.772 \n 7 R1    B6        4  4.58 0.819 \n 8 R3    B1        4  4.38 0.324 \n 9 R1    B3        4  4.36 0.337 \n10 R1    B4        4  4.33 0.727 \n11 R3    B3        4  4.30 0.0710\n12 R1    B2        4  4.29 0.273 \n13 R2    B2        4  4.23 0.504 \n14 R3    B4        4  4.22 0.375 \n15 R3    B5        4  4.15 0.398 \n16 R2    B1        4  4.12 0.411 \n17 R3    B2        4  3.96 0.631 \n18 R3    B6        4  3.61 0.542 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCode# sort genotypes by mean yield\ngen_order &lt;- dat %&gt;% \n  group_by(gen) %&gt;% \n  summarise(mean = mean(yield)) %&gt;% \n  arrange(mean) %&gt;% \n  pull(gen) %&gt;% \n  as.character()\n\nggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = rep\n  ) +\n  geom_line(\n    aes(group = gen),\n    color = \"darkgrey\"\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Genotype\",\n    limits = gen_order\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_classic() +\n  theme(\n    legend.position = \"top\", \n    axis.text.x = element_text(angle = 90, vjust = 0.5)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ row + col | rep, # fill color per genotype, headers per replicate\n  out1 = block, # lines between incomplete blocks\n  out1.gpar = list(col = \"black\", lwd = 1, lty = \"dashed\"), # line type\n  main = \"Field layout\", # title\n  key.cex = 0.6,\n  layout = c(3, 1) # force all reps drawn in one row\n)"
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#variance-components",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html#variance-components",
-    "title": "One-way alpha design",
-    "section": "Variance components",
-    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_fb)$sigma^2\n\n[1] 0.08346307\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rb))\n\n# A tibble: 2 × 5\n  grp       var1        var2    vcov sdcor\n  &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 rep:block (Intercept) &lt;NA&gt;  0.0619 0.249\n2 Residual  &lt;NA&gt;        &lt;NA&gt;  0.0852 0.292"
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#efficiency",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html#efficiency",
-    "title": "One-way alpha design",
-    "section": "Efficiency",
-    "text": "Efficiency\nThe efficiency of a resolvable design can be calculated as its mean s.e.d. compared to the (mean1) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get avg_sed_mod_rb^2 which is 0.07292. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:\n\navg_sed_mod_RCBD &lt;- lm(yield ~ gen + rep, data = dat) %&gt;% \n  emmeans(pairwise ~ \"gen\",\n          adjust = \"none\",\n          lmer.df = \"kenward-roger\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean()\n\navg_sed_mod_RCBD^2\n\n[1] 0.08972397\n\n\nFinally, the efficiency of this resolvable design is then\n\navg_sed_mod_RCBD^2 / avg_sed_mod_rb^2\n\n[1] 1.230428\n\n\nmeaning that the resolvable design is indeed more efficient since the efficiency is &gt; 1."
-  },
-  {
-    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#footnotes",
-    "href": "ch/exan/simple/alpha_johnwilliams1995.html#footnotes",
-    "title": "One-way alpha design",
-    "section": "Footnotes",
-    "text": "Footnotes\n\nIn this scenario, all s.e.d. of the RCBD model would be identical so we don’t really need to get the average, but could instead argue that there is only one constant s.e.d.↩︎"
-  },
-  {
-    "objectID": "ch/exan/simple/augm_petersen1994.html",
-    "href": "ch/exan/simple/augm_petersen1994.html",
-    "title": "One-way augmented design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
-  },
-  {
-    "objectID": "ch/exan/simple/augm_petersen1994.html#import",
-    "href": "ch/exan/simple/augm_petersen1994.html#import",
-    "title": "One-way augmented design",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Petersen1994.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 48 × 5\n   gen   yield block   row   col\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st     2972 I         1     1\n 2 14     2405 I         2     1\n 3 26     2855 I         3     1\n 4 ci     2592 I         4     1\n 5 17     2572 I         5     1\n 6 wa     2608 I         6     1\n 7 22     2705 I         7     1\n 8 13     2391 I         8     1\n 9 st     3122 II        1     2\n10 ci     3023 II        2     2\n# ℹ 38 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/augm_petersen1994.html#format",
-    "href": "ch/exan/simple/augm_petersen1994.html#format",
-    "title": "One-way augmented design",
-    "section": "Format",
-    "text": "Format\nBefore anything, the columns gen and block should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(gen, block), ~ as.factor(.x)))"
-  },
-  {
-    "objectID": "ch/exan/simple/augm_petersen1994.html#explore",
-    "href": "ch/exan/simple/augm_petersen1994.html#explore",
-    "title": "One-way augmented design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(n), desc(mean))\n\n# A tibble: 33 × 5\n   gen       n    na  mean    sd\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st        6     0 2759.  832.\n 2 ci        6     0 2726.  711.\n 3 wa        6     0 2678.  615.\n 4 19        1     0 3643    NA \n 5 11        1     0 3380    NA \n 6 07        1     0 3265    NA \n 7 03        1     0 3055    NA \n 8 04        1     0 3018    NA \n 9 01        1     0 3013    NA \n10 30        1     0 2955    NA \n# ℹ 23 more rows\n\n\n\n\n\n\ndat %&gt;% \n  group_by(block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  block     n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 VI        8     0 3205.  417.\n2 II        8     0 2864.  258.\n3 IV        8     0 2797.  445.\n4 I         8     0 2638.  202.\n5 III       8     0 2567.  440.\n6 V         8     0 1390.  207.\n\n\n\n\nAdditionally, we can decide to plot our data. Note that we here define custom colors for the genotypes, where all unreplicated entries get a shade of green and all replicated checks get a shade of red.\n\ngreens30 &lt;- colorRampPalette(c(\"#bce2cc\", \"#00923f\"))(30)\noranges3 &lt;- colorRampPalette(c(\"#e4572e\", \"#ad0000\"))(3)\ngen_cols &lt;- set_names(c(greens30, oranges3), nm = levels(dat$gen))\n\n\nCodeggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = block\n  ) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_color_manual(\n    guide = \"none\",\n    values = gen_cols\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_bw() +\n  theme(\n    legend.position = \"top\",\n    axis.text.x = element_text(size = 7)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per cultivar  \n  col.regions = gen_cols, # custom fill colors\n  out1 = block, # line between blocks                     \n  text = gen, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n)"
-  },
-  {
-    "objectID": "ch/exan/simple/augm_petersen1994.html#variance-components",
-    "href": "ch/exan/simple/augm_petersen1994.html#variance-components",
-    "title": "One-way augmented design",
-    "section": "Variance components",
-    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_fb)$sigma^2\n\n[1] 91102.66\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rb))\n\n# A tibble: 2 × 5\n  grp      var1        var2     vcov sdcor\n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1 block    (Intercept) &lt;NA&gt;  434198.  659.\n2 Residual &lt;NA&gt;        &lt;NA&gt;   91103.  302."
-  },
-  {
-    "objectID": "ch/exan/simple/latsq_bridges1989.html",
-    "href": "ch/exan/simple/latsq_bridges1989.html",
-    "title": "One-way latin square design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
-  },
-  {
-    "objectID": "ch/exan/simple/latsq_bridges1989.html#import",
-    "href": "ch/exan/simple/latsq_bridges1989.html#import",
-    "title": "One-way latin square design",
-    "section": "Import",
-    "text": "Import\n\ndat &lt;- agridat::bridges.cucumber %&gt;% \n  as_tibble() %&gt;% \n  filter(loc == \"Clemson\") %&gt;% # filter data from only one location\n  select(-loc) # remove loc column which is now unnecessary\n\ndat\n\n# A tibble: 16 × 4\n   gen        row   col yield\n   &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1 Dasher       1     3  44.2\n 2 Dasher       2     4  54.1\n 3 Dasher       3     2  47.2\n 4 Dasher       4     1  36.7\n 5 Guardian     1     4  33  \n 6 Guardian     2     2  13.6\n 7 Guardian     3     1  44.1\n 8 Guardian     4     3  35.8\n 9 Poinsett     1     1  11.5\n10 Poinsett     2     3  22.4\n11 Poinsett     3     4  30.3\n12 Poinsett     4     2  21.5\n13 Sprint       1     2  15.1\n14 Sprint       2     1  20.3\n15 Sprint       3     3  41.3\n16 Sprint       4     4  27.1"
-  },
-  {
-    "objectID": "ch/exan/simple/latsq_bridges1989.html#format",
-    "href": "ch/exan/simple/latsq_bridges1989.html#format",
-    "title": "One-way latin square design",
-    "section": "Format",
-    "text": "Format\nFor our analysis, gen, row and col should be encoded as factors. However, the desplot() function needs row and col as formatted as integers. Therefore we create copies of these columns encoded as factors and named rowF and colF. Below are two ways how to achieve this:\n\n\n\ndat &lt;- dat %&gt;%\n  mutate(\n    colF = as.factor(col),\n    rowF = as.factor(row)\n  )\n\n\n\n\n\ndat &lt;- dat %&gt;%\n  mutate(across(\n    .cols = c(row, col), \n    .fns = ~ as.factor(.x), \n    .names = (\"{.col}F\")\n  ))"
-  },
-  {
-    "objectID": "ch/exan/simple/latsq_bridges1989.html#explore",
-    "href": "ch/exan/simple/latsq_bridges1989.html#explore",
-    "title": "One-way latin square design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per genotype, per row and per column.\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  gen          n    na  mean    sd\n  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Dasher       4     0  45.6  7.21\n2 Guardian     4     0  31.6 12.9 \n3 Sprint       4     0  26.0 11.4 \n4 Poinsett     4     0  21.4  7.71\n\n\n\n\n\ndat %&gt;% \n  group_by(rowF) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  rowF      n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 3         4     0  40.7  7.36\n2 4         4     0  30.3  7.28\n3 2         4     0  27.6 18.1 \n4 1         4     0  26.0 15.4 \n\n\n\n\n\n\ndat %&gt;% \n  group_by(colF) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  colF      n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 4         4     0  36.1 12.2 \n2 3         4     0  35.9  9.67\n3 1         4     0  28.2 14.9 \n4 2         4     0  24.4 15.6 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = gen, color = colF, shape = rowF) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Column\"\n  ) +\n  scale_shape_discrete(\n    name = \"Row\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a Latin square design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per genotype       \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield     \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\nThus, Dasher seems to be the most promising genotype in terms of yield. Moreover, it can be seen that yields were generally higher in column 4 and row 3."
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html",
-    "href": "ch/exan/simple/rcbd_gomezgomez1984.html",
-    "title": "Two-way randomized complete block design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#import",
-    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#import",
-    "title": "Two-way randomized complete block design",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/riceRCBD.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 72 × 6\n     row   col rep   N      G     yield\n   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;\n 1     2     6 rep1  Goomba Simba  4520\n 2     3     4 rep1  Koopa  Simba  5598\n 3     2     3 rep1  Toad   Simba  6192\n 4     1     1 rep1  Peach  Simba  8542\n 5     2     1 rep1  Diddy  Simba  5806\n 6     3     1 rep1  Yoshi  Simba  7470\n 7     4     5 rep1  Goomba Nala   4034\n 8     4     1 rep1  Koopa  Nala   6682\n 9     3     2 rep1  Toad   Nala   6869\n10     1     2 rep1  Peach  Nala   6318\n# ℹ 62 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#format",
-    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#format",
-    "title": "Two-way randomized complete block design",
-    "section": "Format",
-    "text": "Format\nBefore anything, the columns rep, N and G should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(rep, N, G), ~ as.factor(.x)))"
-  },
-  {
-    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#explore",
-    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#explore",
-    "title": "Two-way randomized complete block design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per nitrogen level, per genotype and also per nitrogen-genotype-combination.\n\n\n\ndat %&gt;% \n  group_by(N) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  N          n    na  mean    sd\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Diddy     12     0 5866.  832.\n2 Toad      12     0 5864. 1434.\n3 Yoshi     12     0 5812  2349.\n4 Peach     12     0 5797. 2660.\n5 Koopa     12     0 5478.  657.\n6 Goomba    12     0 4054.  672.\n\ndat %&gt;% \n  group_by(G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  G         n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Simba    18     0 6554. 1475.\n2 Nala     18     0 6156. 1078.\n3 Timon    18     0 5563. 1269.\n4 Pumba    18     0 3642. 1434.\n\n\n\n\n\n\ndat %&gt;% \n  group_by(N, G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n=Inf)\n\n# A tibble: 24 × 6\n   N      G         n    na  mean     sd\n   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 Peach  Simba     3     0 8701.  270. \n 2 Yoshi  Simba     3     0 7563.   86.9\n 3 Yoshi  Nala      3     0 6951.  808. \n 4 Toad   Nala      3     0 6895   166. \n 5 Toad   Simba     3     0 6733.  490. \n 6 Yoshi  Timon     3     0 6687.  496. \n 7 Peach  Nala      3     0 6540.  936. \n 8 Diddy  Simba     3     0 6400   523. \n 9 Diddy  Nala      3     0 6259   499. \n10 Peach  Timon     3     0 6065. 1097. \n11 Toad   Timon     3     0 6014   515. \n12 Diddy  Timon     3     0 5994   101. \n13 Koopa  Nala      3     0 5982   684. \n14 Koopa  Simba     3     0 5672   458. \n15 Koopa  Timon     3     0 5443.  589. \n16 Koopa  Pumba     3     0 4816   506. \n17 Diddy  Pumba     3     0 4812   963. \n18 Goomba Pumba     3     0 4481.  463. \n19 Goomba Nala      3     0 4306   646. \n20 Goomba Simba     3     0 4253.  248. \n21 Toad   Pumba     3     0 3816  1311. \n22 Goomba Timon     3     0 3177.  453. \n23 Yoshi  Pumba     3     0 2047.  703. \n24 Peach  Pumba     3     0 1881.  407. \n\n\n\n\nAdditionally, we can decide to plot our data. One way to deal with the combination of two factors would be to use panels/facets in ggplot2.\nNote that we here define a custom set of colors for the Nitrogen levels that will be used throughout this chapter.\n\nNcolors &lt;- met.brewer(\"VanGogh2\", 6) %&gt;% \n  as.vector() %&gt;% \n  set_names(levels(dat$N))\n\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = N, color = N) +\n  facet_wrap(~G, labeller = label_both) +\n  stat_summary(\n    fun = mean,\n    colour = \"grey\",\n    geom = \"line\",\n    linetype = \"dotted\",\n    group = 1\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Nitrogen\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_manual(\n    values = Ncolors, \n    guide = \"none\"\n  ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(\n    angle = 45,\n    hjust = 1,\n    vjust = 1\n  ))\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = c(\"white\", \"grey95\", \"grey90\"),\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Field layout\", # plot title\n  show.key = TRUE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  form = yield ~ col + row | rep, # fill color per rep, headers per rep\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col  = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\n\nCoderepcolors &lt;- c(met.brewer(\"VanGogh3\", 1),\n               met.brewer(\"Hokusai2\", 1),\n               met.brewer(\"OKeeffe2\", 1)) %&gt;%\n  as.vector() %&gt;%\n  set_names(levels(dat$rep))\n\ndesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = repcolors,\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Experimental design focus\", # plot title\n  show.key = FALSE # don't show legend\n  )"
-  },
-  {
-    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html",
-    "href": "ch/exan/simple/splitplot_gomezgomez1984.html",
-    "title": "Two-way split-plot design",
-    "section": "",
-    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
-  },
-  {
-    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#import",
-    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#import",
-    "title": "Two-way split-plot design",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Gomez&Gomez1984.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 72 × 7\n   yield   row   col rep   mainplot G     N     \n   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; \n 1  4520     4     1 rep1  mp01     Simba Goomba\n 2  5598     2     2 rep1  mp02     Simba Koopa \n 3  6192     1     3 rep1  mp03     Simba Toad  \n 4  8542     2     4 rep1  mp04     Simba Peach \n 5  5806     2     5 rep1  mp05     Simba Diddy \n 6  7470     1     6 rep1  mp06     Simba Yoshi \n 7  4034     2     1 rep1  mp01     Nala  Goomba\n 8  6682     4     2 rep1  mp02     Nala  Koopa \n 9  6869     3     3 rep1  mp03     Nala  Toad  \n10  6318     4     4 rep1  mp04     Nala  Peach \n# ℹ 62 more rows"
-  },
-  {
-    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#format",
-    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#format",
-    "title": "Two-way split-plot design",
-    "section": "Format",
-    "text": "Format\nBefore anything, the columns rep, N and G should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(rep:N), ~ as.factor(.x)))"
-  },
-  {
-    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#explore",
-    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#explore",
-    "title": "Two-way split-plot design",
-    "section": "Explore",
-    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per nitrogen level, per genotype and also per nitrogen-genotype-combination.\n\n\n\ndat %&gt;% \n  group_by(N) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  N          n    na  mean    sd\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Diddy     12     0 5866.  832.\n2 Toad      12     0 5864. 1434.\n3 Yoshi     12     0 5812  2349.\n4 Peach     12     0 5797. 2660.\n5 Koopa     12     0 5478.  657.\n6 Goomba    12     0 4054.  672.\n\ndat %&gt;% \n  group_by(G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  G         n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Simba    18     0 6554. 1475.\n2 Nala     18     0 6156. 1078.\n3 Timon    18     0 5563. 1269.\n4 Pumba    18     0 3642. 1434.\n\n\n\n\n\n\ndat %&gt;% \n  group_by(N, G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n=Inf)\n\n# A tibble: 24 × 6\n   N      G         n    na  mean     sd\n   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 Peach  Simba     3     0 8701.  270. \n 2 Yoshi  Simba     3     0 7563.   86.9\n 3 Yoshi  Nala      3     0 6951.  808. \n 4 Toad   Nala      3     0 6895   166. \n 5 Toad   Simba     3     0 6733.  490. \n 6 Yoshi  Timon     3     0 6687.  496. \n 7 Peach  Nala      3     0 6540.  936. \n 8 Diddy  Simba     3     0 6400   523. \n 9 Diddy  Nala      3     0 6259   499. \n10 Peach  Timon     3     0 6065. 1097. \n11 Toad   Timon     3     0 6014   515. \n12 Diddy  Timon     3     0 5994   101. \n13 Koopa  Nala      3     0 5982   684. \n14 Koopa  Simba     3     0 5672   458. \n15 Koopa  Timon     3     0 5443.  589. \n16 Koopa  Pumba     3     0 4816   506. \n17 Diddy  Pumba     3     0 4812   963. \n18 Goomba Pumba     3     0 4481.  463. \n19 Goomba Nala      3     0 4306   646. \n20 Goomba Simba     3     0 4253.  248. \n21 Toad   Pumba     3     0 3816  1311. \n22 Goomba Timon     3     0 3177.  453. \n23 Yoshi  Pumba     3     0 2047.  703. \n24 Peach  Pumba     3     0 1881.  407. \n\n\n\n\nAdditionally, we can decide to plot our data. One way to deal with the combination of two factors would be to use panels/facets in ggplot2.\nNote that we here define a custom set of colors for the Nitrogen levels that will be used throughout this chapter.\n\nNcolors &lt;- met.brewer(\"VanGogh2\", 6) %&gt;% \n  as.vector() %&gt;% \n  set_names(levels(dat$N))\n\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = N, color = N) +\n  facet_wrap(~G, labeller = label_both) +\n  stat_summary(\n    fun = mean,\n    colour = \"grey\",\n    geom = \"line\",\n    linetype = \"dotted\",\n    group = 1\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Nitrogen\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_manual(\n    values = Ncolors, \n    guide = \"none\"\n  ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(\n    angle = 45,\n    hjust = 1,\n    vjust = 1\n  ))\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a split-plot design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = c(\"white\", \"grey95\", \"grey90\"),\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Field layout\", # plot title\n  show.key = TRUE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  form = yield ~ col + row | rep, # fill color per rep, headers per rep\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col  = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # show legend\n  )\n\n\n\n\n\n\n\n\n\n\n\nCodemainplotcolors &lt;- c(met.brewer(\"VanGogh3\", 6),\n                    met.brewer(\"Hokusai2\", 6),\n                    met.brewer(\"OKeeffe2\", 6)) %&gt;%\n  as.vector() %&gt;%\n  set_names(levels(dat$mainplot))\n\ndesplot(\n  data = dat,\n  form = mainplot ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = mainplotcolors,\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Experimental design focus\", # plot title\n  show.key = TRUE, # don't show legend\n  key.cex = 0.6\n  )"
-  },
-  {
-    "objectID": "ch/misc/furtherresources.html",
-    "href": "ch/misc/furtherresources.html",
-    "title": "Further resources",
-    "section": "",
-    "text": "This is a collection of resources I would recommend for topics that are not covered (well enough) on this website.\nIn general, you should browse through the Big Book of R, which is curated collection of over 300 R programming books on different topics.\n\nGeneralized Linear Models\n\nThe online version of “Beyond Multiple Linear Regression - Applied Generalized Linear Models and Multilevel Models in R” by Roback and Legler (2021)\nThe open access PDF version “Generalized Linear Mixed Models with Applications in Agriculture and Biology” by Ruı́z et al. (2023)\n\n\n\nMaps\n\nChapter 6: Maps in Wickham (2016)\nDrawing beautiful maps programmatically with R, sf and ggplot2 Part 1, Part 2 and Part 3\n#30DayMapChallenge - check out the posts of previous years, e.g. all the contributions of user bydata and the R code that created them.\n\n\n\nMeta analyses\n\nThe online version of “Doing Meta-Analysis with R: A Hands-On Guide” by Harrer et al. (2021)\n\n\n\n\n\n\n\n\nReferences\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with r. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\nRoback, Paul, and Julie Legler. 2021. Beyond Multiple Linear Regression. Chapman; Hall/CRC. https://doi.org/10.1201/9780429066665.\n\n\nRuı́z, Josafhat Salinas, Osval Antonio Montesinos López, Gabriela Hernández Ramı́rez, and Jose Crossa Hiriart. 2023. Generalized Linear Mixed Models with Applications in Agriculture and Biology. Springer International Publishing. https://doi.org/10.1007/978-3-031-32800-8.\n\n\nWickham, Hadley. 2016. Ggplot2 Elegant Graphics for Data Analysis. Use r! Springer International Publishing. https://doi.org/10.1007/978-3-319-24277-4.\n\nCitationBibTeX citation:@online{schmidt2023,\n  author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},\n  title = {Further Resources},\n  date = {2023-10-01},\n  url = {https://schmidtpaul.github.io/dsfair_quarto//ch/misc/furtherresources.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\n[Paul Schmidt](https://schmidtpaul.github.io/). 2023. “Further\nResources.” October 1, 2023. https://schmidtpaul.github.io/dsfair_quarto//ch/misc/furtherresources.html."
-  },
-  {
-    "objectID": "ch/misc/workshopprep.html",
-    "href": "ch/misc/workshopprep.html",
-    "title": "Prepare for an upcoming workshop",
-    "section": "",
-    "text": "Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare."
-  },
-  {
-    "objectID": "ch/misc/workshopprep.html#r-packages",
-    "href": "ch/misc/workshopprep.html#r-packages",
-    "title": "Prepare for an upcoming workshop",
-    "section": "R-packages",
-    "text": "R-packages\nDuring the workshop you will get to know and install many additional R-packages that are not automatically installed. In most cases, you can just install them the moment they are introduced. However, if you e.g. have a slow internet connection, it may be worthwhile to install them beforehand. You can install most of the packages we need by running the following code:\n\nif (!require(\"pacman\", quietly = TRUE))\n  install.packages(\"pacman\")\n\npacman::p_load(\n  agridat,\n  broom,\n  conflicted,\n  desplot,\n  dlookr,\n  emmeans,\n  ggtext,\n  glmmTMB,\n  here,\n  janitor,\n  lme4,\n  lmerTest,\n  modelbased,\n  multcomp,\n  multcompView,\n  naniar,\n  nlme,\n  openxlsx,\n  performance,\n  readxl,\n  scales,\n  tidyverse\n)"
-  },
-  {
-    "objectID": "ch/misc/workshopprep.html#having-two-screens-helps",
-    "href": "ch/misc/workshopprep.html#having-two-screens-helps",
-    "title": "Prepare for an upcoming workshop",
-    "section": "Having two screens helps!",
-    "text": "Having two screens helps!\nDuring the workshop, I will constantly share my screen with you. Depending on whether you have multiple screens available or not, there are three main scenarios in my experience - ranked from worst to best:\n\nYou only have a single screen\nWhile this is the worst scenario, you obviously can still participate and will have no problem following me during the workshop. What may become difficult, however, is if you want to both look at my shared screen and also write your own R code simulatenously. If you only have only a single screen (that is not super wide), this means constantly switching between zoom and R. Nevertheless, there will be exercises during the workshop where everone has time to do an assignment on their own so that during those time you will definitely get some undivided R time.\nYou have a two screens, but they are not connected to the same deviceAn example for such a scenario would be having a computer with one screen and a laptop/tablet next to it. You could open R on one device and zoom on the other. This is certainly better than having only a single screen, since it is much easier to simultaneously read my and write your code. It is not optimal, however, since it does not allow for the advantages (i) and (ii) listed for scenario 3 below.\nYou have two screensHaving a computer/laptop with multiple screens connected is the optimal setup! You can easily look at both my and your R code and additionally (i) share your screen via zoom so that we can fix an issue you are having in R and (ii) copy-paste things from the zoom-chat into R."
-  },
-  {
-    "objectID": "ch/misc/workshopprep.html#do-i-need-to-install-zoom",
-    "href": "ch/misc/workshopprep.html#do-i-need-to-install-zoom",
-    "title": "Prepare for an upcoming workshop",
-    "section": "Do I need to install zoom?",
-    "text": "Do I need to install zoom?\n(Obviously, this section is only relevant if the workshop will be held via zoom and not some other video communication software.)\nNo, not necessarily. It is not required to install the zoom software in order to participate in a zoom meeting, because you can also join from your browser (see details here and here). Basically, there will be a link that says “Join from your browser” and that’s it. However, be aware that there are some minor functions not available to you if you are joining from your browser."
-  },
-  {
-    "objectID": "ch/misc/workshopprep.html#what-else",
-    "href": "ch/misc/workshopprep.html#what-else",
-    "title": "Prepare for an upcoming workshop",
-    "section": "What else?",
-    "text": "What else?\n\nCheck your microphoneMake sure we can hear you when asking a question.\nCheck your camera\nThis is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.\nGet familiar with the options/functionsKnow how to mute your microphone. It should be muted at all times except when you are actually talking to us.\nKnow how to use the zoom chat.\nKnow how to use non-verbal feedback/meeting reactions in zoom (i.e. thumbs up etc.)."
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html",
-    "href": "ch/rbasics/correlation_regression.html",
-    "title": "Correlation & Regression",
-    "section": "",
-    "text": "This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.\n# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  modelbased,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#import",
-    "href": "ch/rbasics/correlation_regression.html#import",
-    "title": "Correlation & Regression",
-    "section": "Import",
-    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/DrinksPeterMax.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 20 × 3\n   Person drinks blood_alc\n   &lt;chr&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n 1 Max         1       0.2\n 2 Max         2       0.3\n 3 Max         3       0.5\n 4 Max         3       0.6\n 5 Max         4       0.6\n 6 Max         4       0.5\n 7 Max         4       0.7\n 8 Max         5       0.6\n 9 Max         7       0.8\n10 Max         8       1  \n11 Peter       1       0.1\n12 Peter       1       0.1\n13 Peter       1       0.2\n14 Peter       1       0.2\n15 Peter       1       0.1\n16 Peter       3       0.3\n17 Peter       5       0.5\n18 Peter       6       0.8\n19 Peter       8       0.9\n20 Peter       9       1.3"
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#goal",
-    "href": "ch/rbasics/correlation_regression.html#goal",
-    "title": "Correlation & Regression",
-    "section": "Goal",
-    "text": "Goal\nThe goal of this analysis is to answer the question how the number of drinks relates to the blood alcohol level. Note that we can ignore the column Person, since we do not care whether data came from Peter or Max. Thus, we only focus on the two numeric columns drinks and blood_alc. For them, we will do a correlation and a regression analysis."
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#exploring",
-    "href": "ch/rbasics/correlation_regression.html#exploring",
-    "title": "Correlation & Regression",
-    "section": "Exploring",
-    "text": "Exploring\nTo quickly get a first feeling for this dataset, we can use summary() and draw a plot via plot() or ggplot().\n\nsummary(dat)\n\n    Person              drinks       blood_alc    \n Length:20          Min.   :1.00   Min.   :0.100  \n Class :character   1st Qu.:1.00   1st Qu.:0.200  \n Mode  :character   Median :3.50   Median :0.500  \n                    Mean   :3.85   Mean   :0.515  \n                    3rd Qu.:5.25   3rd Qu.:0.725  \n                    Max.   :9.00   Max.   :1.300  \n\n\n\n\n\nCodeplot(y = dat$blood_alc, x = dat$drinks)\n\n\n\n\n\n\n\n\n\n\n\nCodeggplot(data = dat) +\n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n    theme_classic()\n\n\n\n\n\n\n\n\n\nApparently, the number of drinks ranges from 1 to 9 with a mean of 3.85, while the measured blood alcohol levels range from 0.1 to 1.3 with a mean of 0.515. The plots show a clear trend of increasing blood alcohol levels with a higher number of drinks - which is what we would expect."
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#get-it",
-    "href": "ch/rbasics/correlation_regression.html#get-it",
-    "title": "Correlation & Regression",
-    "section": "Get it",
-    "text": "Get it\nIf you only want to get the actual correlation estimate, you can use the function cor() and provide the two numeric variables (as vectors):\n\ncor(dat$drinks, dat$blood_alc)\n\n[1] 0.9559151\n\n\nSo the correlation between number of drinks and blood alcohol content in our sample is ca. 0.96 and thus very strong, since it is almost 1."
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#test-it",
-    "href": "ch/rbasics/correlation_regression.html#test-it",
-    "title": "Correlation & Regression",
-    "section": "Test it",
-    "text": "Test it\nIf you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use cor.test() instead of cor(). We may also use the {broom} package to get the results in a more convenient format.\n\n\n\nmycor &lt;- cor.test(dat$drinks, \n                  dat$blood_alc)\nmycor\n\n\n    Pearson's product-moment correlation\n\ndata:  dat$drinks and dat$blood_alc\nt = 13.811, df = 18, p-value = 5.089e-11\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.8897837 0.9827293\nsample estimates:\n      cor \n0.9559151 \n\n\n\n\n\n\ntidy(mycor)\n\n# A tibble: 1 × 8\n  estimate statistic  p.value parameter conf.low conf.high method    alternative\n     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      \n1    0.956      13.8 5.09e-11        18    0.890     0.983 Pearson'… two.sided  \n\n\n\n\nLooking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run ?cor.test() and look at the “Details” section for more info. Here, our correlation estimate of 0.96 is significantly different from 0, since the p-value is 0.0000000000509 and therefore \\(&lt; 0.05\\). Furthermore, the confidence interval is 0.890 - 0.983 meaning that we are 95% sure that the true correlation is somewhere in that range.\n\n\n\n\n\n\nAdditional Resources\n\n\n\n\n\n\n{correlation}\n{corrr}\n{ggcorrplot}"
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#get-it-1",
-    "href": "ch/rbasics/correlation_regression.html#get-it-1",
-    "title": "Correlation & Regression",
-    "section": "Get it",
-    "text": "Get it\nIn R, we can use the lm() function for fitting linear models so that it fits the simple linear regression equation shown above easily:\n\nreg &lt;- lm(formula = blood_alc ~ drinks,\n          data = dat)\n\nAs you can see, we refer to our data object dat in the data = argument so that in the formula = argument we only need to write the names of the respective columns in dat. Furthermore, we store the results in the reg object. When looking at this object, we get the following results:\n\nreg\n\n\nCall:\nlm(formula = blood_alc ~ drinks, data = dat)\n\nCoefficients:\n(Intercept)       drinks  \n    0.04896      0.12105  \n\n\nFirst, our command is repeated and then the “Coefficients” are shown, which are indeed the estimates for \\(a\\) and \\(b\\). So the best straight line is:\n\\[ bloodalc = 0.049 + 0.121 * drinks \\]\nwhich looks like this:\n\nCodeggplot(data = dat) +\n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  geom_abline(\n    intercept = reg$coefficients[1],\n    slope = reg$coefficients[2],\n    color = \"#00923f\", \n    linewidth = 1\n  ) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nHere is a little more info why formula = blood_alc ~ drinks leads to R estimating the \\(a\\) and \\(b\\) we want: What makes sense is that blood_alc is \\(y\\), drinks is \\(x\\) and ~ would therefore be the \\(=\\) in our equation. However, why is it we never had to write anything about \\(a\\) or \\(b\\)? The answer is that (i) when fitting a linear model, there is usually always an intercept (=\\(a\\)) by default and (ii) when writing a numeric variable (=drinks) as on the right side of the equation, it will automatically be assumed to have a slope (=\\(b\\)) multiplied with it. Accordingly, blood_alc ~ drinks automatically translates to blood_alc = a + b*drinks so to speak."
-  },
-  {
-    "objectID": "ch/rbasics/correlation_regression.html#is-this-right",
-    "href": "ch/rbasics/correlation_regression.html#is-this-right",
-    "title": "Correlation & Regression",
-    "section": "Is this right?",
-    "text": "Is this right?\nAfter fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via {modelbased}:\n\npreddat &lt;- tibble(drinks = seq(0, 9)) %&gt;% \n  estimate_expectation(model = reg) %&gt;% \n  as_tibble()\n\npreddat\n\n# A tibble: 10 × 5\n   drinks Predicted     SE  CI_low CI_high\n    &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1      0    0.0490 0.0406 -0.0363   0.134\n 2      1    0.170  0.0337  0.0993   0.241\n 3      2    0.291  0.0278  0.233    0.349\n 4      3    0.412  0.0238  0.362    0.462\n 5      4    0.533  0.0226  0.486    0.581\n 6      5    0.654  0.0247  0.602    0.706\n 7      6    0.775  0.0294  0.713    0.837\n 8      7    0.896  0.0357  0.821    0.971\n 9      8    1.02   0.0428  0.927    1.11 \n10      9    1.14   0.0505  1.03     1.24 \n\n\nYou may notice that according to our model, the expected alcohol content in your blood when having 0 drinks is actually 0.049 and thus larger than 0. This is obviously not true in real life. Instead, the true intercept should actually be exactly 0, so what went wrong?\nFirst of all, data will never be perfect in the sense that the when a parameter really is e.g. 42, its estimate based on measured data is also exactly 42.000000… . Instead, there are e.g. measurement errors: Peter and Max may have forgotten a drink or two or their device to measure the alcohol content is not precise enough. In fact, this would most likely be the underlying reason here - but remember that I made the data up.\nSo I would like you to think about the issue from two other angles:\n\nAre the results really saying the intercept is &gt; 0?\nDid we even ask the right question or should we have fitted a different model?\n\nAre the results really saying the intercept is &gt; 0?\nNo, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. summary(). We may also use the {broom} package to get the results in a more convenient format.\n\ntidy(reg, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   0.0490   0.0406       1.21 2.43e- 1  -0.0363     0.134\n2 drinks        0.121    0.00876     13.8  5.09e-11   0.103      0.139\n\n\nyou can see that the p-value for the intercept is 0.243, which is larger than 0.05 and thus saying that we could not find the intercept to be significantly different from 0. A second indication can be found when looking at the confidence interval of the expected value for having 0 drinks in the table above: [-0.0363, 0.1340]. This interval actually includes 0 which suggests that the true expected blood alcohol content for having 0 drinks may indeed be 0.\nShould we have fitted a different model?\nWe certainly could have and we will actually do it now. It must be clear that statistically speaking there was nothing wrong with our analysis. However, from a biological standpoint or in other words - because of our background knowledge and expertise as scientists - we could have indeed actively decided for a regression analysis that does not have an intercept and is thus forced to start 0 in terms of blood alcohol content. After all, statistics is just a tool to help us make conclusions. It is a powerful tool, but it will always be our responsibility to “ask the right questions” i.e. apply expedient methods.\nA simple linear regression without an intercept is strictly speaking no longer “simple”, since it no longer has the typical equation, but instead this one:\n\\[ y = \\beta x\\]\nTo tell lm() that it should not estimate the default intercept, we simply add 0 + right after the ~. As expected, we only get one estimate for the slope:\n\nreg_noint &lt;- lm(formula = blood_alc ~ 0 + drinks, data = dat)\nreg_noint\n\n\nCall:\nlm(formula = blood_alc ~ 0 + drinks, data = dat)\n\nCoefficients:\ndrinks  \n0.1298  \n\n\nmeaning that this regression with no intercept is estimated as\n\\[ bloodalc = 0.1298 * drinks \\]\nand must definitely predict 0 blood_alc when having 0 drinks. As a final result, we can compare both regression lines visually in a ggplot:\n\nCodeggplot(data = dat) + \n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  geom_abline(\n    intercept = reg$coefficients[1],\n    slope = reg$coefficients[2],\n    color = \"#00923f\", \n    linewidth = 1\n  ) +\n  geom_abline(\n    intercept = reg_noint$coefficients[1],\n    slope = reg_noint$coefficients[2],\n    color = \"#e4572e\", \n    linewidth = 1\n  ) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()"
-  },
-  {
     "objectID": "ch/rbasics/tidyverse.html",
     "href": "ch/rbasics/tidyverse.html",
     "title": "The tidyverse",
@@ -735,6 +266,496 @@
     "text": "Footnotes\n\nBut it was not the first package to use it. This blog post has a nice summary of the history of the pipe operator in R.↩︎\nNote that there are some differences between %&gt;% and |&gt; - find more about it e.g. here, here or here.↩︎\nSee the additional resources below if you want it differently.↩︎\nIt does not make a difference here, whether we put x = chr or x = fct in the ggplot statement.↩︎\nYes, the mean in this example is not really a mean, since there is only one number per group.↩︎\nNote that while I create two vectors in this example, this will work just as well with columns of a table via `table %&gt;% mutate(new = stringrfunction(old))`↩︎"
   },
   {
+    "objectID": "ch/rbasics/correlation_regression.html",
+    "href": "ch/rbasics/correlation_regression.html",
+    "title": "Correlation & Regression",
+    "section": "",
+    "text": "This chapter is trying to give you a feeling for what correlation and (simple linear) regression is. I am aware that the example data doesn’t have anything to do with agriculture or related fields, but I decided to keep it because it allows for an intuitive conclusion at the end.\n# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  modelbased,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#import",
+    "href": "ch/rbasics/correlation_regression.html#import",
+    "title": "Correlation & Regression",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/DrinksPeterMax.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 20 × 3\n   Person drinks blood_alc\n   &lt;chr&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n 1 Max         1       0.2\n 2 Max         2       0.3\n 3 Max         3       0.5\n 4 Max         3       0.6\n 5 Max         4       0.6\n 6 Max         4       0.5\n 7 Max         4       0.7\n 8 Max         5       0.6\n 9 Max         7       0.8\n10 Max         8       1  \n11 Peter       1       0.1\n12 Peter       1       0.1\n13 Peter       1       0.2\n14 Peter       1       0.2\n15 Peter       1       0.1\n16 Peter       3       0.3\n17 Peter       5       0.5\n18 Peter       6       0.8\n19 Peter       8       0.9\n20 Peter       9       1.3"
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#goal",
+    "href": "ch/rbasics/correlation_regression.html#goal",
+    "title": "Correlation & Regression",
+    "section": "Goal",
+    "text": "Goal\nThe goal of this analysis is to answer the question how the number of drinks relates to the blood alcohol level. Note that we can ignore the column Person, since we do not care whether data came from Peter or Max. Thus, we only focus on the two numeric columns drinks and blood_alc. For them, we will do a correlation and a regression analysis."
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#exploring",
+    "href": "ch/rbasics/correlation_regression.html#exploring",
+    "title": "Correlation & Regression",
+    "section": "Exploring",
+    "text": "Exploring\nTo quickly get a first feeling for this dataset, we can use summary() and draw a plot via plot() or ggplot().\n\nsummary(dat)\n\n    Person              drinks       blood_alc    \n Length:20          Min.   :1.00   Min.   :0.100  \n Class :character   1st Qu.:1.00   1st Qu.:0.200  \n Mode  :character   Median :3.50   Median :0.500  \n                    Mean   :3.85   Mean   :0.515  \n                    3rd Qu.:5.25   3rd Qu.:0.725  \n                    Max.   :9.00   Max.   :1.300  \n\n\n\n\n\nCodeplot(y = dat$blood_alc, x = dat$drinks)\n\n\n\n\n\n\n\n\n\n\n\nCodeggplot(data = dat) +\n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n    theme_classic()\n\n\n\n\n\n\n\n\n\nApparently, the number of drinks ranges from 1 to 9 with a mean of 3.85, while the measured blood alcohol levels range from 0.1 to 1.3 with a mean of 0.515. The plots show a clear trend of increasing blood alcohol levels with a higher number of drinks - which is what we would expect."
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#get-it",
+    "href": "ch/rbasics/correlation_regression.html#get-it",
+    "title": "Correlation & Regression",
+    "section": "Get it",
+    "text": "Get it\nIf you only want to get the actual correlation estimate, you can use the function cor() and provide the two numeric variables (as vectors):\n\ncor(dat$drinks, dat$blood_alc)\n\n[1] 0.9559151\n\n\nSo the correlation between number of drinks and blood alcohol content in our sample is ca. 0.96 and thus very strong, since it is almost 1."
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#test-it",
+    "href": "ch/rbasics/correlation_regression.html#test-it",
+    "title": "Correlation & Regression",
+    "section": "Test it",
+    "text": "Test it\nIf you would like additional information, such as a confidence interval and a test resulting in a p-value, you can use cor.test() instead of cor(). We may also use the {broom} package to get the results in a more convenient format.\n\n\n\nmycor &lt;- cor.test(dat$drinks, \n                  dat$blood_alc)\nmycor\n\n\n    Pearson's product-moment correlation\n\ndata:  dat$drinks and dat$blood_alc\nt = 13.811, df = 18, p-value = 5.089e-11\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.8897837 0.9827293\nsample estimates:\n      cor \n0.9559151 \n\n\n\n\n\n\ntidy(mycor)\n\n# A tibble: 1 × 8\n  estimate statistic  p.value parameter conf.low conf.high method    alternative\n     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      \n1    0.956      13.8 5.09e-11        18    0.890     0.983 Pearson'… two.sided  \n\n\n\n\nLooking at this longer output, you can see the sample estimate at the bottom, a confidence interval above it and a p-value with the corresponding test hypothesis above that. Run ?cor.test() and look at the “Details” section for more info. Here, our correlation estimate of 0.96 is significantly different from 0, since the p-value is 0.0000000000509 and therefore \\(&lt; 0.05\\). Furthermore, the confidence interval is 0.890 - 0.983 meaning that we are 95% sure that the true correlation is somewhere in that range.\n\n\n\n\n\n\nAdditional Resources\n\n\n\n\n\n\n{correlation}\n{corrr}\n{ggcorrplot}"
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#get-it-1",
+    "href": "ch/rbasics/correlation_regression.html#get-it-1",
+    "title": "Correlation & Regression",
+    "section": "Get it",
+    "text": "Get it\nIn R, we can use the lm() function for fitting linear models so that it fits the simple linear regression equation shown above easily:\n\nreg &lt;- lm(formula = blood_alc ~ drinks,\n          data = dat)\n\nAs you can see, we refer to our data object dat in the data = argument so that in the formula = argument we only need to write the names of the respective columns in dat. Furthermore, we store the results in the reg object. When looking at this object, we get the following results:\n\nreg\n\n\nCall:\nlm(formula = blood_alc ~ drinks, data = dat)\n\nCoefficients:\n(Intercept)       drinks  \n    0.04896      0.12105  \n\n\nFirst, our command is repeated and then the “Coefficients” are shown, which are indeed the estimates for \\(a\\) and \\(b\\). So the best straight line is:\n\\[ bloodalc = 0.049 + 0.121 * drinks \\]\nwhich looks like this:\n\nCodeggplot(data = dat) +\n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  geom_abline(\n    intercept = reg$coefficients[1],\n    slope = reg$coefficients[2],\n    color = \"#00923f\", \n    linewidth = 1\n  ) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nHere is a little more info why formula = blood_alc ~ drinks leads to R estimating the \\(a\\) and \\(b\\) we want: What makes sense is that blood_alc is \\(y\\), drinks is \\(x\\) and ~ would therefore be the \\(=\\) in our equation. However, why is it we never had to write anything about \\(a\\) or \\(b\\)? The answer is that (i) when fitting a linear model, there is usually always an intercept (=\\(a\\)) by default and (ii) when writing a numeric variable (=drinks) as on the right side of the equation, it will automatically be assumed to have a slope (=\\(b\\)) multiplied with it. Accordingly, blood_alc ~ drinks automatically translates to blood_alc = a + b*drinks so to speak."
+  },
+  {
+    "objectID": "ch/rbasics/correlation_regression.html#is-this-right",
+    "href": "ch/rbasics/correlation_regression.html#is-this-right",
+    "title": "Correlation & Regression",
+    "section": "Is this right?",
+    "text": "Is this right?\nAfter fitting a model, you may use it to make predictions. Here is one way of obtaining the expected blood alcohol content for having 0 to 9 drinks according to our simple linear regression via {modelbased}:\n\npreddat &lt;- tibble(drinks = seq(0, 9)) %&gt;% \n  estimate_expectation(model = reg) %&gt;% \n  as_tibble()\n\npreddat\n\n# A tibble: 10 × 5\n   drinks Predicted     SE  CI_low CI_high\n    &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1      0    0.0490 0.0406 -0.0363   0.134\n 2      1    0.170  0.0337  0.0993   0.241\n 3      2    0.291  0.0278  0.233    0.349\n 4      3    0.412  0.0238  0.362    0.462\n 5      4    0.533  0.0226  0.486    0.581\n 6      5    0.654  0.0247  0.602    0.706\n 7      6    0.775  0.0294  0.713    0.837\n 8      7    0.896  0.0357  0.821    0.971\n 9      8    1.02   0.0428  0.927    1.11 \n10      9    1.14   0.0505  1.03     1.24 \n\n\nYou may notice that according to our model, the expected alcohol content in your blood when having 0 drinks is actually 0.049 and thus larger than 0. This is obviously not true in real life. Instead, the true intercept should actually be exactly 0, so what went wrong?\nFirst of all, data will never be perfect in the sense that the when a parameter really is e.g. 42, its estimate based on measured data is also exactly 42.000000… . Instead, there are e.g. measurement errors: Peter and Max may have forgotten a drink or two or their device to measure the alcohol content is not precise enough. In fact, this would most likely be the underlying reason here - but remember that I made the data up.\nSo I would like you to think about the issue from two other angles:\n\nAre the results really saying the intercept is &gt; 0?\nDid we even ask the right question or should we have fitted a different model?\n\nAre the results really saying the intercept is &gt; 0?\nNo, they are not. Yes, the sample estimate for the intercept is 0.049, but when looking at more detailed information via e.g. summary(). We may also use the {broom} package to get the results in a more convenient format.\n\ntidy(reg, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   0.0490   0.0406       1.21 2.43e- 1  -0.0363     0.134\n2 drinks        0.121    0.00876     13.8  5.09e-11   0.103      0.139\n\n\nyou can see that the p-value for the intercept is 0.243, which is larger than 0.05 and thus saying that we could not find the intercept to be significantly different from 0. A second indication can be found when looking at the confidence interval of the expected value for having 0 drinks in the table above: [-0.0363, 0.1340]. This interval actually includes 0 which suggests that the true expected blood alcohol content for having 0 drinks may indeed be 0.\nShould we have fitted a different model?\nWe certainly could have and we will actually do it now. It must be clear that statistically speaking there was nothing wrong with our analysis. However, from a biological standpoint or in other words - because of our background knowledge and expertise as scientists - we could have indeed actively decided for a regression analysis that does not have an intercept and is thus forced to start 0 in terms of blood alcohol content. After all, statistics is just a tool to help us make conclusions. It is a powerful tool, but it will always be our responsibility to “ask the right questions” i.e. apply expedient methods.\nA simple linear regression without an intercept is strictly speaking no longer “simple”, since it no longer has the typical equation, but instead this one:\n\\[ y = \\beta x\\]\nTo tell lm() that it should not estimate the default intercept, we simply add 0 + right after the ~. As expected, we only get one estimate for the slope:\n\nreg_noint &lt;- lm(formula = blood_alc ~ 0 + drinks, data = dat)\nreg_noint\n\n\nCall:\nlm(formula = blood_alc ~ 0 + drinks, data = dat)\n\nCoefficients:\ndrinks  \n0.1298  \n\n\nmeaning that this regression with no intercept is estimated as\n\\[ bloodalc = 0.1298 * drinks \\]\nand must definitely predict 0 blood_alc when having 0 drinks. As a final result, we can compare both regression lines visually in a ggplot:\n\nCodeggplot(data = dat) + \n  aes(x = drinks, y = blood_alc) +\n  geom_point(size = 2) +\n  geom_abline(\n    intercept = reg$coefficients[1],\n    slope = reg$coefficients[2],\n    color = \"#00923f\", \n    linewidth = 1\n  ) +\n  geom_abline(\n    intercept = reg_noint$coefficients[1],\n    slope = reg_noint$coefficients[2],\n    color = \"#e4572e\", \n    linewidth = 1\n  ) +\n  scale_x_continuous(\n    name = \"Number of drinks\",\n    limits = c(0, 9),\n    breaks = seq(0, 9),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_y_continuous(\n    name = \"Blood alcohol content\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()"
+  },
+  {
+    "objectID": "ch/misc/workshopprep.html",
+    "href": "ch/misc/workshopprep.html",
+    "title": "Prepare for an upcoming workshop",
+    "section": "",
+    "text": "Hi there! If you are reading this, you will most likely soon participate in a workshop given by me. Thank you - I am already looking forward to it! Here are some tips to help you prepare."
+  },
+  {
+    "objectID": "ch/misc/workshopprep.html#r-packages",
+    "href": "ch/misc/workshopprep.html#r-packages",
+    "title": "Prepare for an upcoming workshop",
+    "section": "R-packages",
+    "text": "R-packages\nDuring the workshop you will get to know and install many additional R-packages that are not automatically installed. In most cases, you can just install them the moment they are introduced. However, if you e.g. have a slow internet connection, it may be worthwhile to install them beforehand. You can install most of the packages we need by running the following code:\n\nif (!require(\"pacman\", quietly = TRUE))\n  install.packages(\"pacman\")\n\npacman::p_load(\n  agridat,\n  broom,\n  conflicted,\n  desplot,\n  dlookr,\n  emmeans,\n  ggtext,\n  glmmTMB,\n  here,\n  janitor,\n  lme4,\n  lmerTest,\n  modelbased,\n  multcomp,\n  multcompView,\n  naniar,\n  nlme,\n  openxlsx,\n  performance,\n  readxl,\n  scales,\n  tidyverse\n)"
+  },
+  {
+    "objectID": "ch/misc/workshopprep.html#having-two-screens-helps",
+    "href": "ch/misc/workshopprep.html#having-two-screens-helps",
+    "title": "Prepare for an upcoming workshop",
+    "section": "Having two screens helps!",
+    "text": "Having two screens helps!\nDuring the workshop, I will constantly share my screen with you. Depending on whether you have multiple screens available or not, there are three main scenarios in my experience - ranked from worst to best:\n\nYou only have a single screen\nWhile this is the worst scenario, you obviously can still participate and will have no problem following me during the workshop. What may become difficult, however, is if you want to both look at my shared screen and also write your own R code simulatenously. If you only have only a single screen (that is not super wide), this means constantly switching between zoom and R. Nevertheless, there will be exercises during the workshop where everone has time to do an assignment on their own so that during those time you will definitely get some undivided R time.\nYou have a two screens, but they are not connected to the same deviceAn example for such a scenario would be having a computer with one screen and a laptop/tablet next to it. You could open R on one device and zoom on the other. This is certainly better than having only a single screen, since it is much easier to simultaneously read my and write your code. It is not optimal, however, since it does not allow for the advantages (i) and (ii) listed for scenario 3 below.\nYou have two screensHaving a computer/laptop with multiple screens connected is the optimal setup! You can easily look at both my and your R code and additionally (i) share your screen via zoom so that we can fix an issue you are having in R and (ii) copy-paste things from the zoom-chat into R."
+  },
+  {
+    "objectID": "ch/misc/workshopprep.html#do-i-need-to-install-zoom",
+    "href": "ch/misc/workshopprep.html#do-i-need-to-install-zoom",
+    "title": "Prepare for an upcoming workshop",
+    "section": "Do I need to install zoom?",
+    "text": "Do I need to install zoom?\n(Obviously, this section is only relevant if the workshop will be held via zoom and not some other video communication software.)\nNo, not necessarily. It is not required to install the zoom software in order to participate in a zoom meeting, because you can also join from your browser (see details here and here). Basically, there will be a link that says “Join from your browser” and that’s it. However, be aware that there are some minor functions not available to you if you are joining from your browser."
+  },
+  {
+    "objectID": "ch/misc/workshopprep.html#what-else",
+    "href": "ch/misc/workshopprep.html#what-else",
+    "title": "Prepare for an upcoming workshop",
+    "section": "What else?",
+    "text": "What else?\n\nCheck your microphoneMake sure we can hear you when asking a question.\nCheck your camera\nThis is optional of course, but I prefer participants turning their camera on as seeing your reactions improves the workshop.\nGet familiar with the options/functionsKnow how to mute your microphone. It should be muted at all times except when you are actually talking to us.\nKnow how to use the zoom chat.\nKnow how to use non-verbal feedback/meeting reactions in zoom (i.e. thumbs up etc.)."
+  },
+  {
+    "objectID": "ch/misc/furtherresources.html",
+    "href": "ch/misc/furtherresources.html",
+    "title": "Further resources",
+    "section": "",
+    "text": "This is a collection of resources I would recommend for topics that are not covered (well enough) on this website.\nIn general, you should browse through the Big Book of R, which is curated collection of over 300 R programming books on different topics.\n\nGeneralized Linear Models\n\nThe online version of “Beyond Multiple Linear Regression - Applied Generalized Linear Models and Multilevel Models in R” by Roback and Legler (2021)\nThe open access PDF version “Generalized Linear Mixed Models with Applications in Agriculture and Biology” by Ruı́z et al. (2023)\n\n\n\nMaps\n\nChapter 6: Maps in Wickham (2016)\nDrawing beautiful maps programmatically with R, sf and ggplot2 Part 1, Part 2 and Part 3\n#30DayMapChallenge - check out the posts of previous years, e.g. all the contributions of user bydata and the R code that created them.\n\n\n\nMeta analyses\n\nThe online version of “Doing Meta-Analysis with R: A Hands-On Guide” by Harrer et al. (2021)\n\n\n\n\n\n\n\n\nReferences\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with r. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\nRoback, Paul, and Julie Legler. 2021. Beyond Multiple Linear Regression. Chapman; Hall/CRC. https://doi.org/10.1201/9780429066665.\n\n\nRuı́z, Josafhat Salinas, Osval Antonio Montesinos López, Gabriela Hernández Ramı́rez, and Jose Crossa Hiriart. 2023. Generalized Linear Mixed Models with Applications in Agriculture and Biology. Springer International Publishing. https://doi.org/10.1007/978-3-031-32800-8.\n\n\nWickham, Hadley. 2016. Ggplot2 Elegant Graphics for Data Analysis. Use r! Springer International Publishing. https://doi.org/10.1007/978-3-319-24277-4.\n\nCitationBibTeX citation:@online{schmidt2023,\n  author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},\n  title = {Further Resources},\n  date = {2023-10-01},\n  url = {https://schmidtpaul.github.io/dsfair_quarto//ch/misc/furtherresources.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\n[Paul Schmidt](https://schmidtpaul.github.io/). 2023. “Further\nResources.” October 1, 2023. https://schmidtpaul.github.io/dsfair_quarto//ch/misc/furtherresources.html."
+  },
+  {
+    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html",
+    "href": "ch/exan/simple/splitplot_gomezgomez1984.html",
+    "title": "Two-way split-plot design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#import",
+    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#import",
+    "title": "Two-way split-plot design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Gomez&Gomez1984.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 72 × 7\n   yield   row   col rep   mainplot G     N     \n   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; \n 1  4520     4     1 rep1  mp01     Simba Goomba\n 2  5598     2     2 rep1  mp02     Simba Koopa \n 3  6192     1     3 rep1  mp03     Simba Toad  \n 4  8542     2     4 rep1  mp04     Simba Peach \n 5  5806     2     5 rep1  mp05     Simba Diddy \n 6  7470     1     6 rep1  mp06     Simba Yoshi \n 7  4034     2     1 rep1  mp01     Nala  Goomba\n 8  6682     4     2 rep1  mp02     Nala  Koopa \n 9  6869     3     3 rep1  mp03     Nala  Toad  \n10  6318     4     4 rep1  mp04     Nala  Peach \n# ℹ 62 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#format",
+    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#format",
+    "title": "Two-way split-plot design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns rep, N and G should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(rep:N), ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "ch/exan/simple/splitplot_gomezgomez1984.html#explore",
+    "href": "ch/exan/simple/splitplot_gomezgomez1984.html#explore",
+    "title": "Two-way split-plot design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per nitrogen level, per genotype and also per nitrogen-genotype-combination.\n\n\n\ndat %&gt;% \n  group_by(N) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  N          n    na  mean    sd\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Diddy     12     0 5866.  832.\n2 Toad      12     0 5864. 1434.\n3 Yoshi     12     0 5812  2349.\n4 Peach     12     0 5797. 2660.\n5 Koopa     12     0 5478.  657.\n6 Goomba    12     0 4054.  672.\n\ndat %&gt;% \n  group_by(G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  G         n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Simba    18     0 6554. 1475.\n2 Nala     18     0 6156. 1078.\n3 Timon    18     0 5563. 1269.\n4 Pumba    18     0 3642. 1434.\n\n\n\n\n\n\ndat %&gt;% \n  group_by(N, G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n=Inf)\n\n# A tibble: 24 × 6\n   N      G         n    na  mean     sd\n   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 Peach  Simba     3     0 8701.  270. \n 2 Yoshi  Simba     3     0 7563.   86.9\n 3 Yoshi  Nala      3     0 6951.  808. \n 4 Toad   Nala      3     0 6895   166. \n 5 Toad   Simba     3     0 6733.  490. \n 6 Yoshi  Timon     3     0 6687.  496. \n 7 Peach  Nala      3     0 6540.  936. \n 8 Diddy  Simba     3     0 6400   523. \n 9 Diddy  Nala      3     0 6259   499. \n10 Peach  Timon     3     0 6065. 1097. \n11 Toad   Timon     3     0 6014   515. \n12 Diddy  Timon     3     0 5994   101. \n13 Koopa  Nala      3     0 5982   684. \n14 Koopa  Simba     3     0 5672   458. \n15 Koopa  Timon     3     0 5443.  589. \n16 Koopa  Pumba     3     0 4816   506. \n17 Diddy  Pumba     3     0 4812   963. \n18 Goomba Pumba     3     0 4481.  463. \n19 Goomba Nala      3     0 4306   646. \n20 Goomba Simba     3     0 4253.  248. \n21 Toad   Pumba     3     0 3816  1311. \n22 Goomba Timon     3     0 3177.  453. \n23 Yoshi  Pumba     3     0 2047.  703. \n24 Peach  Pumba     3     0 1881.  407. \n\n\n\n\nAdditionally, we can decide to plot our data. One way to deal with the combination of two factors would be to use panels/facets in ggplot2.\nNote that we here define a custom set of colors for the Nitrogen levels that will be used throughout this chapter.\n\nNcolors &lt;- met.brewer(\"VanGogh2\", 6) %&gt;% \n  as.vector() %&gt;% \n  set_names(levels(dat$N))\n\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = N, color = N) +\n  facet_wrap(~G, labeller = label_both) +\n  stat_summary(\n    fun = mean,\n    colour = \"grey\",\n    geom = \"line\",\n    linetype = \"dotted\",\n    group = 1\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Nitrogen\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_manual(\n    values = Ncolors, \n    guide = \"none\"\n  ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(\n    angle = 45,\n    hjust = 1,\n    vjust = 1\n  ))\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a split-plot design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = c(\"white\", \"grey95\", \"grey90\"),\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Field layout\", # plot title\n  show.key = TRUE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  form = yield ~ col + row | rep, # fill color per rep, headers per rep\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col  = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # show legend\n  )\n\n\n\n\n\n\n\n\n\n\n\nCodemainplotcolors &lt;- c(met.brewer(\"VanGogh3\", 6),\n                    met.brewer(\"Hokusai2\", 6),\n                    met.brewer(\"OKeeffe2\", 6)) %&gt;%\n  as.vector() %&gt;%\n  set_names(levels(dat$mainplot))\n\ndesplot(\n  data = dat,\n  form = mainplot ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = mainplotcolors,\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Experimental design focus\", # plot title\n  show.key = TRUE, # don't show legend\n  key.cex = 0.6\n  )"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html",
+    "href": "ch/exan/simple/rcbd_gomezgomez1984.html",
+    "title": "Two-way randomized complete block design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  MetBrewer,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#import",
+    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#import",
+    "title": "Two-way randomized complete block design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/riceRCBD.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 72 × 6\n     row   col rep   N      G     yield\n   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;\n 1     2     6 rep1  Goomba Simba  4520\n 2     3     4 rep1  Koopa  Simba  5598\n 3     2     3 rep1  Toad   Simba  6192\n 4     1     1 rep1  Peach  Simba  8542\n 5     2     1 rep1  Diddy  Simba  5806\n 6     3     1 rep1  Yoshi  Simba  7470\n 7     4     5 rep1  Goomba Nala   4034\n 8     4     1 rep1  Koopa  Nala   6682\n 9     3     2 rep1  Toad   Nala   6869\n10     1     2 rep1  Peach  Nala   6318\n# ℹ 62 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#format",
+    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#format",
+    "title": "Two-way randomized complete block design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns rep, N and G should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(rep, N, G), ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_gomezgomez1984.html#explore",
+    "href": "ch/exan/simple/rcbd_gomezgomez1984.html#explore",
+    "title": "Two-way randomized complete block design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per nitrogen level, per genotype and also per nitrogen-genotype-combination.\n\n\n\ndat %&gt;% \n  group_by(N) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  N          n    na  mean    sd\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Diddy     12     0 5866.  832.\n2 Toad      12     0 5864. 1434.\n3 Yoshi     12     0 5812  2349.\n4 Peach     12     0 5797. 2660.\n5 Koopa     12     0 5478.  657.\n6 Goomba    12     0 4054.  672.\n\ndat %&gt;% \n  group_by(G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  G         n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Simba    18     0 6554. 1475.\n2 Nala     18     0 6156. 1078.\n3 Timon    18     0 5563. 1269.\n4 Pumba    18     0 3642. 1434.\n\n\n\n\n\n\ndat %&gt;% \n  group_by(N, G) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n=Inf)\n\n# A tibble: 24 × 6\n   N      G         n    na  mean     sd\n   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 Peach  Simba     3     0 8701.  270. \n 2 Yoshi  Simba     3     0 7563.   86.9\n 3 Yoshi  Nala      3     0 6951.  808. \n 4 Toad   Nala      3     0 6895   166. \n 5 Toad   Simba     3     0 6733.  490. \n 6 Yoshi  Timon     3     0 6687.  496. \n 7 Peach  Nala      3     0 6540.  936. \n 8 Diddy  Simba     3     0 6400   523. \n 9 Diddy  Nala      3     0 6259   499. \n10 Peach  Timon     3     0 6065. 1097. \n11 Toad   Timon     3     0 6014   515. \n12 Diddy  Timon     3     0 5994   101. \n13 Koopa  Nala      3     0 5982   684. \n14 Koopa  Simba     3     0 5672   458. \n15 Koopa  Timon     3     0 5443.  589. \n16 Koopa  Pumba     3     0 4816   506. \n17 Diddy  Pumba     3     0 4812   963. \n18 Goomba Pumba     3     0 4481.  463. \n19 Goomba Nala      3     0 4306   646. \n20 Goomba Simba     3     0 4253.  248. \n21 Toad   Pumba     3     0 3816  1311. \n22 Goomba Timon     3     0 3177.  453. \n23 Yoshi  Pumba     3     0 2047.  703. \n24 Peach  Pumba     3     0 1881.  407. \n\n\n\n\nAdditionally, we can decide to plot our data. One way to deal with the combination of two factors would be to use panels/facets in ggplot2.\nNote that we here define a custom set of colors for the Nitrogen levels that will be used throughout this chapter.\n\nNcolors &lt;- met.brewer(\"VanGogh2\", 6) %&gt;% \n  as.vector() %&gt;% \n  set_names(levels(dat$N))\n\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = N, color = N) +\n  facet_wrap(~G, labeller = label_both) +\n  stat_summary(\n    fun = mean,\n    colour = \"grey\",\n    geom = \"line\",\n    linetype = \"dotted\",\n    group = 1\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Nitrogen\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_manual(\n    values = Ncolors, \n    guide = \"none\"\n  ) +\n  theme_bw() +\n  theme(axis.text.x = element_text(\n    angle = 45,\n    hjust = 1,\n    vjust = 1\n  ))\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = c(\"white\", \"grey95\", \"grey90\"),\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Field layout\", # plot title\n  show.key = TRUE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  form = yield ~ col + row | rep, # fill color per rep, headers per rep\n  text = G, # genotype names per plot\n  cex = 0.8, # genotype names: font size\n  shorten = \"abb\", # genotype names: abbreviate\n  col  = N, # color of genotype names for each N-level\n  col.text = Ncolors, # use custom colors from above\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE, # show legend\n  key.cex = 0.7 # legend font size\n  )\n\n\n\n\n\n\n\n\n\n\n\nCoderepcolors &lt;- c(met.brewer(\"VanGogh3\", 1),\n               met.brewer(\"Hokusai2\", 1),\n               met.brewer(\"OKeeffe2\", 1)) %&gt;%\n  as.vector() %&gt;%\n  set_names(levels(dat$rep))\n\ndesplot(\n  data = dat,\n  form = rep ~ col + row | rep, # fill color per rep, headers per rep\n  col.regions = repcolors,\n  out1 = col, out1.gpar = list(col = \"darkgrey\"), # lines between columns\n  out2 = row, out2.gpar = list(col = \"darkgrey\"), # lines between rows\n  main = \"Experimental design focus\", # plot title\n  show.key = FALSE # don't show legend\n  )"
+  },
+  {
+    "objectID": "ch/exan/simple/latsq_bridges1989.html",
+    "href": "ch/exan/simple/latsq_bridges1989.html",
+    "title": "One-way latin square design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
+  },
+  {
+    "objectID": "ch/exan/simple/latsq_bridges1989.html#import",
+    "href": "ch/exan/simple/latsq_bridges1989.html#import",
+    "title": "One-way latin square design",
+    "section": "Import",
+    "text": "Import\n\ndat &lt;- agridat::bridges.cucumber %&gt;% \n  as_tibble() %&gt;% \n  filter(loc == \"Clemson\") %&gt;% # filter data from only one location\n  select(-loc) # remove loc column which is now unnecessary\n\ndat\n\n# A tibble: 16 × 4\n   gen        row   col yield\n   &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;\n 1 Dasher       1     3  44.2\n 2 Dasher       2     4  54.1\n 3 Dasher       3     2  47.2\n 4 Dasher       4     1  36.7\n 5 Guardian     1     4  33  \n 6 Guardian     2     2  13.6\n 7 Guardian     3     1  44.1\n 8 Guardian     4     3  35.8\n 9 Poinsett     1     1  11.5\n10 Poinsett     2     3  22.4\n11 Poinsett     3     4  30.3\n12 Poinsett     4     2  21.5\n13 Sprint       1     2  15.1\n14 Sprint       2     1  20.3\n15 Sprint       3     3  41.3\n16 Sprint       4     4  27.1"
+  },
+  {
+    "objectID": "ch/exan/simple/latsq_bridges1989.html#format",
+    "href": "ch/exan/simple/latsq_bridges1989.html#format",
+    "title": "One-way latin square design",
+    "section": "Format",
+    "text": "Format\nFor our analysis, gen, row and col should be encoded as factors. However, the desplot() function needs row and col as formatted as integers. Therefore we create copies of these columns encoded as factors and named rowF and colF. Below are two ways how to achieve this:\n\n\n\ndat &lt;- dat %&gt;%\n  mutate(\n    colF = as.factor(col),\n    rowF = as.factor(row)\n  )\n\n\n\n\n\ndat &lt;- dat %&gt;%\n  mutate(across(\n    .cols = c(row, col), \n    .fns = ~ as.factor(.x), \n    .names = (\"{.col}F\")\n  ))"
+  },
+  {
+    "objectID": "ch/exan/simple/latsq_bridges1989.html#explore",
+    "href": "ch/exan/simple/latsq_bridges1989.html#explore",
+    "title": "One-way latin square design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per genotype, per row and per column.\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  gen          n    na  mean    sd\n  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Dasher       4     0  45.6  7.21\n2 Guardian     4     0  31.6 12.9 \n3 Sprint       4     0  26.0 11.4 \n4 Poinsett     4     0  21.4  7.71\n\n\n\n\n\ndat %&gt;% \n  group_by(rowF) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  rowF      n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 3         4     0  40.7  7.36\n2 4         4     0  30.3  7.28\n3 2         4     0  27.6 18.1 \n4 1         4     0  26.0 15.4 \n\n\n\n\n\n\ndat %&gt;% \n  group_by(colF) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  colF      n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 4         4     0  36.1 12.2 \n2 3         4     0  35.9  9.67\n3 1         4     0  28.2 14.9 \n4 2         4     0  24.4 15.6 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = gen, color = colF, shape = rowF) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Column\"\n  ) +\n  scale_shape_discrete(\n    name = \"Row\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a Latin square design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per genotype       \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield     \n  out1 = rowF, # line between rows\n  out2 = colF, # line between columns\n  out1.gpar = list(col = \"black\", lwd = 2), # out1 line style\n  out2.gpar = list(col = \"black\", lwd = 2), # out2 line style\n  text = gen, # gen names per plot\n  cex = 1, # gen names: font size\n  shorten = FALSE, # gen names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\nThus, Dasher seems to be the most promising genotype in terms of yield. Moreover, it can be seen that yields were generally higher in column 4 and row 3."
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html",
+    "href": "ch/exan/simple/augm_petersen1994.html",
+    "title": "One-way augmented design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  car,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#import",
+    "href": "ch/exan/simple/augm_petersen1994.html#import",
+    "title": "One-way augmented design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Petersen1994.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 48 × 5\n   gen   yield block   row   col\n   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st     2972 I         1     1\n 2 14     2405 I         2     1\n 3 26     2855 I         3     1\n 4 ci     2592 I         4     1\n 5 17     2572 I         5     1\n 6 wa     2608 I         6     1\n 7 22     2705 I         7     1\n 8 13     2391 I         8     1\n 9 st     3122 II        1     2\n10 ci     3023 II        2     2\n# ℹ 38 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#format",
+    "href": "ch/exan/simple/augm_petersen1994.html#format",
+    "title": "One-way augmented design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns gen and block should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(gen, block), ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#explore",
+    "href": "ch/exan/simple/augm_petersen1994.html#explore",
+    "title": "One-way augmented design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(n), desc(mean))\n\n# A tibble: 33 × 5\n   gen       n    na  mean    sd\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 st        6     0 2759.  832.\n 2 ci        6     0 2726.  711.\n 3 wa        6     0 2678.  615.\n 4 19        1     0 3643    NA \n 5 11        1     0 3380    NA \n 6 07        1     0 3265    NA \n 7 03        1     0 3055    NA \n 8 04        1     0 3018    NA \n 9 01        1     0 3013    NA \n10 30        1     0 2955    NA \n# ℹ 23 more rows\n\n\n\n\n\n\ndat %&gt;% \n  group_by(block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 6 × 5\n  block     n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 VI        8     0 3205.  417.\n2 II        8     0 2864.  258.\n3 IV        8     0 2797.  445.\n4 I         8     0 2638.  202.\n5 III       8     0 2567.  440.\n6 V         8     0 1390.  207.\n\n\n\n\nAdditionally, we can decide to plot our data. Note that we here define custom colors for the genotypes, where all unreplicated entries get a shade of green and all replicated checks get a shade of red.\n\ngreens30 &lt;- colorRampPalette(c(\"#bce2cc\", \"#00923f\"))(30)\noranges3 &lt;- colorRampPalette(c(\"#e4572e\", \"#ad0000\"))(3)\ngen_cols &lt;- set_names(c(greens30, oranges3), nm = levels(dat$gen))\n\n\nCodeggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = block\n  ) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Genotype\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_color_manual(\n    guide = \"none\",\n    values = gen_cols\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_bw() +\n  theme(\n    legend.position = \"top\",\n    axis.text.x = element_text(size = 7)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ col + row, # fill color per cultivar  \n  col.regions = gen_cols, # custom fill colors\n  out1 = block, # line between blocks                     \n  text = gen, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend\n)"
+  },
+  {
+    "objectID": "ch/exan/simple/augm_petersen1994.html#variance-components",
+    "href": "ch/exan/simple/augm_petersen1994.html#variance-components",
+    "title": "One-way augmented design",
+    "section": "Variance components",
+    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_fb)$sigma^2\n\n[1] 91102.66\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rb))\n\n# A tibble: 2 × 5\n  grp      var1        var2     vcov sdcor\n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1 block    (Intercept) &lt;NA&gt;  434198.  659.\n2 Residual &lt;NA&gt;        &lt;NA&gt;   91103.  302."
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html",
+    "title": "One-way alpha design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  agridat,\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#import",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#import",
+    "title": "One-way alpha design",
+    "section": "Import",
+    "text": "Import\nThe data is available as part of the {agridat} package and needs no further formatting:\n\ndat &lt;- as_tibble(agridat::john.alpha)\ndat\n\n# A tibble: 72 × 7\n    plot rep   block gen   yield   row   col\n   &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;\n 1     1 R1    B1    G11    4.12     1     1\n 2     2 R1    B1    G04    4.45     2     1\n 3     3 R1    B1    G05    5.88     3     1\n 4     4 R1    B1    G22    4.58     4     1\n 5     5 R1    B2    G21    4.65     5     1\n 6     6 R1    B2    G10    4.17     6     1\n 7     7 R1    B2    G20    4.01     7     1\n 8     8 R1    B2    G02    4.34     8     1\n 9     9 R1    B3    G23    4.23     9     1\n10    10 R1    B3    G14    4.76    10     1\n# ℹ 62 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#explore",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#explore",
+    "title": "One-way alpha design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(n), desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 24 × 4\n   gen       n  mean     sd\n   &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 G01       3  5.16 0.534 \n 2 G05       3  5.06 0.841 \n 3 G12       3  4.91 0.641 \n 4 G15       3  4.89 0.207 \n 5 G19       3  4.87 0.398 \n 6 G13       3  4.83 0.619 \n 7 G21       3  4.82 0.503 \n 8 G17       3  4.73 0.379 \n 9 G16       3  4.73 0.502 \n10 G06       3  4.71 0.464 \n11 G22       3  4.64 0.432 \n12 G14       3  4.56 0.186 \n13 G02       3  4.51 0.574 \n14 G18       3  4.44 0.587 \n15 G04       3  4.40 0.0433\n16 G10       3  4.39 0.450 \n17 G11       3  4.38 0.641 \n18 G08       3  4.32 0.584 \n19 G24       3  4.14 0.726 \n20 G23       3  4.14 0.232 \n21 G07       3  4.13 0.510 \n22 G20       3  3.78 0.209 \n23 G09       3  3.61 0.606 \n24 G03       3  3.34 0.456 \n\n\n\n\n\n\ndat %&gt;% \n  group_by(rep, block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:n, mean, sd) %&gt;%\n  arrange(desc(mean)) %&gt;% \n  print(n = Inf)\n\n# A tibble: 18 × 5\n   rep   block     n  mean     sd\n   &lt;fct&gt; &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 R2    B3        4  5.22 0.149 \n 2 R2    B5        4  5.21 0.185 \n 3 R2    B6        4  5.11 0.323 \n 4 R2    B4        4  5.01 0.587 \n 5 R1    B5        4  4.79 0.450 \n 6 R1    B1        4  4.75 0.772 \n 7 R1    B6        4  4.58 0.819 \n 8 R3    B1        4  4.38 0.324 \n 9 R1    B3        4  4.36 0.337 \n10 R1    B4        4  4.33 0.727 \n11 R3    B3        4  4.30 0.0710\n12 R1    B2        4  4.29 0.273 \n13 R2    B2        4  4.23 0.504 \n14 R3    B4        4  4.22 0.375 \n15 R3    B5        4  4.15 0.398 \n16 R2    B1        4  4.12 0.411 \n17 R3    B2        4  3.96 0.631 \n18 R3    B6        4  3.61 0.542 \n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCode# sort genotypes by mean yield\ngen_order &lt;- dat %&gt;% \n  group_by(gen) %&gt;% \n  summarise(mean = mean(yield)) %&gt;% \n  arrange(mean) %&gt;% \n  pull(gen) %&gt;% \n  as.character()\n\nggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = rep\n  ) +\n  geom_line(\n    aes(group = gen),\n    color = \"darkgrey\"\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Genotype\",\n    limits = gen_order\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_shape_discrete(\n    name = \"Block\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_classic() +\n  theme(\n    legend.position = \"top\", \n    axis.text.x = element_text(angle = 90, vjust = 0.5)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a non-resolvable augmented design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}.\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = gen ~ row + col | rep, # fill color per genotype, headers per replicate\n  out1 = block, # lines between incomplete blocks\n  out1.gpar = list(col = \"black\", lwd = 1, lty = \"dashed\"), # line type\n  main = \"Field layout\", # title\n  key.cex = 0.6,\n  layout = c(3, 1) # force all reps drawn in one row\n)"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#variance-components",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#variance-components",
+    "title": "One-way alpha design",
+    "section": "Variance components",
+    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_fb)$sigma^2\n\n[1] 0.08346307\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rb))\n\n# A tibble: 2 × 5\n  grp       var1        var2    vcov sdcor\n  &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 rep:block (Intercept) &lt;NA&gt;  0.0619 0.249\n2 Residual  &lt;NA&gt;        &lt;NA&gt;  0.0852 0.292"
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#efficiency",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#efficiency",
+    "title": "One-way alpha design",
+    "section": "Efficiency",
+    "text": "Efficiency\nThe efficiency of a resolvable design can be calculated as its mean s.e.d. compared to the (mean1) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get avg_sed_mod_rb^2 which is 0.07292. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:\n\navg_sed_mod_RCBD &lt;- lm(yield ~ gen + rep, data = dat) %&gt;% \n  emmeans(pairwise ~ \"gen\",\n          adjust = \"none\",\n          lmer.df = \"kenward-roger\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean()\n\navg_sed_mod_RCBD^2\n\n[1] 0.08972397\n\n\nFinally, the efficiency of this resolvable design is then\n\navg_sed_mod_RCBD^2 / avg_sed_mod_rb^2\n\n[1] 1.230428\n\n\nmeaning that the resolvable design is indeed more efficient since the efficiency is &gt; 1."
+  },
+  {
+    "objectID": "ch/exan/simple/alpha_johnwilliams1995.html#footnotes",
+    "href": "ch/exan/simple/alpha_johnwilliams1995.html#footnotes",
+    "title": "One-way alpha design",
+    "section": "Footnotes",
+    "text": "Footnotes\n\nIn this scenario, all s.e.d. of the RCBD model would be identical so we don’t really need to get the average, but could instead argue that there is only one constant s.e.d.↩︎"
+  },
+  {
+    "objectID": "ch/exan/simple/crd_mead1993.html",
+    "href": "ch/exan/simple/crd_mead1993.html",
+    "title": "One-way completely randomized design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
+  },
+  {
+    "objectID": "ch/exan/simple/crd_mead1993.html#import",
+    "href": "ch/exan/simple/crd_mead1993.html#import",
+    "title": "One-way completely randomized design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 24 × 4\n   variety yield   row   col\n   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 v1       25.1     4     2\n 2 v1       17.2     1     6\n 3 v1       26.4     4     1\n 4 v1       16.1     1     4\n 5 v1       22.2     1     2\n 6 v1       15.9     2     4\n 7 v2       40.2     4     4\n 8 v2       35.2     3     1\n 9 v2       32.0     4     6\n10 v2       36.5     2     1\n# ℹ 14 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/crd_mead1993.html#format",
+    "href": "ch/exan/simple/crd_mead1993.html#format",
+    "title": "One-way completely randomized design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the column variety should be encoded as a factor, since R by default encoded it as a character variable. There are multiple ways to do this - here are two:\n\n\n\ndat &lt;- dat %&gt;% \n  mutate(variety = as.factor(variety))\n\n\n\n\n\ndat &lt;- dat %&gt;% \n  mutate(across(variety, ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "ch/exan/simple/crd_mead1993.html#explore",
+    "href": "ch/exan/simple/crd_mead1993.html#explore",
+    "title": "One-way completely randomized design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can a summary per variety.\n\ndat %&gt;% \n  group_by(variety) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd, p00, p100) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 7\n  variety     n    na  mean    sd   p00  p100\n  &lt;fct&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 v2          6     0  37.4  3.95  32.0  43.3\n2 v4          6     0  29.9  2.23  27.6  33.2\n3 v1          6     0  20.5  4.69  15.9  26.4\n4 v3          6     0  19.5  5.56  11.4  25.9\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = variety) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Variety\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a completely randomized design; CRD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}:\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = variety ~ col + row, # fill color per variety\n  text = variety, # variety names per plot\n  cex = 1, # variety names: font size\n  main = \"Field layout\", # plot title\n  show.key = FALSE # hide legend \n  )     \n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat, \n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color per variety\n  text = variety, # variety names per plot\n  cex = 1, # variety names: font size\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend \n  )"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html",
+    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html",
+    "title": "One-way randomized complete block design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#import",
+    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#import",
+    "title": "One-way randomized complete block design",
+    "section": "Import",
+    "text": "Import\n\n\n# data is available online:\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Clewer&Scarisbrick2001.csv\"\n\n\n\ndat &lt;- read_csv(path) # use path from above\ndat\n\n# A tibble: 12 × 5\n   block cultivar yield   row   col\n   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 B1    C1         7.4     2     1\n 2 B1    C2         9.8     3     1\n 3 B1    C3         7.3     1     1\n 4 B1    C4         9.5     4     1\n 5 B2    C1         6.5     1     2\n 6 B2    C2         6.8     4     2\n 7 B2    C3         6.1     3     2\n 8 B2    C4         8       2     2\n 9 B3    C1         5.6     2     3\n10 B3    C2         6.2     1     3\n11 B3    C3         6.4     3     3\n12 B3    C4         7.4     4     3"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#format",
+    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#format",
+    "title": "One-way randomized complete block design",
+    "section": "Format",
+    "text": "Format\nBefore anything, the columns block and cultivar should be encoded as factors, since R by default encoded them as character.\n\ndat &lt;- dat %&gt;%\n  mutate(across(c(block, cultivar), ~ as.factor(.x)))"
+  },
+  {
+    "objectID": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#explore",
+    "href": "ch/exan/simple/rcbd_clewerscarisbrick2001.html#explore",
+    "title": "One-way randomized complete block design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\n\n\ndat %&gt;% \n  group_by(cultivar) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 4 × 5\n  cultivar     n    na  mean    sd\n  &lt;fct&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 C4           3     0   8.3 1.08 \n2 C2           3     0   7.6 1.93 \n3 C3           3     0   6.6 0.624\n4 C1           3     0   6.5 0.9  \n\n\n\n\n\n\ndat %&gt;% \n  group_by(block) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 3 × 5\n  block     n    na  mean    sd\n  &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 B1        4     0  8.5  1.33 \n2 B2        4     0  6.85 0.819\n3 B3        4     0  6.4  0.748\n\n\n\n\nAdditionally, we can decide to plot our data:\n\nCodeggplot(data = dat) +\n  aes(y = yield, x = cultivar, color = block) +\n  geom_point() +\n    scale_x_discrete(\n    name = \"Cultivar\"\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.1))\n  ) +\n  scale_color_discrete(\n    name = \"Block\"\n  ) +\n  theme_classic()\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a randomized complete block design; RCBD) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. We can even create a second field plan that gives us a feeling for the yields per plot.\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = cultivar ~ col + row, # fill color per cultivar       \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Field layout: cultivars\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\n\n\nCodedesplot(\n  data = dat,\n  flip = TRUE, # row 1 on top, not on bottom\n  form = yield ~ col + row, # fill color according to yield      \n  out1 = block, # line between blocks                     \n  text = cultivar, # cultivar names per plot\n  cex = 1, # cultviar names: font size\n  shorten = FALSE, # cultivar names: don't abbreviate\n  main = \"Yield per plot\", # plot title\n  show.key = FALSE # hide legend\n  ) \n\n\n\n\n\n\n\n\n\nThus, C4 seems to be the most promising cultivar in terms of yield. Moreover, it can be seen that yields were generally higher in block B1 (left), compared to the other blocks."
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html",
+    "title": "One-way row column design",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  conflicted,\n  desplot,\n  emmeans,\n  ggtext,\n  lme4,\n  lmerTest,\n  multcomp,\n  multcompView,\n  tidyverse)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nconflicts_prefer(lmerTest::lmer)"
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#import",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#import",
+    "title": "One-way row column design",
+    "section": "Import",
+    "text": "Import\nThe data is available as part of the {agridat} package:\n\ndat &lt;- as_tibble(agridat::kempton.rowcol)\ndat\n\n# A tibble: 68 × 5\n   rep     row   col gen   yield\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;\n 1 R1        1     1 G20    3.77\n 2 R1        1     2 G04    3.21\n 3 R1        1     3 G33    4.55\n 4 R1        1     4 G28    4.09\n 5 R1        1     5 G07    5.05\n 6 R1        1     6 G12    4.19\n 7 R1        1     7 G30    3.27\n 8 R1        2     1 G10    3.44\n 9 R1        2     2 G14    4.3 \n10 R1        2     4 G21    3.86\n# ℹ 58 more rows"
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#format",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#format",
+    "title": "One-way row column design",
+    "section": "Format",
+    "text": "Format\nFor our analysis, gen, row and col should be encoded as factors. However, the desplot() function needs row and col as formatted as integers. Therefore we create copies of these columns encoded as factors and named rowF and colF:\n\ndat &lt;- dat %&gt;%\n  mutate(\n    colF = as.factor(col),\n    rowF = as.factor(row)\n  )"
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#explore",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#explore",
+    "title": "One-way row column design",
+    "section": "Explore",
+    "text": "Explore\nWe make use of dlookr::describe() to conveniently obtain descriptive summary tables. Here, we get can summarize per block and per cultivar.\n\ndat %&gt;% \n  group_by(gen) %&gt;% \n  dlookr::describe(yield) %&gt;% \n  select(2:sd) %&gt;%\n  arrange(desc(mean))\n\n# A tibble: 35 × 5\n   gen       n    na  mean     sd\n   &lt;fct&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 G19       2     0  6.07 1.84  \n 2 G07       2     0  5.74 0.976 \n 3 G33       2     0  5.13 0.820 \n 4 G06       2     0  4.96 0.940 \n 5 G09       2     0  4.94 1.68  \n 6 G11       2     0  4.93 1.03  \n 7 G14       2     0  4.92 0.877 \n 8 G27       2     0  4.89 1.80  \n 9 G03       2     0  4.78 0.0424\n10 G25       2     0  4.78 0.361 \n# ℹ 25 more rows\n\n\nAdditionally, we can decide to plot our data.\n\nCode# sort genotypes by mean yield\ngen_order &lt;- dat %&gt;% \n  group_by(gen) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  arrange(mean) %&gt;% \n  pull(gen) %&gt;% \n  as.character()\n\nggplot(data = dat) +\n  aes(\n    y = yield,\n    x = gen,\n    shape = rep\n  ) +\n  geom_line(\n    aes(group = gen),\n    color = \"darkgrey\"\n  ) +\n  geom_point() +\n  scale_x_discrete(\n    name = \"Genotype\",\n    limits = gen_order\n  ) +\n  scale_y_continuous(\n    name = \"Yield\",\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_shape_discrete(\n    name = \"Replicate\"\n  ) +\n  guides(shape = guide_legend(nrow = 1)) +\n  theme_classic() +\n  theme(\n    legend.position = \"top\", \n    axis.text.x = element_text(angle = 90, vjust = 0.5)\n  )\n\n\n\n\n\n\n\nFinally, since this is an experiment that was laid with a certain experimental design (= a resolvable row column design) - it makes sense to also get a field plan. This can be done via desplot() from {desplot}. In this case it is worth noting that there is missing data, as yield values for two plots are not present in the data.\n\nCodedesplot(\n  data = dat,\n  form = gen ~ col + row | rep, # fill color per genotype, headers per replicate\n  text = gen, \n  cex = 0.7, \n  shorten = \"no\",\n  out1 = row, out1.gpar=list(col=\"black\"), # lines between rows\n  out2 = col, out2.gpar=list(col=\"black\"), # lines between columns\n  main = \"Field layout\", \n  show.key = FALSE\n)"
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#variance-components",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#variance-components",
+    "title": "One-way row column design",
+    "section": "Variance components",
+    "text": "Variance components\nTo extract variance components from our models, we unfortunately need different functions per model since only of of them is a mixed model and we used different functions to fit them.\n\n\n\n# Residual Variance\nsummary(mod_frc)$sigma^2\n\n[1] 0.1666074\n\n\n\n\n\n\n# Both Variance Components\nas_tibble(VarCorr(mod_rrc))\n\n# A tibble: 3 × 5\n  grp      var1        var2    vcov sdcor\n  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 colF     (Intercept) &lt;NA&gt;  0.144  0.380\n2 rowF     (Intercept) &lt;NA&gt;  0.0293 0.171\n3 Residual &lt;NA&gt;        &lt;NA&gt;  0.167  0.409"
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#efficiency",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#efficiency",
+    "title": "One-way row column design",
+    "section": "Efficiency",
+    "text": "Efficiency\nThe efficiency of a resolvable design can be calculated as its mean s.e.d. compared to the (mean1) s.e.d. of the analogous RCBD, i.e. leaving out the incomplete block effects within the replicates. Above, we have already calculated the mean s.e.d. of our resolvable design so we can square it and get avg_sed_mod_frc^2 which is 0.23312. Accordingly, we can fit a model leaving out the incomplete block effects and get the s.e.d. just like before and also square it:\n\navg_sed_mod_RCBD &lt;- lm(yield ~ gen + rep, data = dat) %&gt;% \n  emmeans(pairwise ~ \"gen\",\n          adjust = \"none\",\n          lmer.df = \"kenward-roger\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean()\n\navg_sed_mod_RCBD^2\n\n[1] 0.3257469\n\n\nFinally, the efficiency of this resolvable design is then\n\navg_sed_mod_RCBD^2 / avg_sed_mod_frc^2\n\n[1] 1.397325\n\n\nmeaning that the resolvable design is more efficient since the efficiency is &gt; 1."
+  },
+  {
+    "objectID": "ch/exan/simple/rowcol_kemptonfox1997.html#footnotes",
+    "href": "ch/exan/simple/rowcol_kemptonfox1997.html#footnotes",
+    "title": "One-way row column design",
+    "section": "Footnotes",
+    "text": "Footnotes\n\nIn this scenario, all s.e.d. of the RCBD model would be identical so we don’t really need to get the average, but could instead argue that there is only one constant s.e.d.↩︎"
+  },
+  {
+    "objectID": "ch/misc/exercises.html",
+    "href": "ch/misc/exercises.html",
+    "title": "Exercises",
+    "section": "",
+    "text": "1 Ex: 1wCRD\n\nExercise# This data holds information about the misture content from multiple samples\n# for each of four different soils. Notice that for this dataset you have no\n# information on any specific field trial layout (i.e. row or col column are\n# not present in the dataset). Therefore you should skip trying to create a\n# field layout with desplot() and instead focus on the following:\n# 1) How many samples per soil were taken?\n# 2) Which soil has the highest value for moisture?\n# 3) Which soil has the highest average value for moisture?\n# 4) Create a ggplot with moisture values per soil!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the LSD test/t-test.\n# Bonus:\n# 7) Repeat the analysis, but this time remove all moisture values larger than\n# 12 at the very beginning.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Mead1993b.csv\"\ndat_1wCRD &lt;- read_csv(path, col_types = \"fn\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(multcomp)\nlibrary(multcompView)\n\ndat_1wCRD %&gt;% \n  group_by(soil) %&gt;% \n  summarise(\n    n = n(),\n    max = max(moisture),\n    mean = mean(moisture)\n  )\n\nplot_1wCRD &lt;- ggplot(data = dat_1wCRD) +\n  aes(y = moisture, x = soil) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  )\n\nmod_1wCRD &lt;- lm(moisture ~ soil, dat_1wCRD)\n\nanova(mod_1wCRD)\n  \nmod_1wCRD %&gt;% \n  emmeans(specs = ~ soil) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n2 Ex: 1wRCBD\n\nExercise# This data holds information from a yield (t/ha) trial laid out as a\n# randomized complete block design (3 blocks) with cultivar (4 cultivars)\n# being the only treatment factor. Thus, we have a total of 12 plots.\n# 1) Create a desplot!\n# 2) Which cultivar has the highest average yield?\n# 3) Which block has the highest average yield?\n# 4) Create a ggplot with yield per cultivar.\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n# Bonus:\n# 7) Repeat the analysis, but this time remove all observations from block 1.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/Clewer&Scarisbrick2001.csv\"\ndat_1wRCBD &lt;- read_csv(path, col_types = \"ffnii\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(desplot)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wRCBD,\n  flip = TRUE, \n  form = cultivar ~ col + row,\n  text = cultivar,\n  out1 = block,\n  cex = 1,\n  show.key = FALSE\n)\n\ndat_1wRCBD %&gt;% \n  group_by(cultivar) %&gt;% \n  summarise(mean = mean(yield))\n\ndat_1wRCBD %&gt;% \n  group_by(block) %&gt;% \n  summarise(mean = mean(yield))\n\nplot_1wRCBD &lt;- ggplot(data = dat_1wRCBD) +\n  aes(y = yield, x = cultivar, color = block) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  )\n\nmod_1wRCBD &lt;- lm(yield ~ cultivar + block, dat_1wRCBD)\n\nanova(mod_1wRCBD)\n  \nmod_1wRCBD %&gt;% \n  emmeans(specs = ~ cultivar) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n3 Ex: 1wAugLat\n\nExercise# This dataset contains information from an experiment utilizing a resolvable\n# design with checks. Specifically, it features 2 replicates and includes 90\n# unique entries. Additionally, there are 6 checks with extra replication.\n# Each block in the design contains 10 entries, and these incomplete blocks\n# are organized according to a lattice design, which allows them to be grouped\n# into complete replicates, forming a resolvable design structure. In this\n# dataset, standards are coded from 1001 to 1006, while the entries are coded\n# from 2 to 100.\n# 1) Create a desplot!\n# 2) What is the the number of missing values, the number of non-missing\n# values and the average value for yield for each combination of rep and\n# genoCheck?\n# 3) Create a ggplot with geno on the x-axis, yield on the y-axis and\n# dots colored depending on whether a geno is a check or not!\n# 4) Compare the average s.e.d. to find out whether the effects for\n# incomplete blocks should be taken as fixed or random in the model!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/PiephoAugmentedLattice.csv\"\ndat_1wAugLat &lt;- read_csv(path, col_types = \"ffffnnii\")\n\n\n\nSolutionlibrary(emmeans)\nlibrary(desplot)\nlibrary(lme4)\nlibrary(lmerTest)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wAugLat,\n  flip = TRUE, \n  form = geno ~ col + row,\n  text = geno,\n  col = genoCheck, \n  col.text = c(\"red\", \"black\"),\n  out1 = rep,\n  out2 = block, \n  show.key = FALSE\n)\n\ndat_1wAugLat %&gt;%\n  group_by(rep, genoCheck) %&gt;%\n  summarise(nobs = sum(!is.na(yield)),\n            nNA  = sum(is.na(yield)),\n            mean = mean(yield, na.rm = TRUE))\n\ngeno_order &lt;- dat_1wAugLat %&gt;% \n  group_by(geno) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  ungroup() %&gt;% \n  arrange(mean) %&gt;% \n  pull(geno) %&gt;% \n  as.character()\n\nmygg &lt;- ggplot(data = dat_1wAugLat) +\n  aes(y = yield, x = geno, color = genoCheck) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_x_discrete(\n    limits = geno_order\n  )\n\nmod_1wAugLat_fb &lt;-   lm(yield ~ geno + rep + block,       data = dat_1wAugLat)\nmod_1wAugLat_rb &lt;- lmer(yield ~ geno + rep + (1 | block), data = dat_1wAugLat)\n\nmod_1wAugLat_fb %&gt;%\n  emmeans(pairwise ~ \"geno\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\n# this takes some time!\nmod_1wAugLat_rb %&gt;%\n  emmeans(pairwise ~ \"geno\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\nanova(mod_1wAugLat_rb)\n  \nmod_1wAugLat_rb %&gt;% \n  emmeans(specs = ~ geno) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n4 Ex: 1wRowCol\n\nExercise# This data contains information from an experiment involving 64 oat\n# genotypes. The experimental design is an 8 x 8 lattice, which has been\n# replicated three times.\n# 1) Create a desplot!\n# 2) Per replicate, what is the the number of missing values, the number of\n# non-missing values and the average value for yield, height and TKW,\n# respectively?\n# 3) Create a ggplot with treat on the x-axis, yield on the y-axis!\n# 4) Compare the average s.e.d. to find out whether the effects for\n# incomplete blocks should be taken as fixed or random in the model!\n# 5) Conduct an ANOVA\n# 6) Perform multiple mean comparisons using the t-test.\n\n# get data\nlibrary(tidyverse)\npath &lt;- \"https://raw.githubusercontent.com/SchmidtPaul/dsfair_quarto/master/data/RowColFromUtz.csv\"\ndat_1wRowCol &lt;- read_csv(path, col_types = \"fiiffnnn\") %&gt;% \n  mutate(rowF = as.factor(row), colF = as.factor(col))\n\n\n\nSolutionlibrary(emmeans)\nlibrary(lme4)\nlibrary(lmerTest)\nlibrary(multcomp)\nlibrary(multcompView)\n\nmydp &lt;- desplot(\n  data = dat_1wRowCol,\n  flip = TRUE, \n  form = treat ~ col + row,\n  text = treat,\n  out1 = rep,\n  out2 = inc_block, \n  show.key = FALSE\n)\n\ndat_1wRowCol %&gt;%\n  group_by(rep) %&gt;%\n  dlookr::describe(yield, height, TKW) %&gt;% \n  dplyr::select(1:sd)\n\ntreat_order &lt;- dat_1wRowCol %&gt;% \n  group_by(treat) %&gt;% \n  summarise(mean = mean(yield, na.rm = TRUE)) %&gt;% \n  ungroup() %&gt;% \n  arrange(mean) %&gt;% \n  pull(treat) %&gt;% \n  as.character()\n\nmygg &lt;- ggplot(data = dat_1wRowCol) +\n  aes(y = yield, x = treat) +\n  geom_point() +\n  theme_bw() +\n  scale_y_continuous(\n    limits = c(0, NA),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_x_discrete(\n    limits = treat_order\n  )\n\nmod_1wRowCol_fb &lt;-   lm(yield ~ treat + rep + inc_block,       data = dat_1wRowCol)\nmod_1wRowCol_rb &lt;- lmer(yield ~ treat + rep + (1 | inc_block), data = dat_1wRowCol)\n\nmod_1wRowCol_fb %&gt;%\n  emmeans(pairwise ~ \"treat\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\n# this takes some time!\nmod_1wRowCol_rb %&gt;%\n  emmeans(pairwise ~ \"treat\",\n          adjust = \"none\") %&gt;%\n  pluck(\"contrasts\") %&gt;% # extract diffs\n  as_tibble() %&gt;% # format to table\n  pull(\"SE\") %&gt;% # extract s.e.d. column\n  mean() # get arithmetic mean\n\nanova(mod_1wRowCol_rb)\n  \nmod_1wRowCol_rb %&gt;% \n  emmeans(specs = ~ treat) %&gt;%\n  cld(adjust = \"none\", Letters = letters) \n\n\n\n\n\n\nCitationBibTeX citation:@online{schmidt2023,\n  author = {{[}Paul Schmidt{]}(https://schmidtpaul.github.io/)},\n  title = {Exercises},\n  date = {2023-11-14},\n  url = {https://schmidtpaul.github.io/dsfair_quarto//ch/misc/exercises.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\n[Paul Schmidt](https://schmidtpaul.github.io/). 2023.\n“Exercises.” November 14, 2023. https://schmidtpaul.github.io/dsfair_quarto//ch/misc/exercises.html."
+  },
+  {
+    "objectID": "ch/misc/usefulthings.html",
+    "href": "ch/misc/usefulthings.html",
+    "title": "Useful things",
+    "section": "",
+    "text": "This chapter is a collection of things I wish I had known earlier in my years using R and that I hope can be of use to you. Sections are named after R packages or whatever applies and sorted alphabetically."
+  },
+  {
+    "objectID": "ch/misc/usefulthings.html#footnotes",
+    "href": "ch/misc/usefulthings.html#footnotes",
+    "title": "Useful things",
+    "section": "Footnotes",
+    "text": "Footnotes\n\nKeep in mind that p00 is the 0th percentile and thus the minimum. Analogously, p50 is the median and p100 the maximum.↩︎"
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html",
+    "href": "ch/rbasics/baddata.html",
+    "title": "Bad data & Outliers",
+    "section": "",
+    "text": "# (install &) load packages\npacman::p_load(\n  broom,\n  conflicted,\n  here,\n  janitor,\n  naniar,\n  readxl,\n  tidyverse\n)\n\n# handle function conflicts\nconflicts_prefer(dplyr::filter) \nconflicts_prefer(dplyr::select)\nThere are two download links:"
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#import",
+    "href": "ch/rbasics/baddata.html#import",
+    "title": "Bad data & Outliers",
+    "section": "Import",
+    "text": "Import\nAssuming you are working in a R-project, save the formatted file somewhere within the project directory. I have saved it within a sub folder called data so that the relative path to my file is data/vision_fixed.xls.\n\npath &lt;- here(\"data\", \"vision_fixed.xls\")\ndat &lt;- read_excel(path)\n\ndat\n\n# A tibble: 29 × 9\n   Person   Ages Gender `Civil state` Height Profession Vision Distance PercDist\n   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n 1 Andrés     25 M      S                180 Student        10      1.5     15  \n 2 Anja       29 F      S                168 Professio…     10      4.5     45  \n 3 Armando    31 M      S                169 Professio…      9      4.5     50  \n 4 Carlos     25 M      M                185 Professio…      8      6       75  \n 5 Cristi…    23 F      &lt;NA&gt;             170 Student        10      3       30  \n 6 Delfa      39 F      M                158 Professio…      6      4.5     75  \n 7 Eduardo    28 M      S                166 Professio…      8      4.5     56.2\n 8 Enrique    NA &lt;NA&gt;   &lt;NA&gt;              NA Professio…     NA      6       NA  \n 9 Fanny      25 F      M                164 Student         9      3       33.3\n10 Franci…    46 M      M                168 Professio…      8      4.5     56.2\n# ℹ 19 more rows\n\n\nThis is optional, but we could argue that our column names are not in a desirable format. To deal with this, we can use the clean_names() functions of {janitor}. This package has several more handy functions for cleaning data that are worth checking out.\n\ndat &lt;- dat %&gt;% clean_names()\ndat\n\n# A tibble: 29 × 9\n   person    ages gender civil_state height profession vision distance perc_dist\n   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n 1 Andrés      25 M      S              180 Student        10      1.5      15  \n 2 Anja        29 F      S              168 Professio…     10      4.5      45  \n 3 Armando     31 M      S              169 Professio…      9      4.5      50  \n 4 Carlos      25 M      M              185 Professio…      8      6        75  \n 5 Cristina    23 F      &lt;NA&gt;           170 Student        10      3        30  \n 6 Delfa       39 F      M              158 Professio…      6      4.5      75  \n 7 Eduardo     28 M      S              166 Professio…      8      4.5      56.2\n 8 Enrique     NA &lt;NA&gt;   &lt;NA&gt;            NA Professio…     NA      6        NA  \n 9 Fanny       25 F      M              164 Student         9      3        33.3\n10 Francis…    46 M      M              168 Professio…      8      4.5      56.2\n# ℹ 19 more rows"
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#goal",
+    "href": "ch/rbasics/baddata.html#goal",
+    "title": "Bad data & Outliers",
+    "section": "Goal",
+    "text": "Goal\nVery much like in the previous chapter, our goal is to look at the relationship of two numeric variables: ages and vision. What is new about this data is, that it (i) has missing values and (ii) has a potential outlier."
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#exploring",
+    "href": "ch/rbasics/baddata.html#exploring",
+    "title": "Bad data & Outliers",
+    "section": "Exploring",
+    "text": "Exploring\nTo quickly get a first feeling for this dataset, we can use summary() and draw a plot via plot() or ggplot().\n\nsummary(dat)\n\n    person               ages          gender          civil_state       \n Length:29          Min.   :22.00   Length:29          Length:29         \n Class :character   1st Qu.:25.00   Class :character   Class :character  \n Mode  :character   Median :26.00   Mode  :character   Mode  :character  \n                    Mean   :30.61                                        \n                    3rd Qu.:29.50                                        \n                    Max.   :55.00                                        \n                    NA's   :1                                            \n     height       profession            vision          distance    \n Min.   :145.0   Length:29          Min.   : 3.000   Min.   :1.500  \n 1st Qu.:164.8   Class :character   1st Qu.: 7.000   1st Qu.:1.500  \n Median :168.0   Mode  :character   Median : 9.000   Median :3.000  \n Mean   :168.2                      Mean   : 8.357   Mean   :3.466  \n 3rd Qu.:172.8                      3rd Qu.:10.000   3rd Qu.:4.500  \n Max.   :190.0                      Max.   :10.000   Max.   :6.000  \n NA's   :1                          NA's   :1                       \n   perc_dist     \n Min.   : 15.00  \n 1st Qu.: 20.24  \n Median : 40.18  \n Mean   : 45.45  \n 3rd Qu.: 57.19  \n Max.   :150.00  \n NA's   :1       \n\n\n\n\n\nCodeplot(y = dat$vision, x = dat$ages)\n\n\n\n\n\n\n\n\n\n\n\nCodeggplot(data = dat) +\n  aes(x = ages, y = vision) +\n  geom_point(size = 2) +\n  scale_x_continuous(\n    name = \"Person's age\",\n    limits = c(20, 60),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n  scale_y_continuous(\n    name = \"Person's vision\",\n    limits = c(0, NA),\n    breaks = seq(0, 10, 2),\n    expand = expansion(mult = c(0, 0.05))\n  ) +\n    theme_bw()\n\n\n\n\n\n\n\n\n\nApparently, most people are in their 20s and can see quite well, however some people are older and they tend to have a vision that’s a little worse."
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#step-1-investigate",
+    "href": "ch/rbasics/baddata.html#step-1-investigate",
+    "title": "Bad data & Outliers",
+    "section": "Step 1: Investigate",
+    "text": "Step 1: Investigate\nIn such a scenario, the first thing you should do is find out more about this suspicious data point. In our case, we would start by finding out the person’s name. One way of doing this is by simply filtering the data:\n\ndat %&gt;% \n  filter(vision == 3)\n\n# A tibble: 1 × 9\n  person   ages gender civil_state height profession   vision distance perc_dist\n  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Rolando    26 M      M              180 Professional      3      4.5       150\n\n\nWe find that it was 26 year old Rolando who supposedly had a vision score of only 3."
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#step-2-act",
+    "href": "ch/rbasics/baddata.html#step-2-act",
+    "title": "Bad data & Outliers",
+    "section": "Step 2: Act",
+    "text": "Step 2: Act\nSince we pretend it is you who collected the data, you should now\n\nthink back if you can actually remember Rolando and if he had poor vision and/or\nfind other documents such as your handwritten sheets to verify this number and make sure you did not make any typos transferring the data to your computer.\n\nThis may reaffirm or correct the suspicious data point and thus end the discussion on whether it is an outlier that should be removed from the data. However, you may also decide to delete this value. Yet, it must be realized, that deleting one or multiple values from a dataset almost always affects the results from subsequent statistical analyses - especially if the values stick out from the rest."
+  },
+  {
+    "objectID": "ch/rbasics/baddata.html#r²---coeff.-of-det.",
+    "href": "ch/rbasics/baddata.html#r²---coeff.-of-det.",
+    "title": "Bad data & Outliers",
+    "section": "R² - Coeff. of det.",
+    "text": "R² - Coeff. of det.\nNevertheless, it is clear that the red line has a much better fit to the remaining data points, than the green line has - simply because Rolando’s data point sticks out so much. One way of measuring how well a regression fits the data is by calculating the coefficient of determination \\(R^2\\), which measures the proportion of total variation in the data explained by the model and can thus range from 0 (=bad) to 1 (=good). It can easily obtained via glance(), which is another function from {broom}:\n\n\n\nglance(reg)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     0.247         0.218  1.54      8.54 0.00709     1  -50.9  108.  112.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\nglance(reg_noRo)\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     0.485         0.464  1.04      23.5 0.0000548     1  -38.4  82.7  86.6\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\nFinally, we find that removing Rolando from the dataset increased the \\(R^2\\) for the simple linear regression from 25% to 49%."
+  },
+  {
+    "objectID": "ch/rbasics/firststeps.html",
+    "href": "ch/rbasics/firststeps.html",
+    "title": "First steps in R",
+    "section": "",
+    "text": "This chapter is mostly aimed at people who are very new to R. However, people who do know R may still find useful insights from the sections where I emphasize how I use R.\nFurthermore, this tutorial teaches R the way I use it, which means you can do (and may have done) almost everything I do here with other code/functions/approaches. “The way I use it” mostly refers to me using the {tidyverse}, which “is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures” and has become quite popular over the last years. Here is a direct comparison of how to do things in R with base R and via the tidyverse."
+  },
+  {
+    "objectID": "ch/rbasics/firststeps.html#base-r",
+    "href": "ch/rbasics/firststeps.html#base-r",
+    "title": "First steps in R",
+    "section": "base R",
+    "text": "base R\nAfter installing R there are many functions etc. you can use right away - which is what we did above. For example, when running ?mean, the help page will tell you that this function is part of the {base} package. As the name suggests, this package is built-in and its functions are ready to use the moment you have installed R. You can verify this by going to the “Packages” tab in RStudio - you will find the base package and it will have a checked box next to it."
+  },
+  {
+    "objectID": "ch/rbasics/firststeps.html#loading-packages",
+    "href": "ch/rbasics/firststeps.html#loading-packages",
+    "title": "First steps in R",
+    "section": "loading packages",
+    "text": "loading packages\nWhen looking at the “Packages” tab in RStudio you may notice that some packages are listed, but do not have a check mark in the box next to them. These are packages that are installed, but not loaded. When a package is not loaded, its functions cannot be used. In order to load a package, the default command is library(package_name). This command must be run once every time you open a new R session."
+  },
+  {
+    "objectID": "ch/rbasics/firststeps.html#installing-additional-packages",
+    "href": "ch/rbasics/firststeps.html#installing-additional-packages",
+    "title": "First steps in R",
+    "section": "installing additional packages",
+    "text": "installing additional packages\nR really shines because of the ability to install additional packages from external sources. Basically, anyone can create a function, put it in a package and make it available online. Some packages are very sophisticated and popular - e.g. the package ggplot2, which is not built-in, has been downloaded 75 million times. In order to install a package, the default command is install.packages(package_name). Alternatively, you can also click on the “Install” button in the top left of the “Packages” tab and type in the package_name there.\n\n\n\n\n\n\nNote\n\n\n\nA package only needs to be installed once, but\nA package must be loaded every time you open a new R session!\n\n\nHere is a curated list of R packages and tools for different areas."
+  },
+  {
+    "objectID": "ch/rbasics/firststeps.html#footnotes",
+    "href": "ch/rbasics/firststeps.html#footnotes",
+    "title": "First steps in R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\nAs long as you are dealing with numbers and calculations. Spaces do matter when we are talking about strings (i.e. text).↩︎"
+  },
+  {
+    "objectID": "ch/summaryarticles/anovatypes.html",
+    "href": "ch/summaryarticles/anovatypes.html",
+    "title": "ANOVA Types",
+    "section": "",
+    "text": "In the realm of statistical analysis, particularly when dealing with linear models, understanding the nuances between different types of ANOVA (Analysis of Variance) is crucial. Specifically, we will delve into the distinctions between Type I, Type II, and Type III ANOVA, their theoretical underpinnings, and practical implications, especially in the context of unbalanced data."
+  },
+  {
+    "objectID": "ch/summaryarticles/anovatypes.html#unbalanced-data-order-of-terms",
+    "href": "ch/summaryarticles/anovatypes.html#unbalanced-data-order-of-terms",
+    "title": "ANOVA Types",
+    "section": "Unbalanced data & order of terms",
+    "text": "Unbalanced data & order of terms\nThis example is based on the augmented design chapter. The data is unbalanced so that for a Type I ANOVA there is a difference between the following two models, while for Type II and Type III it does not make a difference.\n\nmod1 &lt;- lm(yield ~ gen + block, data = dat)\nmod2 &lt;- lm(yield ~ block + gen, data = dat)\n\nHere are the p-values summarized in a single table:\n\nCodelibrary(tidyverse)\nlibrary(broom)\nlibrary(car)\n\ndat &lt;- data.frame(\n  gen = c(\n    \"st\", \"14\", \"26\", \"ci\", \"17\", \"wa\", \"22\", \"13\", \"st\", \"ci\", \"04\", \"15\", \"30\",\n    \"03\", \"wa\", \"24\", \"st\", \"18\", \"27\", \"ci\", \"25\", \"28\", \"05\", \"wa\", \"st\", \"09\",\n    \"06\", \"ci\", \"wa\", \"20\", \"11\", \"23\", \"st\", \"02\", \"21\", \"wa\", \"ci\", \"10\", \"08\",\n    \"16\", \"st\", \"29\", \"07\", \"ci\", \"01\", \"wa\", \"12\", \"19\"\n  ),\n  yield = c(\n    2972L, 2405L, 2855L, 2592L, 2572L, 2608L, 2705L, 2391L, 3122L,\n    3023L, 3018L, 2477L, 2955L, 3055L, 2477L, 2783L, 2260L, 2603L,\n    2857L, 2918L, 2825L, 1903L, 2065L, 3107L, 3348L, 2268L, 2148L,\n    2940L, 2850L, 2670L, 3380L, 2770L, 1315L, 1055L, 1688L, 1625L, \n    1398L, 1293L, 1253L, 1495L, 3538L, 2915L, 3265L, 3483L, 3013L,\n    3400L, 2385L, 3643L),\n  block = rep(c(\"I\", \"II\", \"III\", \"IV\", \"V\", \"VI\"), each = 8L),\n  row = c(\n    1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 1L, 2L, 3L, 4L, 5L, 6L, 7L,\n    8L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L,\n    15L, 16L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 9L, 10L, 11L,\n    12L, 13L, 14L, 15L, 16L),\n  col = rep(rep(1:3, 2), each = 8L)\n)\n\n# Define models\nmod1 &lt;- lm(yield ~ gen + block, data = dat)\nmod2 &lt;- lm(yield ~ block + gen, data = dat)\n\n# Your get_p_values function\nget_p_values &lt;- function(mymodel, myterm, mytype) {\n  if (mytype == \"I\") {\n    x &lt;- broom::tidy(stats::anova(mymodel))\n  } else {\n    x &lt;- broom::tidy(car::Anova(mymodel, type = mytype))\n  }\n  x %&gt;% filter(term == myterm) %&gt;% pull(p.value)\n}\n\n# Define terms and types\nterms &lt;- c(\"gen\", \"block\")\ntypes &lt;- c(\"I\", \"II\", \"III\")\nmodels &lt;- list(mod1 = mod1, mod2 = mod2)\n\n# Creating the combined tibble\ncrossing(model = names(models), term = terms, type = types) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    p = get_p_values(models[[model]], term, type)\n  ) %&gt;%\n  ungroup() %&gt;% \n  pivot_wider(\n    names_from = term,\n    values_from = p\n  )\n\n# A tibble: 6 × 4\n  model type       block     gen\n  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;\n1 mod1  I     0.000208   0.00911\n2 mod1  II    0.000208   0.293  \n3 mod1  III   0.000208   0.293  \n4 mod2  I     0.00000576 0.293  \n5 mod2  II    0.000208   0.293  \n6 mod2  III   0.000208   0.293"
+  },
+  {
+    "objectID": "ch/summaryarticles/anovatypes.html#interaction",
+    "href": "ch/summaryarticles/anovatypes.html#interaction",
+    "title": "ANOVA Types",
+    "section": "Interaction",
+    "text": "Interaction\nTODO"
+  },
+  {
     "objectID": "ch/summaryarticles/designingexperiments.html",
     "href": "ch/summaryarticles/designingexperiments.html",
     "title": "Designing Experiments",
@@ -782,6 +803,13 @@
     "title": "Designing Experiments",
     "section": "Row-Column",
     "text": "Row-Column\nIn a resolvable row-column design a complete replicate is divided into rows and columns. This creates a grid of incomplete blocks in both dimensions. The design’s resolvability lies in its ability to group these incomplete rows and columns back into complete replicates.\n\n\n\nCoderow_column(\n  t = 6,\n  nrows = 2,\n  r = 3,\n  seed = 42\n) %&gt;% plot()\n\n\n\n\n\n\n\n\n\n\n\nCoderow_column(\n  t = 12,\n  nrows = 3,\n  r = 3,\n  seed = 42\n) %&gt;% plot()"
+  },
+  {
+    "objectID": "ch/summaryarticles/designingexperiments.html#split-plot",
+    "href": "ch/summaryarticles/designingexperiments.html#split-plot",
+    "title": "Designing Experiments",
+    "section": "Split-plot",
+    "text": "Split-plot\nSplit-plot designs are used in scenarios where two factors are involved, with one being easier or more cost-effective to randomize than the other.\n\n\n\nCodesplit_plot(\n  wp = paste0(\"A\", 1:3),\n  sp = paste0(\"B\", 1:4),\n  reps = 3,\n  seed = 42\n) %&gt;% plot()\n\n\n\n\n\n\n\n\n\n\n\nCodesplit_plot(\n  wp = paste0(\"A\", 1:2),\n  sp = paste0(\"B\", 1:5),\n  reps = 2,\n  seed = 42\n) %&gt;% plot()"
   },
   {
     "objectID": "ch/summaryarticles/designingexperiments.html#footnotes",

@@ -1,0 +1,114 @@
+---
+title: "ANOVA Types"
+abstract: "What are ANOVA type I, II and III and why you should care"
+---
+
+```{r}
+#| echo: false
+source(here::here("src/helpersrc.R"))
+```
+
+In the realm of statistical analysis, particularly when dealing with linear models, understanding the nuances between different types of ANOVA (Analysis of Variance) is crucial. Specifically, we will delve into the distinctions between Type I, Type II, and Type III ANOVA, their theoretical underpinnings, and practical implications, especially in the context of unbalanced data.
+
+# Background & Implementation
+
+ * **Type I** ANOVA (Sequential): 
+   * `stats::anova(model)`
+   * This method evaluates the significance of each predictor sequentially. For example, in a model with two predictors A and B, Type I ANOVA first assesses the effect of A, then the effect of B given A. The order of variables in your model is critical here, as it can alter the results, particularly in unbalanced datasets.
+
+ * **Type II** ANOVA (Hierarchical): 
+   * `car::Anova(model, type = "II")`
+   * Type II looks at each main effect in the model, but unlike Type I, it does not depend on the order of terms. It's particularly useful for models with main effects only, both in balanced and unbalanced datasets. Here, each main effect is tested after accounting for other main effects, but without considering interactions.
+
+ * **Type III** ANOVA (Marginal): 
+   * `car::Anova(model, type = "III")`
+   * This type tests each main effect after considering all other terms, including interactions. Type III is the go-to method when your model includes interactions, particularly in unbalanced datasets. It's robust against the order of terms in your model.
+ 
+# When Results Differ
+
+Results from these ANOVA types differ notably in unbalanced datasets. In balanced datasets, all three types usually yield similar results. However, in unbalanced scenarios:
+
+ * Type I results depend on the order of terms. Type II and III remain consistent regardless of term order but differ from Type I.
+ * Type III adjusts main effects for interactions, leading to different outcomes than Type II in models with interaction terms.
+ 
+# Examples
+
+## Unbalanced data & order of terms
+
+This example is based on the augmented design chapter. The data is unbalanced so that for a `Type I` ANOVA there is a difference between the following two models, while for `Type II` and `Type III` it does not make a difference.
+
+```{r, eval=FALSE}
+mod1 <- lm(yield ~ gen + block, data = dat)
+mod2 <- lm(yield ~ block + gen, data = dat)
+```
+
+Here are the p-values summarized in a single table:
+
+```{r}
+#| code-fold: true
+library(tidyverse)
+library(broom)
+library(car)
+
+dat <- data.frame(
+  gen = c(
+    "st", "14", "26", "ci", "17", "wa", "22", "13", "st", "ci", "04", "15", "30",
+    "03", "wa", "24", "st", "18", "27", "ci", "25", "28", "05", "wa", "st", "09",
+    "06", "ci", "wa", "20", "11", "23", "st", "02", "21", "wa", "ci", "10", "08",
+    "16", "st", "29", "07", "ci", "01", "wa", "12", "19"
+  ),
+  yield = c(
+    2972L, 2405L, 2855L, 2592L, 2572L, 2608L, 2705L, 2391L, 3122L,
+    3023L, 3018L, 2477L, 2955L, 3055L, 2477L, 2783L, 2260L, 2603L,
+    2857L, 2918L, 2825L, 1903L, 2065L, 3107L, 3348L, 2268L, 2148L,
+    2940L, 2850L, 2670L, 3380L, 2770L, 1315L, 1055L, 1688L, 1625L, 
+    1398L, 1293L, 1253L, 1495L, 3538L, 2915L, 3265L, 3483L, 3013L,
+    3400L, 2385L, 3643L),
+  block = rep(c("I", "II", "III", "IV", "V", "VI"), each = 8L),
+  row = c(
+    1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 1L, 2L, 3L, 4L, 5L, 6L, 7L,
+    8L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L,
+    15L, 16L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 9L, 10L, 11L,
+    12L, 13L, 14L, 15L, 16L),
+  col = rep(rep(1:3, 2), each = 8L)
+)
+
+# Define models
+mod1 <- lm(yield ~ gen + block, data = dat)
+mod2 <- lm(yield ~ block + gen, data = dat)
+
+# Your get_p_values function
+get_p_values <- function(mymodel, myterm, mytype) {
+  if (mytype == "I") {
+    x <- broom::tidy(stats::anova(mymodel))
+  } else {
+    x <- broom::tidy(car::Anova(mymodel, type = mytype))
+  }
+  x %>% filter(term == myterm) %>% pull(p.value)
+}
+
+# Define terms and types
+terms <- c("gen", "block")
+types <- c("I", "II", "III")
+models <- list(mod1 = mod1, mod2 = mod2)
+
+# Creating the combined tibble
+crossing(model = names(models), term = terms, type = types) %>%
+  rowwise() %>%
+  mutate(
+    p = get_p_values(models[[model]], term, type)
+  ) %>%
+  ungroup() %>% 
+  pivot_wider(
+    names_from = term,
+    values_from = p
+  )
+```
+
+## Interaction
+
+TODO
+
+# Conclusion
+
+In most cases it's probably best to conduct a `Type III` ANOVA, e.g. via `car::Anova(model, type = "III")`.
