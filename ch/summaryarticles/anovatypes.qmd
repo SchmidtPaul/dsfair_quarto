@@ -12,32 +12,31 @@ In the realm of statistical analysis, particularly when dealing with linear mode
 
 # Background & Implementation
 
- * **Type I** ANOVA (Sequential): 
-   * `stats::anova(model)`
-   * This method evaluates the significance of each predictor sequentially. For example, in a model with two predictors A and B, Type I ANOVA first assesses the effect of A, then the effect of B given A. The order of variables in your model is critical here, as it can alter the results, particularly in unbalanced datasets.
+-   **Type I** ANOVA (Sequential):
+    -   `stats::anova(model)`
+    -   This method evaluates the significance of each predictor sequentially. For example, in a model with two predictors A and B, Type I ANOVA first assesses the effect of A, then the effect of B given A. The order of variables in your model is critical here, as it can alter the results, particularly in unbalanced datasets.
+-   **Type II** ANOVA (Hierarchical):
+    -   `car::Anova(model, type = "II")`
+    -   Type II looks at each main effect in the model, but unlike Type I, it does not depend on the order of terms. It's particularly useful for models with main effects only, both in balanced and unbalanced datasets. Here, each main effect is tested after accounting for other main effects, but without considering interactions.
+-   **Type III** ANOVA (Marginal):
+    -   `car::Anova(model, type = "III")`
+    -   This type tests each main effect after considering all other terms, including interactions. Type III is the go-to method when your model includes interactions, particularly in unbalanced datasets. It's robust against the order of terms in your model.
 
- * **Type II** ANOVA (Hierarchical): 
-   * `car::Anova(model, type = "II")`
-   * Type II looks at each main effect in the model, but unlike Type I, it does not depend on the order of terms. It's particularly useful for models with main effects only, both in balanced and unbalanced datasets. Here, each main effect is tested after accounting for other main effects, but without considering interactions.
-
- * **Type III** ANOVA (Marginal): 
-   * `car::Anova(model, type = "III")`
-   * This type tests each main effect after considering all other terms, including interactions. Type III is the go-to method when your model includes interactions, particularly in unbalanced datasets. It's robust against the order of terms in your model.
- 
 # When Results Differ
 
 Results from these ANOVA types differ notably in unbalanced datasets. In balanced datasets, all three types usually yield similar results. However, in unbalanced scenarios:
 
- * Type I results depend on the order of terms. Type II and III remain consistent regardless of term order but differ from Type I.
- * Type III adjusts main effects for interactions, leading to different outcomes than Type II in models with interaction terms.
- 
-# Examples
+-   Type I results depend on the order of terms. Type II and III remain consistent regardless of term order but differ from Type I.
+-   Type III adjusts main effects for interactions, leading to different outcomes than Type II in models with interaction terms.
 
-## Unbalanced data & order of terms
+## Examples
+
+### Unbalanced data & order of terms
 
 This example is based on the augmented design chapter. The data is unbalanced so that for a `Type I` ANOVA there is a difference between the following two models, while for `Type II` and `Type III` it does not make a difference.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 mod1 <- lm(yield ~ gen + block, data = dat)
 mod2 <- lm(yield ~ block + gen, data = dat)
 ```
@@ -105,10 +104,72 @@ crossing(model = names(models), term = terms, type = types) %>%
   )
 ```
 
-## Interaction
+### Interaction
 
-TODO
+In this example, our model includes an interaction term between two factors, 'N' and 'G'. As said before, Type III adjusts main effects for interactions, leading to different outcomes than Type II.
+
+```{r}
+#| eval: false
+mod <- lm(yield ~ N + G + N:G, data = dat)
+```
+
+Here are the p-values summarized in a single table:
+
+```{r}
+#| code-fold: true
+library(tidyverse)
+library(broom)
+library(car)
+
+dat <- data.frame(
+  N = c(
+    "Koopa", "Peach", "Yoshi", "Koopa", "Peach", "Toad", "Toad", "Koopa", "Yoshi",
+    "Goomba", "Toad", "Yoshi", "Yoshi", "Toad", "Koopa", "Peach", "Yoshi",
+    "Koopa", "Goomba", "Goomba", "Diddy", "Koopa", "Goomba", "Goomba", "Toad",
+    "Peach", "Yoshi", "Diddy", "Peach", "Diddy", "Peach", "Peach", "Koopa",
+    "Diddy", "Koopa", "Goomba", "Toad", "Toad", "Yoshi", "Yoshi", "Diddy",
+    "Yoshi", "Koopa", "Peach", "Diddy", "Diddy", "Diddy", "Goomba"
+  ),
+  G = c(
+    "Simba", "Nala", "Pumba", "Timon", "Nala", "Nala", "Simba", "Simba", "Nala",
+    "Nala", "Simba", "Simba", "Simba", "Pumba", "Nala", "Pumba", "Nala", "Nala",
+    "Nala", "Simba", "Simba", "Pumba", "Pumba", "Timon", "Timon", "Timon", "Nala",
+    "Nala", "Simba", "Pumba", "Timon", "Pumba", "Timon", "Timon", "Pumba",
+    "Simba", "Pumba", "Simba", "Pumba", "Timon", "Nala", "Timon", "Simba",
+    "Simba", "Timon", "Simba", "Simba", "Pumba"
+  ),
+  yield = c(
+    6162, 6318, 1690, 4948, 5736, 7072, 6192, 5598, 6666, 5044, 7146, 7578, 7642,
+    2504, 6682, 2338, 6324, 5316, 4034, 4030, 6600, 5372, 4216, 3554, 5970, 5684,
+    7862, 6732, 9012, 5924, 7302, 1560, 6094, 5904, 4694, 4520, 5126, 6860, 1594,
+    6392, 5738, 7260, 5256, 8548, 5974, 6794, 5806, 4212
+  )
+)
+
+mod <- lm(yield ~ N*G, data = dat)
+
+anova_type_I <- broom::tidy(stats::anova(mod)) %>%
+  select(term, typeI = p.value)
+
+anova_type_II <- broom::tidy(car::Anova(mod, type = "II")) %>% 
+  select(term, typeII = p.value)
+
+anova_type_III <- broom::tidy(car::Anova(mod, type = "III")) %>% 
+  select(term, typeIII = p.value)
+
+list(anova_type_I, anova_type_II, anova_type_III) %>% 
+  reduce(full_join, by = "term") %>% 
+  filter(term %in% c("N", "G", "N:G")) %>% 
+  mutate(across(starts_with("type"), ~insight::format_p(., name = NULL)))
+```
 
 # Conclusion
 
 In most cases it's probably best to conduct a `Type III` ANOVA, e.g. via `car::Anova(model, type = "III")`.
+
+::: {.callout-tip collapse="true"}
+## Additional Resources
+
+-   [Anova – Type I/II/III SS explained](https://md.psych.bio.uni-goettingen.de/mv/unit/lm_cat/lm_cat_unbal_ss_explained.html)
+-   StackExchange Discussion on [How to interpret type I, type II, and type III ANOVA and MANOVA?](https://stats.stackexchange.com/questions/20452/how-to-interpret-type-i-type-ii-and-type-iii-anova-and-manova)
+:::
