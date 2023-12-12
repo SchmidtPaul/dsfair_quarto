@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2023-12-12">
+<title>dsfair_quarto - Linear Mixed Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../img/favicon-32x32.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Data Science for Agriculture in R">
+<meta name="twitter:description" content="a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields">
+<meta name="twitter:image" content="https://schmidtpaul.github.io/dsfair_quarto/ch/summaryarticles/img/hexagonDSFAIR.png">
+<meta name="twitter:creator" content="@SchmidtPaul1989">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DSFAIR</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">R Basics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
+    <a class="dropdown-item" href="../../ch/rbasics/firststeps.html" rel="" target="">
+ <span class="dropdown-text">First Steps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/rbasics/tidyverse.html" rel="" target="">
+ <span class="dropdown-text">The tidyverse</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/rbasics/correlation_regression.html" rel="" target="">
+ <span class="dropdown-text">Correlation &amp; Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/rbasics/baddata.html" rel="" target="">
+ <span class="dropdown-text">Bad data &amp; Outliers</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Simple Experiments</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
+<li>
+    <a class="dropdown-item" href="../../ch/exan/simple/crd_mead1993.html" rel="" target="">
+ <span class="dropdown-text">1w CRD (Mead 1993)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/rcbd_clewerscarisbrick2001.html" rel="" target="">
+ <span class="dropdown-text">1w RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/latsq_bridges1989.html" rel="" target="">
+ <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/rowcol_kemptonfox1997.html" rel="" target="">
+ <span class="dropdown-text">1w rowcol (Kempton &amp; Fox 1997)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
+ <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/exan/simple/splitplot_gomezgomez1984.html" rel="" target="">
+ <span class="dropdown-text">2w split-plot (Gomez &amp; Gomez 1984)</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="dropdown-header">
+ <span class="menu-text">Complex Experiments</span>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Summary Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/ggplot2intro.html" rel="" target="">
+ <span class="dropdown-text">ggplot2 tutorial</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/compactletterdisplay.html" rel="" target="">
+ <span class="dropdown-text">Compact Letter Display</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/designingexperiments.html" rel="" target="">
+ <span class="dropdown-text">Designing Experiments</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/modeldiagnostics.html" rel="" target="">
+ <span class="dropdown-text">Model Diagnostics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/whyseequal.html" rel="" target="">
+ <span class="dropdown-text">Why SE equal</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/anovatypes.html" rel="" target="">
+ <span class="dropdown-text">ANOVA Types</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/summaryarticles/mixedmodels.html" rel="" target="">
+ <span class="dropdown-text">Mixed Models</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-misc" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Misc</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-misc">
+<li>
+    <a class="dropdown-item" href="../../ch/misc/usefulthings.html" rel="" target="">
+ <span class="dropdown-text">Useful things</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/misc/exercises.html" rel="" target="">
+ <span class="dropdown-text">Exercises</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/misc/furtherresources.html" rel="" target="">
+ <span class="dropdown-text">Other Resources</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../ch/misc/workshopprep.html" rel="" target="">
+ <span class="dropdown-text">Workshop prep</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://schmidtpaul.github.io/" rel="" target="">
+ <span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SchmidtPaul/dsfair_quarto" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#what-even-is-a-random-effect" id="toc-what-even-is-a-random-effect" class="nav-link active" data-scroll-target="#what-even-is-a-random-effect">What even is a random effect?</a>
+  <ul class="collapse">
+<li><a href="#when-is-a-random-effect" id="toc-when-is-a-random-effect" class="nav-link" data-scroll-target="#when-is-a-random-effect">When is a random effect?</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#general-representation" id="toc-general-representation" class="nav-link" data-scroll-target="#general-representation">General Representation</a>
+  <ul class="collapse">
+<li>
+<a href="#immediate-observations" id="toc-immediate-observations" class="nav-link" data-scroll-target="#immediate-observations">Immediate observations</a>
+  <ul class="collapse">
+<li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An example</a></li>
+  </ul>
+</li>
+  <li><a href="#less-obvious-details" id="toc-less-obvious-details" class="nav-link" data-scroll-target="#less-obvious-details">Less obvious details</a></li>
+  </ul>
+</li>
+  <li><a href="#ml-reml" id="toc-ml-reml" class="nav-link" data-scroll-target="#ml-reml">ML &amp; REML</a></li>
+  </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="mixedmodels.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Linear Mixed Models</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Paul Schmidt </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.biomath.de/">
+            BioMath GmbH
+            </a>
+          </p>
+        <p class="affiliation">
+            <a href="https://schmidtpaul.github.io/">
+            &amp; Freelancer
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Last updated</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 12, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Content summary</div>
+    What are random effects and linear mixed models?
+  </div>
+</div>
+
+</header><section id="what-even-is-a-random-effect" class="level1"><h1>What even is a random effect?</h1>
+<p>Typically, learning about random effects in statistical methods comes after grasping simpler regressions and ANOVAs. As a result, when someone mentions “an effect” in statistics, it often refers to a fixed effect, making random effects somewhat special and explicitly labeled as such. While fixed effects models date back to the early 19th century (Legendre, 1805; Gauss, 1809), the understanding and application of random effects in statistical models are relatively newer concepts.</p>
+<p>It could be noted that the error term (<span class="math inline">\(e\)</span>) in all models, including those with only fixed effects, is a random variable, representing a stochastic component. Thus, strictly speaking, nearly all models could be considered mixed models, but the error term plays a unique role and is not counted as a random effect.</p>
+<p>When random effects are explained, they are often described as representing random samples from a population or factors whose levels, unlike fixed effects, are randomly selected from a larger set.</p>
+<p>Another common point of discussion is the minimum number of factor levels required before considering a factor as random. Recommendations usually vary between 5 and 12 levels.</p>
+<section id="when-is-a-random-effect" class="level2"><h2 class="anchored" data-anchor-id="when-is-a-random-effect">When is a random effect?</h2>
+<p>Here are some rules of thumb that call for a random effect:</p>
+<ul>
+<li>When factor levels are randomly selected from a larger population.
+<ul>
+<li>Examples
+<ul>
+<li>Selecting a few locations from a larger target region.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When there are approximately 8 or more levels of the factor.</li>
+<li>When it represents an additional randomization unit in an experiment’s design.
+<ul>
+<li>Examples
+<ul>
+<li>Mainplots in split-plot designs</li>
+<li>Subplots in split-split-plot designs</li>
+</ul>
+</li>
+<li>Relevant chapters
+<ul>
+<li><a href="../../ch/exan/simple/splitplot_gomezgomez1984.html">Split-plot Design</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When it involves incomplete blocks in an experiment.
+<ul>
+<li>Relevant chapters
+<ul>
+<li><a href="../../ch/exan/simple/alpha_johnwilliams1995.html">Alpha Design</a></li>
+<li><a href="../../ch/exan/simple/augm_petersen1994.html">Augmented Design</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When it represents sub-samples of experimental units.
+<ul>
+<li>Examples
+<ul>
+<li>Multiple plants sampled within the same plot (at the same time)</li>
+<li>Multiple leaves sampled from the same plant (at the same time)</li>
+<li>Multiple measurements sampled from the same animal (at the same time)</li>
+</ul>
+</li>
+<li>Relevant chapters
+<ul>
+<li><a href="https://schmidtpaul.github.io/DSFAIR/subsampling_Piepho1997.html">Sub-sampling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When it is crossed with another random effect.
+<ul>
+<li>Examples
+<ul>
+<li>If the main effect of ‘Location’ is random, then the ‘Year:Location’ interaction effect is automatically random as well.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When assuming correlations or specific variance structures between levels.
+<ul>
+<li>Examples
+<ul>
+<li>Between genotypes due to genetic similarity</li>
+<li>Between repeated measures on the same experimental unit due to temporal proximity (=over time)</li>
+<li>Between samples on the same field due to spatial proximity</li>
+</ul>
+</li>
+<li>Relevant chapters
+<ul>
+<li><a href="https://schmidtpaul.github.io/DSFAIR/Repeated_RCBD_PiephoEdmondson2018.html">Repeated Measures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></section></section><section id="general-representation" class="level1"><h1>General Representation</h1>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><strong>simple linear model</strong> <span class="math display">\[y = X\beta + e\]</span></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p><strong>linear mixed model</strong> <span class="math display">\[y = X\beta + Zu + e\]</span></p>
+</div>
+</div>
+<section id="immediate-observations" class="level2"><h2 class="anchored" data-anchor-id="immediate-observations">Immediate observations</h2>
+<p>In this formula, <span class="math inline">\(y\)</span> is a vector of observations (e.g., yield values). <span class="math inline">\(X\)</span> is the design matrix for fixed effects, and <span class="math inline">\(\beta\)</span> is the vector of these fixed effects. Analogously, <span class="math inline">\(Z\)</span> is the design matrix for random effects, and <span class="math inline">\(u\)</span> is the vector of random effects. Therefore, the difference between a linear model and a linear mixed model is <span class="math inline">\(Zu\)</span>.</p>
+<p>Before a model is fitted, <span class="math inline">\(\beta\)</span> and <span class="math inline">\(u\)</span> are unknown, meaning we don’t yet have numerical values for these effects – they need to be estimated. However, <span class="math inline">\(y\)</span>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are known quantities; they contain the measured values and, in simple terms, the treatments or conditions that these measurements have undergone. The design matrices <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> connect the effects to the observational values.</p>
+<p>Lastly, we have the random vector of errors <span class="math inline">\(e\)</span>. It’s important to recognize that the errors in the model are neither known before the model fitting, nor are they explicitly estimated as part of the model’s output. Rather, they inherently represent the residual portion of the data that the fitted model fails to explain. However, these errors are not entirely arbitrary; they are constrained by certain conditions. Specifically, they collectively sum to zero and are typically assumed to have a uniform variance across observations. This implies that while individual errors may vary, they do so within a structured framework set by the model.</p>
+<p>It’s crucial to understand that the length of <span class="math inline">\(y\)</span> and <span class="math inline">\(e\)</span>, and the number of rows in <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, correspond to the number of observations in the dataset. The length of <span class="math inline">\(\beta\)</span> depends on how many fixed effects are to be fitted in the model (at least 1, i.e.&nbsp;<span class="math inline">\(\mu\)</span>) and matches the number of columns in <span class="math inline">\(X\)</span>. The same logic applies to <span class="math inline">\(u\)</span> for random effects and <span class="math inline">\(Z\)</span>.</p>
+<section id="an-example" class="level3"><h3 class="anchored" data-anchor-id="an-example">An example</h3>
+<p>Let’s consider a simple linear model <span class="math inline">\(y = X\beta + e\)</span> using the following dataset:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  yield <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.2</span>, <span class="fl">3.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">4.1</span>, <span class="fl">4.0</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>  var yield
+1   A   3.2
+2   A   3.6
+3   B   2.8
+4   B   2.9
+5   C   4.1
+6   C   4.0</code></pre>
+</div>
+</div>
+<p>When fitting the following model, this happens:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">var</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><span class="math display">\[
+\begin{bmatrix}
+3.2 \\
+3.6 \\
+2.8 \\
+2.9 \\
+4.1 \\
+4.0 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+\mu \\
+var_B \\
+var_C \\
+\end{bmatrix}
+\]</span></p>
+<p>After the model is fitted, we find this:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coefficients</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co"># show estimated beta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>(Intercept)        varB        varC 
+       3.40       -0.55        0.65 </code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">resid</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co"># show residuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="custom-output"><code>    1     2     3     4     5     6 
+-0.20  0.20 -0.05  0.05  0.05 -0.05 </code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\begin{bmatrix}
+3.2 \\
+3.6 \\
+2.8 \\
+2.9 \\
+4.1 \\
+4.0 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+3.40 \\
+-0.55 \\
+0.65 \\
+\end{bmatrix}
++
+\begin{bmatrix}
+-0.20 \\
+0.20 \\
+-0.05 \\
+0.05 \\
+0.05 \\
+-0.05 \\
+\end{bmatrix}
+\]</span></p>
+</section></section><section id="less-obvious-details" class="level2"><h2 class="anchored" data-anchor-id="less-obvious-details">Less obvious details</h2>
+<p>Simply knowing the components mentioned above doesn’t fully describe a (mixed) model. Typically, one should also mention the distributions and covariance structures:</p>
+<p><span class="math inline">\(u \sim MVN(0, G)\)</span></p>
+<p><span class="math inline">\(e \sim MVN(0, R)\)</span></p>
+<p><span class="math inline">\(y \sim MVN(X\beta, V)\)</span></p>
+<p>Unless stated otherwise, a multivariate normal distribution is often assumed, denoted here as <span class="math inline">\(MVN()\)</span>. If the distribution were not normal, we would be discussing generalized mixed models.</p>
+<p>The first entry within the parentheses indicates the expected value (mean vector). Both random effects <span class="math inline">\(u\)</span> and errors <span class="math inline">\(e\)</span> have an expected value of 0. This makes sense as they represent only random deviations from the fixed part of the model. Thus, individual errors may be positive or negative, but on average, their expected value is 0. The expected value for <span class="math inline">\(y\)</span>, our observations, is naturally not 0 but depends on the data and is expressed by the fixed effects estimated from the data.</p>
+<p>For instance, consider a model with <span class="math inline">\(\mu\)</span> as the only fixed effect. Then <span class="math inline">\(\beta = \mu\)</span> and <span class="math inline">\(X\)</span> is a vector filled with 1s, its length corresponding to the number of observations. In such a simplified case, the entire fixed part of the model is reduced to an overall mean <span class="math inline">\(\mu\)</span>, and the expected value for our observations <span class="math inline">\(y\)</span> would be this overall mean.</p>
+</section></section><section id="ml-reml" class="level1"><h1>ML &amp; REML</h1>
+<p>Unlike simple linear models, mixed models (and generalized models) cannot rely solely on the Least Squares Method (LSM) (Legendre, 1805) for estimating all their parameters. Instead, methods like the Maximum Likelihood (ML) approach (Edgeworth, 1908) are necessary. As the name suggests, ML estimates parameters by maximizing a likelihood function so that the parameter distribution best matches the observed data. The estimates are the most probable or maximum likely. However, it is essential to specify the distribution for which this maximization is performed. Interestingly, if a simple linear model (like a linear regression assuming normal distribution) is estimated using ML, the parameter estimates (<span class="math inline">\(\beta\)</span>) will be identical to those obtained via LSM.</p>
+<p>One advantage of the ML method is its flexibility. It can be used for models that do not assume a normally distributed error term. Instead, it can accommodate distributions from the Exponential Family, which includes, besides the normal distribution, the binomial, Poisson, gamma, and inverse Gaussian distributions.</p>
+<p>However, a drawback of the ML method, especially in mixed models (even under normal distribution), is its tendency to underestimate the true variance components, particularly in small samples.</p>
+<p>On the other hand, the Restricted Maximum Likelihood (REML) method (Bartlett, 1937) offers an unbiased estimation of variance components. In mixed models, REML is used specifically to estimate <span class="math inline">\(V\)</span>, not <span class="math inline">\(\beta\)</span>. The REML estimation of <span class="math inline">\(V\)</span> is then utilized to perform an ML estimation of <span class="math inline">\(\beta\)</span>. This implies that the variance components estimated via REML are independent of the fixed effects in the model.</p>
+<p>One limitation of REML, compared to ML, is that the model fits from different models for the same dataset are only comparably valid as long as they contain the same fixed effects. In other words, the goodness of fit of various REML models should not be compared if they have different fixed effects. This limitation restricts the scope of REML in comparing model fits across different models with varying fixed effects.</p>
+<p>TODO</p>
+
+
+<!-- -->
+
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{schmidt2023,
+  author = {Paul Schmidt},
+  title = {Linear {Mixed} {Models}},
+  date = {2023-12-12},
+  url = {https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/mixedmodels.html},
+  langid = {en},
+  abstract = {What are random effects and linear mixed models?}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-schmidt2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Paul Schmidt. 2023. <span>“Linear Mixed Models.”</span> December 12,
+2023. <a href="https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/mixedmodels.html">https://schmidtpaul.github.io/dsfair_quarto//ch/summaryarticles/mixedmodels.html</a>.
+</div></div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Linear Mixed Models"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "What are random effects and linear mixed models?"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src/helpersrc.R"</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># What even is a random effect?</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>Typically, learning about random effects in statistical methods comes after grasping simpler regressions and ANOVAs. As a result, when someone mentions "an effect" in statistics, it often refers to a fixed effect, making random effects somewhat special and explicitly labeled as such. While fixed effects models date back to the early 19th century (Legendre, 1805; Gauss, 1809), the understanding and application of random effects in statistical models are relatively newer concepts. </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>It could be noted that the error term ($e$) in all models, including those with only fixed effects, is a random variable, representing a stochastic component. Thus, strictly speaking, nearly all models could be considered mixed models, but the error term plays a unique role and is not counted as a random effect.</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>When random effects are explained, they are often described as representing random samples from a population or factors whose levels, unlike fixed effects, are randomly selected from a larger set.</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>Another common point of discussion is the minimum number of factor levels required before considering a factor as random. Recommendations usually vary between 5 and 12 levels.</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## When is a random effect?</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>Here are some rules of thumb that call for a random effect:</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When factor levels are randomly selected from a larger population.</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Examples</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Selecting a few locations from a larger target region.</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When there are approximately 8 or more levels of the factor. </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When it represents an additional randomization unit in an experiment's design.</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Examples</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Mainplots in split-plot designs</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Subplots in split-split-plot designs</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Relevant chapters</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="co">[</span><span class="ot">Split-plot Design</span><span class="co">](../exan/simple/splitplot_gomezgomez1984.qmd)</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When it involves incomplete blocks in an experiment.</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Relevant chapters </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="co">[</span><span class="ot">Alpha Design</span><span class="co">](../exan/simple/alpha_johnwilliams1995.qmd)</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="co">[</span><span class="ot">Augmented Design</span><span class="co">](../exan/simple/augm_petersen1994.qmd)</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When it represents sub-samples of experimental units.</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Examples</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Multiple plants sampled within the same plot (at the same time)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Multiple leaves sampled from the same plant (at the same time)</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Multiple measurements sampled from the same animal (at the same time)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Relevant chapters</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="co">[</span><span class="ot">Sub-sampling</span><span class="co">](https://schmidtpaul.github.io/DSFAIR/subsampling_Piepho1997.html)</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When it is crossed with another random effect. </span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Examples</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>If the main effect of 'Location' is random, then the 'Year:Location' interaction effect is automatically random as well.</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When assuming correlations or specific variance structures between levels.</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Examples</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Between genotypes due to genetic similarity</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Between repeated measures on the same experimental unit due to temporal proximity (=over time)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Between samples on the same field due to spatial proximity</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Relevant chapters</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="co">[</span><span class="ot">Repeated Measures</span><span class="co">](https://schmidtpaul.github.io/DSFAIR/Repeated_RCBD_PiephoEdmondson2018.html)</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="fu"># General Representation</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>::: columns</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>**simple linear model**</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>$$y = X\beta + e$$</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>::: {.column width="2%"}</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>::: {.column width="49%"}</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>**linear mixed model**</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>$$y = X\beta + Zu + e$$</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Immediate observations</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>In this formula, $y$ is a vector of observations (e.g., yield values). $X$ is the design matrix for fixed effects, and $\beta$ is the vector of these fixed effects. Analogously, $Z$ is the design matrix for random effects, and $u$ is the vector of random effects. Therefore, the difference between a linear model and a linear mixed model is $Zu$.</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>Before a model is fitted, $\beta$ and $u$ are unknown, meaning we don't yet have numerical values for these effects – they need to be estimated. However, $y$, $X$ and $Z$ are known quantities; they contain the measured values and, in simple terms, the treatments or conditions that these measurements have undergone. The design matrices $X$ and $Z$ connect the effects to the observational values.</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>Lastly, we have the random vector of errors $e$. It's important to recognize that the errors in the model are neither known before the model fitting, nor are they explicitly estimated as part of the model's output. Rather, they inherently represent the residual portion of the data that the fitted model fails to explain. However, these errors are not entirely arbitrary; they are constrained by certain conditions. Specifically, they collectively sum to zero and are typically assumed to have a uniform variance across observations. This implies that while individual errors may vary, they do so within a structured framework set by the model.</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>It's crucial to understand that the length of $y$ and $e$, and the number of rows in $X$ and $Z$, correspond to the number of observations in the dataset. The length of $\beta$ depends on how many fixed effects are to be fitted in the model (at least 1, i.e. $\mu$) and matches the number of columns in $X$. The same logic applies to $u$ for random effects and $Z$.</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### An example</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>Let's consider a simple linear model $y = X\beta + e$ using the following dataset:</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>)),</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">yield =</span> <span class="fu">c</span>(<span class="fl">3.2</span>, <span class="fl">3.6</span>, <span class="fl">2.8</span>, <span class="fl">2.9</span>, <span class="fl">4.1</span>, <span class="fl">4.0</span>)</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>data</span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>When fitting the following model, this happens:</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(yield <span class="sc">~</span> var, <span class="at">data =</span> data)</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>3.2 <span class="sc">\\</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>3.6 <span class="sc">\\</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>2.8 <span class="sc">\\</span></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>2.9 <span class="sc">\\</span></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>4.1 <span class="sc">\\</span></span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>4.0 <span class="sc">\\</span></span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>1 &amp; 1 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>1 &amp; 1 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 1 <span class="sc">\\</span></span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 1 <span class="sc">\\</span></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>\mu <span class="sc">\\</span></span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>var_B <span class="sc">\\</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>var_C <span class="sc">\\</span></span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>After the model is fitted, we find this:</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(mod) <span class="co"># show estimated beta</span></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="fu">resid</span>(mod) <span class="co"># show residuals</span></span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>3.2 <span class="sc">\\</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a>3.6 <span class="sc">\\</span></span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>2.8 <span class="sc">\\</span></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>2.9 <span class="sc">\\</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>4.1 <span class="sc">\\</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>4.0 <span class="sc">\\</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>1 &amp; 1 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>1 &amp; 1 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 1 <span class="sc">\\</span></span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 1 <span class="sc">\\</span></span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>3.40 <span class="sc">\\</span></span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>-0.55 <span class="sc">\\</span></span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>0.65 <span class="sc">\\</span></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>+</span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>-0.20 <span class="sc">\\</span></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>0.20 <span class="sc">\\</span></span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>-0.05 <span class="sc">\\</span></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>0.05 <span class="sc">\\</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>0.05 <span class="sc">\\</span></span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>-0.05 <span class="sc">\\</span></span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Less obvious details</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>Simply knowing the components mentioned above doesn't fully describe a (mixed) model. Typically, one should also mention the distributions and covariance structures:</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>$u \sim MVN(0, G)$</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a>$e \sim MVN(0, R)$</span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>$y \sim MVN(X\beta, V)$</span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>Unless stated otherwise, a multivariate normal distribution is often assumed, denoted here as $MVN()$. If the distribution were not normal, we would be discussing generalized mixed models.</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a>The first entry within the parentheses indicates the expected value (mean vector). Both random effects $u$ and errors $e$ have an expected value of 0. This makes sense as they represent only random deviations from the fixed part of the model. Thus, individual errors may be positive or negative, but on average, their expected value is 0. The expected value for $y$, our observations, is naturally not 0 but depends on the data and is expressed by the fixed effects estimated from the data.</span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>For instance, consider a model with $\mu$ as the only fixed effect. Then $\beta = \mu$ and $X$ is a vector filled with 1s, its length corresponding to the number of observations. In such a simplified case, the entire fixed part of the model is reduced to an overall mean $\mu$, and the expected value for our observations $y$ would be this overall mean.</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a><span class="fu"># ML &amp; REML</span></span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a>Unlike simple linear models, mixed models (and generalized models) cannot rely solely on the Least Squares Method (LSM) (Legendre, 1805) for estimating all their parameters. Instead, methods like the Maximum Likelihood (ML) approach (Edgeworth, 1908) are necessary. As the name suggests, ML estimates parameters by maximizing a likelihood function so that the parameter distribution best matches the observed data. The estimates are the most probable or maximum likely. However, it is essential to specify the distribution for which this maximization is performed. Interestingly, if a simple linear model (like a linear regression assuming normal distribution) is estimated using ML, the parameter estimates ($\beta$) will be identical to those obtained via LSM.</span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a>One advantage of the ML method is its flexibility. It can be used for models that do not assume a normally distributed error term. Instead, it can accommodate distributions from the Exponential Family, which includes, besides the normal distribution, the binomial, Poisson, gamma, and inverse Gaussian distributions.</span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>However, a drawback of the ML method, especially in mixed models (even under normal distribution), is its tendency to underestimate the true variance components, particularly in small samples.</span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>On the other hand, the Restricted Maximum Likelihood (REML) method (Bartlett, 1937) offers an unbiased estimation of variance components. In mixed models, REML is used specifically to estimate $V$, not $\beta$. The REML estimation of $V$ is then utilized to perform an ML estimation of $\beta$. This implies that the variance components estimated via REML are independent of the fixed effects in the model.</span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a>One limitation of REML, compared to ML, is that the model fits from different models for the same dataset are only comparably valid as long as they contain the same fixed effects. In other words, the goodness of fit of various REML models should not be compared if they have different fixed effects. This limitation restricts the scope of REML in comparing model fits across different models with varying fixed effects.</span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>TODO</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item">
+ <p>All content licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+</body></html>
