@@ -1,0 +1,21 @@
+type	Var	N	mean	Comb
+Keine	A	N1 & N2	4	A-N1 & N2
+Keine	A	N1 & N2	4	A-N1 & N2
+Keine	B	N1 & N2	4	B-N1 & N2
+Keine	B	N1 & N2	4	B-N1 & N2
+Sorte	A	N1 & N2	2	A-N1 & N2
+Sorte	A	N1 & N2	2	A-N1 & N2
+Sorte	B	N1 & N2	6	B-N1 & N2
+Sorte	B	N1 & N2	6	B-N1 & N2
+Dünger	A	N1	3	A-N1
+Dünger	A	N2	5	A-N2
+Dünger	B	N1	3	B-N1
+Dünger	B	N2	5	B-N2
+Sorte & Dünger (additiv)	A	N1	1	A-N1
+Sorte & Dünger (additiv)	A	N2	3	A-N2
+Sorte & Dünger (additiv)	B	N1	5	B-N1
+Sorte & Dünger (additiv)	B	N2	7	B-N2
+Sorte & Dünger Interaktion	A	N1	5	A-N1
+Sorte & Dünger Interaktion	A	N2	3	A-N2
+Sorte & Dünger Interaktion	B	N1	1	B-N1
+Sorte & Dünger Interaktion	B	N2	7	B-N2

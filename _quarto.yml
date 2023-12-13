@@ -51,6 +51,8 @@ website:
             href: ch/summaryarticles/modeldiagnostics.qmd
           - text: Why SE equal
             href: ch/summaryarticles/whyseequal.qmd
+          - text: Multiplicity Adjustment
+            href: ch/summaryarticles/multiplicityadj.qmd
           - text: ANOVA Types
             href: ch/summaryarticles/anovatypes.qmd
           - text: Mixed Models

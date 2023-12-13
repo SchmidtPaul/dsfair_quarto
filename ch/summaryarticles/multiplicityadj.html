@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2023-12-13">
+<title>dsfair_quarto – Multiplicity Adjustments: Understanding the Nuance of Post hoc Tests</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+<!-- htmldependencies:E3FAD763 --><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="/index.html">
+    <span class="navbar-title">DSFAIR</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="/index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-r-basics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">R Basics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-r-basics">
+<li>
+    <a class="dropdown-item" href="/ch/rbasics/firststeps.html" rel="" target="">
+ <span class="dropdown-text">First Steps</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/rbasics/tidyverse.html" rel="" target="">
+ <span class="dropdown-text">The tidyverse</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/rbasics/correlation_regression.html" rel="" target="">
+ <span class="dropdown-text">Correlation &amp; Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/rbasics/baddata.html" rel="" target="">
+ <span class="dropdown-text">Bad data &amp; Outliers</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-simple-experiments" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Simple Experiments</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-simple-experiments">
+<li>
+    <a class="dropdown-item" href="/ch/exan/simple/crd_mead1993.html" rel="" target="">
+ <span class="dropdown-text">1w CRD (Mead 1993)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/rcbd_clewerscarisbrick2001.html" rel="" target="">
+ <span class="dropdown-text">1w RCBD (Clewer &amp; Scarisbrickt 2001)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/latsq_bridges1989.html" rel="" target="">
+ <span class="dropdown-text">1w Latin Square (Bridges 1989)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/augm_petersen1994.html" rel="" target="">
+ <span class="dropdown-text">1w augmented (Petersen 1994)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/alpha_johnwilliams1995.html" rel="" target="">
+ <span class="dropdown-text">1w alpha (John &amp; Williams 1995)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/rowcol_kemptonfox1997.html" rel="" target="">
+ <span class="dropdown-text">1w rowcol (Kempton &amp; Fox 1997)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/rcbd_gomezgomez1984.html" rel="" target="">
+ <span class="dropdown-text">2w RCBD (Gomez &amp; Gomez 1984)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/exan/simple/splitplot_gomezgomez1984.html" rel="" target="">
+ <span class="dropdown-text">2w split-plot (Gomez &amp; Gomez 1984)</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="dropdown-header">
+ <span class="menu-text">Complex Experiments</span>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-summary-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Summary Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-summary-articles">
+<li>
+    <a class="dropdown-item" href="/ch/summaryarticles/ggplot2intro.html" rel="" target="">
+ <span class="dropdown-text">ggplot2 tutorial</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/compactletterdisplay.html" rel="" target="">
+ <span class="dropdown-text">Compact Letter Display</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/designingexperiments.html" rel="" target="">
+ <span class="dropdown-text">Designing Experiments</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/modeldiagnostics.html" rel="" target="">
+ <span class="dropdown-text">Model Diagnostics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/whyseequal.html" rel="" target="">
+ <span class="dropdown-text">Why SE equal</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/multiplicityadj.html" rel="" target="">
+ <span class="dropdown-text">Multiplicity Adjustment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/anovatypes.html" rel="" target="">
+ <span class="dropdown-text">ANOVA Types</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/summaryarticles/mixedmodels.html" rel="" target="">
+ <span class="dropdown-text">Mixed Models</span></a>
+  </li>  
+    </ul>
+</li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-misc" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Misc</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-misc">
+<li>
+    <a class="dropdown-item" href="/ch/misc/usefulthings.html" rel="" target="">
+ <span class="dropdown-text">Useful things</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/misc/exercises.html" rel="" target="">
+ <span class="dropdown-text">Exercises</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/misc/furtherresources.html" rel="" target="">
+ <span class="dropdown-text">Other Resources</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="/ch/misc/workshopprep.html" rel="" target="">
+ <span class="dropdown-text">Workshop prep</span></a>
+  </li>  
+    </ul>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="https://schmidtpaul.github.io/" rel="" target="">
+ <span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/SchmidtPaul/dsfair_quarto" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+<div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Multiplicity Adjustments: Understanding the Nuance of Post hoc Tests</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Paul Schmidt </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://www.biomath.de/">
+            BioMath GmbH
+            </a>
+          </p>
+        <p class="affiliation">
+            <a href="https://schmidtpaul.github.io/">
+            &amp; Freelancer
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Last updated</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 13, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Content summary</div>
+    What are multiplicity adjustments? What are the various methods for multiple mean comparisons, including the t-test, Tukey test, and others, highlighting their purposes and differences.
+  </div>
+</div>
+
+</header><nav id="TOC" role="doc-toc"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#the-motivating-issue" id="toc-the-motivating-issue">The motivating issue</a></li>
+  <li>
+<a href="#the-landscape-of-post-hoc-tests" id="toc-the-landscape-of-post-hoc-tests">The Landscape of Post hoc Tests</a>
+  <ul>
+<li><a href="#the-core-difference-multiple-t-test-vs.-tukeys-test" id="toc-the-core-difference-multiple-t-test-vs.-tukeys-test">The Core Difference: Multiple t-test vs. Tukey’s Test</a></li>
+  <li><a href="#so-which-one-should-i-use" id="toc-so-which-one-should-i-use">So which one should I use?</a></li>
+  </ul>
+</li>
+  </ul></nav><section id="the-motivating-issue" class="level1"><h1>The motivating issue</h1>
+<p>In statistical analysis, conducting multiple mean comparisons is a common practice, especially following ANOVA tests. This practice, however, introduces a complexity: the risk of committing Type I errors (false positives) increases with each additional comparison.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Brief Intro: Type I &amp; Type II errors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In statistical analysis, understanding the concepts of Type I and Type II errors is crucial. A Type I error, denoted as <span class="math inline">\(\alpha\)</span>, occurs when a true null hypothesis is incorrectly rejected (= false positive), such as falsely identifying a difference where none exists. Conversely, a Type II error, denoted as <span class="math inline">\(\beta\)</span>, happens when a false null hypothesis is not rejected, essentially missing a real difference. Controlling these error rates is vital in any statistical test, but it’s important to note that it’s impossible to completely eliminate them. When a test is said to be “performed at the 5% level,” it means that the Type I error rate (<span class="math inline">\(\alpha\)</span>) is controlled at 5%, accepting a 5% risk of a false positive.</p>
+</div>
+</div>
+<p>Taken directly from <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem">Wikipedia’s article “Multiple comparisons problem”</a>:</p>
+<blockquote>
+<p>For example, if one test is performed at the 5% level and the corresponding null hypothesis is true, there is only a 5% risk of incorrectly rejecting the null hypothesis. However, if 100 tests are each conducted at the 5% level and all corresponding null hypotheses are true, the expected number of incorrect rejections (also known as false positives or Type I errors) is 5. If the tests are statistically independent from each other (i.e. are performed on independent samples), the probability of at least one incorrect rejection is approximately 99.4%.</p>
+<p>The multiple comparisons problem also applies to confidence intervals. A single confidence interval with a 95% coverage probability level will contain the true value of the parameter in 95% of samples. However, if one considers 100 confidence intervals simultaneously, each with 95% coverage probability, the expected number of non-covering intervals is 5. If the intervals are statistically independent from each other, the probability that at least one interval does not contain the population parameter is 99.4%.</p>
+</blockquote>
+<p>As a consequence, several methods have been developed to deal with this issue, each with its strengths and weaknesses.</p>
+</section><section id="the-landscape-of-post-hoc-tests" class="level1"><h1>The Landscape of Post hoc Tests</h1>
+<p>Here are a few of the most common post hoc tests:</p>
+<ul>
+<li>
+<strong>Multiple t-test</strong> (Fisher, 1940): A pairwise comparison test that looks at each pair of means separately.</li>
+<li>
+<strong>Tukey’s HSD Test</strong> (John Tukey, 1949): Designed to compare all possible pairs of means while controlling the family-wise error rate.</li>
+<li>
+<strong>Dunnett’s Test</strong> (Charles Dunnett, 1955): Compares multiple treatments with a control.</li>
+<li>
+<strong>Scheffé’s Test</strong> (Henry Scheffé, 1959): Allows comparison of any set of contrasts.</li>
+<li>
+<strong>Holm-Bonferroni Method</strong> (Sture Holm &amp; Carlo Emilio Bonferroni, 1979): A stepwise approach to control the family-wise error rate.</li>
+</ul>
+<p>Each of these tests brings a unique approach to handling multiple comparisons, and the choice of which to use depends largely on the specific context and objectives of your analysis.</p>
+<section id="the-core-difference-multiple-t-test-vs.-tukeys-test" class="level2"><h2>The Core Difference: Multiple t-test vs. Tukey’s Test</h2>
+<p>To better grasp the fundamental differences between the multiple t-test and Tukey’s HSD test, let’s compare their approaches side by side, focusing on how they control the Type I error rate and their implications:</p>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 40%">
+<col style="width: 46%">
+</colgroup>
+<thead><tr class="header">
+<th>Aspect</th>
+<th>Multiple t-test</th>
+<th>Tukey’s HSD Test</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>Type I Error Rate Control</strong></td>
+<td>Controls the Type I error rate (<span class="math inline">\(\alpha\)</span>) for <strong>each individual comparison</strong> without adjustment for other tests.</td>
+<td>Controls the Type I error rate (<span class="math inline">\(\alpha\)</span>) <strong>across all comparisons collectively</strong>, incorporating a multiplicity adjustment.</td>
+</tr>
+<tr class="even">
+<td><strong>Multiplicity Adjustment</strong></td>
+<td>
+<strong>Does not have any multiplicity adjustment</strong>. Individual comparisons are treated independently.</td>
+<td>
+<strong>Has a multiplicity adjustment</strong> to account for the number of comparisons, reducing the risk of collective Type I errors.</td>
+</tr>
+<tr class="odd">
+<td><strong>Conservativeness</strong></td>
+<td>More liberal, tending to find smaller p-values. Quicker to declare a difference as statistically significant.</td>
+<td>More conservative, resulting in larger p-values. Less likely to declare a difference as statistically significant.</td>
+</tr>
+<tr class="even">
+<td><strong>Implication on False Positives</strong></td>
+<td>Higher probability of false positives (Type I errors) in multiple comparisons due to no collective adjustment.</td>
+<td>Lower probability of false positives across the set of comparisons, due to adjustment for collective error rate.</td>
+</tr>
+<tr class="odd">
+<td><strong>Implication on False Negatives</strong></td>
+<td>Lower risk of false negatives (Type II errors) due to its liberal approach.</td>
+<td>Higher risk of false negatives (Type II errors), as its conservative approach may overlook some actual differences.</td>
+</tr>
+</tbody>
+</table>
+<p>The multiple t-test evaluates each comparison in isolation, which makes it more likely to find significant differences, but with an increased risk of Type I errors when many comparisons are made. In contrast, Tukey’s test takes a more holistic approach, adjusting for the collective risk across all comparisons, which makes it more stringent but also more reliable in the context of multiple testing.</p>
+</section><section id="so-which-one-should-i-use" class="level2"><h2>So which one should I use?</h2>
+<p>While multiplicity adjustments are essential in controlling the overall error rate in multiple comparisons, they are not universally preferred in every situation. The decision between tests like the multiple t-test and the Tukey test is a balance of statistical rigor, research objectives, data characteristics, and field-specific conventions. This complexity is why statisticians often stop short of declaring a one-size-fits-all best choice, emphasizing instead the importance of context and research goals in guiding the selection of appropriate statistical methods.</p>
+<p>In conclusion, it is true that the decision between tests such as the multiple t-test and the Tukey test is nuanced and context-dependent, but ultimately the most critical aspect of your analysis is transparency. It’s essential to clearly report which test you’ve used when showing your results. Equally important is the principle of deciding on your test choice before examining the results. This approach ensures that your analysis is guided by your research question and methodological considerations, rather than being influenced by the data patterns you observe.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Additional Resources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Lee S, Lee DK. What is the proper way to apply the multiple comparison test? Korean J Anesthesiol. 2018 Oct;71(5):353-360. doi: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6193594/">10.4097/kja.d.18.00242</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="quarto-navigation-envelope" class="hidden">
+<span class="hidden" data-render-id="quarto-int-sidebar-title">dsfair_quarto</span> <span class="hidden" data-render-id="quarto-int-navbar-title">DSFAIR</span> <span class="hidden" data-render-id="quarto-int-navbar:Home">Home</span> <span class="hidden" data-render-id="quarto-int-navbar:/index.html">/index.html</span> <span class="hidden" data-render-id="quarto-int-navbar:R Basics">R Basics</span> <span class="hidden" data-render-id="quarto-int-navbar:First Steps">First Steps</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/rbasics/firststeps.html">/ch/rbasics/firststeps.html</span> <span class="hidden" data-render-id="quarto-int-navbar:The tidyverse">The tidyverse</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/rbasics/tidyverse.html">/ch/rbasics/tidyverse.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Correlation &amp; Regression">Correlation &amp; Regression</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/rbasics/correlation_regression.html">/ch/rbasics/correlation_regression.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Bad data &amp; Outliers">Bad data &amp; Outliers</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/rbasics/baddata.html">/ch/rbasics/baddata.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Simple Experiments">Simple Experiments</span> <span class="hidden" data-render-id="quarto-int-navbar:1w CRD (Mead 1993)">1w CRD (Mead 1993)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/crd_mead1993.html">/ch/exan/simple/crd_mead1993.html</span> <span class="hidden" data-render-id="quarto-int-navbar:1w RCBD (Clewer &amp; Scarisbrickt 2001)">1w RCBD (Clewer &amp; Scarisbrickt 2001)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/rcbd_clewerscarisbrick2001.html">/ch/exan/simple/rcbd_clewerscarisbrick2001.html</span> <span class="hidden" data-render-id="quarto-int-navbar:1w Latin Square (Bridges 1989)">1w Latin Square (Bridges 1989)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/latsq_bridges1989.html">/ch/exan/simple/latsq_bridges1989.html</span> <span class="hidden" data-render-id="quarto-int-navbar:1w augmented (Petersen 1994)">1w augmented (Petersen 1994)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/augm_petersen1994.html">/ch/exan/simple/augm_petersen1994.html</span> <span class="hidden" data-render-id="quarto-int-navbar:1w alpha (John &amp; Williams 1995)">1w alpha (John &amp; Williams 1995)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/alpha_johnwilliams1995.html">/ch/exan/simple/alpha_johnwilliams1995.html</span> <span class="hidden" data-render-id="quarto-int-navbar:1w rowcol (Kempton &amp; Fox 1997)">1w rowcol (Kempton &amp; Fox 1997)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/rowcol_kemptonfox1997.html">/ch/exan/simple/rowcol_kemptonfox1997.html</span> <span class="hidden" data-render-id="quarto-int-navbar:2w RCBD (Gomez &amp; Gomez 1984)">2w RCBD (Gomez &amp; Gomez 1984)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/rcbd_gomezgomez1984.html">/ch/exan/simple/rcbd_gomezgomez1984.html</span> <span class="hidden" data-render-id="quarto-int-navbar:2w split-plot (Gomez &amp; Gomez 1984)">2w split-plot (Gomez &amp; Gomez 1984)</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/exan/simple/splitplot_gomezgomez1984.html">/ch/exan/simple/splitplot_gomezgomez1984.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Complex Experiments">Complex Experiments</span> <span class="hidden" data-render-id="quarto-int-navbar:Summary Articles">Summary Articles</span> <span class="hidden" data-render-id="quarto-int-navbar:ggplot2 tutorial">ggplot2 tutorial</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/ggplot2intro.html">/ch/summaryarticles/ggplot2intro.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Compact Letter Display">Compact Letter Display</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/compactletterdisplay.html">/ch/summaryarticles/compactletterdisplay.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Designing Experiments">Designing Experiments</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/designingexperiments.html">/ch/summaryarticles/designingexperiments.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Model Diagnostics">Model Diagnostics</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/modeldiagnostics.html">/ch/summaryarticles/modeldiagnostics.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Why SE equal">Why SE equal</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/whyseequal.html">/ch/summaryarticles/whyseequal.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Multiplicity Adjustment">Multiplicity Adjustment</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/multiplicityadj.html">/ch/summaryarticles/multiplicityadj.html</span> <span class="hidden" data-render-id="quarto-int-navbar:ANOVA Types">ANOVA Types</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/anovatypes.html">/ch/summaryarticles/anovatypes.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Mixed Models">Mixed Models</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/summaryarticles/mixedmodels.html">/ch/summaryarticles/mixedmodels.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Misc">Misc</span> <span class="hidden" data-render-id="quarto-int-navbar:Useful things">Useful things</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/misc/usefulthings.html">/ch/misc/usefulthings.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Exercises">Exercises</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/misc/exercises.html">/ch/misc/exercises.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Other Resources">Other Resources</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/misc/furtherresources.html">/ch/misc/furtherresources.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Workshop prep">Workshop prep</span> <span class="hidden" data-render-id="quarto-int-navbar:/ch/misc/workshopprep.html">/ch/misc/workshopprep.html</span> <span class="hidden" data-render-id="quarto-int-navbar:Contact">Contact</span> <span class="hidden" data-render-id="quarto-int-navbar:https://schmidtpaul.github.io/">https://schmidtpaul.github.io/</span> <span class="hidden" data-render-id="quarto-int-navbar:https://github.com/SchmidtPaul/dsfair_quarto">https://github.com/SchmidtPaul/dsfair_quarto</span> []{.hidden render-id=“footer-right-
+<p>
+All content licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+</p>
+<p>“}</p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">dsfair_quarto - Multiplicity Adjustments: Understanding the Nuance of Post hoc Tests</span> <span class="hidden" data-render-id="quarto-twittercardtitle">Data Science for Agriculture in R</span> <span class="hidden" data-render-id="quarto-ogcardtitle">dsfair_quarto - Multiplicity Adjustments: Understanding the Nuance of Post hoc Tests</span> <span class="hidden" data-render-id="quarto-metasitename">dsfair_quarto</span> <span class="hidden" data-render-id="quarto-twittercarddesc">a cookbook with statistical analyses of typical examples in life sciences with focus on experimental agriculture, biology, ecology and other related fields</span> <span class="hidden" data-render-id="quarto-ogcardddesc">What are multiplicity adjustments? What are the various methods for multiple mean comparisons, including the t-test, Tukey test, and others, highlighting their purposes and differences.</span></p>
+</div>
+<!-- -->
+<div class="quarto-embedded-source-code">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Multiplicity Adjustments: Understanding the Nuance of Post hoc Tests"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> "What are multiplicity adjustments? What are the various methods for multiple mean comparisons, including the t-test, Tukey test, and others, highlighting their purposes and differences."</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>quarto-executable-code-5450563D</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"src/helpersrc.R"</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># The motivating issue</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>In statistical analysis, conducting multiple mean comparisons is a common practice, especially following ANOVA tests. This practice, however, introduces a complexity: the risk of committing Type I errors (false positives) increases with each additional comparison.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Brief Intro: Type I &amp; Type II errors</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>In statistical analysis, understanding the concepts of Type I and Type II errors is crucial. A Type I error, denoted as $\alpha$, occurs when a true null hypothesis is incorrectly rejected (= false positive), such as falsely identifying a difference where none exists. Conversely, a Type II error, denoted as $\beta$, happens when a false null hypothesis is not rejected, essentially missing a real difference. Controlling these error rates is vital in any statistical test, but it's important to note that it's impossible to completely eliminate them. When a test is said to be "performed at the 5% level," it means that the Type I error rate ($\alpha$) is controlled at 5%, accepting a 5% risk of a false positive.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Taken directly from <span class="co">[</span><span class="ot">Wikipedia's article "Multiple comparisons problem"</span><span class="co">](https://en.wikipedia.org/wiki/Multiple_comparisons_problem)</span>:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For example, if one test is performed at the 5% level and the corresponding null hypothesis is true, there is only a 5% risk of incorrectly rejecting the null hypothesis. However, if 100 tests are each conducted at the 5% level and all corresponding null hypotheses are true, the expected number of incorrect rejections (also known as false positives or Type I errors) is 5. If the tests are statistically independent from each other (i.e. are performed on independent samples), the probability of at least one incorrect rejection is approximately 99.4%.</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The multiple comparisons problem also applies to confidence intervals. A single confidence interval with a 95% coverage probability level will contain the true value of the parameter in 95% of samples. However, if one considers 100 confidence intervals simultaneously, each with 95% coverage probability, the expected number of non-covering intervals is 5. If the intervals are statistically independent from each other, the probability that at least one interval does not contain the population parameter is 99.4%.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>As a consequence, several methods have been developed to deal with this issue, each with its strengths and weaknesses.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Landscape of Post hoc Tests</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Here are a few of the most common post hoc tests:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Multiple t-test** (Fisher, 1940): A pairwise comparison test that looks at each pair of means separately.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Tukey's HSD Test** (John Tukey, 1949): Designed to compare all possible pairs of means while controlling the family-wise error rate.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Dunnett's Test** (Charles Dunnett, 1955): Compares multiple treatments with a control.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Scheffé's Test** (Henry Scheffé, 1959): Allows comparison of any set of contrasts.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Holm-Bonferroni Method** (Sture Holm &amp; Carlo Emilio Bonferroni, 1979): A stepwise approach to control the family-wise error rate.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>Each of these tests brings a unique approach to handling multiple comparisons, and the choice of which to use depends largely on the specific context and objectives of your analysis.</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Core Difference: Multiple t-test vs. Tukey's Test</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>To better grasp the fundamental differences between the multiple t-test and Tukey's HSD test, let's compare their approaches side by side, focusing on how they control the Type I error rate and their implications:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>| Aspect                            | Multiple t-test                                                                                                   | Tukey's HSD Test                                                                                                                   |</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>|-----------------------------------|-------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>| **Type I Error Rate Control**     | Controls the Type I error rate ($\alpha$) for **each individual comparison** without adjustment for other tests. | Controls the Type I error rate ($\alpha$) **across all comparisons collectively**, incorporating a multiplicity adjustment.         |</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>| **Multiplicity Adjustment**       | **Does not have any multiplicity adjustment**. Individual comparisons are treated independently.                  | **Has a multiplicity adjustment** to account for the number of comparisons, reducing the risk of collective Type I errors.         |</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>| **Conservativeness**              | More liberal, tending to find smaller p-values. Quicker to declare a difference as statistically significant.    | More conservative, resulting in larger p-values. Less likely to declare a difference as statistically significant.                |</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>| **Implication on False Positives**| Higher probability of false positives (Type I errors) in multiple comparisons due to no collective adjustment.   | Lower probability of false positives across the set of comparisons, due to adjustment for collective error rate.                   |</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>| **Implication on False Negatives**| Lower risk of false negatives (Type II errors) due to its liberal approach.                                       | Higher risk of false negatives (Type II errors), as its conservative approach may overlook some actual differences.                |</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>The multiple t-test evaluates each comparison in isolation, which makes it more likely to find significant differences, but with an increased risk of Type I errors when many comparisons are made. In contrast, Tukey's test takes a more holistic approach, adjusting for the collective risk across all comparisons, which makes it more stringent but also more reliable in the context of multiple testing.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## So which one should I use?</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>While multiplicity adjustments are essential in controlling the overall error rate in multiple comparisons, they are not universally preferred in every situation. The decision between tests like the multiple t-test and the Tukey test is a balance of statistical rigor, research objectives, data characteristics, and field-specific conventions. This complexity is why statisticians often stop short of declaring a one-size-fits-all best choice, emphasizing instead the importance of context and research goals in guiding the selection of appropriate statistical methods.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>In conclusion, it is true that the decision between tests such as the multiple t-test and the Tukey test is nuanced and context-dependent, but ultimately the most critical aspect of your analysis is transparency. It's essential to clearly report which test you've used when showing your results. Equally important is the principle of deciding on your test choice before examining the results. This approach ensures that your analysis is guided by your research question and methodological considerations, rather than being influenced by the data patterns you observe. </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Lee S, Lee DK. What is the proper way to apply the multiple comparison test? Korean J Anesthesiol. 2018 Oct;71(5):353-360. doi: <span class="co">[</span><span class="ot">10.4097/kja.d.18.00242</span><span class="co">](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6193594/)</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+       
+    </div>   
+    <div class="nav-footer-center">
+       
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item">
+ <p>All content licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License</a>.</p>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+</body>
+</html>
