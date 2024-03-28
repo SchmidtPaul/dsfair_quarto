@@ -286,8 +286,8 @@ ggplot(data = dat) +
     linewidth = 1
   ) +
   geom_abline(
-    intercept = reg_noint$coefficients[1],
-    slope = reg_noint$coefficients[2],
+    intercept = 0,
+    slope = reg_noint$coefficients[1],
     color = "#e4572e", 
     linewidth = 1
   ) +

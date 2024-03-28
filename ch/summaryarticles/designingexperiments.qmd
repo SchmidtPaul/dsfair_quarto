@@ -18,16 +18,16 @@ This article is very much under construction, but check out
     -   @piepho_2004
 
     -   @piepho_2022
-    
+
 # Fundamental principles
 
 In experimental design, three core principles are crucial: Replication, Randomization, and Blocking.
 
- * **Replication** (mandatory) involves repeating each treatment multiple times to distinguish real effects from random variations. For instance, in agricultural studies, a fertilizer treatment would be applied across several plots to accurately assess its impact.
+-   **Replication** (mandatory) involves repeating each treatment multiple times to distinguish real effects from random variations. For instance, in agricultural studies, a fertilizer treatment would be applied across several plots to accurately assess its impact.
 
- * **Randomization** (mandatory) ensures unbiased treatment assignment to experimental units, crucial for attributing outcome differences to the treatments rather than external factors. In clinical trials, this means randomly assigning patients to different treatment groups for comparability.
+-   **Randomization** (mandatory) ensures unbiased treatment assignment to experimental units, crucial for attributing outcome differences to the treatments rather than external factors. In clinical trials, this means randomly assigning patients to different treatment groups for comparability.
 
- * **Blocking** (optional) is used to control known sources of variability by grouping similar units. Treatments are randomized within these blocks, particularly effective in environments like field experiments where conditions like soil type can influence outcomes.
+-   **Blocking** (optional) is used to control known sources of variability by grouping similar units. Treatments are randomized within these blocks, particularly effective in environments like field experiments where conditions like soil type can influence outcomes.
 
 These principles - Replication for reliability, Randomization for unbiasedness, and Blocking for precision - are fundamental in designing robust experiments. A nice deep dive can be found in @casler_2015.
 
@@ -37,6 +37,7 @@ In this section, we explore a variety of design models commonly employed in expe
 
 ```{r}
 #| code-fold: false
+library(tidyverse)
 library(FielDHub)
 
 paste0("T", 1:3)
@@ -49,11 +50,20 @@ In a Completely Randomized Design (CRD), each experimental unit is assigned to a
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-CRD(
+#| output: false
+out <- CRD(
   t = paste0("T", 1:3),
   reps = 3,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- c("#00923f", "#bce2cc", "#e9ecef")
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 
@@ -62,13 +72,28 @@ CRD(
 
 ::: {.column width="49%"}
 ```{r}
-CRD(
+#| output: false
+out <- CRD(
   t = paste0("T", 1:4),
   reps = 3,
   seed = 42
 ) %>% plot()
 ```
+
+```{r}
+#| echo: false
+colors <- colorRampPalette(c("#00923f", "#e9ecef"))(4)
+
+out$p +
+  scale_fill_manual(values = colors)
+```
 :::
+:::
+
+::: callout-note
+## can't reproduce the colors?
+
+You might be wondering why running the same code does not give you the same plots because your colors are different. This is because I actually changed the colors but hid the code that does so. If you want to see the entire code, go to the top right corner of this chapter, click on `</> Code` and then `View Source`.
 :::
 
 ## RCBD
@@ -82,11 +107,20 @@ The RCBD is advantageous when external factors, such as environmental conditions
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-RCBD(
+#| output: false
+out <- RCBD(
   t = paste0("T", 1:3),
   reps = 3,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- c("#00923f", "#bce2cc", "#e9ecef")
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 
@@ -95,11 +129,20 @@ RCBD(
 
 ::: {.column width="49%"}
 ```{r}
-RCBD(
+#| output: false
+out <- RCBD(
   t = paste0("T", 1:4),
   reps = 3,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- colorRampPalette(c("#00923f", "#e9ecef"))(4)
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 :::
@@ -111,11 +154,20 @@ In a Latin Square Design, the experiment is arranged in a square grid to control
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-latin_square(
+#| output: false
+out <- latin_square(
   t = 3,
   reps = 1,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- c("#00923f", "#bce2cc", "#e9ecef")
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 
@@ -124,11 +176,20 @@ latin_square(
 
 ::: {.column width="49%"}
 ```{r}
-latin_square(
+#| output: false
+out <- latin_square(
   t = 4,
   reps = 1,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- colorRampPalette(c("#00923f", "#e9ecef"))(4)
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 :::
@@ -142,12 +203,21 @@ In a non-resolvable[^1] Augmented Design, the treatment levels are categorized i
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-RCBD_augmented(
+#| output: false
+out <- RCBD_augmented(
   lines = 6,
   checks = 2,
   b = 3,
   seed = 42
 ) %>% plot()
+```
+
+```{r}
+#| echo: false
+colors <- colors <- c("#00923f", "#bce2cc", "#e9ecef")
+
+out$p +
+  scale_fill_manual(values = colors)
 ```
 :::
 
@@ -156,7 +226,7 @@ RCBD_augmented(
 
 ::: {.column width="49%"}
 ```{r}
-RCBD_augmented(
+out <- RCBD_augmented(
   lines = 30,
   checks = 3,
   b = 6,
@@ -173,7 +243,7 @@ An $\alpha$-design is an incomplete block design that is resolvable, meaning it 
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-alpha_lattice(
+out <- alpha_lattice(
   t = 9, 
   k = 3, 
   r = 3, 
@@ -187,7 +257,7 @@ alpha_lattice(
 
 ::: {.column width="49%"}
 ```{r}
-alpha_lattice(
+out <- alpha_lattice(
   t = 15, 
   k = 3, 
   r = 3, 
@@ -204,7 +274,7 @@ In a resolvable row-column design a complete replicate is divided into rows and 
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-row_column(
+out <- row_column(
   t = 6,
   nrows = 2,
   r = 3,
@@ -218,7 +288,7 @@ row_column(
 
 ::: {.column width="49%"}
 ```{r}
-row_column(
+out <- row_column(
   t = 12,
   nrows = 3,
   r = 3,
@@ -230,12 +300,12 @@ row_column(
 
 ## Split-plot
 
-Split-plot designs are used in scenarios where two factors are involved, with one being easier or more cost-effective to randomize than the other. 
+Split-plot designs are used in scenarios where two factors are involved, with one being easier or more cost-effective to randomize than the other.
 
 ::: columns
 ::: {.column width="49%"}
 ```{r}
-split_plot(
+out <- split_plot(
   wp = paste0("A", 1:3),
   sp = paste0("B", 1:4),
   reps = 3,
@@ -249,7 +319,7 @@ split_plot(
 
 ::: {.column width="49%"}
 ```{r}
-split_plot(
+out <- split_plot(
   wp = paste0("A", 1:2),
   sp = paste0("B", 1:5),
   reps = 2,

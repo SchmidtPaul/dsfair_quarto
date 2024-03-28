@@ -91,7 +91,7 @@ website:
 format:
   html:
     anchor-sections: true
-    css: styles.css
+    css: include/styles.css
     code-fold: false
     code-summary: "Click to show/hide code"
     code-overflow: scroll
@@ -100,7 +100,7 @@ format:
     code-tools: true
     citations-hover: true
     footnotes-hover: true
-    theme: theme.scss
+    theme: include/theme.scss
     toc: true
   pdf:
     colorlinks: true

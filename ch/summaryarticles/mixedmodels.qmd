@@ -10,7 +10,7 @@ source(here::here("src/helpersrc.R"))
 
 # What even is a random effect?
 
-Typically, learning about random effects in statistical methods comes after grasping simpler regressions and ANOVAs. As a result, when someone mentions "an effect" in statistics, it often refers to a fixed effect, making random effects somewhat special and explicitly labeled as such. While fixed effects models date back to the early 19th century (Legendre, 1805; Gauss, 1809), the understanding and application of random effects in statistical models are relatively newer concepts. 
+Typically, learning about random effects in statistical methods comes after grasping simpler regressions and ANOVAs. As a result, when someone mentions "an effect" in statistics, it often refers to a fixed effect, making random effects somewhat special and explicitly labeled as such. While fixed effects models date back to the early 19th century, the understanding and application of random effects in statistical models are relatively newer concepts. 
 
 It could be noted that the error term ($e$) in all models, including those with only fixed effects, is a random variable, representing a stochastic component. Thus, strictly speaking, nearly all models could be considered mixed models, but the error term plays a unique role and is not counted as a random effect.
 
