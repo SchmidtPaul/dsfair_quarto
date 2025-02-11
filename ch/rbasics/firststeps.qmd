@@ -123,7 +123,7 @@ However, there are also functions like `mean()` which return the mean of all num
 mean(mynumbers)
 ```
 
-c Comparison Operators
+# Comparison Operators
 
 In R, comparison operators are used to compare values and variables, much like you might in mathematics or in spreadsheet formulas. They are fundamental in making decisions and controlling the flow of your code. Here are the most commonly used comparison operators:
 
