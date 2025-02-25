@@ -146,12 +146,13 @@ TO DO
 
 # Keyboard shortcuts
 
-Here are shortcuts I actually use regularly in RStudio:
+Here are shortcuts I use regularly in RStudio:
 
 | Shortcut              | Description                                   |
 |-----------------------|-----------------------------------------------|
 | CTRL+ENTER            | Run selected lines of code                    |
 | CTRL+C                | Convert all selected lines to comment         |
+| CTRL+SHIFT+A          | Auto-format selected lines                    |
 | CTRL+SHIFT+M          | Insert `%>%`                                  |
 | CTRL+SHIFT+R          | Insert code section header                    |
 | CTRL+LEFT/RIGHT       | Jump to Word                                  |
